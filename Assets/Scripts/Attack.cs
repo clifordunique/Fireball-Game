@@ -30,9 +30,12 @@ public class Attack : MonoBehaviour
         Debug.Log(angle);
         Debug.Log(firePoint.position);
 
-        Instantiate(test, firePoint.position, Quaternion.Euler(new Vector3(0, 0, angle - 90)));
+        Instantiate(test, firePoint.position, Quaternion.FromToRotation(Vector3.up, direction));
         Debug.Log("Speed: " + direction * speed);
     }
 }
-    
+
+// Unneccesary way of calculating the angle:
+// 
+
 

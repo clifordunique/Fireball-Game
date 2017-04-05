@@ -3,9 +3,10 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour {
 
-	// Update is called once per frame
+    public float speed = 30f;
+
 	void Update () {
-        transform.Translate(Vector3.up * 20 * Time.deltaTime);
-        Destroy(gameObject, 5f);
+        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        Destroy(gameObject, 1.5f);
 	}
 }
