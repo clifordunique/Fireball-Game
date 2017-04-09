@@ -163,11 +163,16 @@ public class Player : MonoBehaviour
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, 4 / Mathf.Abs(controller.collisions.slopeAngle));
         }
-        if(controller.collisions.descendingSlope && velocity.x > 0)
+        else if(controller.collisions.descendingSlope && velocity.x > 0)
         {
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, .1f * Mathf.Abs(controller.collisions.slopeAngle));
+            Debug.Log("In dude");
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, .01f * Mathf.Abs(controller.collisions.slopeAngle));
         }
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below ? accelerationTimeGrounded : accelerationTimeAirborne));
+        else
+        {
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below ? accelerationTimeGrounded : accelerationTimeAirborne));
+        }
+        
         velocity.y += gravity * Time.deltaTime;
     }
 }

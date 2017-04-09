@@ -231,7 +231,7 @@ public class Controller2D : RaycastController {
             if (hit)
             {
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-                speedBySlopeAngleDescend = 1 + Mathf.Abs(slopeAngle) * .01f; // For increasing the velocity on a slope
+                speedBySlopeAngleDescend = 1 + Mathf.Abs(slopeAngle) * .02f; // For increasing the velocity on a slope
                 if (slopeAngle != 0 && slopeAngle <= maxSlopeAngle)
                 {
                     if (Mathf.Sign(hit.normal.x) == directionX)
@@ -241,7 +241,7 @@ public class Controller2D : RaycastController {
                             float moveDistance = Mathf.Abs(moveAmount.x);
                             float descendVelocityY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
                             moveAmount.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign(moveAmount.x) * speedBySlopeAngleDescend;
-                            moveAmount.y -= descendVelocityY * 1.9f;
+                            moveAmount.y -= descendVelocityY * 1.9f * speedBySlopeAngleDescend;
 
                             //UPDATE COLLISIONS
                             collisions.slopeAngle = slopeAngle;
