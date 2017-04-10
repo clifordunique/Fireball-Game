@@ -1,5 +1,11 @@
-﻿using UnityEngine;
+﻿/* Author: John Paul Depew
+ * Allows whatever object this is attached to to shoot
+ * using the mouse
+ */
+
+using UnityEngine;
 using System.Collections;
+using System.Diagnostics;
 
 public class Attack : MonoBehaviour
 {
@@ -7,18 +13,32 @@ public class Attack : MonoBehaviour
     public Transform test;
     public Transform firePoint;
     public float speed = 10f;
+    Stopwatch sw;
+
+    void Start()
+    {
+        firePoint = transform.FindChild("FirePoint");
+        sw = new Stopwatch();
+    }
 
     void Update()
     {
-        firePoint = transform.FindChild("FirePoint");
-        if (firePoint == null)
+        sw.Start();
+        UnityEngine.Debug.Log(sw.ElapsedMilliseconds);
+        if (sw.ElapsedMilliseconds > 500)
         {
-            Debug.LogError("No firepoint? WHAT?!");
+            if (firePoint == null)
+            {
+                UnityEngine.Debug.LogError("No firepoint? WHAT?!");
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                sw.Reset();
+                Shoot();
+            }
+            
         }
-        if (Input.GetMouseButtonDown(0))
-        {
-            Shoot();
-        }
+        
     }
 
     void Shoot()
@@ -27,15 +47,12 @@ public class Attack : MonoBehaviour
         Vector2 heading = targetPoint - (Vector2)firePoint.transform.position;
         Vector2 direction = heading.normalized;
         float angle = Mathf.Atan2(heading.y, heading.x) * Mathf.Rad2Deg;
-        Debug.Log(angle);
-        Debug.Log(firePoint.position);
+        UnityEngine.Debug.Log(angle);
+        UnityEngine.Debug.Log(firePoint.position);
 
         Instantiate(test, firePoint.position, Quaternion.FromToRotation(Vector3.up, direction));
-        Debug.Log("Speed: " + direction * speed);
+        UnityEngine.Debug.Log("Speed: " + direction * speed);
     }
 }
-
-// Unneccesary way of calculating the angle:
-// 
 
 
