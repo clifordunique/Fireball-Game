@@ -224,7 +224,7 @@ public class Controller2D : RaycastController {
         if(!collisions.slidingDownMaxSlope)
         {
             float directionX = Mathf.Sign(moveAmount.x);
-            
+
             Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Infinity, collisionMask);
 
@@ -241,7 +241,7 @@ public class Controller2D : RaycastController {
                             float moveDistance = Mathf.Abs(moveAmount.x);
                             float descendVelocityY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
                             moveAmount.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign(moveAmount.x) * speedBySlopeAngleDescend;
-                            moveAmount.y -= descendVelocityY * 1.9f * speedBySlopeAngleDescend;
+                            moveAmount.y -= descendVelocityY * speedBySlopeAngleDescend;
 
                             //UPDATE COLLISIONS
                             collisions.slopeAngle = slopeAngle;
@@ -262,7 +262,6 @@ public class Controller2D : RaycastController {
             float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
             if(slopeAngle > maxSlopeAngle)
             {
-                // Knowing the angle of the slope and the intended y movement, we solve for the x movement
                 moveAmount.x = hit.normal.x * (Mathf.Abs(moveAmount.y) - hit.distance) / Mathf.Tan(slopeAngle * Mathf.Deg2Rad);
 
                 collisions.slopeAngle = slopeAngle;

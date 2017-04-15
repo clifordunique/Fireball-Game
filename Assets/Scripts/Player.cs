@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     float accelerationTimeGrounded = .2f;
     float accelerationTimeDescendingSlope = .5f;
     float accelerationTimeClimbingSlope = .1f;
-    float moveSpeed = 8;
+    public float moveSpeed = 40;
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     bool wallSliding;
     int wallDirX;
 
+    float velocityXOld;
+
     void Start()
     {
         controller = GetComponent<Controller2D>();
@@ -45,7 +47,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateVelocity();
-        HandlWallSliding();
+        HandleWallSliding();
 
         controller.Move(velocity * Time.deltaTime, directionalInput);
 
@@ -54,7 +56,7 @@ public class Player : MonoBehaviour
         {
             if (controller.collisions.slidingDownMaxSlope)
             {
-                velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
+               velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
             }
             else
             {
@@ -119,7 +121,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void HandlWallSliding()
+    void HandleWallSliding()
     {
         wallDirX = (controller.collisions.left) ? -1 : 1;
         wallSliding = false;
@@ -163,16 +165,16 @@ public class Player : MonoBehaviour
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, 4 / Mathf.Abs(controller.collisions.slopeAngle));
         }
-        else if(controller.collisions.descendingSlope && velocity.x > 0)
+        else if(controller.collisions.descendingSlope && Mathf.Abs(velocityXOld) > 1f)
         {
-            Debug.Log("In dude");
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, .01f * Mathf.Abs(controller.collisions.slopeAngle));
         }
         else
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below ? accelerationTimeGrounded : accelerationTimeAirborne));
         }
-        
+
+        velocityXOld = velocity.x;
         velocity.y += gravity * Time.deltaTime;
     }
 }

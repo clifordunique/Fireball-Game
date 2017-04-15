@@ -24,7 +24,6 @@ public class Attack : MonoBehaviour
     void Update()
     {
         sw.Start();
-        UnityEngine.Debug.Log(sw.ElapsedMilliseconds);
         if (sw.ElapsedMilliseconds > 500)
         {
             if (firePoint == null)
