@@ -128,6 +128,11 @@ public class Player : MonoBehaviour
         if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
         {
             wallSliding = true;
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                wallSliding = false;
+                return;
+            }
 
             if (velocity.y < -wallSlideSpeedMax)
             {
@@ -160,14 +165,20 @@ public class Player : MonoBehaviour
      */
     void CalculateVelocity()
     {
+        float slopeAngleClimbSmoothTime = .05f + 1/Mathf.Abs(controller.collisions.slopeAngle);
+        float slopeAngleDescendSmoothTime = .15f + Mathf.Abs(controller.collisions.slopeAngle) * .01f;
         float targetVelocityX = directionalInput.x * moveSpeed;
         if(controller.collisions.climingSlope)
         {
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, 4 / Mathf.Abs(controller.collisions.slopeAngle));
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleClimbSmoothTime);
+            Debug.Log(controller.collisions.slopeAngle);
+            Debug.Log("climb: " + slopeAngleClimbSmoothTime);
         }
         else if(controller.collisions.descendingSlope && Mathf.Abs(velocityXOld) > 1f)
         {
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, .01f * Mathf.Abs(controller.collisions.slopeAngle));
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleDescendSmoothTime);
+            Debug.Log(controller.collisions.slopeAngle);
+            Debug.Log("descend: " + slopeAngleDescendSmoothTime);
         }
         else
         {
