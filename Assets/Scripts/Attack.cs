@@ -17,7 +17,7 @@ public class Attack : MonoBehaviour
 
     void Start()
     {
-        firePoint = transform.FindChild("FirePoint");
+        firePoint = transform.Find("FirePoint");
         sw = new Stopwatch();
     }
 

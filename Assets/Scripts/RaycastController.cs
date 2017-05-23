@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿/* RaycastController
+ * Author: Sebastian Lague
+ * Modified by John Paul Depew
+ * 
+ * Description: This script is a controller using raycasts. It sets up the rays and their origins and updates this every frame
+ *
+ */
+
+using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(BoxCollider2D))]
