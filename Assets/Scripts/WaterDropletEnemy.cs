@@ -12,15 +12,21 @@ public class WaterDropletEnemy : MonoBehaviour {
 
     public LayerMask mask;
     public float speed = 8;
+    public float chaseSpeed = 12;
     public float waitTime = .2f;
     public Transform pathHolder;
     public float viewDistanceX = 8;
     public float viewDistanceY = 3;
+    public float health = 10;
+    // If an object damages the enemy, it should always have a PlayerWeapon script attached
+    PlayerWeapon weapon;
 
     Transform player;
+    Animator anim;
 
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        anim = gameObject.GetComponent<Animator>();
 
         Vector2[] waypoints = new Vector2[pathHolder.childCount];
         for (int i = 0; i < waypoints.Length; i++)
@@ -31,7 +37,11 @@ public class WaterDropletEnemy : MonoBehaviour {
 	}
 	
 	void Update () {
-        bool temp = CanSeePlayer();
+        if (CanSeePlayer())
+        {
+            StopAllCoroutines();
+            StartCoroutine(ChasePlayer());
+        }
     }
 
     /* Tests whether the enemy can see the player or not
@@ -45,9 +55,7 @@ public class WaterDropletEnemy : MonoBehaviour {
             {
                 if (!Physics.Linecast(transform.position, player.position, mask))
                 {
-                    Debug.Log("I can see the player. Prepare for obliteration.");
                     return true;
-
                 }
             }
         }
@@ -65,18 +73,61 @@ public class WaterDropletEnemy : MonoBehaviour {
 
         while (true)
         {
-            transform.position = Vector2.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
+            anim.SetFloat("Speed", speed);
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(targetWaypoint.x, transform.position.y), speed * Time.deltaTime);
             if (transform.position.x == targetWaypoint.x)
             {
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
+                anim.SetFloat("Speed", 0);
                 yield return new WaitForSeconds(waitTime);
 
                 transform.localScale = new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
                 yield return new WaitForSeconds(waitTime);
+                anim.SetFloat("Speed", speed);
             }
             yield return null;
+        }
+    }
+    
+    IEnumerator ChasePlayer()
+    {
+        Debug.Log("I am trying to chase the player");
+        anim.SetFloat("Speed", chaseSpeed);
+        //Vector2 dirToPlayer = (player.position - transform.position).normalized;
+        while (transform.position.x != player.position.x)
+        {
+            Debug.Log("Player: " + player.position.x + "\nMe: " + transform.position.x);
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, transform.position.y), chaseSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log("Entered the trigger");
+        if (col.gameObject.CompareTag("PlayerWeapon"))
+        {
+            if (col.gameObject.GetComponent<PlayerWeapon>() != null)
+            {
+                weapon = col.gameObject.GetComponent<PlayerWeapon>();
+                DamageEnemy(weapon.damage);
+                Destroy(col.gameObject);
+            }
+            else
+            {
+                Debug.Log("Invalid projectile. Either it shouldn't be labeled as PlayerWeapon, or it needs the PlayerWeapon script attached");
+            }
+        }
+    }
+
+    public void DamageEnemy(int _damage)
+    {
+        health -= _damage;
+        if(health <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 }

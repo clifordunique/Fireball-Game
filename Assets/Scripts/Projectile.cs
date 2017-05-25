@@ -9,4 +9,6 @@ public class Projectile : MonoBehaviour {
         transform.Translate(Vector3.up * speed * Time.deltaTime);
         Destroy(gameObject, 1.5f);
 	}
+
+
 }

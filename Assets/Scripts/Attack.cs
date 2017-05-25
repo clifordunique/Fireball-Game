@@ -47,7 +47,6 @@ public class Attack : MonoBehaviour
         Vector2 direction = heading.normalized;
         float angle = Mathf.Atan2(heading.y, heading.x) * Mathf.Rad2Deg;
         UnityEngine.Debug.Log(angle);
-        UnityEngine.Debug.Log(firePoint.position);
 
         Instantiate(test, firePoint.position, Quaternion.FromToRotation(Vector3.up, direction));
         UnityEngine.Debug.Log("Speed: " + direction * speed);
