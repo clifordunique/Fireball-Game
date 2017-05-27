@@ -17,7 +17,9 @@ public class WaterDropletEnemy : MonoBehaviour {
     public Transform pathHolder;
     public float viewDistanceX = 8;
     public float viewDistanceY = 3;
-    public float health = 10;
+    public float maxHealth = 10;
+    float health;
+
     // If an object damages the enemy, it should always have a PlayerWeapon script attached
     PlayerWeapon weapon;
 
@@ -27,6 +29,7 @@ public class WaterDropletEnemy : MonoBehaviour {
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         anim = gameObject.GetComponent<Animator>();
+        health = maxHealth;
 
         Vector2[] waypoints = new Vector2[pathHolder.childCount];
         for (int i = 0; i < waypoints.Length; i++)
@@ -93,7 +96,7 @@ public class WaterDropletEnemy : MonoBehaviour {
     
     IEnumerator ChasePlayer()
     {
-        Debug.Log("I am trying to chase the player");
+        //Debug.Log("I am trying to chase the player");
         anim.SetFloat("Speed", chaseSpeed);
         //Vector2 dirToPlayer = (player.position - transform.position).normalized;
         while (transform.position.x != player.position.x)
@@ -104,24 +107,23 @@ public class WaterDropletEnemy : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    /* Detects when a trigger has entered the enemy's collider.
+     * If it has a "PlayerWeapon" script attached, it scales the enemy and calls DamageEnemy.
+     */
+    void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Entered the trigger");
-        if (col.gameObject.CompareTag("PlayerWeapon"))
+        //Debug.Log("Entered the trigger");
+        if (col.gameObject.GetComponent<PlayerWeapon>() != null)
         {
-            if (col.gameObject.GetComponent<PlayerWeapon>() != null)
-            {
-                weapon = col.gameObject.GetComponent<PlayerWeapon>();
-                DamageEnemy(weapon.damage);
-                Destroy(col.gameObject);
-            }
-            else
-            {
-                Debug.Log("Invalid projectile. Either it shouldn't be labeled as PlayerWeapon, or it needs the PlayerWeapon script attached");
-            }
+            weapon = col.gameObject.GetComponent<PlayerWeapon>();
+            DamageEnemy(weapon.damage);
+            transform.localScale *= (health + 6/health)/maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
+            Destroy(col.gameObject);
         }
     }
 
+    /* Damages the enemy and destroys it if its health is less than zero
+     */
     public void DamageEnemy(int _damage)
     {
         health -= _damage;

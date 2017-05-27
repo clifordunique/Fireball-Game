@@ -1,4 +1,12 @@
-﻿using UnityEngine;
+﻿/* Name: Player.cs
+ * Author: Sebastian Lague
+ * Modified by John Paul Depew
+ * 
+ * Description: This script handles a lot of the variables of the Player class.
+ * It also handles wall jumping and calculating the velocity.
+ */
+
+using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(Controller2D))]
@@ -12,6 +20,9 @@ public class Player : MonoBehaviour
     float accelerationTimeDescendingSlope = .5f;
     float accelerationTimeClimbingSlope = .1f;
     public float moveSpeed = 40;
+
+    public float maxHealth = 10;
+    float health;
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
@@ -41,7 +52,8 @@ public class Player : MonoBehaviour
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-        print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
+        health = maxHealth;
+        //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
     }
 
     void Update()
@@ -172,13 +184,13 @@ public class Player : MonoBehaviour
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleClimbSmoothTime);
             Debug.Log(controller.collisions.slopeAngle);
-            Debug.Log("climb: " + slopeAngleClimbSmoothTime);
+            //Debug.Log("climb: " + slopeAngleClimbSmoothTime);
         }
         else if(controller.collisions.descendingSlope && Mathf.Abs(velocityXOld) > 1f)
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleDescendSmoothTime);
             Debug.Log(controller.collisions.slopeAngle);
-            Debug.Log("descend: " + slopeAngleDescendSmoothTime);
+            //Debug.Log("descend: " + slopeAngleDescendSmoothTime);
         }
         else
         {
