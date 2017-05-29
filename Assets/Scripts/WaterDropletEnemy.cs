@@ -8,7 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterDropletEnemy : MonoBehaviour {
+public class WaterDropletEnemy : MonoBehaviour , Enemy {
 
     public LayerMask mask;
     public float speed = 8;
@@ -22,6 +22,7 @@ public class WaterDropletEnemy : MonoBehaviour {
 
     // If an object damages the enemy, it should always have a PlayerWeapon script attached
     PlayerWeapon weapon;
+    AudioManager audioManager;
 
     Transform player;
     Animator anim;
@@ -30,6 +31,7 @@ public class WaterDropletEnemy : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         anim = gameObject.GetComponent<Animator>();
         health = maxHealth;
+        audioManager = AudioManager.instance;
 
         Vector2[] waypoints = new Vector2[pathHolder.childCount];
         for (int i = 0; i < waypoints.Length; i++)
@@ -107,9 +109,10 @@ public class WaterDropletEnemy : MonoBehaviour {
         }
     }
 
-    /* Detects when a trigger has entered the enemy's collider.
+    /* NOT NEEDED -- I now have the object detecting what it collided with
+     * Detects when a trigger has entered the enemy's collider.
      * If it has a "PlayerWeapon" script attached, it scales the enemy and calls DamageEnemy.
-     */
+     *
     void OnTriggerEnter2D(Collider2D col)
     {
         //Debug.Log("Entered the trigger");
@@ -117,16 +120,18 @@ public class WaterDropletEnemy : MonoBehaviour {
         {
             weapon = col.gameObject.GetComponent<PlayerWeapon>();
             DamageEnemy(weapon.damage);
-            transform.localScale *= (health + 6/health)/maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
             Destroy(col.gameObject);
         }
-    }
+    }*/
 
     /* Damages the enemy and destroys it if its health is less than zero
      */
     public void DamageEnemy(int _damage)
     {
         health -= _damage;
+        transform.localScale *= (health + 6 / health) / maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
+        audioManager.PlaySound("Spat");
+
         if(health <= 0)
         {
             Destroy(this.gameObject);

@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
     public float maxHealth = 10;
     float health;
+    public float maxFireStrength = 10;
+    float fireStrength;
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
@@ -53,6 +55,7 @@ public class Player : MonoBehaviour
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         health = maxHealth;
+        fireStrength = maxFireStrength;
         //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
     }
 
