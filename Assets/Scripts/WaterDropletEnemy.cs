@@ -18,7 +18,9 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
     public float viewDistanceX = 8;
     public float viewDistanceY = 3;
     public float maxHealth = 10;
+
     float health;
+    int damage = 10;
 
     // If an object damages the enemy, it should always have a PlayerWeapon script attached
     PlayerWeapon weapon;
@@ -100,10 +102,23 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
     {
         //Debug.Log("I am trying to chase the player");
         anim.SetFloat("Speed", chaseSpeed);
-        //Vector2 dirToPlayer = (player.position - transform.position).normalized;
+
         while (transform.position.x != player.position.x)
         {
-            Debug.Log("Player: " + player.position.x + "\nMe: " + transform.position.x);
+            //Debug.Log("Player: " + player.position.x + "\nMe: " + transform.position.x);
+            float dirToPlayerX = (player.position.x - transform.position.x);
+
+            Debug.Log(dirToPlayerX);
+            
+            if(dirToPlayerX > 0)
+            {
+                transform.GetComponent<SpriteRenderer>().flipX = false;
+            }
+            else
+            {
+                transform.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            //transform.Translate(dirToPlayerX * Time.deltaTime * chaseSpeed);
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, transform.position.y), chaseSpeed * Time.deltaTime);
             yield return null;
         }
@@ -135,6 +150,15 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         if(health <= 0)
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.GetComponent<Player>() != null)
+        {
+            Player player = col.gameObject.GetComponent<Player>();
+            player.DamageFire((int)(damage * ((health + 6 / health) / maxHealth)));
         }
     }
 }

@@ -22,9 +22,9 @@ public class Player : MonoBehaviour
     public float moveSpeed = 40;
 
     public float maxHealth = 10;
-    float health;
+    public float health;
     public float maxFireStrength = 10;
-    float fireStrength;
+    public float fireStrength;
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
@@ -202,5 +202,15 @@ public class Player : MonoBehaviour
 
         velocityXOld = velocity.x;
         velocity.y += gravity * Time.deltaTime;
+    }
+
+    public void DamageFire(int _damage)
+    {
+        fireStrength -= _damage;
+    }
+
+    public void DamagePlayer(int _damage)
+    {
+        health -= _damage;
     }
 }

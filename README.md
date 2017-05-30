@@ -6,5 +6,3 @@ The Parallaxing script is from Brackeys: https://www.youtube.com/user/Brackeys.
 I made slight modifications to some of these files.
 
 This is my first game so I'm keeping it small.
-
-Any object that damages the enemy: Requires "PlayerWeapon" tag and script.
