@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour {
 
 	void Update () {
         transform.Translate(Vector3.up * speed * Time.deltaTime);
-        Destroy(gameObject, 1.5f);
+        Destroy(gameObject, 3f);
 	}
 
 

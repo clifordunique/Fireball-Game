@@ -49,7 +49,7 @@ public class Attack : MonoBehaviour
         //UnityEngine.Debug.Log(angle);
 
         Instantiate(test, firePoint.position, Quaternion.FromToRotation(Vector3.up, direction));
-        UnityEngine.Debug.Log("Speed: " + direction * speed);
+        //UnityEngine.Debug.Log("Speed: " + direction * speed);
     }
 }
 

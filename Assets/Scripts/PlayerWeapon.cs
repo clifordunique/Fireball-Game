@@ -17,7 +17,7 @@ public class PlayerWeapon : MonoBehaviour {
         if (col.gameObject.GetComponent<Enemy>() != null)
         {
             enemy = col.gameObject.GetComponent<Enemy>();
-            enemy.DamageEnemy(damage);
+            enemy.DamageEnemy(damage, transform.position);
             Destroy(this.gameObject);
         }
     }
