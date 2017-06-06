@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
         else if(controller.collisions.descendingSlope && Mathf.Abs(velocityXOld) > 1f)
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleDescendSmoothTime);
-            Debug.Log(controller.collisions.slopeAngle);
+            //Debug.Log(controller.collisions.slopeAngle);
             //Debug.Log("descend: " + slopeAngleDescendSmoothTime);
         }
         else

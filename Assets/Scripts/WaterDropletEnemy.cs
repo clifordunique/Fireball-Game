@@ -71,7 +71,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
                 {
                     if (anim.GetFloat("Speed") <= speed)
                     {
-                        UnityEngine.Debug.Log("I can see the plaeyrf");
+                        //UnityEngine.Debug.Log("I can see the plaeyrf");
                         return true;
                     }
                 }
@@ -167,7 +167,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
     public void DamageEnemy(int _damage, Vector2 position)
     {
         health -= _damage;
-        transform.localScale *= (health + 6 / health) / maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
+        transform.localScale *= (health + 6 / (health + .1f)) / maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
         Effect(position);
         
         if (health <= 0)
