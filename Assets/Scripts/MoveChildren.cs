@@ -6,7 +6,8 @@ public class MoveChildren : MonoBehaviour {
 
     public Transform[] water;
     public Transform[] pathHolder;
-    public float moveSpeed = 1;
+    public float moveSpeed = 10;
+    public float smoothDistance = 4;
 
     AudioManager audioManager;
 
@@ -25,11 +26,6 @@ public class MoveChildren : MonoBehaviour {
         }
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
 
     IEnumerator FollowPath(Vector2[] waypoints, Transform waterToMove)
     {
@@ -37,15 +33,40 @@ public class MoveChildren : MonoBehaviour {
         waterToMove.position = waypoints[0];
         int targetWaypointIndex = 1;
         Vector2 targetWaypoint = waypoints[targetWaypointIndex];
-        //float dirX = Mathf.Sign(targetWaypoint.x - transform.position.x);
+        BoxCollider2D collider = waterToMove.GetComponent<BoxCollider2D>();
+        Bounds waterBounds = collider.bounds;
+
         while (true)
         {
-            waterToMove.position = Vector2.MoveTowards(waterToMove.position, targetWaypoint, moveSpeed * Time.deltaTime);
+            float distTargetX = Mathf.Abs(targetWaypoint.x - waterToMove.position.x);
+            float distTargetY = Mathf.Abs(targetWaypoint.y - waterToMove.position.y);
+            float distOldX = Mathf.Abs(waypoints[(targetWaypointIndex + 1) % waypoints.Length].x - waterToMove.position.x);
+            float distOldY = Mathf.Abs(waypoints[(targetWaypointIndex + 1) % waypoints.Length].y - waterToMove.position.y);
+            float targetMagnitude = new Vector2(distTargetX, distTargetY).magnitude;
+            float oldMagnitude = new Vector2(distOldX, distOldY).magnitude;
+
             if (waterToMove.position.x == targetWaypoint.x && waterToMove.position.y == targetWaypoint.y)
             {
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
             }
+
+            // smoothing - REALLY BAD AND NOT EXACTLY WORKING
+            if(targetMagnitude < smoothDistance)
+            {
+                
+                waterToMove.position = Vector2.MoveTowards(waterToMove.position, targetWaypoint, (targetMagnitude + .1f) / smoothDistance * moveSpeed * Time.deltaTime);
+            }
+            else if (oldMagnitude < smoothDistance)
+            {
+                waterToMove.position = Vector2.MoveTowards(waterToMove.position, targetWaypoint, (oldMagnitude + .1f) / smoothDistance * moveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                Debug.Log("in elsd]e");
+                waterToMove.position = Vector2.MoveTowards(waterToMove.position, targetWaypoint, moveSpeed * Time.deltaTime);
+            }
+
             yield return null;
         }
     }
