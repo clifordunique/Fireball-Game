@@ -12,10 +12,18 @@ public class PlayerWeapon : MonoBehaviour {
 
     Enemy enemy;
     public int damage = 4;
+    AudioManager audioManager;
+
+    void Start()
+    {
+        audioManager = AudioManager.instance;
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.GetComponent<Enemy>() != null)
         {
+            audioManager.PlaySound("Water Hiss Short");
             enemy = col.gameObject.GetComponent<Enemy>();
             enemy.DamageEnemy(damage, transform.position);
             Destroy(this.gameObject);

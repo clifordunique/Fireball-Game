@@ -254,6 +254,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         {
             Player player = col.gameObject.GetComponent<Player>();
             player.DamageFire((int)(damage * ((health + 6 / health) / maxHealth)));
+            audioManager.PlaySound("Water Hiss Short");
         }
     }
 }

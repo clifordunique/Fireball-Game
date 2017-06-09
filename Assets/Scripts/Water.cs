@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveChildren : MonoBehaviour {
+public class Water : MonoBehaviour {
 
     public Transform[] water;
     public Transform[] pathHolder;
     public float moveSpeed = 10;
     public float smoothDistance = 4;
+    public int damage = 10;
 
     AudioManager audioManager;
 
@@ -27,6 +28,37 @@ public class MoveChildren : MonoBehaviour {
 
     }
 
+    /* Detects a collision
+     * decreases the players firehealth (probably to zero)
+     */
+    void OnTriggerStay2D(Collider2D col)
+    {
+        Debug.Log("in collision");
+        if (col.gameObject.GetComponent<Player>() != null)
+        {
+            Debug.Log("in if");
+            Player player = col.gameObject.GetComponent<Player>();
+            player.DamageFire(damage);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.GetComponent<Player>() != null)
+        {
+            audioManager.PlaySound("Water Hiss Long");
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.GetComponent<Player>() != null)
+        {
+            audioManager.StopSound("Water Hiss Long");
+            audioManager.PlaySound("Water Hiss End");
+        }
+    }
+
     IEnumerator FollowPath(Vector2[] waypoints, Transform waterToMove)
     {
         // Corretly placing enemy at initialization
@@ -34,7 +66,6 @@ public class MoveChildren : MonoBehaviour {
         int targetWaypointIndex = 1;
         Vector2 targetWaypoint = waypoints[targetWaypointIndex];
         BoxCollider2D collider = waterToMove.GetComponent<BoxCollider2D>();
-        Bounds waterBounds = collider.bounds;
 
         while (true)
         {
@@ -63,7 +94,6 @@ public class MoveChildren : MonoBehaviour {
             }
             else
             {
-                Debug.Log("in elsd]e");
                 waterToMove.position = Vector2.MoveTowards(waterToMove.position, targetWaypoint, moveSpeed * Time.deltaTime);
             }
 
