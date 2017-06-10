@@ -12,6 +12,7 @@ using System.Collections;
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour
 {
+    const int MAXREPAIR = 50;
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
     public float timeToJumpApex = .4f;
@@ -23,8 +24,9 @@ public class Player : MonoBehaviour
 
     public float maxHealth = 10;
     public float health;
-    public float maxFireStrength = 10;
-    public float fireStrength;
+    public float maxFireHealth = 10;
+    public float fireHealth;
+    public bool isFire = true;
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour
 
     CollisionInfo colInfo;
     Controller2D controller;
+    Animator anim;
 
     Vector2 directionalInput;
     bool wallSliding;
@@ -50,12 +53,13 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         controller = GetComponent<Controller2D>();
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         health = maxHealth;
-        fireStrength = maxFireStrength;
+        fireHealth = maxFireHealth;
         //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
     }
 
@@ -206,7 +210,15 @@ public class Player : MonoBehaviour
 
     public void DamageFire(int _damage)
     {
-        fireStrength -= _damage;
+        if (fireHealth >= 0)
+        {
+            fireHealth -= _damage;
+            anim.SetFloat("Fire Health", fireHealth);
+            if (fireHealth <= 0)
+            {
+                isFire = false;
+            }
+        }
     }
 
     public void DamagePlayer(int _damage)

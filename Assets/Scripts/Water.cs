@@ -46,7 +46,11 @@ public class Water : MonoBehaviour {
     {
         if (col.gameObject.GetComponent<Player>() != null)
         {
-            audioManager.PlaySound("Water Hiss Long");
+            Player player = col.gameObject.GetComponent<Player>();
+            if (player.isFire)
+            {
+                audioManager.PlaySound("Water Hiss Long");
+            }
         }
     }
 
@@ -54,8 +58,12 @@ public class Water : MonoBehaviour {
     {
         if (col.gameObject.GetComponent<Player>() != null)
         {
-            audioManager.StopSound("Water Hiss Long");
-            audioManager.PlaySound("Water Hiss End");
+            Player player = col.gameObject.GetComponent<Player>();
+            if (player.isFire)
+            {
+                audioManager.StopSound("Water Hiss Long");
+                audioManager.PlaySound("Water Hiss End");
+            }
         }
     }
 
