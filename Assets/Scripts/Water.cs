@@ -33,10 +33,8 @@ public class Water : MonoBehaviour {
      */
     void OnTriggerStay2D(Collider2D col)
     {
-        Debug.Log("in collision");
         if (col.gameObject.GetComponent<Player>() != null)
         {
-            Debug.Log("in if");
             Player player = col.gameObject.GetComponent<Player>();
             player.DamageFire(damage);
         }
@@ -52,6 +50,11 @@ public class Water : MonoBehaviour {
                 audioManager.PlaySound("Water Hiss Long");
             }
         }
+        if(col.gameObject.GetComponent<FallInWaterableObject>() != null)
+        {
+            FallInWaterableObject waterable = col.gameObject.GetComponent<FallInWaterableObject>();
+            waterable.SetIsInWater(true);
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)
@@ -64,6 +67,11 @@ public class Water : MonoBehaviour {
                 audioManager.StopSound("Water Hiss Long");
                 audioManager.PlaySound("Water Hiss End");
             }
+        }
+        if (col.gameObject.GetComponent<FallInWaterableObject>() != null)
+        {
+            FallInWaterableObject waterable = col.gameObject.GetComponent<FallInWaterableObject>();
+            waterable.SetIsInWater(false);
         }
     }
 

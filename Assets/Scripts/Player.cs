@@ -8,9 +8,10 @@
 
 using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(Controller2D))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, FallInWaterableObject
 {
     const int MAXREPAIR = 50;
     public float maxJumpHeight = 4;
@@ -36,10 +37,12 @@ public class Player : MonoBehaviour
     float timeToWallUnstick;
 
     float gravity;       // -(2 * maxJumpHeight) / timeToJumpApex^2
+    float gravityOriginal;
     float maxJumpVelocity;  // gravity * timeToJumpApex
     float minJumpVelocity;
     Vector3 velocity;
     float velocityXSmoothing;
+    public bool isInWater = false;
 
     CollisionInfo colInfo;
     Controller2D controller;
@@ -56,10 +59,12 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<Controller2D>();
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        gravityOriginal = gravity;
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         health = maxHealth;
         fireHealth = maxFireHealth;
+        anim.SetFloat("Fire Health", fireHealth);
         //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
     }
 
@@ -69,6 +74,15 @@ public class Player : MonoBehaviour
         HandleWallSliding();
 
         controller.Move(velocity * Time.deltaTime, directionalInput);
+
+        if(isInWater)
+        {
+            gravity = .5f * gravityOriginal;
+        }
+        else
+        {
+            gravity = gravityOriginal;
+        }
 
         // Velocity on y axis reset if collision above or below player
         if (controller.collisions.above || controller.collisions.below)
@@ -190,7 +204,7 @@ public class Player : MonoBehaviour
         if(controller.collisions.climingSlope)
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleClimbSmoothTime);
-            Debug.Log(controller.collisions.slopeAngle);
+            //Debug.Log(controller.collisions.slopeAngle);
             //Debug.Log("climb: " + slopeAngleClimbSmoothTime);
         }
         else if(controller.collisions.descendingSlope && Mathf.Abs(velocityXOld) > 1f)
@@ -217,12 +231,28 @@ public class Player : MonoBehaviour
             if (fireHealth <= 0)
             {
                 isFire = false;
+                
             }
+        }
+    }
+
+    public void HealFire(float _health)
+    {
+        if (fireHealth < maxFireHealth)
+        {
+            fireHealth += _health;
+            isFire = true;
+            anim.SetFloat("Fire Health", fireHealth);
         }
     }
 
     public void DamagePlayer(int _damage)
     {
         health -= _damage;
+    }
+
+    void FallInWaterableObject.SetIsInWater(bool _isInWater)
+    {
+        isInWater = _isInWater;
     }
 }

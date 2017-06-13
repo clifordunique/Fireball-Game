@@ -7,9 +7,9 @@ using UnityEngine;
 using System.Collections;
 using System.Diagnostics;
 
+[RequireComponent(typeof(Player))]
 public class Attack : MonoBehaviour
 {
-
     public Transform test;
     public Transform firePoint;
     public float speed = 10f;
@@ -23,21 +23,22 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
-        sw.Start();
-        if (sw.ElapsedMilliseconds > 500)
+        if (GetComponent<Player>().isFire)
         {
-            if (firePoint == null)
+            sw.Start();
+            if (sw.ElapsedMilliseconds > 500)
             {
-                UnityEngine.Debug.LogError("No firepoint? WHAT?!");
+                if (firePoint == null)
+                {
+                    UnityEngine.Debug.LogError("No firepoint? WHAT?!");
+                }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    sw.Reset();
+                    Shoot();
+                }
             }
-            if (Input.GetMouseButtonDown(0))
-            {
-                sw.Reset();
-                Shoot();
-            }
-            
         }
-        
     }
 
     void Shoot()

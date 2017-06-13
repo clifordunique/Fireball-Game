@@ -23,6 +23,8 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
     public Transform waterSplat;
     public Transform waterSplat2;
 
+    Vector2 dirToPlayer;
+
     float health;
     int damage = 10;
 
@@ -50,6 +52,10 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
 	}
 	
 	void Update () {
+        if(player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
         if (CanSeePlayer())
         {
             UnityEngine.Debug.Log("I can see the plaeyrf");
@@ -119,7 +125,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
 
         //Wait for the enemy to finish jumping, then chase the player
         yield return StartCoroutine(Jump());
-
+        StartCoroutine(GetDirectionToPlayer());
         while (transform.position.x != player.position.x)
         {
             //Debug.Log("Player: " + player.position.x + "\nMe: " + transform.position.x);
@@ -127,8 +133,20 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
 
             transform.GetComponent<SpriteRenderer>().flipX = (dirToPlayerX > 0) ? true : false;
             //transform.Translate(dirToPlayerX * Time.deltaTime * chaseSpeed);
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, transform.position.y), chaseSpeed * Time.deltaTime);
+            //transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, transform.position.y), chaseSpeed * Time.deltaTime);
+
+            UnityEngine.Debug.Log("dirToPlayer: " + dirToPlayer);
+            transform.Translate(dirToPlayer.normalized * .2f);
             yield return null;
+        }
+    }
+
+    IEnumerator GetDirectionToPlayer()
+    {
+        while (true)
+        {
+            dirToPlayer = (player.position - transform.position);
+            yield return new WaitForSeconds(.5f);
         }
     }
 
@@ -137,7 +155,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
     IEnumerator Jump()
     {
         Stopwatch sw = new Stopwatch();
-        float jumpHeight = 1;
+        float jumpHeight = 2;
 
         sw.Start();
         while (sw.ElapsedMilliseconds < 500)
@@ -253,8 +271,12 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         if (col.gameObject.GetComponent<Player>() != null)
         {
             Player player = col.gameObject.GetComponent<Player>();
-            player.DamageFire((int)(damage * ((health + 6 / health) / maxHealth)));
-            audioManager.PlaySound("Water Hiss Short");
+            if (player.isFire)
+            {
+                player.DamageFire((int)(damage * ((health + 6 / health) / maxHealth)));
+                audioManager.PlaySound("Water Hiss Short");
+                Destroy(transform.parent.gameObject);
+            }
         }
     }
 }
