@@ -14,11 +14,13 @@ public class Attack : MonoBehaviour
     public Transform firePoint;
     public float speed = 10f;
     Stopwatch sw;
+    AudioManager audioManager;
 
     void Start()
     {
         firePoint = transform.Find("FirePoint");
         sw = new Stopwatch();
+        audioManager = AudioManager.instance;
     }
 
     void Update()
@@ -47,6 +49,7 @@ public class Attack : MonoBehaviour
         Vector2 heading = targetPoint - (Vector2)firePoint.transform.position;
         Vector2 direction = heading.normalized;
         float angle = Mathf.Atan2(heading.y, heading.x) * Mathf.Rad2Deg;
+        audioManager.PlaySound("Fireball");
         //UnityEngine.Debug.Log(angle);
 
         Instantiate(test, firePoint.position, Quaternion.FromToRotation(Vector3.up, direction));

@@ -136,6 +136,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
             //transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, transform.position.y), chaseSpeed * Time.deltaTime);
 
             UnityEngine.Debug.Log("dirToPlayer: " + dirToPlayer);
+            // Probably change this, make some more intuitive way to change speed
             transform.Translate(dirToPlayer.normalized * .2f);
             yield return null;
         }
