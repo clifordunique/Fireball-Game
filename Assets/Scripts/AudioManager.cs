@@ -42,6 +42,21 @@ public class Sound
         source.Play();
     }
 
+    public void Pause()
+    {
+        source.Pause();
+    }
+
+    public void UnPause()
+    {
+        source.UnPause();
+    }
+
+    public bool isPlaying()
+    {
+        return source.isPlaying;
+    }
+
     public void Stop()
     {
         source.Stop();
@@ -115,5 +130,20 @@ public class AudioManager : MonoBehaviour {
 
         // no sound with _name
         Debug.LogWarning("AudioManager: Sound not found in list, " + _name);
+    }
+
+    /* Pass in the string to check if it is playing
+     */
+    public bool isPlaying(string _name)
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].name == _name)
+            {
+                return sounds[i].isPlaying();
+            }
+        }
+        Debug.LogWarning("AudioManager: Sound not found in list, " + _name);
+        return false;
     }
 }

@@ -19,7 +19,6 @@ public class PondBasin : MonoBehaviour {
     {
         if (col.GetComponent<Player>() != null)
         {
-            Debug.Log("in trigger");
             anim.SetBool("TriggerEnter", true);
         }
     }
