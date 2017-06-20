@@ -7,7 +7,7 @@ public class Controller2D : RaycastController {
     public float maxSlopeAngle = 80;
     float speedBySlopeAngleClimb;
     float speedBySlopeAngleDescend;
-
+    
     public CollisionInfo collisions;
     [HideInInspector]
     public Vector2 playerInput;

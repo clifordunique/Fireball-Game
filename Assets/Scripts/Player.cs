@@ -9,25 +9,30 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour, FallInWaterableObject
 {
-    const int MAXREPAIR = 50;
-    public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
     public float timeToJumpApex = .4f;
     float accelerationTimeAirborne = .3f;
     float accelerationTimeGrounded = .2f;
     float accelerationTimeDescendingSlope = .5f;
     float accelerationTimeClimbingSlope = .1f;
-    public float moveSpeed = 40;
 
-    public float maxHealth = 10;
     public float health;
-    public float maxFireHealth = 10;
+
+    // Variables to be carried over to the next scene start
+    public float maxHealth;
+    public float maxFireHealth;
     public float fireHealth;
+    public float moveSpeed = 40;
+    public float maxJumpHeight;
     public bool isFire = true;
+    // End
+
+    GameMaster gm;
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
@@ -60,10 +65,10 @@ public class Player : MonoBehaviour, FallInWaterableObject
         controller = GetComponent<Controller2D>();
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         gravityOriginal = gravity;
+        gm = FindObjectOfType<GameMaster>();
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         health = maxHealth;
-        fireHealth = maxFireHealth;
         anim.SetFloat("Fire Health", fireHealth);
         //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
     }
@@ -96,6 +101,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 velocity.y = 0;
             }
         }
+        anim.SetFloat("Fire Health", fireHealth);
     }
 
     /* Gets input from the PlayerInput class
@@ -243,6 +249,16 @@ public class Player : MonoBehaviour, FallInWaterableObject
             fireHealth += _health;
             isFire = true;
             anim.SetFloat("Fire Health", fireHealth);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log("in the trigger!!!!!!!!!!!!!!!");
+        if (col.CompareTag("Done"))
+        {
+            gm.SavePlayerStats();
+            SceneManager.LoadScene("Level03");
         }
     }
 

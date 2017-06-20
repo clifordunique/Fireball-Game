@@ -118,7 +118,6 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
     
     IEnumerator ChasePlayer()
     {
-        //Debug.Log("I am trying to chase the player");
         anim.SetFloat("Speed", chaseSpeed);
         float dirToPlayerX = (player.position.x - transform.position.x);
         transform.GetComponent<SpriteRenderer>().flipX = (dirToPlayerX > 0) ? true : false;
@@ -128,20 +127,20 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         StartCoroutine(GetDirectionToPlayer());
         while (transform.position.x != player.position.x)
         {
-            //Debug.Log("Player: " + player.position.x + "\nMe: " + transform.position.x);
             dirToPlayerX = (player.position.x - transform.position.x);
 
             transform.GetComponent<SpriteRenderer>().flipX = (dirToPlayerX > 0) ? true : false;
             //transform.Translate(dirToPlayerX * Time.deltaTime * chaseSpeed);
             //transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, transform.position.y), chaseSpeed * Time.deltaTime);
 
-            UnityEngine.Debug.Log("dirToPlayer: " + dirToPlayer);
-            // Probably change this, make some more intuitive way to change speed
-            transform.Translate(dirToPlayer.normalized * .2f);
+            transform.Translate(dirToPlayer.normalized * chaseSpeed / 50);
             yield return null;
         }
     }
 
+    /* Gets the players direction with a slight delay
+     * This allows you to change direction without the enemy immediately registering it.
+     */
     IEnumerator GetDirectionToPlayer()
     {
         while (true)
