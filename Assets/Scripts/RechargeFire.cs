@@ -10,6 +10,7 @@ public class RechargeFire : MonoBehaviour {
     {
         if(col.GetComponent<Player>() != null)
         {
+            Debug.Log("healing player");
             Player player = col.GetComponent<Player>();
             player.HealFire(healAmount);
         }

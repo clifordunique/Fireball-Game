@@ -7,8 +7,6 @@
  */
 
 using UnityEngine;
-using System.Collections;
-using System;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Controller2D))]
@@ -52,6 +50,9 @@ public class Player : MonoBehaviour, FallInWaterableObject
     CollisionInfo colInfo;
     Controller2D controller;
     Animator anim;
+    AudioManager audioManager;
+    string audioClip = null;
+    string[] audioClips;
 
     Vector2 directionalInput;
     bool wallSliding;
@@ -61,6 +62,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void Start()
     {
+        audioManager = AudioManager.instance;
+        if (audioManager == null)
+        {
+            Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
+        }
         anim = GetComponent<Animator>();
         controller = GetComponent<Controller2D>();
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -71,6 +77,15 @@ public class Player : MonoBehaviour, FallInWaterableObject
         health = maxHealth;
         anim.SetFloat("Fire Health", fireHealth);
         //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
+        audioClips = new string[14];
+        for (int i = 0; i < 14; i++)
+        {
+            if (i < 10)
+                audioClips[i] = "grass" + "0" + i;
+            else
+                audioClips[i] = "grass" + i;
+        }
+        Debug.Log(audioClips.Length);
     }
 
     void Update()
@@ -224,8 +239,31 @@ public class Player : MonoBehaviour, FallInWaterableObject
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below ? accelerationTimeGrounded : accelerationTimeAirborne));
         }
 
+        // Sound plays when the player starts, but not necessarily when he is slowing down
+        if(Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x))
+        {
+            if (!audioManager.isPlaying(audioClip) || audioClip == null)
+            {
+                audioClip = GetRandomAudioFromArray();
+                audioManager.PlaySound(audioClip);
+            }
+        }
+        /* not working
+        else if (Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocity.x) <= Mathf.Abs(velocityXOld))
+        {
+            audioManager.PlaySound("grass01");
+        }
+        */
+
         velocityXOld = velocity.x;
         velocity.y += gravity * Time.deltaTime;
+    }
+
+    string GetRandomAudioFromArray()
+    {
+        Debug.Log(audioClips.Length);
+        int i = Random.Range(0, audioClips.Length);
+        return audioClips[i];
     }
 
     public void DamageFire(int _damage)

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class LoadGM : MonoBehaviour {
 
-    GameMaster thatPersistingObject;
+    GameMaster gm;
+
     void Awake()
     {
-        thatPersistingObject = FindObjectOfType<GameMaster>();
-        thatPersistingObject.LoadPlayerStats();
+        gm = FindObjectOfType<GameMaster>();
+        gm.LoadPlayerStats();
     }
 }
