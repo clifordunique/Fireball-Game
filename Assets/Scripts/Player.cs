@@ -116,7 +116,21 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 velocity.y = 0;
             }
         }
+
+        DealWithFire();
+    }
+
+    void DealWithFire()
+    {
         anim.SetFloat("Fire Health", fireHealth);
+        if (fireHealth <= 0)
+        {
+            isFire = false;
+        }
+        else
+        {
+            isFire = true;
+        }
     }
 
     /* Gets input from the PlayerInput class
