@@ -24,6 +24,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
     public Transform waterSplat2;
 
     Vector2 dirToPlayer;
+    Vector2 dirToPlayerOld;
 
     float health;
     int damage = 10;
@@ -132,7 +133,10 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
             transform.GetComponent<SpriteRenderer>().flipX = (dirToPlayerX > 0) ? true : false;
             //transform.Translate(dirToPlayerX * Time.deltaTime * chaseSpeed);
             //transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, transform.position.y), chaseSpeed * Time.deltaTime);
-
+            if(dirToPlayer.y < 0)
+            {
+                dirToPlayer = new Vector2(dirToPlayer.x, 0);
+            }
             transform.Translate(dirToPlayer.normalized * chaseSpeed / 50);
             yield return null;
         }
@@ -147,6 +151,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         {
             dirToPlayer = (player.position - transform.position);
             yield return new WaitForSeconds(.5f);
+            dirToPlayerOld = dirToPlayer;
         }
     }
 

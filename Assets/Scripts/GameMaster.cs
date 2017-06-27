@@ -1,8 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour {
+
+    public GameObject endLevelUI;
 
     AudioManager audioManager;
     public string[] forestBackgroundArray;
@@ -49,6 +51,20 @@ public class GameMaster : MonoBehaviour {
     void PlayBackgroundMusic()
     {
         audioManager.PlaySound(forestBackgroundArray[backgroundSoundIndex]);
+    }
+
+    public void EndLevel()
+    {
+        endLevelUI.SetActive(true);
+        SavePlayerStats();
+        StartCoroutine(waitToLoad(2));
+    }
+
+    IEnumerator waitToLoad(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        SceneManager.LoadScene("Level03");
+
     }
 
     /* saves the player stats, such as powerups and if he's still on fire

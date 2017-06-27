@@ -7,7 +7,14 @@ public class CampFire : MonoBehaviour {
     public GameObject fire;
     public float displacementX;
     public float displacementY;
+
+    GameMaster gm;
 	
+    void Start()
+    {
+        gm = FindObjectOfType<GameMaster>();
+    }
+
 	void Update () {
 	}
 
@@ -16,6 +23,7 @@ public class CampFire : MonoBehaviour {
         if (col.GetComponent<Player>() != null && col.GetComponent<Player>().isFire)
         {
             Instantiate(fire, new Vector2(transform.position.x + displacementX, transform.position.y + displacementY), transform.rotation);
+            gm.EndLevel();
         }
     }
 }
