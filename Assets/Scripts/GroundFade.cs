@@ -18,7 +18,6 @@ public class GroundFade : MonoBehaviour {
     void Start()
     {
         dstBtwSides = Mathf.Abs(side2.position.x - side1.position.x);
-        Debug.Log(dstBtwSides);
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
     }

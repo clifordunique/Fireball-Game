@@ -32,6 +32,8 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
     // If an object damages the enemy, it should always have a PlayerWeapon script attached
     PlayerWeapon weapon;
     AudioManager audioManager;
+
+    SpriteRenderer sr;
     Stopwatch sw;
 
     Transform player;
@@ -43,13 +45,9 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         anim = GetComponent<Animator>();
         health = maxHealth;
         audioManager = AudioManager.instance;
+        sr = GetComponent<SpriteRenderer>();
 
-        Vector2[] waypoints = new Vector2[pathHolder.childCount];
-        for (int i = 0; i < waypoints.Length; i++)
-        {
-            waypoints[i] = pathHolder.GetChild(i).position;
-        }
-        StartCoroutine(FollowPath(waypoints));
+        SetWaypoints();
 	}
 	
 	void Update () {
@@ -59,10 +57,19 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         }
         if (CanSeePlayer())
         {
-            UnityEngine.Debug.Log("I can see the plaeyrf");
             StopAllCoroutines();
             StartCoroutine(ChasePlayer());
         }
+    }
+
+    void SetWaypoints()
+    {
+        Vector2[] waypoints = new Vector2[pathHolder.childCount];
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            waypoints[i] = pathHolder.GetChild(i).position;
+        }
+        StartCoroutine(FollowPath(waypoints));
     }
 
     /* Tests whether the enemy can see the player or not
@@ -72,13 +79,12 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
     {
         if (Mathf.Abs(transform.position.x - player.position.x) < viewDistanceX && Mathf.Abs(transform.position.y - player.position.y) < viewDistanceY)
         {
-            if ((transform.GetComponent<SpriteRenderer>().flipX && (player.position.x > transform.position.x)) || !transform.GetComponent<SpriteRenderer>().flipX && (player.position.x < transform.position.x))
+            if ((transform.localScale.x < 0 && (player.position.x > transform.position.x)) || transform.localScale.x > 0 && (player.position.x < transform.position.x))
             {
-                if (!Physics.Linecast(transform.position, player.position, mask))
+                if (!Physics.Linecast(transform.position, player.position, mask) && player.GetComponent<Player>().isFire)
                 {
                     if (anim.GetFloat("Speed") <= speed)
                     {
-                        //UnityEngine.Debug.Log("I can see the plaeyrf");
                         return true;
                     }
                 }
@@ -87,17 +93,19 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         return false;
     }
 
+    /* Follows a path along an array of waypoints. Once it has reached the last waypoint, it goes back to the first.
+     * It makes sure the Enemy is facing the way it is walking.
+     */
     IEnumerator FollowPath(Vector2[] waypoints)
     {
-        // Corretly placing enemy at initialization
-        transform.position = waypoints[0];
         int targetWaypointIndex = 1;
         Vector2 targetWaypoint = waypoints[targetWaypointIndex];
-        float dirX = Mathf.Sign(targetWaypoint.x - transform.position.x);
-        //transform.localScale = new Vector3(-dirX*transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        transform.GetComponent<SpriteRenderer>().flipX = (dirX > 0) ? true : false;
+        float dirX;
+
         while (true)
         {
+            dirX = Mathf.Sign(targetWaypoint.x - transform.position.x);
+            transform.localScale = new Vector2(-dirX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
             anim.SetFloat("Speed", speed);
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(targetWaypoint.x, transform.position.y), speed * Time.deltaTime);
             if (transform.position.x == targetWaypoint.x)
@@ -107,8 +115,9 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
                 anim.SetFloat("Speed", 0);
                 yield return new WaitForSeconds(waitTime);
 
-                //transform.localScale = new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                transform.GetComponent<SpriteRenderer>().flipX = !transform.GetComponent<SpriteRenderer>().flipX;
+                dirX = Mathf.Sign(targetWaypoint.x - transform.position.x);
+                transform.localScale = new Vector2(-dirX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
+                //sr.flipX = !transform.GetComponent<SpriteRenderer>().flipX;
 
                 yield return new WaitForSeconds(waitTime);
                 anim.SetFloat("Speed", speed);
@@ -116,26 +125,37 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
             yield return null;
         }
     }
+
+    void SetLocalScale(float dirX)
+    {
+        transform.localScale = new Vector2(-dirX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
+    }
     
     IEnumerator ChasePlayer()
     {
         anim.SetFloat("Speed", chaseSpeed);
-        float dirToPlayerX = (player.position.x - transform.position.x);
-        transform.GetComponent<SpriteRenderer>().flipX = (dirToPlayerX > 0) ? true : false;
+        float dirToPlayerX = Mathf.Sign(player.position.x - transform.position.x);
+        //transform.GetComponent<SpriteRenderer>().flipX = (dirToPlayerX > 0) ? true : false;
+        transform.localScale = new Vector2(-dirToPlayerX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
 
         //Wait for the enemy to finish jumping, then chase the player
         yield return StartCoroutine(Jump());
         StartCoroutine(GetDirectionToPlayer());
         while (transform.position.x != player.position.x)
         {
-            dirToPlayerX = (player.position.x - transform.position.x);
-
-            transform.GetComponent<SpriteRenderer>().flipX = (dirToPlayerX > 0) ? true : false;
+            if(!player.GetComponent<Player>().isFire)
+            {
+                StopAllCoroutines();
+                SetWaypoints();
+            }
+            dirToPlayerX = Mathf.Sign(player.position.x - transform.position.x);
+            //transform.GetComponent<SpriteRenderer>().flipX = (dirToPlayerX > 0) ? true : false;
+            transform.localScale = new Vector2(-dirToPlayerX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
             //transform.Translate(dirToPlayerX * Time.deltaTime * chaseSpeed);
             //transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.position.x, transform.position.y), chaseSpeed * Time.deltaTime);
-            if(dirToPlayer.y < 0)
+            if (dirToPlayer.y < 0)
             {
-                dirToPlayer = new Vector2(dirToPlayer.x, 0);
+                dirToPlayer.y = 0;
             }
             transform.Translate(dirToPlayer.normalized * chaseSpeed / 50);
             yield return null;
@@ -205,19 +225,61 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         audioManager.PlaySound("Spat");
         Vector2 direction = new Vector2(waterSplat.eulerAngles.x,waterSplat.eulerAngles.y);
         Vector2 negDirection = new Vector2(waterSplat.eulerAngles.x, waterSplat.eulerAngles.y);
+
+        // Facing you
+        if ((transform.localScale.x > 0 && player.position.x < transform.position.x) || (transform.localScale.x < 0 && player.position.x > transform.position.x))
+        {
+            // Player is to the left
+            if (player.position.x < transform.position.x)
+            {
+                if (anim.GetFloat("Speed") == 0)
+                {
+                    Instantiate(waterSplat2, new Vector2(position.x + 2, position.y), Quaternion.Euler(Vector2.right));
+                }
+                else
+                {
+                    Instantiate(waterSplat2, position, Quaternion.Euler(Vector2.right));
+                    UnityEngine.Debug.Log("Enemy is facing the player and the player is left");
+                    //waterSplat.GetComponent<SpriteRenderer>().flipX = true;
+                    //waterSplat.eulerAngles = new Vector2(-1, 1);
+                }
+            }
+            else // Player is to the right
+            {
+                if (anim.GetFloat("Speed") == 0)
+                {
+                    Instantiate(waterSplat, new Vector2(position.x - 2, position.y), Quaternion.Euler(Vector2.right));
+                }
+                else
+                {
+                    Instantiate(waterSplat, position, Quaternion.Euler(Vector2.right));
+                    UnityEngine.Debug.Log("Enemy is facing the player and the player is right");
+                    //waterSplat.GetComponent<SpriteRenderer>().flipX = false;
+                    //waterSplat.eulerAngles = new Vector2(1, 1);
+                }
+            }
+        }
+        else // not facing the player
+        {
+            // Player is to the left
+            if (player.position.x < transform.position.x)
+            {
+                Instantiate(waterSplat, position, Quaternion.Euler(Vector2.right));
+                UnityEngine.Debug.Log("Enemy is not facing the player and the player is left");
+                //waterSplat.GetComponent<SpriteRenderer>().flipX = false;
+                //waterSplat.eulerAngles = new Vector2(1, 1);
+            }
+            else // Player is to the right
+            {
+                Instantiate(waterSplat2, position, Quaternion.Euler(Vector2.right));
+                UnityEngine.Debug.Log("Enemy is not facing the player and the player is right");
+                //waterSplat.GetComponent<SpriteRenderer>().flipX = true;
+                //waterSplat.eulerAngles = new Vector2(-1, 1);
+            }
+        }
+
         /*
-        float margin;
-        //Player is on the left of enemy
-        if(!GetComponent<SpriteRenderer>().flipX && player.position.x < transform.position.x)
-        {
-            margin = -1;
-        }
-        // Player is on the right side of enemy
-        else//(GetComponent<SpriteRenderer>().flipX && player.position.x > transform.position.x)
-        {
-            margin = 1;
-        }
-        */
+         * 
         //Facing you
         if ((!GetComponent<SpriteRenderer>().flipX && player.position.x < transform.position.x) || (GetComponent<SpriteRenderer>().flipX && player.position.x > transform.position.x))
         {
@@ -269,6 +331,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
                 //waterSplat.eulerAngles = new Vector2(-1, 1);
             }
         }
+        */
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -282,6 +345,10 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
                 audioManager.PlaySound("Water Hiss Short");
                 Destroy(transform.parent.gameObject);
             }
+        }
+        else if(col.gameObject.GetComponent<Enemy>() != null)
+        {
+            Physics2D.IgnoreCollision(col.collider, GetComponent<Collider2D>());
         }
     }
 }

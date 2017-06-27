@@ -80,12 +80,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
         audioClips = new string[14];
         for (int i = 0; i < 14; i++)
         {
-            if (i < 10)
-                audioClips[i] = "grass" + "0" + i;
+            if (i < 9)
+                audioClips[i] = "grass" + "0" + (i + 1);
             else
-                audioClips[i] = "grass" + i;
+                audioClips[i] = "grass" + (i + 1);
         }
-        Debug.Log(audioClips.Length);
     }
 
     void Update()
@@ -275,7 +274,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     string GetRandomAudioFromArray()
     {
-        Debug.Log(audioClips.Length);
         int i = Random.Range(0, audioClips.Length);
         return audioClips[i];
     }
