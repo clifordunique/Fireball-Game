@@ -8,6 +8,9 @@ public class CampFire : MonoBehaviour {
     public float displacementX;
     public float displacementY;
 
+    public delegate void OnLevelEnd();
+    public event OnLevelEnd levelEndEvent;
+
     GameMaster gm;
 	
     void Start()
@@ -23,7 +26,10 @@ public class CampFire : MonoBehaviour {
         if (col.GetComponent<Player>() != null && col.GetComponent<Player>().isFire)
         {
             Instantiate(fire, new Vector2(transform.position.x + displacementX, transform.position.y + displacementY), transform.rotation);
-            gm.EndLevel();
+            if (levelEndEvent != null)
+            {
+                levelEndEvent();
+            }
         }
     }
 }

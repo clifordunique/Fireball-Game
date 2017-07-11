@@ -8,6 +8,7 @@ public class GameMaster : MonoBehaviour {
 
     AudioManager audioManager;
     public string[] forestBackgroundArray;
+    string[] woodCrackClips;
     int backgroundSoundIndex;
 
     float maxHealth;
@@ -25,10 +26,17 @@ public class GameMaster : MonoBehaviour {
 
     void Start () {
         audioManager = AudioManager.instance;
-
+        FindObjectOfType<Controller2D>().hitBranchEvent += OnHitBranch;
+        FindObjectOfType<Controller2D>().branchBreakEvent += OnBranchBreak;
+        FindObjectOfType<CampFire>().levelEndEvent += OnLevelEnd;
         if (audioManager == null)
         {
             Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
+        }
+        woodCrackClips = new string[7];
+        for (int i = 0; i < woodCrackClips.Length; i++)
+        {
+            woodCrackClips[i] = "woodcrack0" + (i + 1);
         }
         GetRandomIndex();
         PlayBackgroundMusic();
@@ -53,19 +61,28 @@ public class GameMaster : MonoBehaviour {
         audioManager.PlaySound(forestBackgroundArray[backgroundSoundIndex]);
     }
 
-    public void EndLevel()
+    void OnLevelEnd()
     {
-        endLevelUI.SetActive(true);
-        SavePlayerStats();
-        StartCoroutine(waitToLoad(2));
+        StartCoroutine(LevelEnd());
+        FindObjectOfType<CampFire>().levelEndEvent -= OnLevelEnd;
     }
 
+    IEnumerator LevelEnd()
+    {
+        yield return new WaitForSeconds(2);
+        endLevelUI.SetActive(true);
+        SavePlayerStats();
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Level03");
+    }
+    /*
     IEnumerator waitToLoad(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         SceneManager.LoadScene("Level03");
 
     }
+    */
 
     /* saves the player stats, such as powerups and if he's still on fire
      */
@@ -93,5 +110,20 @@ public class GameMaster : MonoBehaviour {
         //player.moveSpeed  = moveSpeed;
         //player.maxJumpHeight  = maxJumpHeight;
         player.isFire  = isFire;
+    }
+
+    public void OnHitBranch()
+    {
+        int i = Random.Range(1, woodCrackClips.Length);
+        Debug.Log("poop " + woodCrackClips[i]);
+        audioManager.PlaySound(woodCrackClips[i]);
+    }
+    public void OnBranchBreak()
+    {
+        audioManager.PlaySound(woodCrackClips[0]);
+        new WaitForSeconds(1f);
+        audioManager.PlaySound(woodCrackClips[5]);
+        FindObjectOfType<Controller2D>().hitBranchEvent -= OnHitBranch;
+        FindObjectOfType<Controller2D>().branchBreakEvent -= OnBranchBreak;
     }
 }

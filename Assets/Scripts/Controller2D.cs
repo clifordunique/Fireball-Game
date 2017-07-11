@@ -7,6 +7,11 @@ public class Controller2D : RaycastController {
     public float maxSlopeAngle = 80;
     float speedBySlopeAngleClimb;
     float speedBySlopeAngleDescend;
+
+    public delegate void OnHitBranch();
+    public event OnHitBranch hitBranchEvent;
+    public delegate void OnBranchBreak();
+    public event OnBranchBreak branchBreakEvent;
     
     public CollisionInfo collisions;
     [HideInInspector]
@@ -43,8 +48,8 @@ public class Controller2D : RaycastController {
 
         //Always check for horizontal collisions to enable wall sliding in case player jumps while right next to a wall.
         HorizontalCollisions(ref moveAmount);
-
-        if(moveAmount.y != 0)
+        ConstantDownwardRaycast(moveAmount);
+        if (moveAmount.y != 0)
         {
             VerticalCollisions(ref moveAmount);
         }
@@ -156,7 +161,7 @@ public class Controller2D : RaycastController {
 
                 /* Checking for a hit. If a ray hits an object, change the moveAmount to the ray length.
                  * That way the next frame the player (following its new moveAmount) should rest on the object below it.
-                 * If the moveAmount, doesn't change to the ray length that would be a problem b/c the player would just go through the platform.
+                 * If the moveAmount doesn't change to the ray length that would be a problem b/c the player would just go through the platform.
                  */
                 moveAmount.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;
@@ -186,6 +191,41 @@ public class Controller2D : RaycastController {
                     moveAmount.x = (hit.distance - skinWidth) * directionX;
                     collisions.slopeAngle = slopeAngle;
                     collisions.slopeNormal = hit.normal;
+                }
+            }
+        }
+    }
+
+    void ConstantDownwardRaycast(Vector2 moveAmount)
+    {
+        float rayLength = Mathf.Abs(moveAmount.y) + skinWidth;
+        for (int i = 0; i < verticalRayCount; i++)
+        {
+            Vector2 rayOrigin = raycastOrigins.bottomLeft;
+            rayOrigin += Vector2.right * (verticalRaySpacing * i * moveAmount.x);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * -rayLength, 5, collisionMask);
+
+            Debug.DrawRay(rayOrigin, Vector2.up * -rayLength /*   * rayLength   */ , Color.red);
+
+            /* Detects if the player lands on a branch and bumps it down slightly
+            */
+            if (hit)
+            {
+                if (hit.collider.tag == "Branch")
+                {
+                    if (hit.transform.eulerAngles.z < 3.5f && hitBranchEvent != null)
+                    {
+                        // Currently subscribed to by TreeBranch and GM
+                        hitBranchEvent();
+                    }
+                    else if (hit.transform.eulerAngles.z > 4.5f && hit.transform.eulerAngles.z < 7 && hitBranchEvent != null)
+                    {
+                        hitBranchEvent();
+                    }
+                    else if (hit.transform.eulerAngles.z > 9f && branchBreakEvent != null)
+                    {
+                        branchBreakEvent();
+                    }
                 }
             }
         }

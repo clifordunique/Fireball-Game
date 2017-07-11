@@ -38,6 +38,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
 
     Transform player;
     Animator anim;
+    Collider2D playerCollider;
 
 	void Start () {
         sw = new Stopwatch();
@@ -46,6 +47,9 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         health = maxHealth;
         audioManager = AudioManager.instance;
         sr = GetComponent<SpriteRenderer>();
+        FindObjectOfType<Player>().onFireEvent += OnFire;
+        FindObjectOfType<Player>().offFireEvent += OffFire;
+        playerCollider = FindObjectOfType<Player>().GetComponent<Collider2D>();
 
         SetWaypoints();
 	}
@@ -239,7 +243,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
                 else
                 {
                     Instantiate(waterSplat2, position, Quaternion.Euler(Vector2.right));
-                    UnityEngine.Debug.Log("Enemy is facing the player and the player is left");
+                    //UnityEngine.Debug.Log("Enemy is facing the player and the player is left");
                     //waterSplat.GetComponent<SpriteRenderer>().flipX = true;
                     //waterSplat.eulerAngles = new Vector2(-1, 1);
                 }
@@ -253,7 +257,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
                 else
                 {
                     Instantiate(waterSplat, position, Quaternion.Euler(Vector2.right));
-                    UnityEngine.Debug.Log("Enemy is facing the player and the player is right");
+                    //UnityEngine.Debug.Log("Enemy is facing the player and the player is right");
                     //waterSplat.GetComponent<SpriteRenderer>().flipX = false;
                     //waterSplat.eulerAngles = new Vector2(1, 1);
                 }
@@ -265,14 +269,14 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
             if (player.position.x < transform.position.x)
             {
                 Instantiate(waterSplat, position, Quaternion.Euler(Vector2.right));
-                UnityEngine.Debug.Log("Enemy is not facing the player and the player is left");
+                //UnityEngine.Debug.Log("Enemy is not facing the player and the player is left");
                 //waterSplat.GetComponent<SpriteRenderer>().flipX = false;
                 //waterSplat.eulerAngles = new Vector2(1, 1);
             }
             else // Player is to the right
             {
                 Instantiate(waterSplat2, position, Quaternion.Euler(Vector2.right));
-                UnityEngine.Debug.Log("Enemy is not facing the player and the player is right");
+                //UnityEngine.Debug.Log("Enemy is not facing the player and the player is right");
                 //waterSplat.GetComponent<SpriteRenderer>().flipX = true;
                 //waterSplat.eulerAngles = new Vector2(-1, 1);
             }
@@ -334,19 +338,31 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         */
     }
 
+    void OnFire()
+    {
+        Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), false);
+    }
+
+    void OffFire()
+    {
+        Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), true);
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.GetComponent<Player>() != null)
+        if (col.gameObject.CompareTag("Player"))
         {
             Player player = col.gameObject.GetComponent<Player>();
             if (player.isFire)
             {
                 player.DamageFire((int)(damage * ((health + 6 / health) / maxHealth)));
                 audioManager.PlaySound("Water Hiss Short");
+                FindObjectOfType<Player>().onFireEvent -= OnFire;
+                FindObjectOfType<Player>().offFireEvent -= OffFire;
                 Destroy(transform.parent.gameObject);
             }
         }
-        else if(col.gameObject.GetComponent<Enemy>() != null)
+        else if(col.gameObject.CompareTag("Enemy"))
         {
             Physics2D.IgnoreCollision(col.collider, GetComponent<Collider2D>());
         }

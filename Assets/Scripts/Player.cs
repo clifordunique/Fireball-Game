@@ -43,7 +43,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     float gravityOriginal;
     float maxJumpVelocity;  // gravity * timeToJumpApex
     float minJumpVelocity;
-    Vector3 velocity;
+    public Vector3 velocity;
     float velocityXSmoothing;
     public bool isInWater = false;
 
@@ -59,6 +59,12 @@ public class Player : MonoBehaviour, FallInWaterableObject
     int wallDirX;
 
     float velocityXOld;
+    public float velocityYOld;
+
+    public delegate void OnFire();
+    public event OnFire onFireEvent;
+    public delegate void OffFire();
+    public event OnFire offFireEvent;
 
     void Start()
     {
@@ -78,7 +84,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         anim.SetFloat("Fire Health", fireHealth);
         //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
         audioClips = new string[14];
-        for (int i = 0; i < 14; i++)
+        for (int i = 0; i < audioClips.Length; i++)
         {
             if (i < 9)
                 audioClips[i] = "grass" + "0" + (i + 1);
@@ -125,10 +131,18 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (fireHealth <= 0)
         {
             isFire = false;
+            if (offFireEvent != null)
+            {
+                offFireEvent();
+            }
         }
         else
         {
             isFire = true;
+            if(onFireEvent != null)
+            {
+                onFireEvent();
+            }
         }
     }
 
@@ -257,7 +271,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             if (!audioManager.isPlaying(audioClip) || audioClip == null)
             {
-                audioClip = GetRandomAudioFromArray();
+                audioClip = audioClips[Random.Range(0, audioClips.Length)];
                 audioManager.PlaySound(audioClip);
             }
         }
@@ -269,14 +283,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
         */
 
         velocityXOld = velocity.x;
+        velocityYOld = velocity.y;
         velocity.y += gravity * Time.deltaTime;
     }
 
-    string GetRandomAudioFromArray()
-    {
-        int i = Random.Range(0, audioClips.Length);
-        return audioClips[i];
-    }
+
 
     public void DamageFire(int _damage)
     {
@@ -287,7 +298,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
             if (fireHealth <= 0)
             {
                 isFire = false;
-                
             }
         }
     }
@@ -304,7 +314,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("in the trigger!!!!!!!!!!!!!!!");
         if (col.CompareTag("Done"))
         {
             gm.SavePlayerStats();
