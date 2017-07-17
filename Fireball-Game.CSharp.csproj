@@ -89,7 +89,7 @@
     <Compile Include="Assets\Scripts\GameMaster.cs" />
     <Compile Include="Assets\Scripts\GroundChildrenFade.cs" />
     <Compile Include="Assets\Scripts\GroundFade.cs" />
-    <Compile Include="Assets\Scripts\LoadGM.cs" />
+    <Compile Include="Assets\Scripts\Loader.cs" />
     <Compile Include="Assets\Scripts\Parallaxing.cs" />
     <Compile Include="Assets\Scripts\PlatformController.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />

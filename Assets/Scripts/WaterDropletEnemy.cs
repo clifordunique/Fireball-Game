@@ -209,7 +209,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         }
     }*/
 
-    /* Damages the enemy and destroys it if its health is less than zero
+    /* Damages the enemy and destroys it if its health is less than zero and instantiates a splash effect
      */
     public void DamageEnemy(int _damage, Vector2 position)
     {
@@ -219,6 +219,23 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
         
         if (health <= 0)
         {
+            FindObjectOfType<Player>().onFireEvent -= OnFire;
+            FindObjectOfType<Player>().offFireEvent -= OffFire;
+            Destroy(this.gameObject);
+        }
+    }
+
+    /* Damages the enemy and destroys it if its health is less than zero
+ */
+    public void DamageEnemy(int _damage)
+    {
+        health -= _damage;
+        transform.localScale *= (health + 6 / (health + .1f)) / maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
+
+        if (health <= 0)
+        {
+            FindObjectOfType<Player>().onFireEvent -= OnFire;
+            FindObjectOfType<Player>().offFireEvent -= OffFire;
             Destroy(this.gameObject);
         }
     }
@@ -340,12 +357,12 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
 
     void OnFire()
     {
-        Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), false);
+            Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), false);
     }
 
     void OffFire()
     {
-        Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), true);
+            Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), true);
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -357,9 +374,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
             {
                 player.DamageFire((int)(damage * ((health + 6 / health) / maxHealth)));
                 audioManager.PlaySound("Water Hiss Short");
-                FindObjectOfType<Player>().onFireEvent -= OnFire;
-                FindObjectOfType<Player>().offFireEvent -= OffFire;
-                Destroy(transform.parent.gameObject);
+                DamageEnemy(1000);
             }
         }
         else if(col.gameObject.CompareTag("Enemy"))

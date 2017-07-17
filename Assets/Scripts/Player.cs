@@ -125,6 +125,19 @@ public class Player : MonoBehaviour, FallInWaterableObject
         DealWithFire();
     }
 
+    /* Loading things from the previous level... maybe
+    //I AM A DUCK AND I'M DIGGING A HOLE... DIGGY DIGGY HOLE
+    void CheckLoader()
+    {
+        Debug.Log("first" + " space " + loader.fireHealth);
+        if(loader.fireHealth != loader.fireHealthDefault)
+        {
+            Debug.Log("second");
+            loader.LoadPlayerStats();
+        }
+    }
+    */
+
     void DealWithFire()
     {
         anim.SetFloat("Fire Health", fireHealth);
@@ -267,7 +280,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
 
         // Sound plays when the player starts, but not necessarily when he is slowing down
-        if(Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x))
+        if(Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) && controller.collisions.below)
         {
             if (!audioManager.isPlaying(audioClip) || audioClip == null)
             {
@@ -316,7 +329,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         if (col.CompareTag("Done"))
         {
-            gm.SavePlayerStats();
             SceneManager.LoadScene("Level03");
         }
     }

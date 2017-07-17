@@ -211,8 +211,9 @@ public class Controller2D : RaycastController {
             */
             if (hit)
             {
-                if (hit.collider.tag == "Branch")
+                if (hit.collider.tag == "Branch" && hit.distance < .4f)
                 {
+                    Debug.Log(hit.distance);
                     if (hit.transform.eulerAngles.z < 3.5f && hitBranchEvent != null)
                     {
                         // Currently subscribed to by TreeBranch and GM
