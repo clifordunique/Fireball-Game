@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface Enemy {
 
-    void DamageEnemy(int _damage, Vector2 position);
+    void DamageEnemy(int _damage);
+    void Effect(Vector2 position);
 }

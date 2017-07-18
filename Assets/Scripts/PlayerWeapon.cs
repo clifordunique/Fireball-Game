@@ -25,7 +25,8 @@ public class PlayerWeapon : MonoBehaviour {
         {
             audioManager.PlaySound("Water Hiss Short");
             enemy = col.gameObject.GetComponent<Enemy>();
-            enemy.DamageEnemy(damage, transform.position);
+            enemy.DamageEnemy(damage);
+            enemy.Effect(transform.position);
             Destroy(this.gameObject);
         }
     }
