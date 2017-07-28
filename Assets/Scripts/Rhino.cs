@@ -12,6 +12,17 @@ public class Rhino : MonoBehaviour {
     public float rotateDownTarget = 10;
     public float rotationSpeed = 2;
     public float maxMoveSpeed = 1;
+    public float accelerationTime = .2f;
+    public float maxJumpHeight;
+    public float timeToJumpApex = .4f;
+    public int chargeDirection = -1;
+    float gravity;
+
+    float velocityXSmoothing;
+    float moveSpeed = 0;
+
+    RhinoController controller;
+    Vector2 velocity;
 
     public delegate void OnSeePlayer();
     public event OnSeePlayer seePlayerEvent;
@@ -21,6 +32,8 @@ public class Rhino : MonoBehaviour {
         player = FindObjectOfType<Player>();
         anim = GetComponent<Animator>();
         seePlayerEvent += SeePlayer;
+        controller = transform.parent.GetComponent<RhinoController>();
+        gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
     }
 
     // Update is called once per frame
@@ -34,6 +47,21 @@ public class Rhino : MonoBehaviour {
                 seePlayerEvent();
             }
         }
+
+        // Velocity on y axis reset if collision above or below player
+        if (controller.collisions.above || controller.collisions.below)
+        {
+            if (controller.collisions.slidingDownMaxSlope)
+            {
+                velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
+            }
+            else
+            {
+                velocity.y = 0;
+            }
+        }
+        CalculateVelocity();
+        controller.Move(velocity, false);
     }
 
     void SeePlayer()
@@ -60,7 +88,7 @@ public class Rhino : MonoBehaviour {
 
             yield return null;
         }
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.1f);
         StartCoroutine(RotateHeadDown());
     }
 
@@ -82,7 +110,7 @@ public class Rhino : MonoBehaviour {
 
             yield return null;
         }
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.1f);
         Charge();
     }
 
@@ -95,14 +123,12 @@ public class Rhino : MonoBehaviour {
 
     IEnumerator Charging()
     {
-        float moveSpeed = .01f;
+        moveSpeed = 0.2f;
         while (true)
         {
-            Debug.Log(moveSpeed * Vector2.left);
-            transform.parent.Translate(new Vector2(-moveSpeed, 0));
-            if(moveSpeed < maxMoveSpeed)
+            if(Mathf.Abs(moveSpeed) < maxMoveSpeed)
             {
-                moveSpeed += .01f;
+                moveSpeed = moveSpeed + 0.02f;
             }
             yield return null;
         }
@@ -112,5 +138,14 @@ public class Rhino : MonoBehaviour {
     {
         float a = easeAmount + 1;
         return Mathf.Pow(x, a) / (Mathf.Pow(x, a) + Mathf.Pow(1 - x, a));
+    }
+
+    void CalculateVelocity()
+    {
+
+        float targetVelocityX = moveSpeed * Mathf.Sign(chargeDirection);
+        velocity.y += gravity * Time.deltaTime;
+        Debug.Log(velocity.y + " " + moveSpeed);
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, accelerationTime);
     }
 }
