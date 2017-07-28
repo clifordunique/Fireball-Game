@@ -8,19 +8,23 @@ public class Rhino : MonoBehaviour {
     public Transform head;
     Animator anim;
     public float easeAmount;
+    public float rotateUpTarget = -10f;
+    public float rotateDownTarget = 10;
+    public float rotationSpeed = 2;
+    public float maxMoveSpeed = 1;
 
     public delegate void OnSeePlayer();
     public event OnSeePlayer seePlayerEvent;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         player = FindObjectOfType<Player>();
         anim = GetComponent<Animator>();
         seePlayerEvent += SeePlayer;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update() {
         //Debug.Log(head.rotation.z * Mathf.Rad2Deg);
         //Debug.Log(Mathf.Abs(player.transform.position.x - transform.position.x));
         if (Mathf.Abs(player.transform.position.x - transform.position.x) < 20)
@@ -30,34 +34,78 @@ public class Rhino : MonoBehaviour {
                 seePlayerEvent();
             }
         }
-	}
+    }
 
     void SeePlayer()
     {
-        StartCoroutine(Rotate());
+        StartCoroutine(RotateHeadUp());
         seePlayerEvent -= SeePlayer;
     }
 
-    IEnumerator Rotate()
+    IEnumerator RotateHeadUp()
     {
         anim.enabled = false;
-        float targetRotation = -10;
-        float totalRotation = Mathf.Abs(targetRotation - head.rotation.z * Mathf.Rad2Deg);
+        float totalRotation = Mathf.Abs(rotateUpTarget - head.rotation.z * Mathf.Rad2Deg);
         float currentRotation;
         float rotationPercentage;
 
-        while (head.rotation.z * Mathf.Rad2Deg > -10)
+        while (head.rotation.z * Mathf.Rad2Deg > rotateUpTarget + 2)
         {
-            currentRotation = Mathf.Abs(targetRotation - head.rotation.z * Mathf.Rad2Deg);
+            currentRotation = Mathf.Abs(rotateUpTarget - head.rotation.z * Mathf.Rad2Deg);
             rotationPercentage = currentRotation / totalRotation;
             rotationPercentage = Mathf.Clamp01(rotationPercentage);
             float easedPercentBetweenRotation = -Ease(rotationPercentage);
-            //Debug.Log(head.rotation.z * Mathf.Rad2Deg);
-            head.Rotate(Vector3.forward, easedPercentBetweenRotation);
-            //Vector3.RotateTowards(head.rotation, targetRotation, easedPercentBetweenRotation, 1f);
-            
+            Debug.Log(head.rotation.z * Mathf.Rad2Deg + " " + (rotateUpTarget + 2));
+            head.Rotate(Vector3.forward, easedPercentBetweenRotation * rotationSpeed * Time.deltaTime);
+
             yield return null;
-        } 
+        }
+        yield return new WaitForSeconds(.5f);
+        StartCoroutine(RotateHeadDown());
+    }
+
+    IEnumerator RotateHeadDown()
+    {
+        anim.enabled = false;
+        float totalRotation = Mathf.Abs(rotateDownTarget - head.rotation.z * Mathf.Rad2Deg);
+        float currentRotation;
+        float rotationPercentage;
+
+        while (head.rotation.z * Mathf.Rad2Deg < rotateDownTarget - 2)
+        {
+            currentRotation = Mathf.Abs(rotateDownTarget - head.rotation.z * Mathf.Rad2Deg);
+            rotationPercentage = currentRotation / totalRotation;
+            rotationPercentage = Mathf.Clamp01(rotationPercentage);
+            float easedPercentBetweenRotation = Ease(rotationPercentage);
+            Debug.Log(head.rotation.z * Mathf.Rad2Deg + "  target: " + (rotateDownTarget - 2));
+            head.Rotate(Vector3.forward, easedPercentBetweenRotation * rotationSpeed * Time.deltaTime);
+
+            yield return null;
+        }
+        yield return new WaitForSeconds(.5f);
+        Charge();
+    }
+
+    void Charge()
+    {
+        anim.enabled = true;
+        anim.Play("Run");
+        StartCoroutine(Charging());
+    }
+
+    IEnumerator Charging()
+    {
+        float moveSpeed = .01f;
+        while (true)
+        {
+            Debug.Log(moveSpeed * Vector2.left);
+            transform.parent.Translate(new Vector2(-moveSpeed, 0));
+            if(moveSpeed < maxMoveSpeed)
+            {
+                moveSpeed += .01f;
+            }
+            yield return null;
+        }
     }
 
     float Ease(float x)
