@@ -61,8 +61,8 @@ public class Rhino : MonoBehaviour {
     void CanSeePlayer()
     {
         Vector2 directionToPlayer = player.transform.position - eye.transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(eye.transform.position, directionToPlayer, 30, layerMask);
-        if (hit && hit.transform.gameObject.layer == 10)
+        RaycastHit2D hit = Physics2D.Raycast(eye.transform.position, directionToPlayer, 25, layerMask);
+        if (hit && hit.transform.gameObject.layer == 10 && hit.transform.gameObject.GetComponent<SpriteRenderer>().sortingLayerName == "Player")
         {
             if (seePlayerEvent != null)
             {
@@ -111,7 +111,7 @@ public class Rhino : MonoBehaviour {
             rotationPercentage = currentRotation / totalRotation;
             rotationPercentage = Mathf.Clamp01(rotationPercentage);
             float easedPercentBetweenRotation = Ease(rotationPercentage);
-            Debug.Log(head.rotation.z * Mathf.Rad2Deg + "  target: " + (rotateDownTarget - 2));
+            //Debug.Log(head.rotation.z * Mathf.Rad2Deg + "  target: " + (rotateDownTarget - 2));
             head.Rotate(Vector3.forward, easedPercentBetweenRotation * rotationSpeed * Time.deltaTime);
 
             yield return null;

@@ -83,7 +83,7 @@ public class Controller2D : RaycastController {
             if (hit)
             {
                 // Fixes issue when platform is on top of player, decreasing the player's ability to move right and left
-                if(hit.distance == 0)
+                if (hit.distance == 0)
                 {
                     continue;
                 }

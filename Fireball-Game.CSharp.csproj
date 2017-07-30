@@ -78,7 +78,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\RhinoController.cs" />
     <Compile Include="Assets\Scripts\Attack.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
@@ -101,7 +100,9 @@
     <Compile Include="Assets\Scripts\RaycastController.cs" />
     <Compile Include="Assets\Scripts\RechargeFire.cs" />
     <Compile Include="Assets\Scripts\Rhino.cs" />
+    <Compile Include="Assets\Scripts\RhinoController.cs" />
     <Compile Include="Assets\Scripts\TreeBranch.cs" />
+    <Compile Include="Assets\Scripts\Underbrush.cs" />
     <Compile Include="Assets\Scripts\Water.cs" />
     <Compile Include="Assets\Scripts\WaterDropletEnemy.cs" />
     <Compile Include="Assets\Scripts\WaterSplat.cs" />

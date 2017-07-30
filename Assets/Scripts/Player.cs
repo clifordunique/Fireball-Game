@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
 {
     public float minJumpHeight = 1;
     public float timeToJumpApex = .4f;
+    public LayerMask underBrushLayerMask;
     float accelerationTimeAirborne = .3f;
     float accelerationTimeGrounded = .2f;
     float accelerationTimeDescendingSlope = .5f;
@@ -37,6 +38,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public Vector2 wallLeap;
     public float wallSlideSpeedMax = 3;
     public float wallStickTime = .25f;
+    bool isNearUnderbrush = false;
+    bool wantsToBeInUnderBrush = false;
     float timeToWallUnstick;
 
     float gravity;       // -(2 * maxJumpHeight) / timeToJumpApex^2
@@ -47,6 +50,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     float velocityXSmoothing;
     public bool isInWater = false;
 
+    SpriteRenderer sr;
     CollisionInfo colInfo;
     Controller2D controller;
     Animator anim;
@@ -69,6 +73,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     void Start()
     {
         audioManager = AudioManager.instance;
+        sr = GetComponent<SpriteRenderer>();
         if (audioManager == null)
         {
             Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
@@ -97,6 +102,12 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         CalculateVelocity();
         HandleWallSliding();
+        DetectUnderBrush();
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            ToggleIsInUnderbrush();
+        }
 
         controller.Move(velocity * Time.deltaTime, directionalInput);
 
@@ -125,18 +136,47 @@ public class Player : MonoBehaviour, FallInWaterableObject
         DealWithFire();
     }
 
-    /* Loading things from the previous level... maybe
-    //I AM A DUCK AND I'M DIGGING A HOLE... DIGGY DIGGY HOLE
-    void CheckLoader()
+    void DetectUnderBrush()
     {
-        Debug.Log("first" + " space " + loader.fireHealth);
-        if(loader.fireHealth != loader.fireHealthDefault)
+        Debug.Log("Near: " + isNearUnderbrush);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 1f, underBrushLayerMask);
+        if (hit)
         {
-            Debug.Log("second");
-            loader.LoadPlayerStats();
+            if (hit.collider.CompareTag("Underbrush"))
+            {
+                isNearUnderbrush = true;
+                // This if is so that if the player goes out of the underbrush but quickly goes back in he won't suddenly be in the Player layer
+                if (wantsToBeInUnderBrush)         
+                {
+                    sr.sortingLayerName = "Behind Underbrush";
+                }
+            }
+        }
+        else
+        {
+            isNearUnderbrush = false;
+            sr.sortingLayerName = "Player";
         }
     }
+
+    /* Toggles if the player is behind the underbrush
     */
+    void ToggleIsInUnderbrush()
+    {
+        if (isNearUnderbrush)
+        {
+            if (sr.sortingLayerName == "Player")
+            {
+                sr.sortingLayerName = "Behind Underbrush";
+                wantsToBeInUnderBrush = true;
+            }
+            else
+            {
+                sr.sortingLayerName = "Player";
+                wantsToBeInUnderBrush = false;
+            }
+        }
+    }
 
     void DealWithFire()
     {
