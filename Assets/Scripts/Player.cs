@@ -69,6 +69,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public event OnFire onFireEvent;
     public delegate void OffFire();
     public event OnFire offFireEvent;
+    public delegate void OnUnderbrush();
+    public event OnUnderbrush onUnderbrushEvent;
 
     void Start()
     {
@@ -138,7 +140,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void DetectUnderBrush()
     {
-        Debug.Log("Near: " + isNearUnderbrush);
+        //Debug.Log("Near: " + isNearUnderbrush);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 1f, underBrushLayerMask);
         if (hit)
         {
@@ -169,11 +171,19 @@ public class Player : MonoBehaviour, FallInWaterableObject
             {
                 sr.sortingLayerName = "Behind Underbrush";
                 wantsToBeInUnderBrush = true;
+                if (onUnderbrushEvent != null)
+                {
+                    onUnderbrushEvent();
+                }
             }
             else
             {
                 sr.sortingLayerName = "Player";
                 wantsToBeInUnderBrush = false;
+                if (onUnderbrushEvent != null)
+                {
+                    onUnderbrushEvent();
+                }
             }
         }
     }
