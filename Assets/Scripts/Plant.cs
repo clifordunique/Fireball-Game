@@ -5,28 +5,39 @@ using UnityEngine;
 public class Plant : MonoBehaviour {
 
     public LayerMask playerLayerMask;
+    public float dstRightLeft;
+    public float dstUpDown;
+    public Transform raycastPoint;
+
     float originalRotation;
     bool isTouchingPlayer = false;
 
 	void Start () {
         FindObjectOfType<Player>().onUnderbrushEvent += OnUnderbrush;
         originalRotation = transform.eulerAngles.z;
-        Debug.Log(originalRotation);
+        Debug.Log(originalRotation + " " + gameObject.name);
     }
 
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 5f, playerLayerMask);
-        if (hit)
+        RaycastHit2D hitDown = Physics2D.Raycast(raycastPoint.position, Vector2.down, dstUpDown, playerLayerMask);
+        RaycastHit2D hitUp = Physics2D.Raycast(raycastPoint.position, Vector2.up, dstUpDown, playerLayerMask);
+        RaycastHit2D hitRight = Physics2D.Raycast(raycastPoint.position, Vector2.right, dstRightLeft, playerLayerMask);
+        RaycastHit2D hitLeft = Physics2D.Raycast(raycastPoint.position, Vector2.left, dstRightLeft, playerLayerMask);
+
+        //Debug.DrawRay(raycastPoint.position, Vector3.down * dstUpDown);
+        //Debug.DrawRay(raycastPoint.position, Vector3.up * dstUpDown);
+        //Debug.DrawRay(raycastPoint.position, Vector3.left * dstRightLeft);
+        //Debug.DrawRay(raycastPoint.position, Vector3.right * dstRightLeft);
+        if (hitDown || hitRight || hitLeft)
         {
-            Debug.Log("is touching player");
             isTouchingPlayer = true;
-            Debug.Log("is touching player" + isTouchingPlayer);
+            //Debug.Log("is touching player" + isTouchingPlayer);
         }
         else
         {
             isTouchingPlayer = false;
-            Debug.Log("is touching playe falser" + isTouchingPlayer);
+            //Debug.Log("is touching playe falser" + isTouchingPlayer);
         }
     }
 
@@ -41,12 +52,12 @@ public class Plant : MonoBehaviour {
 
     IEnumerator RotatePlant()
     {
-        float targetRotation = originalRotation + 5;
+        float targetRotation = originalRotation + 8;
         Debug.Log("targetRotation " + targetRotation + " transform.eulerAngles.z" + transform.eulerAngles.z);
         while (transform.eulerAngles.z < targetRotation)
         {
             Debug.Log("targetRotation " + targetRotation + " transform.eulerAngles.z" + transform.eulerAngles.z);
-            transform.Rotate(new Vector3(0, 0, 3f));
+            transform.Rotate(new Vector3(0, 0, 2f));
             yield return null;
         }
         while (transform.eulerAngles.z > originalRotation + 3.1)
