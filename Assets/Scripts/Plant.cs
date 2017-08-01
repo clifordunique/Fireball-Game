@@ -11,13 +11,10 @@ public class Plant : MonoBehaviour {
     public float rotateAmt = 8;
 
     Player player;
-    float originalRotation;
     bool isTouchingPlayer = false;
 
 	void Start () {
         FindObjectOfType<Player>().onUnderbrushEvent += OnUnderbrush;
-        originalRotation = transform.eulerAngles.z;
-        Debug.Log(originalRotation + " " + gameObject.name);
         player = FindObjectOfType<Player>();
     }
 
@@ -55,36 +52,48 @@ public class Plant : MonoBehaviour {
 
     IEnumerator RotatePlant()
     {
-        float targetRotation = originalRotation + rotateAmt;
-        Debug.Log("targetRotation " + targetRotation + " transform.eulerAngles.z" + transform.eulerAngles.z);
         // Plant is to the right
         if(player.transform.position.x < raycastPoint.position.x)
         {
-            while (transform.eulerAngles.z < targetRotation)
+            //float targetRotation = originalRotation + rotateAmt;
+            //float eulerAngles = transform.eulerAngles.z + 90;
+
+            float deltaRotation = 0;
+
+            while (deltaRotation < rotateAmt)
             {
-                Debug.Log("targetRotation " + targetRotation + " transform.eulerAngles.z" + transform.eulerAngles.z);
-                transform.Rotate(new Vector3(0, 0, 2f));
+                //Debug.Log("deltaRotation " + deltaRotation + ". rotateAmt " + (rotateAmt));
+                transform.Rotate(new Vector3(0, 0, 1f));
+                deltaRotation += 1f;
                 yield return null;
             }
-            while (transform.eulerAngles.z > originalRotation + 3.1)
+            while (deltaRotation > 0)
             {
-                Debug.Log("originalRotation " + originalRotation + " transform.eulerAngles.z" + transform.eulerAngles.z);
+                //Debug.Log("deltaRotation " + deltaRotation + " rotateAmt " + (rotateAmt));
                 transform.Rotate(new Vector3(0, 0, -1f));
+                deltaRotation -= 1f;
                 yield return null;
             }
         }
-        else
+        else // plant is to the left
         {
-            while (transform.eulerAngles.z > targetRotation)
+            //float targetRotation = originalRotation - rotateAmt;
+            //float eulerAngles = transform.eulerAngles.z + 90;
+
+            float deltaRotation = 0;
+
+            while (deltaRotation > -rotateAmt)
             {
-                Debug.Log("targetRotation " + targetRotation + " transform.eulerAngles.z" + transform.eulerAngles.z);
-                transform.Rotate(new Vector3(0, 0, -2f));
+                //Debug.Log("deltaRotation " + deltaRotation + ". rotateAmt " + (rotateAmt));
+                transform.Rotate(new Vector3(0, 0, -1f));
+                deltaRotation -= 1f;
                 yield return null;
             }
-            while (transform.eulerAngles.z < originalRotation + 3.1)
+            while (deltaRotation < 0)
             {
-                Debug.Log("originalRotation " + originalRotation + " transform.eulerAngles.z" + transform.eulerAngles.z);
+                //Debug.Log("deltaRotation " + deltaRotation + ". rotateAmt " + (rotateAmt));
                 transform.Rotate(new Vector3(0, 0, 1f));
+                deltaRotation += 1f;
                 yield return null;
             }
         }
