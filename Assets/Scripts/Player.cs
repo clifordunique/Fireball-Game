@@ -55,6 +55,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     Controller2D controller;
     Animator anim;
     AudioManager audioManager;
+    public GameObject deathPrefab;
     string audioClip = null;
     string[] audioClips;
 
@@ -63,7 +64,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     int wallDirX;
 
     float velocityXOld;
-    public float velocityYOld;
+    float velocityYOld;
 
     public delegate void OnFire();
     public event OnFire onFireEvent;
@@ -386,6 +387,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public void DamagePlayer(int _damage)
     {
         health -= _damage;
+        if(health < 0)
+        {
+            Instantiate(deathPrefab, transform.position, Quaternion.Euler(0,0,0));
+            Destroy(gameObject);
+        }
     }
 
     void FallInWaterableObject.SetIsInWater(bool _isInWater)
