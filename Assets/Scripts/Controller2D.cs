@@ -12,7 +12,9 @@ public class Controller2D : RaycastController {
     public event OnHitBranch hitBranchEvent;
     public delegate void OnBranchBreak();
     public event OnBranchBreak branchBreakEvent;
-    
+    public delegate void OnRhinoHitPlayer();
+    public event OnRhinoHitPlayer rhinoHitPlayerEvent;
+
     public CollisionInfo collisions;
     [HideInInspector]
     public Vector2 playerInput;
@@ -61,6 +63,20 @@ public class Controller2D : RaycastController {
             collisions.below = true;
         }
     }
+
+    // TODO: detect rhino horn collision
+    //void ConstantHorizontalCollisions()
+    //{
+    //    Debug.Log("hit");
+    //    if (hit.collider.tag == "Rhino Horn")
+    //    {
+    //        Debug.Log("in");
+    //        if (rhinoHitPlayerEvent != null)
+    //        {
+    //            rhinoHitPlayerEvent();
+    //        }
+    //    }
+    //}
 
     void HorizontalCollisions(ref Vector2 moveAmount)
     {

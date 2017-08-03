@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class RhinoHorn : MonoBehaviour {
 
-    void OnCollisionEnter2D(Collision2D col)
+    Player player;
+
+    void Start()
     {
-        Debug.Log("inside!!!");
-        if (col.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("one step farther!!!");
-            Player player = col.gameObject.GetComponent<Player>();
-            player.DamagePlayer(1000);
-        }
+        FindObjectOfType<Controller2D>().rhinoHitPlayerEvent += OnRhinoHitPlayer;
+        player = FindObjectOfType<Player>();
+    }
+
+    void OnRhinoHitPlayer()
+    {
+        Debug.Log("one step farther!!!");
+        player.DamagePlayer(1000);
+        FindObjectOfType<Controller2D>().rhinoHitPlayerEvent -= OnRhinoHitPlayer;
     }
 }
