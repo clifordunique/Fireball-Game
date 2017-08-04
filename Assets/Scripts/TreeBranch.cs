@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class TreeBranch : MonoBehaviour {
 
-    Player player;
-    Vector3 currentV;
+    //Player player;
+    //Vector3 currentV;
     Rigidbody2D rb2D;
     public LayerMask treeBranch;
-    float currentVelocity;
-    float smoothTime = .125f;
-    float rotateAmount = 0;
+    //float currentVelocity;
+    //float smoothTime = .125f;
+    //float rotateAmount = 0;
 
     void Start()
     {
