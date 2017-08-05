@@ -5,6 +5,7 @@ using UnityEngine;
 public class RhinoHorn : MonoBehaviour {
 
     Player player;
+    public Camera cam;
     public float directionX = -1;
     public Transform rayOriginPos;
     //public delegate void OnRhinoHitPlayer();
@@ -33,6 +34,8 @@ public class RhinoHorn : MonoBehaviour {
         //FindObjectOfType<Controller2D>().rhinoHitPlayerEvent -= OnRhinoHitPlayer;
     }
 
+
+
     /*Detects Collisions with the player from the rhino's horn
      * 
      */
@@ -51,9 +54,19 @@ public class RhinoHorn : MonoBehaviour {
             {
                 if(hit.collider.tag == "Player")
                 {
+                    StartCoroutine(ZoomCamera());
                     OnRhinoHitPlayer();
                 }
             }
+        }
+    }
+
+    IEnumerator ZoomCamera()
+    {
+        while (cam.orthographicSize > 10)
+        {
+            cam.orthographicSize -= 0.5f;
+            yield return null;
         }
     }
 }

@@ -9,11 +9,11 @@ public class FlameDestroy : MonoBehaviour {
     float yForce;
     float xForce;
     float thrust;
+
 	// Use this for initialization
 	void Start () {
         sr = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
-
         StartCoroutine(FadeOut());
         yForce = Random.Range(-0.5f, 2);
         xForce = Random.Range(-1, 0);

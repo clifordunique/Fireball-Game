@@ -50,17 +50,27 @@ public class GameMaster : MonoBehaviour {
 
     void OnLevelEnd()
     {
-        StartCoroutine(LevelEnd());
+        StartCoroutine(FadeOut());
         FindObjectOfType<CampFire>().levelEndEvent -= OnLevelEnd;
     }
 
-    IEnumerator LevelEnd()
+    IEnumerator FadeOut()
     {
         yield return new WaitForSeconds(2);
         endLevelUI.SetActive(true);
-        //loader.SavePlayerStats();
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene("Level03");
+        LevelEnd();
+    }
+
+    void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void LevelEnd()
+    {
+        //loader.SavePlayerStats()
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     /*
     IEnumerator waitToLoad(float seconds)

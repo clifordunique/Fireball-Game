@@ -60,13 +60,16 @@ public class Rhino : MonoBehaviour {
 
     void CanSeePlayer()
     {
-        Vector2 directionToPlayer = player.transform.position - eye.transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(eye.transform.position, directionToPlayer, 25, layerMask);
-        if (hit && hit.transform.gameObject.layer == 10 && hit.transform.gameObject.GetComponent<SpriteRenderer>().sortingLayerName == "Player")
+        if(player != null)
         {
-            if (seePlayerEvent != null)
+            Vector2 directionToPlayer = player.transform.position - eye.transform.position;
+            RaycastHit2D hit = Physics2D.Raycast(eye.transform.position, directionToPlayer, 25, layerMask);
+            if (hit && hit.transform.gameObject.layer == 10 && hit.transform.gameObject.GetComponent<SpriteRenderer>().sortingLayerName == "Player")
             {
-                seePlayerEvent();
+                if (seePlayerEvent != null)
+                {
+                    seePlayerEvent();
+                }
             }
         }
     }
