@@ -28,7 +28,10 @@ public class CameraFollow : MonoBehaviour {
     // All player movement has been finished for the frame in its own update method
     void LateUpdate()
     {
-        focusArea.Update(target.collider.bounds);
+        if(target.collider != null)
+        {
+            focusArea.Update(target.collider.bounds);
+        }
 
         Vector2 focusPosition = focusArea.center + Vector2.up * verticalOffset;
 

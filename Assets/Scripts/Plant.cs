@@ -15,6 +15,7 @@ public class Plant : MonoBehaviour {
 
 	void Start () {
         FindObjectOfType<Player>().onUnderbrushEvent += OnUnderbrush;
+        //FindObjectOfType<Player>().fingPoop += Crap;
         player = FindObjectOfType<Player>();
     }
 
@@ -40,6 +41,11 @@ public class Plant : MonoBehaviour {
             //Debug.Log("is touching playe falser" + isTouchingPlayer);
         }
     }
+
+    //void Crap()
+    //{
+    //    Debug.Log("incrap");
+    //}
 
     void OnUnderbrush()
     {

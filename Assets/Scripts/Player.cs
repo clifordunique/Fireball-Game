@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Controller2D))]
-public class Player : MonoBehaviour, FallInWaterableObject
+public class Player : MonoBehaviour//, FallInWaterableObject
 {
     public float minJumpHeight = 1;
     public float timeToJumpApex = .4f;
@@ -66,12 +66,18 @@ public class Player : MonoBehaviour, FallInWaterableObject
     float velocityXOld;
     float velocityYOld;
 
+    // DELEGATES
     public delegate void OnFire();
     public event OnFire onFireEvent;
+
     public delegate void OffFire();
     public event OnFire offFireEvent;
+
     public delegate void OnUnderbrush();
     public event OnUnderbrush onUnderbrushEvent;
+
+    public delegate void ShittyShittityShit();
+    public event ShittyShittityShit fingPoop;
 
     void Start()
     {
@@ -114,7 +120,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
         controller.Move(velocity * Time.deltaTime, directionalInput);
 
-        if(isInWater)
+        if (isInWater)
         {
             gravity = .5f * gravityOriginal;
         }
@@ -128,7 +134,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             if (controller.collisions.slidingDownMaxSlope)
             {
-               velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
+                velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
             }
             else
             {
@@ -149,7 +155,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             {
                 isNearUnderbrush = true;
                 // This if is so that if the player goes out of the underbrush but quickly goes back in he won't suddenly be in the Player layer
-                if (wantsToBeInUnderBrush)         
+                if (wantsToBeInUnderBrush)
                 {
                     sr.sortingLayerName = "Behind Underbrush";
                 }
@@ -176,6 +182,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 {
                     onUnderbrushEvent();
                 }
+
             }
             else
             {
@@ -203,7 +210,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         else
         {
             isFire = true;
-            if(onFireEvent != null)
+            if (onFireEvent != null)
             {
                 onFireEvent();
             }
@@ -242,9 +249,9 @@ public class Player : MonoBehaviour, FallInWaterableObject
         // Regular jumping
         if (controller.collisions.below)
         {
-            if(controller.collisions.slidingDownMaxSlope)
+            if (controller.collisions.slidingDownMaxSlope)
             {
-                if(directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x)) // Not jumping against max slope
+                if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x)) // Not jumping against max slope
                 {
                     velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
                     velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
@@ -254,7 +261,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             {
                 velocity.y = maxJumpVelocity;
             }
-            
+
         }
     }
 
@@ -310,16 +317,16 @@ public class Player : MonoBehaviour, FallInWaterableObject
      */
     void CalculateVelocity()
     {
-        float slopeAngleClimbSmoothTime = .05f + 1/Mathf.Abs(controller.collisions.slopeAngle);
+        float slopeAngleClimbSmoothTime = .05f + 1 / Mathf.Abs(controller.collisions.slopeAngle);
         float slopeAngleDescendSmoothTime = .15f + Mathf.Abs(controller.collisions.slopeAngle) * .01f;
         float targetVelocityX = directionalInput.x * moveSpeed; // For Rhino script, modify this
-        if(controller.collisions.climingSlope)
+        if (controller.collisions.climingSlope)
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleClimbSmoothTime);
             //Debug.Log(controller.collisions.slopeAngle);
             //Debug.Log("climb: " + slopeAngleClimbSmoothTime);
         }
-        else if(controller.collisions.descendingSlope && Mathf.Abs(velocityXOld) > 1f)
+        else if (controller.collisions.descendingSlope && Mathf.Abs(velocityXOld) > 1f)
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleDescendSmoothTime);
             //Debug.Log(controller.collisions.slopeAngle);
@@ -331,7 +338,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
 
         // Sound plays when the player starts, but not necessarily when he is slowing down
-        if(Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) && controller.collisions.below)
+        if (Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) && controller.collisions.below)
         {
             if (!audioManager.isPlaying(audioClip) || audioClip == null)
             {
@@ -387,15 +394,20 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public void DamagePlayer(int _damage)
     {
         health -= _damage;
-        if(health < 0)
+        if (health < 0)
         {
-            Instantiate(deathPrefab, transform.position, Quaternion.Euler(0,0,0));
+            Debug.Log("onPlayerDeathEvent called");
+            if (fingPoop != null)
+            {
+                fingPoop();
+            }
+            Instantiate(deathPrefab, transform.position, Quaternion.Euler(0, 0, 0));
             Destroy(gameObject);
         }
     }
 
-    void FallInWaterableObject.SetIsInWater(bool _isInWater)
-    {
-        isInWater = _isInWater;
-    }
+    //void FallInWaterableObject.SetIsInWater(bool _isInWater)
+    //{
+    //    isInWater = _isInWater;
+    //}
 }

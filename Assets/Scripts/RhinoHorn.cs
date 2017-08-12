@@ -34,20 +34,17 @@ public class RhinoHorn : MonoBehaviour {
         //FindObjectOfType<Controller2D>().rhinoHitPlayerEvent -= OnRhinoHitPlayer;
     }
 
-
-
     /*Detects Collisions with the player from the rhino's horn
      * 
      */
     void ConstantHorizontalCollisions(Vector2 rayOriginPos)
     {
-        Debug.Log("hit");
         Vector2 rayOrigin = rayOriginPos;
         for (int i = 0; i < horizontalRayCount; i++)
         {
             rayOrigin += Vector2.down * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
-            Debug.Log("rayOrigin: " + rayOrigin);
+            //Debug.Log("rayOrigin: " + rayOrigin);
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
 
             if (hit)

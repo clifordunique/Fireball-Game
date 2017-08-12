@@ -11,11 +11,22 @@ public class GameMaster : MonoBehaviour {
     string[] woodCrackClips;
     int backgroundSoundIndex;
 
-    void Start () {
-        audioManager = AudioManager.instance;
+    void Awake()
+    {
+        // For some stupid, unknown, dumb, illogical reason, I have to subscribe
+        // the fingPoop event BEFORE the other events to get it to work.
+        // Why? No idea. It's the most idiotic thing I've come across in
+        // C#/Unity/computer science in general.
+
+        FindObjectOfType<Player>().fingPoop += Crap;
         FindObjectOfType<Controller2D>().hitBranchEvent += OnHitBranch;
         FindObjectOfType<Controller2D>().branchBreakEvent += OnBranchBreak;
         FindObjectOfType<CampFire>().levelEndEvent += OnLevelEnd;
+    }
+
+    void Start ()
+    {
+        audioManager = AudioManager.instance;
         if (audioManager == null)
         {
             Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
@@ -27,6 +38,12 @@ public class GameMaster : MonoBehaviour {
         }
         GetRandomIndex();
         PlayBackgroundMusic();
+    }
+
+    // Restarts the level
+    void Crap()
+    {
+        StartCoroutine(FadeOut(2));
     }
 
     void LateUpdate()
@@ -50,16 +67,32 @@ public class GameMaster : MonoBehaviour {
 
     void OnLevelEnd()
     {
-        StartCoroutine(FadeOut());
+        StartCoroutine(FadeOut(1));
         FindObjectOfType<CampFire>().levelEndEvent -= OnLevelEnd;
     }
 
-    IEnumerator FadeOut()
+    public void OnRestartLevel()
+    {
+
+    }
+
+    IEnumerator FadeOut(int action)
     {
         yield return new WaitForSeconds(2);
         endLevelUI.SetActive(true);
         yield return new WaitForSeconds(2);
-        LevelEnd();
+        switch(action)
+        {
+            case 1:
+                LevelEnd();
+                break;
+            case 2:
+                RestartLevel();
+                break;
+            default:
+                Debug.LogError("Not a valid case for FadeOut Function");
+                break;
+        }
     }
 
     void RestartLevel()
