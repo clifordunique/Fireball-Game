@@ -85,12 +85,13 @@
     <Compile Include="Assets\Scripts\Controller2D.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\FallInWaterableObject.cs" />
-    <Compile Include="Assets\Scripts\FlameDestroy.cs" />
     <Compile Include="Assets\Scripts\FloatOnWater.cs" />
     <Compile Include="Assets\Scripts\GameMaster.cs" />
     <Compile Include="Assets\Scripts\GroundChildrenFade.cs" />
     <Compile Include="Assets\Scripts\GroundFade.cs" />
+    <Compile Include="Assets\Scripts\ISmashable.cs" />
     <Compile Include="Assets\Scripts\Loader.cs" />
+    <Compile Include="Assets\Scripts\ObjectDestroy.cs" />
     <Compile Include="Assets\Scripts\Parallaxing.cs" />
     <Compile Include="Assets\Scripts\Plant.cs" />
     <Compile Include="Assets\Scripts\PlatformController.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Assets\Scripts\Rhino.cs" />
     <Compile Include="Assets\Scripts\RhinoController.cs" />
     <Compile Include="Assets\Scripts\RhinoHorn.cs" />
+    <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\TreeBranch.cs" />
     <Compile Include="Assets\Scripts\Underbrush.cs" />
     <Compile Include="Assets\Scripts\Water.cs" />

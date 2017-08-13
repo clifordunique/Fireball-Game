@@ -2,34 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlameDestroy : MonoBehaviour {
+public class ObjectDestroy : MonoBehaviour
+{
 
     SpriteRenderer sr;
     Rigidbody2D rb2D;
     float yForce;
     float xForce;
     float thrust;
+    public float maxThrust, minThrust;
+    public bool fadeOut;
 
-	// Use this for initialization
-	void Start () {
+    void Start()
+    {
         sr = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
-        StartCoroutine(FadeOut());
         yForce = Random.Range(-0.5f, 2);
         xForce = Random.Range(-1, 0);
-        thrust = Random.Range(100, 1000);
+        thrust = Random.Range(minThrust, maxThrust);
         rb2D.AddForce(new Vector2(xForce, yForce) * thrust);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        if (fadeOut)
+        {
+            StartCoroutine(FadeOut());
+        }
+    }
 
     IEnumerator FadeOut()
     {
         Color tmp = sr.color;
-        while(sr.color.a >= 0)
+        while (sr.color.a >= 0)
         {
             tmp.a -= 0.02f;
             sr.color = tmp;

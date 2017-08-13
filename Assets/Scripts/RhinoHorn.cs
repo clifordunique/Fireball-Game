@@ -54,6 +54,10 @@ public class RhinoHorn : MonoBehaviour {
                     StartCoroutine(ZoomCamera());
                     OnRhinoHitPlayer();
                 }
+                else if(hit.collider.tag == "Rock")
+                {
+                    hit.collider.gameObject.GetComponent<ISmashable>().DestroyObject();
+                }
             }
         }
     }

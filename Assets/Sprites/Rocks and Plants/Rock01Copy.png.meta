@@ -1,0 +1,397 @@
+fileFormatVersion: 2
+guid: 15ce85e11f2f4bf4fabd134ce43bdbe5
+timeCreated: 1502644409
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Rock01Copy_0
+    21300002: Rock01Copy_1
+    21300004: Rock01Copy_2
+    21300006: Rock01Copy_3
+    21300008: Rock01Copy_4
+    21300010: Rock01Copy_5
+    21300012: Rock01Copy_6
+    21300014: Rock01Copy_7
+    21300016: Rock01Copy_8
+    21300018: Rock01Copy_9
+    21300020: Rock01Copy_10
+    21300022: Rock01Copy_11
+    21300024: Rock01Copy_12
+    21300026: Rock01Copy_13
+    21300028: Rock01Copy_14
+    21300030: Rock01Copy_15
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Rock01Copy_0
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 263
+        width: 146
+        height: 80
+      alignment: 9
+      pivot: {x: 0.56703514, y: 0.4999996}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -73, y: 0.94470215}
+        - {x: -62.5, y: 2}
+        - {x: -33.910255, y: -3.7179565}
+        - {x: 62.5, y: -23}
+        - {x: 62.5, y: 40}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_1
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 314
+        width: 132
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -37, y: 35}
+        - {x: -57, y: 8}
+        - {x: -66, y: -15}
+        - {x: -66, y: -35}
+        - {x: 66, y: 7}
+        - {x: 66, y: 8}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_2
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 286
+        width: 178
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -61.337944, y: -0.7588501}
+        - {x: -78.68971, y: -25.73117}
+        - {x: -80.013824, y: -44}
+        - {x: 77.5, y: 13}
+        - {x: 85.879425, y: 38.541443}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_3
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 212
+        width: 170
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -51, y: 50}
+        - {x: -69, y: -12}
+        - {x: -69, y: -50}
+        - {x: 69.91704, y: -15.644379}
+        - {x: 85, y: 13.968506}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_4
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 158
+        width: 182
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -75.32411, y: 7.6167145}
+        - {x: -84, y: 2}
+        - {x: -51.32026, y: -2.5890656}
+        - {x: 77.592926, y: -37.78264}
+        - {x: 81.78264, y: 47}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 116
+        width: 155
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -52.644375, y: 46}
+        - {x: -59.130547, y: 14.162048}
+        - {x: -66.67203, y: -31.10675}
+        - {x: -56.644375, y: -43.486176}
+        - {x: -2.094513, y: -32.592926}
+        - {x: 70.80646, y: 9.968506}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_6
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 67
+        width: 162
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 42.468567, y: -5.563019}
+        - {x: -21.506119, y: 32.144363}
+        - {x: -81, y: -16.385345}
+        - {x: -81, y: -66.5}
+        - {x: 81, y: -66.5}
+        - {x: 60.051437, y: -38.24276}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_7
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 55
+        width: 159
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -65.25498, y: 16.99614}
+        - {x: -74.47235, y: -3.43087}
+        - {x: -17.555305, y: -31.486176}
+        - {x: 12.464638, y: -17.241158}
+        - {x: 2.4093246, y: 12.806427}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_8
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 364
+        width: 160
+        height: 87
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35, y: 28.5}
+        - {x: -72, y: 1.5}
+        - {x: -56.0791, y: -22.551453}
+        - {x: 48.996155, y: -43.5}
+        - {x: 80, y: 14.5}
+        - {x: 58, y: 28.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_9
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 343
+        width: 112
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10.751129, y: 27.148224}
+        - {x: -56, y: -54.5}
+        - {x: 33.37555, y: -40.254974}
+        - {x: 56, y: -19.5}
+        - {x: 51, y: 8.5}
+        - {x: 4, y: 30.5}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_10
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 287
+        width: 185
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -78.632614, y: 8.558197}
+        - {x: -57.501373, y: -18.463501}
+        - {x: 87.5, y: -49.5}
+        - {x: 87.5, y: -19.5}
+        - {x: 42.084564, y: 41.575775}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_11
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 228
+        width: 201
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -100.5, y: 48}
+        - {x: -89.93437, y: -11.020325}
+        - {x: -24.08046, y: -43.37755}
+        - {x: 16.861359, y: -29.263885}
+        - {x: 85.17929, y: 3.8119202}
+        - {x: 70.424194, y: 18.94455}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_12
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 188
+        width: 120
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16.485138, y: 44.83963}
+        - {x: -34.246292, y: -40.87755}
+        - {x: 60, y: -45.5}
+        - {x: 43.49121, y: -8.877548}
+        - {x: 18.54065, y: 21.727325}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_13
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 158
+        width: 165
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 48.5, y: 56.5}
+        - {x: -14.5, y: 37}
+        - {x: -50.5, y: 10.5}
+        - {x: -68.5, y: -32.5}
+        - {x: -56.5, y: -27}
+        - {x: -11.5, y: -9}
+        - {x: 31.5, y: 12}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_14
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 75
+        width: 132
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 25, y: 44}
+        - {x: 16, y: 77}
+        - {x: -52, y: 6}
+        - {x: -66, y: -77}
+        - {x: -13, y: -77}
+        - {x: 7, y: -77}
+        - {x: 35, y: -61}
+        - {x: 35, y: -12}
+        - {x: 34, y: 4}
+      - - {x: 63, y: 49}
+        - {x: 65, y: 47}
+        - {x: 66, y: 47}
+        - {x: 66, y: 52}
+        - {x: 64, y: 52}
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Rock01Copy_15
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 73
+        width: 114
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -57, y: 42.5}
+        - {x: 4, y: -82.5}
+        - {x: 24, y: -84.5}
+        - {x: 38, y: -77.5}
+        - {x: 57, y: 48.5}
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
