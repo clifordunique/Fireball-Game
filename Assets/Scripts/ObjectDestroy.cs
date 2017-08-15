@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class ObjectDestroy : MonoBehaviour
 {
+    public float maxThrust, minThrust;
+    public bool fadeOut;
 
     SpriteRenderer sr;
     Rigidbody2D rb2D;
     float yForce;
     float xForce;
     float thrust;
-    public float maxThrust, minThrust;
-    public bool fadeOut;
+    AudioManager audioManager;
 
     void Start()
     {
+        audioManager = AudioManager.instance;
+        if (audioManager == null)
+        {
+            Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
+        }
         sr = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
         yForce = Random.Range(-0.5f, 2);

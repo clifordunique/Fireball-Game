@@ -13,15 +13,19 @@ public class GameMaster : MonoBehaviour {
 
     void Awake()
     {
-        // For some stupid, unknown, dumb, illogical reason, I have to subscribe
-        // the fingPoop event BEFORE the other events to get it to work.
-        // Why? No idea. It's the most idiotic thing I've come across in
-        // C#/Unity/computer science in general.
-
-        FindObjectOfType<Player>().fingPoop += Crap;
-        FindObjectOfType<Controller2D>().hitBranchEvent += OnHitBranch;
-        FindObjectOfType<Controller2D>().branchBreakEvent += OnBranchBreak;
-        FindObjectOfType<CampFire>().levelEndEvent += OnLevelEnd;
+        if(FindObjectOfType<Player>() != null)
+        {
+            FindObjectOfType<Player>().fingPoop += Crap;
+        }
+        if(FindObjectOfType<Controller2D>() != null)
+        {
+            FindObjectOfType<Controller2D>().hitBranchEvent += OnHitBranch;
+            FindObjectOfType<Controller2D>().branchBreakEvent += OnBranchBreak;
+        }
+        if(FindObjectOfType<CampFire>() != null)
+        {
+            FindObjectOfType<CampFire>().levelEndEvent += OnLevelEnd;
+        }
     }
 
     void Start ()

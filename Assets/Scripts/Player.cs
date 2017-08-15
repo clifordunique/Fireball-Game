@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Controller2D))]
-public class Player : MonoBehaviour//, FallInWaterableObject
+public class Player : MonoBehaviour, FallInWaterableObject
 {
     public float minJumpHeight = 1;
     public float timeToJumpApex = .4f;
@@ -82,11 +82,11 @@ public class Player : MonoBehaviour//, FallInWaterableObject
     void Start()
     {
         audioManager = AudioManager.instance;
-        sr = GetComponent<SpriteRenderer>();
         if (audioManager == null)
         {
             Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
         }
+        sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         controller = GetComponent<Controller2D>();
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -401,13 +401,19 @@ public class Player : MonoBehaviour//, FallInWaterableObject
             {
                 fingPoop();
             }
-            Instantiate(deathPrefab, transform.position, Quaternion.Euler(0, 0, 0));
-            Destroy(gameObject);
+            Effect();
         }
     }
 
-    //void FallInWaterableObject.SetIsInWater(bool _isInWater)
-    //{
-    //    isInWater = _isInWater;
-    //}
+    void Effect()
+    {
+        audioManager.PlaySound("PlayerDie");
+        Instantiate(deathPrefab, transform.position, Quaternion.Euler(0, 0, 0));
+        Destroy(gameObject);
+    }
+
+    void FallInWaterableObject.SetIsInWater(bool _isInWater)
+    {
+        isInWater = _isInWater;
+    }
 }
