@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RhinoHorn : MonoBehaviour {
+public class RhinoAttack : MonoBehaviour {
 
     Player player;
     public Camera cam;
@@ -13,8 +13,7 @@ public class RhinoHorn : MonoBehaviour {
     public int horizontalRayCount = 7;
     public float rayLength = 1f;
     public LayerMask collisionMask;
-
-    float horizontalRaySpacing = 1f;
+    public float horizontalRaySpacing = 1f;
 
     void Start()
     {
@@ -42,7 +41,7 @@ public class RhinoHorn : MonoBehaviour {
         Vector2 rayOrigin = rayOriginPos;
         for (int i = 0; i < horizontalRayCount; i++)
         {
-            rayOrigin += Vector2.down * (horizontalRaySpacing * i);
+
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
             //Debug.Log("rayOrigin: " + rayOrigin);
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
@@ -59,6 +58,7 @@ public class RhinoHorn : MonoBehaviour {
                     hit.collider.gameObject.GetComponent<ISmashable>().DestroyObject();
                 }
             }
+            rayOrigin += Vector2.down * (horizontalRaySpacing);
         }
     }
 
