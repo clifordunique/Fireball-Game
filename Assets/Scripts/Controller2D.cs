@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Controller2D : RaycastController {
+public class Controller2D : RaycastController
+{
 
     // Variables for ascending and descending slope properly
     public float maxSlopeAngle = 80;
@@ -13,6 +14,9 @@ public class Controller2D : RaycastController {
     public delegate void OnBranchBreak();
     public event OnBranchBreak branchBreakEvent;
 
+    // Weird stuff
+    TreeBranch treeBranch;
+
     public CollisionInfo collisions;
     [HideInInspector]
     public Vector2 playerInput;
@@ -21,6 +25,7 @@ public class Controller2D : RaycastController {
     {
         base.Start();
         collisions.faceDir = 1;
+        treeBranch = FindObjectOfType<TreeBranch>();
     }
 
     // Overloaded method for the convenience of the moving platform (PlatformController class)
@@ -36,7 +41,7 @@ public class Controller2D : RaycastController {
         collisions.moveAmountOld = moveAmount;
         playerInput = input;
 
-        if(moveAmount.y < 0)
+        if (moveAmount.y < 0)
         {
             DescendSlope(ref moveAmount);
         }
@@ -48,7 +53,15 @@ public class Controller2D : RaycastController {
 
         //Always check for horizontal collisions to enable wall sliding in case player jumps while right next to a wall.
         HorizontalCollisions(ref moveAmount);
-        ConstantDownwardRaycast(moveAmount);
+        //Do the downward raycasts if close enough to the tree
+        if (treeBranch != null)
+        {
+            float dstToTreeBranch = Mathf.Abs(transform.position.x - treeBranch.transform.position.x);
+            if (dstToTreeBranch < 50)
+            {
+                ConstantDownwardRaycast(moveAmount);
+            }
+        }
         if (moveAmount.y != 0)
         {
             VerticalCollisions(ref moveAmount);
@@ -67,11 +80,11 @@ public class Controller2D : RaycastController {
         float directionX = collisions.faceDir;
         float rayLength = Mathf.Abs(moveAmount.x) + skinWidth;
 
-        if(Mathf.Abs(moveAmount.x) < skinWidth)
+        if (Mathf.Abs(moveAmount.x) < skinWidth)
         {
             rayLength = 2 * skinWidth;
         }
-        
+
         for (int i = 0; i < horizontalRayCount; i++)
         {
             Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
@@ -90,16 +103,16 @@ public class Controller2D : RaycastController {
 
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 
-                if(i == 0 && slopeAngle <= maxSlopeAngle)
+                if (i == 0 && slopeAngle <= maxSlopeAngle)
                 {
                     // Fixes problem when descending a slope into a narrow valley.
-                    if(collisions.descendingSlope)
+                    if (collisions.descendingSlope)
                     {
                         collisions.descendingSlope = false;
                         moveAmount = collisions.moveAmountOld;
                     }
                     float distanceToSlopeStart = 0;
-                    if(slopeAngle != collisions.slopeAngleOld)
+                    if (slopeAngle != collisions.slopeAngleOld)
                     {
                         distanceToSlopeStart = hit.distance - skinWidth;
                         moveAmount.x -= distanceToSlopeStart * directionX;
@@ -113,7 +126,7 @@ public class Controller2D : RaycastController {
                     moveAmount.x = (hit.distance - skinWidth) * directionX;
                     rayLength = hit.distance;
 
-                    if(collisions.climingSlope)
+                    if (collisions.climingSlope)
                     {
                         moveAmount.y = Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(moveAmount.x);
                     }
@@ -141,17 +154,17 @@ public class Controller2D : RaycastController {
             if (hit)
             {
                 // Allows player to jump though platforms if they have the "Through" tag
-                if(hit.collider.tag == "Through")
+                if (hit.collider.tag == "Through")
                 {
-                    if(directionY == 1 || hit.distance == 0)
+                    if (directionY == 1 || hit.distance == 0)
                     {
                         continue;
                     }
-                    if(collisions.fallingThroughPlatform)
+                    if (collisions.fallingThroughPlatform)
                     {
                         continue;
                     }
-                    if(playerInput.y == -1) // Enables the player to fall through platforms with the "Through" tag
+                    if (playerInput.y == -1) // Enables the player to fall through platforms with the "Through" tag
                     {
                         collisions.fallingThroughPlatform = true;
                         Invoke("ResetFallingThroughPlatform", .5f);
@@ -166,7 +179,7 @@ public class Controller2D : RaycastController {
                 moveAmount.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;
 
-                if(collisions.climingSlope)
+                if (collisions.climingSlope)
                 {
                     moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(moveAmount.x);
                 }
@@ -176,17 +189,17 @@ public class Controller2D : RaycastController {
             }
         }
 
-        if(collisions.climingSlope)
+        if (collisions.climingSlope)
         {
             float directionX = Mathf.Sign(moveAmount.x);
             rayLength = Mathf.Abs(moveAmount.x) + skinWidth;
             Vector2 rayOrigin = ((directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight) + Vector2.up * moveAmount.y;
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
 
-            if(hit)
+            if (hit)
             {
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-                if(slopeAngle != collisions.slopeAngle)
+                if (slopeAngle != collisions.slopeAngle)
                 {
                     moveAmount.x = (hit.distance - skinWidth) * directionX;
                     collisions.slopeAngle = slopeAngle;
@@ -222,7 +235,7 @@ public class Controller2D : RaycastController {
                     {
                         hitBranchEvent();
                     }
-                    else if (hit.transform.eulerAngles.z > 9f && branchBreakEvent != null)
+                    else if (hit.transform.eulerAngles.z > 8.3f && branchBreakEvent != null)
                     {
                         branchBreakEvent();
                     }
@@ -255,13 +268,13 @@ public class Controller2D : RaycastController {
     {
         RaycastHit2D maxSlopeHitLeft = Physics2D.Raycast(raycastOrigins.bottomLeft, Vector2.down, Mathf.Abs(moveAmount.y) + skinWidth, collisionMask);
         RaycastHit2D maxSlopeHitRight = Physics2D.Raycast(raycastOrigins.bottomRight, Vector2.down, Mathf.Abs(moveAmount.y) + skinWidth, collisionMask);
-        if(maxSlopeHitLeft ^ maxSlopeHitRight)
+        if (maxSlopeHitLeft ^ maxSlopeHitRight)
         {
             SlideDownMaxSlope(maxSlopeHitLeft, ref moveAmount);
             SlideDownMaxSlope(maxSlopeHitRight, ref moveAmount);
         }
 
-        if(!collisions.slidingDownMaxSlope)
+        if (!collisions.slidingDownMaxSlope)
         {
             float directionX = Mathf.Sign(moveAmount.x);
 
@@ -297,10 +310,10 @@ public class Controller2D : RaycastController {
 
     void SlideDownMaxSlope(RaycastHit2D hit, ref Vector2 moveAmount)
     {
-        if(hit)
+        if (hit)
         {
             float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-            if(slopeAngle > maxSlopeAngle)
+            if (slopeAngle > maxSlopeAngle)
             {
                 moveAmount.x = hit.normal.x * (Mathf.Abs(moveAmount.y) - hit.distance) / Mathf.Tan(slopeAngle * Mathf.Deg2Rad);
 

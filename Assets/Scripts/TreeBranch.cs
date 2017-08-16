@@ -6,7 +6,7 @@ public class TreeBranch : MonoBehaviour {
     //Player player;
     //Vector3 currentV;
     Rigidbody2D rb2D;
-    public LayerMask treeBranch;
+    public LayerMask treeBranchLayerMask;
     //float currentVelocity;
     //float smoothTime = .125f;
     //float rotateAmount = 0;
