@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RhinoAttack : MonoBehaviour {
 
-    Player player;
+
     public Camera cam;
     public float directionX = -1;
     public Transform rayOriginPos;
@@ -15,10 +15,18 @@ public class RhinoAttack : MonoBehaviour {
     public LayerMask collisionMask;
     public float horizontalRaySpacing = 1f;
 
+    Player player;
+    CameraShake camShake;
+
     void Start()
     {
         //FindObjectOfType<Controller2D>().rhinoHitPlayerEvent += OnRhinoHitPlayer;
         player = FindObjectOfType<Player>();
+        camShake = GameMaster.gm.GetComponent<CameraShake>();
+        if (camShake == null)
+        {
+            Debug.LogError("No CameraShake found on the GameMaster.");
+        }
     }
 
     void Update()
@@ -28,7 +36,7 @@ public class RhinoAttack : MonoBehaviour {
 
     void OnRhinoHitPlayer()
     {
-        Debug.Log("one step farther!!!");
+        camShake.Shake(player.camShakeAmt, player.camShakeLength);
         player.DamagePlayer(1000);
         //FindObjectOfType<Controller2D>().rhinoHitPlayerEvent -= OnRhinoHitPlayer;
     }
@@ -50,16 +58,24 @@ public class RhinoAttack : MonoBehaviour {
             {
                 if(hit.collider.tag == "Player")
                 {
-                    StartCoroutine(ZoomCamera());
+                    //StartCoroutine(ZoomCamera());
                     OnRhinoHitPlayer();
+                    Effect(player.camShakeAmt, player.camShakeLength);
                 }
                 else if(hit.collider.tag == "Rock")
                 {
-                    hit.collider.gameObject.GetComponent<ISmashable>().DestroyObject();
+                    Rock rock = hit.collider.gameObject.GetComponent<Rock>();
+                    rock.DestroyObject();
+                    Effect(rock.camShakeAmt, rock.camShakeLength);
                 }
             }
             rayOrigin += Vector2.down * (horizontalRaySpacing);
         }
+    }
+
+    public void Effect(float amt, float length)
+    {
+        camShake.Shake(amt, length);
     }
 
     IEnumerator ZoomCamera()

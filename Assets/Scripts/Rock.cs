@@ -8,6 +8,10 @@ public class Rock : MonoBehaviour, ISmashable {
     public Transform explodePrefab;
     AudioManager audioManager;
 
+    //CameraShake variables
+    public float camShakeAmt = 0.2f;
+    public float camShakeLength = 0.1f;
+
     void Start()
     {
         audioManager = AudioManager.instance;

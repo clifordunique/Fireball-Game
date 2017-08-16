@@ -2,7 +2,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameMaster : MonoBehaviour {
+public class GameMaster : MonoBehaviour
+{
+
+    public static GameMaster gm;
 
     public GameObject endLevelUI;
 
@@ -13,22 +16,26 @@ public class GameMaster : MonoBehaviour {
 
     void Awake()
     {
-        if(FindObjectOfType<Player>() != null)
+        if (gm == null)
+        {
+            gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+        }
+        if (FindObjectOfType<Player>() != null)
         {
             FindObjectOfType<Player>().fingPoop += Crap;
         }
-        if(FindObjectOfType<Controller2D>() != null)
+        if (FindObjectOfType<Controller2D>() != null)
         {
             FindObjectOfType<Controller2D>().hitBranchEvent += OnHitBranch;
             FindObjectOfType<Controller2D>().branchBreakEvent += OnBranchBreak;
         }
-        if(FindObjectOfType<CampFire>() != null)
+        if (FindObjectOfType<CampFire>() != null)
         {
             FindObjectOfType<CampFire>().levelEndEvent += OnLevelEnd;
         }
     }
 
-    void Start ()
+    void Start()
     {
         audioManager = AudioManager.instance;
         if (audioManager == null)
@@ -52,7 +59,7 @@ public class GameMaster : MonoBehaviour {
 
     void LateUpdate()
     {
-        if(!audioManager.isPlaying(forestBackgroundArray[backgroundSoundIndex]))
+        if (!audioManager.isPlaying(forestBackgroundArray[backgroundSoundIndex]))
         {
             GetRandomIndex();
             PlayBackgroundMusic();
@@ -85,7 +92,7 @@ public class GameMaster : MonoBehaviour {
         yield return new WaitForSeconds(2);
         endLevelUI.SetActive(true);
         yield return new WaitForSeconds(2);
-        switch(action)
+        switch (action)
         {
             case 1:
                 LevelEnd();
@@ -121,7 +128,6 @@ public class GameMaster : MonoBehaviour {
     public void OnHitBranch()
     {
         int i = Random.Range(1, woodCrackClips.Length);
-        Debug.Log("poop " + woodCrackClips[i]);
         audioManager.PlaySound(woodCrackClips[i]);
     }
     public void OnBranchBreak()

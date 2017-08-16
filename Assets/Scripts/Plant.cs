@@ -51,7 +51,6 @@ public class Plant : MonoBehaviour {
     {
         if (isTouchingPlayer)
         {
-            Debug.Log("poop");
             StartCoroutine(RotatePlant());
         }
     }

@@ -66,6 +66,10 @@ public class Player : MonoBehaviour, FallInWaterableObject
     float velocityXOld;
     float velocityYOld;
 
+    //CameraShake variables
+    public float camShakeAmt = 0.1f;
+    public float camShakeLength = 0.1f;
+
     // DELEGATES
     public delegate void OnFire();
     public event OnFire onFireEvent;
@@ -174,6 +178,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         if (isNearUnderbrush)
         {
+            audioManager.PlaySound("underbrush");
             if (sr.sortingLayerName == "Player")
             {
                 sr.sortingLayerName = "Behind Underbrush";
@@ -396,7 +401,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
         health -= _damage;
         if (health < 0)
         {
-            Debug.Log("onPlayerDeathEvent called");
             if (fingPoop != null)
             {
                 fingPoop();
