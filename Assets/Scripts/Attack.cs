@@ -10,11 +10,12 @@ using System.Diagnostics;
 [RequireComponent(typeof(Player))]
 public class Attack : MonoBehaviour
 {
-    public Transform test;
+    public PlayerWeapon fireball;
     public Transform firePoint;
     public float speed = 10f;
     Stopwatch sw;
     AudioManager audioManager;
+    Vector2 direction;
 
     void Start()
     {
@@ -47,13 +48,18 @@ public class Attack : MonoBehaviour
     {
         Vector2 targetPoint = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 heading = targetPoint - (Vector2)firePoint.transform.position;
-        Vector2 direction = heading.normalized;
+        direction = heading.normalized;
         float angle = Mathf.Atan2(heading.y, heading.x) * Mathf.Rad2Deg;
         audioManager.PlaySound("Fireball");
         //UnityEngine.Debug.Log(angle);
 
-        Instantiate(test, firePoint.position, Quaternion.FromToRotation(Vector3.up, direction));
+        Instantiate(fireball, firePoint.position, Quaternion.FromToRotation(Vector3.up, direction));
         //UnityEngine.Debug.Log("Speed: " + direction * speed);
+    }
+
+    public Vector2 GetDirection()
+    {
+        return direction;
     }
 }
 

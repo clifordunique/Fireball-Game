@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
 
-public class WaterDropletEnemy : MonoBehaviour , Enemy {
+public class WaterDropletEnemy : MonoBehaviour, Enemy {
 
     public LayerMask mask;
     public float speed = 8;
@@ -211,11 +211,12 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
 
     /* Damages the enemy and destroys it if its health is less than zero
  */
-    public void DamageEnemy(int _damage)
+    public void DamageEnemy(int _damage, Vector2 pos)
     {
         health -= _damage;
         transform.localScale *= (health + 6 / (health + .1f)) / maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
 
+        Effect(pos);
         if (health <= 0)
         {
             FindObjectOfType<Player>().onFireEvent -= OnFire;
@@ -303,7 +304,7 @@ public class WaterDropletEnemy : MonoBehaviour , Enemy {
             {
                 player.DamageFire((int)(damage * ((health + 6 / health) / maxHealth)));
                 audioManager.PlaySound("Water Hiss Short");
-                DamageEnemy(1000);
+                DamageEnemy(1000, transform.position);
             }
         }
         else if(col.gameObject.CompareTag("Enemy"))
