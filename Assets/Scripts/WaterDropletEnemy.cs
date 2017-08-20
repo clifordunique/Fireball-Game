@@ -83,6 +83,7 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy {
     {
         if (Mathf.Abs(transform.position.x - player.position.x) < viewDistanceX && Mathf.Abs(transform.position.y - player.position.y) < viewDistanceY)
         {
+            // If the player is in front of the water droplet
             if ((transform.localScale.x < 0 && (player.position.x > transform.position.x)) || transform.localScale.x > 0 && (player.position.x < transform.position.x))
             {
                 if (!Physics.Linecast(transform.position, player.position, mask) && player.GetComponent<Player>().isFire)
@@ -217,6 +218,12 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy {
         transform.localScale *= (health + 6 / (health + .1f)) / maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
 
         Effect(pos);
+
+        if(Mathf.Abs(transform.position.x - player.position.x) < viewDistanceX && Mathf.Abs(transform.position.y - player.position.y) < viewDistanceY)
+        {
+            StopAllCoroutines();
+            StartCoroutine(ChasePlayer());
+        }
         if (health <= 0)
         {
             FindObjectOfType<Player>().onFireEvent -= OnFire;

@@ -151,7 +151,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void DetectUnderBrush()
     {
-        //Debug.Log("Near: " + isNearUnderbrush);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 1f, underBrushLayerMask);
         if (hit)
         {
@@ -328,14 +327,10 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (controller.collisions.climingSlope)
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleClimbSmoothTime);
-            //Debug.Log(controller.collisions.slopeAngle);
-            //Debug.Log("climb: " + slopeAngleClimbSmoothTime);
         }
         else if (controller.collisions.descendingSlope && Mathf.Abs(velocityXOld) > 1f)
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleDescendSmoothTime);
-            //Debug.Log(controller.collisions.slopeAngle);
-            //Debug.Log("descend: " + slopeAngleDescendSmoothTime);
         }
         else
         {
