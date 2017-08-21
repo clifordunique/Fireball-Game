@@ -9,7 +9,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
 
-public class WaterDropletEnemy : MonoBehaviour, Enemy {
+public class WaterDropletEnemy : MonoBehaviour, Enemy
+{
 
     public LayerMask mask;
     public float speed = 8;
@@ -40,7 +41,8 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy {
     Animator anim;
     Collider2D playerCollider;
 
-	void Start () {
+    void Start()
+    {
         sw = new Stopwatch();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         anim = GetComponent<Animator>();
@@ -52,17 +54,18 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy {
         playerCollider = FindObjectOfType<Player>().GetComponent<Collider2D>();
 
         SetWaypoints();
-	}
-	
-	void Update () {
-        if(player == null)
+    }
+
+    void Update()
+    {
+        if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
         if (CanSeePlayer())
         {
             StopAllCoroutines();
-            StartCoroutine(ChasePlayer());
+            StartCoroutine(ChasePlayer(true));
         }
     }
 
@@ -135,8 +138,11 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy {
     {
         transform.localScale = new Vector2(-dirX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
     }
-    
-    IEnumerator ChasePlayer()
+
+    /* Coroutine where the enemy chases the player
+     * @param shouldJump - whether or not the player should jump
+     */
+    IEnumerator ChasePlayer(bool shouldJump)
     {
         anim.SetFloat("Speed", chaseSpeed);
         float dirToPlayerX = Mathf.Sign(player.position.x - transform.position.x);
@@ -144,11 +150,14 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy {
         transform.localScale = new Vector2(-dirToPlayerX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
 
         //Wait for the enemy to finish jumping, then chase the player
-        yield return StartCoroutine(Jump());
+        if (shouldJump)
+        {
+            yield return StartCoroutine(Jump());
+        }
         StartCoroutine(GetDirectionToPlayer());
         while (transform.position.x != player.position.x)
         {
-            if(!player.GetComponent<Player>().isFire)
+            if (!player.GetComponent<Player>().isFire)
             {
                 StopAllCoroutines();
                 SetWaypoints();
@@ -193,7 +202,7 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y + jumpHeight), .2f);
             yield return null;
         }
-     }
+    }
 
     /* NOT NEEDED -- I now have the object detecting what it collided with
      * Detects when a trigger has entered the enemy's collider.
@@ -219,10 +228,10 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy {
 
         Effect(pos);
 
-        if(Mathf.Abs(transform.position.x - player.position.x) < viewDistanceX && Mathf.Abs(transform.position.y - player.position.y) < viewDistanceY)
+        if (Mathf.Abs(transform.position.x - player.position.x) < viewDistanceX && Mathf.Abs(transform.position.y - player.position.y) < viewDistanceY)
         {
             StopAllCoroutines();
-            StartCoroutine(ChasePlayer());
+            StartCoroutine(ChasePlayer(false));
         }
         if (health <= 0)
         {
@@ -236,7 +245,7 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy {
     {
         //TODO: make it so the splash has a forward velocity if the enemy has a forward velocity so that the splash is visible
         audioManager.PlaySound("Spat");
-        Vector2 direction = new Vector2(waterSplat.eulerAngles.x,waterSplat.eulerAngles.y);
+        Vector2 direction = new Vector2(waterSplat.eulerAngles.x, waterSplat.eulerAngles.y);
         Vector2 negDirection = new Vector2(waterSplat.eulerAngles.x, waterSplat.eulerAngles.y);
 
         // Facing you
@@ -294,12 +303,12 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy {
 
     void OnFire()
     {
-            Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), false);
+        Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), false);
     }
 
     void OffFire()
     {
-            Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), true);
+        Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), true);
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -314,7 +323,7 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy {
                 DamageEnemy(1000, transform.position);
             }
         }
-        else if(col.gameObject.CompareTag("Enemy"))
+        else if (col.gameObject.CompareTag("Enemy"))
         {
             Physics2D.IgnoreCollision(col.collider, GetComponent<Collider2D>());
         }
