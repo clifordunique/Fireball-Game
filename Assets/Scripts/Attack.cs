@@ -4,7 +4,6 @@
  */
 
 using UnityEngine;
-using System.Collections;
 using System.Diagnostics;
 
 [RequireComponent(typeof(Player))]

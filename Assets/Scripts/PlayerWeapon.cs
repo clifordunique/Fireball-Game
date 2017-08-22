@@ -44,7 +44,7 @@ public class PlayerWeapon : MonoBehaviour
             {
                 HitEnemy(hit);
             }
-            else if (hit.collider.gameObject.tag == "Obstacle")
+            else
             {
                 Effect(hit.normal);
             }
@@ -56,7 +56,10 @@ public class PlayerWeapon : MonoBehaviour
         audioManager.PlaySound("Water Hiss Short");
         enemy = hit.collider.gameObject.GetComponent<Enemy>();
         enemy.DamageEnemy(damage, transform.position);
-        Effect(hit.normal);
+        if(hit.collider.GetComponent<WaterDropletEnemy>() == null)
+        {
+            Effect(hit.normal);
+        }
         Destroy(this.gameObject);
     }
 

@@ -21,6 +21,7 @@ public class TreeBranch : MonoBehaviour {
     public void OnHitBranch()
     {
         transform.eulerAngles += new Vector3(0, 0, 1);
+        rb2D.constraints = RigidbodyConstraints2D.None;
         //FindObjectOfType<Controller2D>().hitBranchEvent -= OnHitBranch;
     }
 
