@@ -36,7 +36,7 @@ public class RhinoAttack : MonoBehaviour {
 
     void OnRhinoHitPlayer()
     {
-        camShake.Shake(player.camShakeAmt, player.camShakeLength);
+        //camShake.Shake(player.camShakeAmt, player.camShakeLength);
         player.DamagePlayer(1000);
         //FindObjectOfType<Controller2D>().rhinoHitPlayerEvent -= OnRhinoHitPlayer;
     }
