@@ -1,0 +1,164 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="footfall_data" version="1.3.0" audacityversion="2.0.5" sel0="0.7129931935" sel1="0.7129931935" vpos="1472" h="0.0000000000" zoom="334.3979198578" rate="44100.0">
+	<tags>
+		<tag name="Software" value="Sony Sound Forge 9.0"/>
+		<tag name="ALBUM" value="YouTube Audio Library"/>
+		<tag name="TITLE" value="Running On Grass"/>
+		<tag name="YEAR" value="2009-12-25"/>
+	</tags>
+	<wavetrack name="footfall" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="28904">
+				<waveblock start="0">
+					<simpleblockfile filename="e00007ca.au" len="28904" min="-1.0" max="0.965922" rms="0.095277"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="footfall" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="28904">
+				<waveblock start="0">
+					<simpleblockfile filename="e000036e.au" len="28904" min="-0.959417" max="0.988307" rms="0.11303"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="footfall" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="0.446684" pan="0.0">
+		<waveclip offset="0.14383220">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="22561">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000c17.au" len="22561" min="-1.007097" max="1.01323" rms="0.130963"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="footfall" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="0.446684" pan="0.0">
+		<waveclip offset="0.14383220">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="22561">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000afa.au" len="22561" min="-1.018009" max="1.011598" rms="0.145586"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="snow-on-cement_02" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.14383220">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="22561">
+				<waveblock start="0">
+					<simpleblockfile filename="e00003a0.au" len="22561" min="-0.858887" max="0.999969" rms="0.03175"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="3">
+				<controlpoint t="0.090597598973" val="1.000000000000"/>
+				<controlpoint t="0.155953785227" val="0.166666671634"/>
+				<controlpoint t="0.289507731050" val="0.000000100000"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="footfall" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.19181406">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="20445">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000d38.au" len="20445" min="-1.0" max="0.947484" rms="0.092496"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="footfall" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.19181406">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="20445">
+				<waveblock start="0">
+					<simpleblockfile filename="e00006fb.au" len="20445" min="-0.947078" max="0.974329" rms="0.111193"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="footfall" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.35519274">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="15779">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000230.au" len="15779" min="-1.0" max="0.999969" rms="0.124805"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="2">
+				<controlpoint t="0.233925757160" val="1.000000000000"/>
+				<controlpoint t="0.356534175350" val="0.236111104488"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="footfall" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.35519274">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="15779">
+				<waveblock start="0">
+					<simpleblockfile filename="e000019f.au" len="15779" min="-1.0" max="0.999969" rms="0.139601"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="2">
+				<controlpoint t="0.233925757160" val="1.000000000000"/>
+				<controlpoint t="0.356534175350" val="0.236111104488"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="snow-on-cement" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="0.316228" pan="0.0">
+		<waveclip offset="0.34349206">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="16295">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000e01.au" len="16295" min="-0.721375" max="0.833496" rms="0.033875"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="1">
+				<controlpoint t="0.175237303566" val="0.986111104488"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="snow-on-cement" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="0.316228" pan="0.0">
+		<waveclip offset="0.34349206">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="16295">
+				<waveblock start="0">
+					<simpleblockfile filename="e00004f6.au" len="16295" min="-0.721375" max="0.833496" rms="0.033875"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="1">
+				<controlpoint t="0.175237303566" val="0.986111104488"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="smash13" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="48000" gain="1.0" pan="0.0">
+		<waveclip offset="0.04785417">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="31927">
+				<waveblock start="0">
+					<simpleblockfile filename="e00008f8.au" len="31927" min="-0.987213" max="0.987549" rms="0.073708"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="4">
+				<controlpoint t="0.427627259975" val="0.972222208977"/>
+				<controlpoint t="0.559207025838" val="0.347222208977"/>
+				<controlpoint t="0.610044659316" val="0.083333335817"/>
+				<controlpoint t="0.656146842509" val="0.027777777985"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="smash13" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="48000" gain="1.0" pan="0.0">
+		<waveclip offset="0.04785417">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="31927">
+				<waveblock start="0">
+					<simpleblockfile filename="e000052e.au" len="31927" min="-0.973511" max="0.869446" rms="0.065185"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="4">
+				<controlpoint t="0.427627259975" val="0.972222208977"/>
+				<controlpoint t="0.559207025838" val="0.347222208977"/>
+				<controlpoint t="0.610044659316" val="0.083333335817"/>
+				<controlpoint t="0.656146842509" val="0.027777777985"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+</project>

@@ -1,0 +1,114 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="smash12_data" version="1.3.0" audacityversion="2.0.5" sel0="0.0000000000" sel1="0.6554195011" vpos="0" h="0.0000000000" zoom="978.5358565737" rate="44100.0">
+	<tags>
+		<tag name="ALBUM" value="YouTube Audio Library"/>
+		<tag name="TITLE" value="Running On Grass"/>
+	</tags>
+	<wavetrack name="Running_On_Grass" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="31.622776" pan="0.0">
+		<waveclip offset="-0.00920635">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="9374">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000303.au" len="9374" min="-0.101187" max="0.075159" rms="0.004403"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Running_On_Grass" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="31.622776" pan="0.0">
+		<waveclip offset="-0.00920635">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="9374">
+				<waveblock start="0">
+					<simpleblockfile filename="e000071d.au" len="9374" min="-0.101186" max="0.075152" rms="0.004403"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="smash12" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="0.354813" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="11060">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000a77.au" len="11060" min="-1.0" max="0.999969" rms="0.137368"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="smash12" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="0.354813" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="11060">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000e2b.au" len="11060" min="-1.0" max="0.999969" rms="0.115255"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="thump in grass_02" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="3.162278" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="28904">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000549.au" len="28904" min="-0.72049" max="0.508087" rms="0.028617"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="3">
+				<controlpoint t="0.325771286071" val="1.000000000000"/>
+				<controlpoint t="0.464094808331" val="0.152777776122"/>
+				<controlpoint t="0.625687708167" val="0.000000100000"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="thump in grass_02" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="3.162278" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="28904">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000c0e.au" len="28904" min="-0.972168" max="0.743408" rms="0.040814"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="3">
+				<controlpoint t="0.325771286071" val="1.000000000000"/>
+				<controlpoint t="0.464094808331" val="0.152777776122"/>
+				<controlpoint t="0.625687708167" val="0.000000100000"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Running_On_Grass" channel="0" linked="1" mute="1" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="867456">
+				<waveblock start="0">
+					<simpleblockfile filename="e000011a.au" len="262144" min="-0.180492" max="0.13999" rms="0.00945"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e0000920.au" len="262144" min="-0.214404" max="0.158001" rms="0.010999"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e0000ac8.au" len="262144" min="-0.128265" max="0.095859" rms="0.00676"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="e00008c3.au" len="81024" min="-0.104414" max="0.093988" rms="0.00616"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Running_On_Grass" channel="1" linked="0" mute="1" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="867456">
+				<waveblock start="0">
+					<simpleblockfile filename="e000052f.au" len="262144" min="-0.180467" max="0.139995" rms="0.00945"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e00000d9.au" len="262144" min="-0.214364" max="0.157953" rms="0.010999"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e0000e70.au" len="262144" min="-0.128243" max="0.095824" rms="0.00676"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="e00004e1.au" len="81024" min="-0.104408" max="0.093986" rms="0.00616"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
