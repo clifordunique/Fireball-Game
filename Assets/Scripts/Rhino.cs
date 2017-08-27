@@ -24,6 +24,7 @@ public class Rhino : MonoBehaviour {
     Player player;
     Animator anim;
     AudioManager audioManager;
+    AudioSource rhinoRun;
     RhinoController controller;
     Vector2 velocity;
 
@@ -37,6 +38,7 @@ public class Rhino : MonoBehaviour {
         {
             Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
         }
+        rhinoRun = GetComponent<AudioSource>();
         player = FindObjectOfType<Player>();
         anim = GetComponent<Animator>();
         seePlayerEvent += SeePlayer;
@@ -134,7 +136,8 @@ public class Rhino : MonoBehaviour {
         anim.enabled = true;
         anim.Play("Run");
         StartCoroutine(Charging());
-        audioManager.PlaySound("rhino run");
+        rhinoRun.Play();
+        //audioManager.PlaySound("rhino run");
     }
 
     IEnumerator Charging()
