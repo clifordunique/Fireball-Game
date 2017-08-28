@@ -22,7 +22,7 @@ public class GameMaster : MonoBehaviour
         }
         if (FindObjectOfType<Player>() != null)
         {
-            FindObjectOfType<Player>().fingPoop += Crap;
+            //FindObjectOfType<Player>().fingPoop += KillPlayer;
         }
         if (FindObjectOfType<Controller2D>() != null)
         {
@@ -52,9 +52,10 @@ public class GameMaster : MonoBehaviour
     }
 
     // Restarts the level
-    void Crap()
+    public static void KillPlayer(Player player)
     {
-        StartCoroutine(FadeOut(2));
+        Destroy(player.gameObject);
+        gm.StartCoroutine(gm.FadeOut(2));
     }
 
     void LateUpdate()
@@ -82,15 +83,11 @@ public class GameMaster : MonoBehaviour
         FindObjectOfType<CampFire>().levelEndEvent -= OnLevelEnd;
     }
 
-    public void OnRestartLevel()
-    {
-
-    }
-
     IEnumerator FadeOut(int action)
     {
         yield return new WaitForSeconds(2);
         endLevelUI.SetActive(true);
+        Debug.Log(endLevelUI.activeSelf);
         yield return new WaitForSeconds(2);
         switch (action)
         {

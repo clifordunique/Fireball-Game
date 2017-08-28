@@ -16,6 +16,7 @@ public class Controller2D : RaycastController
 
     // Weird stuff
     TreeBranch treeBranch;
+    Player player;
 
     public CollisionInfo collisions;
     [HideInInspector]
@@ -26,6 +27,7 @@ public class Controller2D : RaycastController
         base.Start();
         collisions.faceDir = 1;
         treeBranch = FindObjectOfType<TreeBranch>();
+        player = GetComponent<Player>();
     }
 
     // Overloaded method for the convenience of the moving platform (PlatformController class)
@@ -153,6 +155,10 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
+                if(hit.collider.tag == "FallBoundary")
+                {
+                    GameMaster.KillPlayer(player);
+                }
                 // Allows player to jump though platforms if they have the "Through" tag
                 if (hit.collider.tag == "Through")
                 {

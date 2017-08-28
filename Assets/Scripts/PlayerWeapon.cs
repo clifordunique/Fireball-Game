@@ -46,7 +46,7 @@ public class PlayerWeapon : MonoBehaviour
             }
             else
             {
-                Effect(hit.normal);
+                Effect(hit);
             }
         }
     }
@@ -58,14 +58,14 @@ public class PlayerWeapon : MonoBehaviour
         enemy.DamageEnemy(damage, transform.position);
         if(hit.collider.GetComponent<WaterDropletEnemy>() == null)
         {
-            Effect(hit.normal);
+            Effect(hit);
         }
         Destroy(this.gameObject);
     }
 
-    void Effect(Vector3 hitNormal)
+    void Effect(RaycastHit2D hit)
     {
-        Instantiate(explodeParticles, transform.position, Quaternion.FromToRotation(Vector3.left, hitNormal));
+        Instantiate(explodeParticles, hit.point + hit.normal * 0.7f, Quaternion.FromToRotation(Vector3.left, hit.normal));
         Destroy(this.gameObject);
     }
 }

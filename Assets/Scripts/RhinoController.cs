@@ -141,23 +141,9 @@ public class RhinoController : BigRaycastController
 
             if (hit)
             {
-                // Allows player to jump though platforms if they have the "Through" tag
-                if (hit.collider.tag == "Through")
+                if(hit.collider.tag == "FallBoundary")
                 {
-                    if (directionY == 1 || hit.distance == 0)
-                    {
-                        continue;
-                    }
-                    if (collisions.fallingThroughPlatform)
-                    {
-                        continue;
-                    }
-                    if (playerInput.y == -1) // Enables the player to fall through platforms with the "Through" tag
-                    {
-                        collisions.fallingThroughPlatform = true;
-                        Invoke("ResetFallingThroughPlatform", .5f);
-                        continue;
-                    }
+                    Destroy(gameObject);
                 }
 
                 /* Checking for a hit. If a ray hits an object, change the moveAmount to the ray length.

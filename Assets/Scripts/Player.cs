@@ -396,11 +396,12 @@ public class Player : MonoBehaviour, FallInWaterableObject
         health -= _damage;
         if (health < 0)
         {
-            if (fingPoop != null)
-            {
-                fingPoop();
-            }
             Effect();
+            //if (fingPoop != null)
+            //{
+            //    fingPoop(); // kills the player
+            //}
+            GameMaster.KillPlayer(this);
         }
     }
 
@@ -408,7 +409,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         audioManager.PlaySound("PlayerDie");
         Instantiate(deathPrefab, transform.position, Quaternion.Euler(0, 0, 0));
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     void FallInWaterableObject.SetIsInWater(bool _isInWater)
