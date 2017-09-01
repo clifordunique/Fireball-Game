@@ -17,6 +17,9 @@ public class Controller2D : RaycastController
     // Weird stuff
     TreeBranch treeBranch;
     Player player;
+    // Detecting platform type, mostly for playing sounds
+    enum PlatformType { grass, rock, treeBranch, snow }
+    PlatformType platformType;
 
     public CollisionInfo collisions;
     [HideInInspector]
@@ -227,11 +230,13 @@ public class Controller2D : RaycastController
             Debug.DrawRay(rayOrigin, Vector2.up * -rayLength /*   * rayLength   */ , Color.red);
 
             /* Detects if the player lands on a branch and bumps it down slightly
+             * TODO: put most of this logic into a branch script
             */
             if (hit)
             {
                 if (hit.collider.tag == "Branch" && hit.distance < .4f)
                 {
+                    platformType = PlatformType.treeBranch;
                     if (hit.transform.eulerAngles.z < 3.5f && hitBranchEvent != null)
                     {
                         // Currently subscribed to by TreeBranch and GM
