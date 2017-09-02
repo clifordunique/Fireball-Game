@@ -180,6 +180,10 @@ public class Controller2D : RaycastController
                         continue;
                     }
                 }
+                if(hit.collider.tag == "Grass")
+                {
+                    platformType = PlatformType.grass;
+                }
 
                 /* Checking for a hit. If a ray hits an object, change the moveAmount to the ray length.
                  * That way the next frame the player (following its new moveAmount) should rest on the object below it.
@@ -237,19 +241,7 @@ public class Controller2D : RaycastController
                 if (hit.collider.tag == "Branch" && hit.distance < .4f)
                 {
                     platformType = PlatformType.treeBranch;
-                    if (hit.transform.eulerAngles.z < 3.5f && hitBranchEvent != null)
-                    {
-                        // Currently subscribed to by TreeBranch and GM
-                        hitBranchEvent();
-                    }
-                    else if (hit.transform.eulerAngles.z > 4.5f && hit.transform.eulerAngles.z < 7 && hitBranchEvent != null)
-                    {
-                        hitBranchEvent();
-                    }
-                    else if (hit.transform.eulerAngles.z > 8.3f && branchBreakEvent != null)
-                    {
-                        branchBreakEvent();
-                    }
+                    hitBranchEvent();
                 }
             }
         }
