@@ -24,11 +24,10 @@ public class GameMaster : MonoBehaviour
         {
             //FindObjectOfType<Player>().fingPoop += KillPlayer;
         }
-        if (FindObjectOfType<Controller2D>() != null)
-        {
-            FindObjectOfType<Controller2D>().hitBranchEvent += OnHitBranch;
-            FindObjectOfType<Controller2D>().branchBreakEvent += OnBranchBreak;
-        }
+        //if (FindObjectOfType<Controller2D>() != null)
+        //{
+        //    FindObjectOfType<Controller2D>().hitBranchEvent += OnHitBranch;
+        //}
         if (FindObjectOfType<CampFire>() != null)
         {
             FindObjectOfType<CampFire>().levelEndEvent += OnLevelEnd;
@@ -42,11 +41,7 @@ public class GameMaster : MonoBehaviour
         {
             Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
         }
-        woodCrackClips = new string[7];
-        for (int i = 0; i < woodCrackClips.Length; i++)
-        {
-            woodCrackClips[i] = "woodcrack0" + (i + 1);
-        }
+
         GetRandomIndex();
         PlayBackgroundMusic();
     }
@@ -121,18 +116,4 @@ public class GameMaster : MonoBehaviour
 
     }
     */
-
-    public void OnHitBranch()
-    {
-        int i = Random.Range(1, woodCrackClips.Length);
-        audioManager.PlaySound(woodCrackClips[i]);
-    }
-    public void OnBranchBreak()
-    {
-        audioManager.PlaySound(woodCrackClips[0]);
-        new WaitForSeconds(1f);
-        audioManager.PlaySound(woodCrackClips[5]);
-        FindObjectOfType<Controller2D>().hitBranchEvent -= OnHitBranch;
-        FindObjectOfType<Controller2D>().branchBreakEvent -= OnBranchBreak;
-    }
 }

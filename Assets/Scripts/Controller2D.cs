@@ -11,8 +11,6 @@ public class Controller2D : RaycastController
 
     public delegate void OnHitBranch();
     public event OnHitBranch hitBranchEvent;
-    public delegate void OnBranchBreak();
-    public event OnBranchBreak branchBreakEvent;
 
     // Weird stuff
     TreeBranch treeBranch;
@@ -234,14 +232,16 @@ public class Controller2D : RaycastController
             Debug.DrawRay(rayOrigin, Vector2.up * -rayLength /*   * rayLength   */ , Color.red);
 
             /* Detects if the player lands on a branch and bumps it down slightly
-             * TODO: put most of this logic into a branch script
             */
             if (hit)
             {
                 if (hit.collider.tag == "Branch" && hit.distance < .4f)
                 {
                     platformType = PlatformType.treeBranch;
-                    hitBranchEvent();
+                    if(hitBranchEvent != null)
+                    {
+                        hitBranchEvent();
+                    }
                 }
             }
         }
