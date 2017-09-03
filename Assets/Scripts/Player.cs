@@ -49,6 +49,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public Vector3 velocity;
     float velocityXSmoothing;
     public bool isInWater = false;
+    PlatformType platformType;
 
     SpriteRenderer sr;
     CollisionInfo colInfo;
@@ -80,8 +81,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public delegate void OnUnderbrush();
     public event OnUnderbrush onUnderbrushEvent;
 
-    public delegate void ShittyShittityShit();
-    public event ShittyShittityShit fingPoop;
+    //public delegate void ShittyShittityShit();
+    //public event ShittyShittityShit fingPoop;
 
     void Start()
     {
@@ -340,10 +341,15 @@ public class Player : MonoBehaviour, FallInWaterableObject
         // Sound plays when the player starts, but not necessarily when he is slowing down
         if (Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) && controller.collisions.below)
         {
+            Debug.Log(platformType.ToString());
             if (!audioManager.isPlaying(audioClip) || audioClip == null)
             {
-                audioClip = audioClips[Random.Range(0, audioClips.Length)];
-                audioManager.PlaySound(audioClip);
+                platformType = controller.GetPlatformType();
+                if(platformType.ToString() == "grass")
+                {
+                    audioClip = audioClips[Random.Range(0, audioClips.Length)];
+                    audioManager.PlaySound(audioClip);
+                }
             }
         }
         /* not working

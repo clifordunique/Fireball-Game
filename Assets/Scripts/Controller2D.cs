@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Controller2D : RaycastController
 {
-
     // Variables for ascending and descending slope properly
     public float maxSlopeAngle = 80;
     float speedBySlopeAngleClimb;
@@ -15,13 +14,13 @@ public class Controller2D : RaycastController
     // Weird stuff
     TreeBranch treeBranch;
     Player player;
-    // Detecting platform type, mostly for playing sounds
-    enum PlatformType { grass, rock, treeBranch, snow }
-    PlatformType platformType;
 
     public CollisionInfo collisions;
     [HideInInspector]
     public Vector2 playerInput;
+
+    // Detecting platform type, mostly for playing sounds
+    PlatformType platformType;
 
     public override void Start()
     {
@@ -65,6 +64,7 @@ public class Controller2D : RaycastController
                 ConstantDownwardRaycast(moveAmount);
             }
         }
+
         if (moveAmount.y != 0)
         {
             VerticalCollisions(ref moveAmount);
@@ -156,6 +156,7 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
+                //Debug.Log(collisions.below);
                 if(hit.collider.tag == "FallBoundary")
                 {
                     GameMaster.KillPlayer(player);
@@ -181,6 +182,10 @@ public class Controller2D : RaycastController
                 if(hit.collider.tag == "Grass")
                 {
                     platformType = PlatformType.grass;
+                }
+                else if(hit.collider.tag == "Rock")
+                {
+                    platformType = PlatformType.rock;
                 }
 
                 /* Checking for a hit. If a ray hits an object, change the moveAmount to the ray length.
@@ -331,4 +336,11 @@ public class Controller2D : RaycastController
     {
         collisions.fallingThroughPlatform = false;
     }
+
+    public PlatformType GetPlatformType()
+    {
+        return platformType;
+    }
 }
+
+public enum PlatformType { grass, rock, treeBranch, snow }
