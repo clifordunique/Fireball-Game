@@ -96,20 +96,20 @@ public class Player : MonoBehaviour, FallInWaterableObject
         controller = GetComponent<Controller2D>();
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         gravityOriginal = gravity;
-        gm = FindObjectOfType<GameMaster>();
+        gm = GameMaster.gm;
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         health = maxHealth;
         anim.SetFloat("Fire Health", fireHealth);
         //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
-        audioClips = new string[14];
-        for (int i = 0; i < audioClips.Length; i++)
-        {
-            if (i < 9)
-                audioClips[i] = "grass" + "0" + (i + 1);
-            else
-                audioClips[i] = "grass" + (i + 1);
-        }
+        //audioClips = new string[14];
+        //for (int i = 0; i < audioClips.Length; i++)
+        //{
+        //    if (i < 9)
+        //        audioClips[i] = "grass" + "0" + (i + 1);
+        //    else
+        //        audioClips[i] = "grass" + (i + 1);
+        //}
     }
 
     void Update()
@@ -342,15 +342,15 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) && controller.collisions.below)
         {
             Debug.Log(platformType.ToString());
-            if (!audioManager.isPlaying(audioClip) || audioClip == null)
+            platformType = controller.GetPlatformType();
+            if(platformType.ToString() == "grass")
             {
-                platformType = controller.GetPlatformType();
-                if(platformType.ToString() == "grass")
-                {
-                    audioClip = audioClips[Random.Range(0, audioClips.Length)];
-                    audioManager.PlaySound(audioClip);
-                }
+                gm.PlayPlatformAudio((int)platformType);
+                Debug.Log((int)platformType);
+                //audioClip = audioClips[Random.Range(0, audioClips.Length)];
+                //audioManager.PlaySound(audioClip);
             }
+            Debug.Log((int)platformType);
         }
         /* not working
         else if (Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocity.x) <= Mathf.Abs(velocityXOld))

@@ -12,6 +12,8 @@ public class GameMaster : MonoBehaviour
     AudioManager audioManager;
     public string[] forestBackgroundArray;
     string[] woodCrackClips;
+    string[] grassPlatformAudioClips;
+    string audioClip;
     int backgroundSoundIndex;
 
     void Awake()
@@ -44,6 +46,7 @@ public class GameMaster : MonoBehaviour
 
         GetRandomIndex();
         PlayBackgroundMusic();
+        LoadPlatformSounds();
     }
 
     // Restarts the level
@@ -59,6 +62,38 @@ public class GameMaster : MonoBehaviour
         {
             GetRandomIndex();
             PlayBackgroundMusic();
+        }
+    }
+
+    /* Method for loading all the needed platform movement
+     *  audioclips into arrays
+     */
+    void LoadPlatformSounds()
+    {
+        grassPlatformAudioClips = new string[14];
+        for (int i = 0; i < grassPlatformAudioClips.Length; i++)
+        {
+            if (i < 9)
+                grassPlatformAudioClips[i] = "grass" + "0" + (i + 1);
+            else
+                grassPlatformAudioClips[i] = "grass" + (i + 1);
+        }
+    }
+
+    public void PlayPlatformAudio(int platformIndex)
+    {
+        if (!audioManager.isPlaying(audioClip) || audioClip == null)
+        {
+            switch (platformIndex)
+            {
+                case 0:
+                    audioClip = grassPlatformAudioClips[Random.Range(0, grassPlatformAudioClips.Length)];
+                    audioManager.PlaySound(audioClip);
+                    break;
+                default:
+                    Debug.Log("something otehr than grass playing");
+                    break;
+            }
         }
     }
 
