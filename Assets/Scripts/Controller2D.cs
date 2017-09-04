@@ -14,6 +14,7 @@ public class Controller2D : RaycastController
     // Weird stuff
     TreeBranch treeBranch;
     Player player;
+    AudioManager audioManager;
 
     public CollisionInfo collisions;
     [HideInInspector]
@@ -21,11 +22,13 @@ public class Controller2D : RaycastController
 
     // Detecting platform type, mostly for playing sounds
     PlatformType platformType;
+    int[] grounded;
 
     public override void Start()
     {
         base.Start();
         collisions.faceDir = 1;
+        audioManager = AudioManager.instance;
         treeBranch = FindObjectOfType<TreeBranch>();
         player = GetComponent<Player>();
     }
@@ -146,6 +149,8 @@ public class Controller2D : RaycastController
         float directionY = Mathf.Sign(moveAmount.y);
         float rayLength = Mathf.Abs(moveAmount.y) + skinWidth;
 
+        grounded = new int[verticalRayCount];
+
         for (int i = 0; i < verticalRayCount; i++)
         {
             Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
@@ -156,8 +161,8 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
-                //Debug.Log(collisions.below);
-                if(hit.collider.tag == "FallBoundary")
+                Debug.Log(moveAmount.y);
+                if (hit.collider.tag == "FallBoundary")
                 {
                     GameMaster.KillPlayer(player);
                 }
@@ -179,13 +184,17 @@ public class Controller2D : RaycastController
                         continue;
                     }
                 }
-                if(hit.collider.tag == "Grass")
+                if (hit.collider.tag == "Grass")
                 {
                     platformType = PlatformType.grass;
                 }
-                else if(hit.collider.tag == "Rock")
+                else if (hit.collider.tag == "Rock")
                 {
                     platformType = PlatformType.rock;
+                    if(moveAmount.y < -0.5f)
+                    {
+                        audioManager.PlaySound("Rock Hit");
+                    }
                 }
 
                 /* Checking for a hit. If a ray hits an object, change the moveAmount to the ray length.
@@ -243,7 +252,7 @@ public class Controller2D : RaycastController
                 if (hit.collider.tag == "Branch" && hit.distance < .4f)
                 {
                     platformType = PlatformType.treeBranch;
-                    if(hitBranchEvent != null)
+                    if (hitBranchEvent != null)
                     {
                         hitBranchEvent();
                     }

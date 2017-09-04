@@ -341,16 +341,13 @@ public class Player : MonoBehaviour, FallInWaterableObject
         // Sound plays when the player starts, but not necessarily when he is slowing down
         if (Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) && controller.collisions.below)
         {
-            Debug.Log(platformType.ToString());
             platformType = controller.GetPlatformType();
             if(platformType.ToString() == "grass")
             {
                 gm.PlayPlatformAudio((int)platformType);
-                Debug.Log((int)platformType);
                 //audioClip = audioClips[Random.Range(0, audioClips.Length)];
                 //audioManager.PlaySound(audioClip);
             }
-            Debug.Log((int)platformType);
         }
         /* not working
         else if (Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocity.x) <= Mathf.Abs(velocityXOld))
