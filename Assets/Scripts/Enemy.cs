@@ -1,7 +1,22 @@
 ﻿using UnityEngine;
 
-public interface Enemy {
+public class Enemy: MonoBehaviour {
 
-    void DamageEnemy(int _damage, Vector2 position);
-    void Effect(Vector2 position);
+    public float maxHealth = 10;
+    [SerializeField]
+    protected float health;
+
+    public virtual void Start()
+    {
+        health = maxHealth;
+    }
+
+    public virtual void DamageEnemy(int _damage, Vector2 position)
+    {
+        health -= _damage;
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }

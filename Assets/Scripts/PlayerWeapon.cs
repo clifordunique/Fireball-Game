@@ -53,7 +53,6 @@ public class PlayerWeapon : MonoBehaviour
 
     void HitEnemy(RaycastHit2D hit)
     {
-        audioManager.PlaySound("Water Hiss Short");
         enemy = hit.collider.gameObject.GetComponent<Enemy>();
         enemy.DamageEnemy(damage, transform.position);
         if(hit.collider.GetComponent<WaterDropletEnemy>() == null)

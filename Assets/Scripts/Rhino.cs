@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rhino : MonoBehaviour {
+public class Rhino : Enemy {
 
     public LayerMask layerMask;
     public Transform head;
@@ -32,7 +33,8 @@ public class Rhino : MonoBehaviour {
     public event OnSeePlayer seePlayerEvent;
 
     // Use this for initialization
-    void Start() {
+    public override void Start() {
+        base.Start();
         audioManager = AudioManager.instance;
         if (audioManager == null)
         {

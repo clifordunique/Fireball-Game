@@ -9,9 +9,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
 
-public class WaterDropletEnemy : MonoBehaviour, Enemy
+public class WaterDropletEnemy : Enemy
 {
-
     public LayerMask mask;
     public float speed = 8;
     public float chaseSpeed = 12;
@@ -19,7 +18,6 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy
     public Transform pathHolder;
     public float viewDistanceX = 8;
     public float viewDistanceY = 3;
-    public float maxHealth = 10;
 
     public Transform waterSplat;
     public Transform waterSplat2;
@@ -27,11 +25,9 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy
     Vector2 dirToPlayer;
     Vector2 dirToPlayerOld;
 
-    float health;
     int damage = 10;
+    bool canSeePlayer = false;
 
-    // If an object damages the enemy, it should always have a PlayerWeapon script attached
-    PlayerWeapon weapon;
     AudioManager audioManager;
 
     SpriteRenderer sr;
@@ -41,16 +37,15 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy
     Animator anim;
     Collider2D playerCollider;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
         sw = new Stopwatch();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         anim = GetComponent<Animator>();
-        health = maxHealth;
         audioManager = AudioManager.instance;
         sr = GetComponent<SpriteRenderer>();
-        FindObjectOfType<Player>().onFireEvent += OnFire;
-        FindObjectOfType<Player>().offFireEvent += OffFire;
+        player.GetComponent<Player>().onFireChangeEvent += OnFireChange;
         playerCollider = FindObjectOfType<Player>().GetComponent<Collider2D>();
 
         SetWaypoints();
@@ -62,10 +57,15 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        if (CanSeePlayer())
+        if (!canSeePlayer)
+        {
+            canSeePlayer = CanSeePlayer();
+        }
+        if (canSeePlayer)
         {
             StopAllCoroutines();
             StartCoroutine(ChasePlayer(true));
+            canSeePlayer = false;
         }
     }
 
@@ -204,28 +204,12 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy
         }
     }
 
-    /* NOT NEEDED -- I now have the object detecting what it collided with
-     * Detects when a trigger has entered the enemy's collider.
-     * If it has a "PlayerWeapon" script attached, it scales the enemy and calls DamageEnemy.
-     *
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        //Debug.Log("Entered the trigger");
-        if (col.gameObject.GetComponent<PlayerWeapon>() != null)
-        {
-            weapon = col.gameObject.GetComponent<PlayerWeapon>();
-            DamageEnemy(weapon.damage);
-            Destroy(col.gameObject);
-        }
-    }*/
-
     /* Damages the enemy and destroys it if its health is less than zero
- */
-    public void DamageEnemy(int _damage, Vector2 pos)
+    */
+    public override void DamageEnemy(int _damage, Vector2 pos)
     {
-        health -= _damage;
         transform.localScale *= (health + 6 / (health + .1f)) / maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
-
+        health -= _damage;
         Effect(pos);
 
         if (Mathf.Abs(transform.position.x - player.position.x) < viewDistanceX && Mathf.Abs(transform.position.y - player.position.y) < viewDistanceY)
@@ -235,8 +219,7 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy
         }
         if (health <= 0)
         {
-            FindObjectOfType<Player>().onFireEvent -= OnFire;
-            FindObjectOfType<Player>().offFireEvent -= OffFire;
+            FindObjectOfType<Player>().onFireChangeEvent -= OnFireChange;
             Destroy(this.gameObject);
         }
     }
@@ -245,6 +228,7 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy
     {
         //TODO: make it so the splash has a forward velocity if the enemy has a forward velocity so that the splash is visible
         audioManager.PlaySound("Spat");
+        audioManager.PlaySound("Water Hiss Short");
         Vector2 direction = new Vector2(waterSplat.eulerAngles.x, waterSplat.eulerAngles.y);
         Vector2 negDirection = new Vector2(waterSplat.eulerAngles.x, waterSplat.eulerAngles.y);
 
@@ -261,9 +245,6 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy
                 else
                 {
                     Instantiate(waterSplat2, position, Quaternion.Euler(Vector2.right));
-                    //UnityEngine.Debug.Log("Enemy is facing the player and the player is left");
-                    //waterSplat.GetComponent<SpriteRenderer>().flipX = true;
-                    //waterSplat.eulerAngles = new Vector2(-1, 1);
                 }
             }
             else // Player is to the right
@@ -275,9 +256,6 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy
                 else
                 {
                     Instantiate(waterSplat, position, Quaternion.Euler(Vector2.right));
-                    //UnityEngine.Debug.Log("Enemy is facing the player and the player is right");
-                    //waterSplat.GetComponent<SpriteRenderer>().flipX = false;
-                    //waterSplat.eulerAngles = new Vector2(1, 1);
                 }
             }
         }
@@ -287,28 +265,17 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy
             if (player.position.x < transform.position.x)
             {
                 Instantiate(waterSplat, position, Quaternion.Euler(Vector2.right));
-                //UnityEngine.Debug.Log("Enemy is not facing the player and the player is left");
-                //waterSplat.GetComponent<SpriteRenderer>().flipX = false;
-                //waterSplat.eulerAngles = new Vector2(1, 1);
             }
             else // Player is to the right
             {
                 Instantiate(waterSplat2, position, Quaternion.Euler(Vector2.right));
-                //UnityEngine.Debug.Log("Enemy is not facing the player and the player is right");
-                //waterSplat.GetComponent<SpriteRenderer>().flipX = true;
-                //waterSplat.eulerAngles = new Vector2(-1, 1);
             }
         }
     }
 
-    void OnFire()
+    void OnFireChange(bool isFire)
     {
-        Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), false);
-    }
-
-    void OffFire()
-    {
-        Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), true);
+        Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), isFire);
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -318,6 +285,7 @@ public class WaterDropletEnemy : MonoBehaviour, Enemy
             Player player = col.gameObject.GetComponent<Player>();
             if (player.isFire)
             {
+                UnityEngine.Debug.Log("Damaging player");
                 player.DamageFire((int)(damage * ((health + 6 / health) / maxHealth)));
                 audioManager.PlaySound("Water Hiss Short");
                 DamageEnemy(1000, transform.position);

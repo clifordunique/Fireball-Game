@@ -72,11 +72,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public float camShakeLength = 0.1f;
 
     // DELEGATES
-    public delegate void OnFire();
-    public event OnFire onFireEvent;
-
-    public delegate void OffFire();
-    public event OnFire offFireEvent;
+    public delegate void OnFireChange(bool currentFire);
+    public event OnFireChange onFireChangeEvent;
 
     public delegate void OnUnderbrush();
     public event OnUnderbrush onUnderbrushEvent;
@@ -207,17 +204,17 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (fireHealth <= 0)
         {
             isFire = false;
-            if (offFireEvent != null)
+            if (onFireChangeEvent != null)
             {
-                offFireEvent();
+                onFireChangeEvent(!isFire);
             }
         }
         else
         {
             isFire = true;
-            if (onFireEvent != null)
+            if (onFireChangeEvent != null)
             {
-                onFireEvent();
+                onFireChangeEvent(!isFire);
             }
         }
     }
@@ -345,8 +342,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
             if(platformType.ToString() == "grass")
             {
                 gm.PlayPlatformAudio((int)platformType);
-                //audioClip = audioClips[Random.Range(0, audioClips.Length)];
-                //audioManager.PlaySound(audioClip);
             }
         }
         /* not working

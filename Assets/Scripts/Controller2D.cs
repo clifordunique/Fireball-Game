@@ -161,7 +161,6 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
-                Debug.Log(moveAmount.y);
                 if (hit.collider.tag == "FallBoundary")
                 {
                     GameMaster.KillPlayer(player);
