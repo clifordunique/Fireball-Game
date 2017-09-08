@@ -72,10 +72,12 @@ public class Rhino : Enemy {
     {
         if(player != null)
         {
-            Vector2 directionToPlayer = player.transform.position - eye.transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(eye.transform.position, directionToPlayer, 25, layerMask);
-            if (hit && hit.transform.gameObject.layer == 10 && hit.transform.gameObject.GetComponent<SpriteRenderer>().sortingLayerName == "Player")
+            Vector2 directionToPlayer = player.transform.position - eye.position;
+            RaycastHit2D hit = Physics2D.Raycast(eye.position, directionToPlayer, 25, layerMask);
+            Debug.DrawRay(eye.position, directionToPlayer * 25, Color.red);
+            if (hit && hit.transform.gameObject.tag == "Player" && hit.transform.gameObject.GetComponent<SpriteRenderer>().sortingLayerName == "Player")
             {
+                Debug.Log("See player");
                 if (seePlayerEvent != null)
                 {
                     seePlayerEvent();

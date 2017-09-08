@@ -208,8 +208,9 @@ public class WaterDropletEnemy : Enemy
     */
     public override void DamageEnemy(int _damage, Vector2 pos)
     {
-        transform.localScale *= (health + 6 / (health + .1f)) / maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
         health -= _damage;
+        transform.localScale *= (health + 6 / (health + .1f)) / maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
+
         Effect(pos);
 
         if (Mathf.Abs(transform.position.x - player.position.x) < viewDistanceX && Mathf.Abs(transform.position.y - player.position.y) < viewDistanceY)

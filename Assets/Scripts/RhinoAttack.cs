@@ -58,7 +58,6 @@ public class RhinoAttack : MonoBehaviour {
             {
                 if(hit.collider.tag == "Player")
                 {
-                    //StartCoroutine(ZoomCamera());
                     OnRhinoHitPlayer();
                     Effect(player.camShakeAmt, player.camShakeLength);
                 }
