@@ -77,7 +77,6 @@ public class Rhino : Enemy {
             Debug.DrawRay(eye.position, directionToPlayer * 25, Color.red);
             if (hit && hit.transform.gameObject.tag == "Player" && hit.transform.gameObject.GetComponent<SpriteRenderer>().sortingLayerName == "Player")
             {
-                Debug.Log("See player");
                 if (seePlayerEvent != null)
                 {
                     seePlayerEvent();

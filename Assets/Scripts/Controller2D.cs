@@ -11,6 +11,9 @@ public class Controller2D : RaycastController
     public delegate void OnHitBranch();
     public event OnHitBranch hitBranchEvent;
 
+    public delegate void NotGrounded();
+    public event NotGrounded notGroundedEvent;
+
     // Weird stuff
     TreeBranch treeBranch;
     Player player;
@@ -149,8 +152,6 @@ public class Controller2D : RaycastController
         float directionY = Mathf.Sign(moveAmount.y);
         float rayLength = Mathf.Abs(moveAmount.y) + skinWidth;
 
-        grounded = new int[verticalRayCount];
-
         for (int i = 0; i < verticalRayCount; i++)
         {
             Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
@@ -166,7 +167,7 @@ public class Controller2D : RaycastController
                     GameMaster.KillPlayer(player);
                 }
                 // Allows player to jump though platforms if they have the "Through" tag
-                if (hit.collider.tag == "Through")
+                if (hit.collider.tag == "Through" || hit.collider.tag == "Branch")
                 {
                     if (directionY == 1 || hit.distance == 0)
                     {
@@ -179,7 +180,7 @@ public class Controller2D : RaycastController
                     if (playerInput.y == -1) // Enables the player to fall through platforms with the "Through" tag
                     {
                         collisions.fallingThroughPlatform = true;
-                        Invoke("ResetFallingThroughPlatform", .5f);
+                        Invoke("ResetFallingThroughPlatform", 0.3f);
                         continue;
                     }
                 }
@@ -190,7 +191,7 @@ public class Controller2D : RaycastController
                 else if (hit.collider.tag == "Rock")
                 {
                     platformType = PlatformType.rock;
-                    if(moveAmount.y < -0.5f)
+                    if(moveAmount.y < -0.3f)
                     {
                         audioManager.PlaySound("Rock Hit");
                     }
@@ -222,6 +223,7 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
+
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
                 if (slopeAngle != collisions.slopeAngle)
                 {
@@ -255,6 +257,13 @@ public class Controller2D : RaycastController
                     {
                         hitBranchEvent();
                     }
+                }
+            }
+            else
+            {
+                if(notGroundedEvent != null)
+                {
+                    notGroundedEvent();
                 }
             }
         }

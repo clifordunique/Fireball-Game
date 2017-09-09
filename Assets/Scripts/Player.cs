@@ -339,7 +339,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) && controller.collisions.below)
         {
             platformType = controller.GetPlatformType();
-            if(platformType.ToString() == "grass")
+            if (platformType.ToString() == "grass")
             {
                 gm.PlayPlatformAudio((int)platformType);
             }

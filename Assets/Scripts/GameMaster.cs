@@ -117,7 +117,6 @@ public class GameMaster : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         endLevelUI.SetActive(true);
-        Debug.Log(endLevelUI.activeSelf);
         yield return new WaitForSeconds(2);
         switch (action)
         {
