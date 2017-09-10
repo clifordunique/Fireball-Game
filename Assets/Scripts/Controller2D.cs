@@ -259,13 +259,6 @@ public class Controller2D : RaycastController
                     }
                 }
             }
-            else
-            {
-                if(notGroundedEvent != null)
-                {
-                    notGroundedEvent();
-                }
-            }
         }
     }
 

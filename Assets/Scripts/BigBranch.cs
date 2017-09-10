@@ -50,7 +50,7 @@ public class BigBranch : TreeBranch {
         }
     }
 
-    public override void OnHitBranch()
+    public void OnHitBranch()
     {
         int i = Random.Range(1, woodCrackClips.Length);
         audioManager.PlaySound(woodCrackClips[i]);
