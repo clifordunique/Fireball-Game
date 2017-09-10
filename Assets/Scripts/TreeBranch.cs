@@ -1,19 +1,22 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System.Diagnostics;
 
-public class TreeBranch : MonoBehaviour {
+public class TreeBranch : MonoBehaviour
+{
+    public static bool collided;
 
     Controller2D controller2D;
     Transform rotationOrigin;
     Rigidbody2D rb2d;
+    Stopwatch sw;
 
     public float easeAmount;
     public float rotationSpeed = 2;
     public float rotateAmt = 2;
+    public float waitMilliseconds;
 
     float originalRotation;
-    bool RDIsRunning;
-    bool RUIsRunning;
 
     void Start()
     {
@@ -22,7 +25,8 @@ public class TreeBranch : MonoBehaviour {
         rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
         rotationOrigin = transform.parent;
         originalRotation = transform.rotation.z;
-        
+        sw = new Stopwatch();
+        sw.Start();
         //audioManager = AudioManager.instance;
 
         //woodCrackClips = new string[7];
@@ -34,19 +38,44 @@ public class TreeBranch : MonoBehaviour {
 
     public virtual void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Enter");
-        if(col.gameObject.tag == "Player")
+        if (sw.ElapsedMilliseconds > waitMilliseconds && collided == false)
         {
-            StartCoroutine(RotateDown(rotationSpeed));
+            if (col.gameObject.tag == "Player")
+            {
+                StartCoroutine(RotateDown(rotationSpeed));
+            }
+            sw.Reset();
+            sw.Start();
         }
+
+        collided = true;
     }
+
+    //public virtual void OnCollisionStay2D(Collision2D col)
+    //{
+    //    collided = true;
+    //    if (sw.ElapsedMilliseconds > waitMilliseconds)
+    //    {
+    //        if (col.gameObject.tag == "Player")
+    //        {
+    //            StartCoroutine(RotateDown(rotationSpeed));
+    //        }
+    //        sw.Reset();
+    //        sw.Start();
+    //    }
+    //}
 
     public virtual void OnCollisionExit2D(Collision2D col)
     {
-        Debug.Log("Exit");
-        if (col.gameObject.tag == "Player")
+        collided = false;
+        if (sw.ElapsedMilliseconds > waitMilliseconds)
         {
-            StartCoroutine(RotateUp(-rotationSpeed));
+            if (col.gameObject.tag == "Player")
+            {
+                StartCoroutine(RotateUp(-rotationSpeed));
+            }
+            sw.Reset();
+            sw.Start();
         }
     }
 
@@ -59,7 +88,6 @@ public class TreeBranch : MonoBehaviour {
 
     IEnumerator RotateDown(float rotation)
     {
-        RDIsRunning = true;
         float deltaRotation = 0;
         float rotationPercentage;
         while (deltaRotation < rotateAmt)
@@ -72,28 +100,23 @@ public class TreeBranch : MonoBehaviour {
             rotationOrigin.Rotate(Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
             yield return null;
         }
-        RDIsRunning = false;
     }
 
     IEnumerator RotateUp(float rotation)
     {
-        RUIsRunning = true;
         float deltaRotation = 0;
         float rotationPercentage;
 
         while (deltaRotation > -rotateAmt)
         {
-            Debug.Log(deltaRotation);
             deltaRotation += rotation;
             rotationPercentage = Mathf.Abs(deltaRotation / rotateAmt);
             rotationPercentage = Mathf.Clamp01(rotationPercentage);
-            Debug.Log(rotationPercentage);
             float easedPercentBetweenRotation = Ease(rotationPercentage);
             //rotationOrigin.Rotate(new Vector3(0, 0, rotation));
             rotationOrigin.Rotate(Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
             yield return null;
         }
-        RUIsRunning = false;
     }
 
     //IEnumerator RotateDown()
