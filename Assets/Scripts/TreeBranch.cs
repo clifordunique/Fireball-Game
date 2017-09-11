@@ -38,14 +38,12 @@ public class TreeBranch : MonoBehaviour
 
     public virtual void OnCollisionEnter2D(Collision2D col)
     {
-        if (sw.ElapsedMilliseconds > waitMilliseconds && collided == false)
+        if (collided == false)
         {
             if (col.gameObject.tag == "Player")
             {
-                StartCoroutine(RotateDown(rotationSpeed));
+                StartCoroutine(RotateDown(rotationSpeed, col.transform));
             }
-            sw.Reset();
-            sw.Start();
         }
 
         collided = true;
@@ -68,14 +66,9 @@ public class TreeBranch : MonoBehaviour
     public virtual void OnCollisionExit2D(Collision2D col)
     {
         collided = false;
-        if (sw.ElapsedMilliseconds > waitMilliseconds)
+        if (col.gameObject.tag == "Player")
         {
-            if (col.gameObject.tag == "Player")
-            {
-                StartCoroutine(RotateUp(-rotationSpeed));
-            }
-            sw.Reset();
-            sw.Start();
+            StartCoroutine(RotateUp(-rotationSpeed, col.transform));
         }
     }
 
@@ -86,7 +79,7 @@ public class TreeBranch : MonoBehaviour
     //    controller2D.hitBranchEvent -= OnHitBranch;
     //}
 
-    IEnumerator RotateDown(float rotation)
+    IEnumerator RotateDown(float rotation, Transform player)
     {
         float deltaRotation = 0;
         float rotationPercentage;
@@ -96,13 +89,13 @@ public class TreeBranch : MonoBehaviour
             rotationPercentage = deltaRotation / rotateAmt;
             rotationPercentage = Mathf.Clamp01(rotationPercentage);
             float easedPercentBetweenRotation = Ease(rotationPercentage);
-            //rotationOrigin.Rotate(new Vector3(0, 0, rotation));
             rotationOrigin.Rotate(Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
+            player.RotateAround(rotationOrigin.position, Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
             yield return null;
         }
     }
 
-    IEnumerator RotateUp(float rotation)
+    IEnumerator RotateUp(float rotation, Transform player)
     {
         float deltaRotation = 0;
         float rotationPercentage;
@@ -113,8 +106,8 @@ public class TreeBranch : MonoBehaviour
             rotationPercentage = Mathf.Abs(deltaRotation / rotateAmt);
             rotationPercentage = Mathf.Clamp01(rotationPercentage);
             float easedPercentBetweenRotation = Ease(rotationPercentage);
-            //rotationOrigin.Rotate(new Vector3(0, 0, rotation));
             rotationOrigin.Rotate(Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
+            player.RotateAround(rotationOrigin.position, Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
             yield return null;
         }
     }

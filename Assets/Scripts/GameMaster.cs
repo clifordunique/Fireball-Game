@@ -44,9 +44,9 @@ public class GameMaster : MonoBehaviour
             Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
         }
 
+        LoadPlatformSounds();
         GetRandomIndex();
         PlayBackgroundMusic();
-        LoadPlatformSounds();
     }
 
     // Restarts the level
