@@ -1,32 +1,26 @@
 ﻿using System.Collections;
 using UnityEngine;
-using System.Diagnostics;
 
 public class TreeBranch : MonoBehaviour
 {
-    public static bool collided;
+    // There might be more than one of this script on an object. This bool detects if the player has already collided
+    // with one so that, for example, if this object has already rotated down, it won't rotate down again.
+    public static bool collided; 
 
-    Controller2D controller2D;
-    Transform rotationOrigin;
+    public Transform rotationOrigin;
     Rigidbody2D rb2d;
-    Stopwatch sw;
 
     public float easeAmount;
     public float rotationSpeed = 2;
     public float rotateAmt = 2;
-    public float waitMilliseconds;
 
     float originalRotation;
 
     void Start()
     {
-        controller2D = FindObjectOfType<Controller2D>();
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
-        rotationOrigin = transform.parent;
         originalRotation = transform.rotation.z;
-        sw = new Stopwatch();
-        sw.Start();
         //audioManager = AudioManager.instance;
 
         //woodCrackClips = new string[7];
@@ -42,92 +36,55 @@ public class TreeBranch : MonoBehaviour
         {
             if (col.gameObject.tag == "Player")
             {
-                StartCoroutine(RotateDown(rotationSpeed, col.transform));
+                StartCoroutine(Rotate(rotationSpeed));
             }
         }
 
         collided = true;
     }
 
-    //public virtual void OnCollisionStay2D(Collision2D col)
-    //{
-    //    collided = true;
-    //    if (sw.ElapsedMilliseconds > waitMilliseconds)
-    //    {
-    //        if (col.gameObject.tag == "Player")
-    //        {
-    //            StartCoroutine(RotateDown(rotationSpeed));
-    //        }
-    //        sw.Reset();
-    //        sw.Start();
-    //    }
-    //}
-
     public virtual void OnCollisionExit2D(Collision2D col)
     {
         collided = false;
         if (col.gameObject.tag == "Player")
         {
-            StartCoroutine(RotateUp(-rotationSpeed, col.transform));
+            StartCoroutine(Rotate(-rotationSpeed));
         }
     }
 
-    //public virtual void OnHitBranch()
-    //{
-    //    Debug.Log("hit");
-    //    StartCoroutine(Rotate(0.5f));
-    //    controller2D.hitBranchEvent -= OnHitBranch;
-    //}
-
-    IEnumerator RotateDown(float rotation, Transform player)
+    /* Rotates rotationOrigin a certain amount
+     * Note: this should be used to rotate a sprite and not a collider.
+     * Strange things might happen otherwise.
+     * 
+     * @param rotation - the amount to rotate
+     */
+    IEnumerator Rotate(float rotation)
     {
         float deltaRotation = 0;
         float rotationPercentage;
         while (deltaRotation < rotateAmt)
         {
-            deltaRotation += rotation;
-            rotationPercentage = deltaRotation / rotateAmt;
-            rotationPercentage = Mathf.Clamp01(rotationPercentage);
-            float easedPercentBetweenRotation = Ease(rotationPercentage);
-            rotationOrigin.Rotate(Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
-            player.RotateAround(rotationOrigin.position, Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
-            yield return null;
-        }
-    }
-
-    IEnumerator RotateUp(float rotation, Transform player)
-    {
-        float deltaRotation = 0;
-        float rotationPercentage;
-
-        while (deltaRotation > -rotateAmt)
-        {
-            deltaRotation += rotation;
+            deltaRotation += Mathf.Abs(rotation);
             rotationPercentage = Mathf.Abs(deltaRotation / rotateAmt);
             rotationPercentage = Mathf.Clamp01(rotationPercentage);
             float easedPercentBetweenRotation = Ease(rotationPercentage);
             rotationOrigin.Rotate(Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
-            player.RotateAround(rotationOrigin.position, Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
             yield return null;
         }
     }
 
-    //IEnumerator RotateDown()
+    //IEnumerator RotateUp(float rotation)
     //{
-    //    float totalRotation = Mathf.Abs(rotateDownTarget + rotationOrigin.rotation.z * Mathf.Rad2Deg);
-    //    float currentRotation;
+    //    float deltaRotation = 0;
     //    float rotationPercentage;
 
-    //    Debug.Log(rotateDownTarget);
-
-    //    while (rotationOrigin.rotation.z * Mathf.Rad2Deg < rotateDownTarget)
+    //    while (deltaRotation > -rotateAmt)
     //    {
-    //        currentRotation = Mathf.Abs(rotateDownTarget - rotationOrigin.rotation.z * Mathf.Rad2Deg);
-    //        rotationPercentage = currentRotation / totalRotation;
+    //        deltaRotation += rotation;
+    //        rotationPercentage = Mathf.Abs(deltaRotation / rotateAmt);
     //        rotationPercentage = Mathf.Clamp01(rotationPercentage);
     //        float easedPercentBetweenRotation = Ease(rotationPercentage);
-    //        rotationOrigin.Rotate(Vector3.forward, easedPercentBetweenRotation * rotationSpeed * Time.deltaTime);
-
+    //        rotationOrigin.Rotate(Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
     //        yield return null;
     //    }
     //}

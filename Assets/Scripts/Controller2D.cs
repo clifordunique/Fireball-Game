@@ -115,11 +115,11 @@ public class Controller2D : RaycastController
                 if (i == 0 && slopeAngle <= maxSlopeAngle)
                 {
                     // Fixes problem when descending a slope into a narrow valley.
-                    if (collisions.descendingSlope)
-                    {
-                        collisions.descendingSlope = false;
-                        moveAmount = collisions.moveAmountOld;
-                    }
+                    //if (collisions.descendingSlope)
+                    //{
+                    //    collisions.descendingSlope = false;
+                    //    moveAmount = collisions.moveAmountOld;
+                    //}
                     float distanceToSlopeStart = 0;
                     if (slopeAngle != collisions.slopeAngleOld)
                     {
@@ -223,7 +223,6 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
-
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
                 if (slopeAngle != collisions.slopeAngle)
                 {
@@ -261,6 +260,7 @@ public class Controller2D : RaycastController
             }
         }
     }
+
 
     void ClimbSlope(ref Vector2 moveAmount, float _slopeAngle, Vector2 slopeNormal)
     {
