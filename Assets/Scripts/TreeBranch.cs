@@ -13,6 +13,7 @@ public class TreeBranch : MonoBehaviour
     public float easeAmount;
     public float rotationSpeed = 2;
     public float rotateAmt = 2;
+    public bool leftSideOfTree;
 
     float originalRotation;
 
@@ -21,6 +22,11 @@ public class TreeBranch : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
         originalRotation = transform.rotation.z;
+        if (!leftSideOfTree)
+        {
+            rotationSpeed = -rotationSpeed;
+        }
+
         //audioManager = AudioManager.instance;
 
         //woodCrackClips = new string[7];
@@ -36,7 +42,7 @@ public class TreeBranch : MonoBehaviour
         {
             if (col.gameObject.tag == "Player")
             {
-                StartCoroutine(Rotate(rotationSpeed));
+                StartCoroutine(Rotate(rotationSpeed, false));
             }
         }
 
@@ -48,7 +54,7 @@ public class TreeBranch : MonoBehaviour
         collided = false;
         if (col.gameObject.tag == "Player")
         {
-            StartCoroutine(Rotate(-rotationSpeed));
+            StartCoroutine(Rotate(-rotationSpeed, true));
         }
     }
 
@@ -58,7 +64,7 @@ public class TreeBranch : MonoBehaviour
      * 
      * @param rotation - the amount to rotate
      */
-    IEnumerator Rotate(float rotation)
+    IEnumerator Rotate(float rotation, bool rotateBack)
     {
         float deltaRotation = 0;
         float rotationPercentage;
@@ -71,6 +77,11 @@ public class TreeBranch : MonoBehaviour
             rotationOrigin.Rotate(Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
             yield return null;
         }
+        //if (rotateBack)
+        //{
+        //    Debug.Log("Back up");
+        //    StartCoroutine(Rotate(-2 * rotationSpeed, false));
+        //}
     }
 
     //IEnumerator RotateUp(float rotation)

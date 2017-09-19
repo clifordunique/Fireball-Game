@@ -320,7 +320,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     void CalculateVelocity()
     {
         float slopeAngleClimbSmoothTime = .05f + 1 / Mathf.Abs(controller.collisions.slopeAngle);
-        float slopeAngleDescendSmoothTime = .15f + Mathf.Abs(controller.collisions.slopeAngle) * .01f;
+        float slopeAngleDescendSmoothTime = 0.15f + Mathf.Abs(controller.collisions.slopeAngle) * .001f;
         float targetVelocityX = directionalInput.x * moveSpeed; // For Rhino script, modify this
         if (controller.collisions.climingSlope)
         {

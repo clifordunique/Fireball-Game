@@ -166,6 +166,7 @@ public class Controller2D : RaycastController
                 {
                     GameMaster.KillPlayer(player);
                 }
+
                 // Allows player to jump though platforms if they have the "Through" tag
                 if (hit.collider.tag == "Through" || hit.collider.tag == "Branch")
                 {
@@ -179,6 +180,7 @@ public class Controller2D : RaycastController
                     }
                     if (playerInput.y == -1) // Enables the player to fall through platforms with the "Through" tag
                     {
+                        //TODO: make this work more consistently. Currently, it only works if the player is on a flat or downward sloping place.
                         collisions.fallingThroughPlatform = true;
                         Invoke("ResetFallingThroughPlatform", 0.3f);
                         continue;
