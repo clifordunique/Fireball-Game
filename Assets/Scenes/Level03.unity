@@ -3666,6 +3666,11 @@ Prefab:
       propertyPath: maxSlopeAngle
       value: 85
       objectReference: {fileID: 0}
+    - target: {fileID: 114712337831951650, guid: 9c25303708b5a4a4898ab685e2fa7443,
+        type: 2}
+      propertyPath: canDoubleJump
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c25303708b5a4a4898ab685e2fa7443, type: 2}
   m_IsPrefabParent: 0

@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Diagnostics;
 
 public class Controller2D : RaycastController
 {
+    public bool shiftKeyDown = false;
+
     // Variables for ascending and descending slope properly
     public float maxSlopeAngle = 80;
     float speedBySlopeAngleClimb;
     float speedBySlopeAngleDescend;
+    Stopwatch sw;
 
     public delegate void OnHitBranch();
     public event OnHitBranch hitBranchEvent;
@@ -25,11 +29,11 @@ public class Controller2D : RaycastController
 
     // Detecting platform type, mostly for playing sounds
     PlatformType platformType;
-    int[] grounded;
 
     public override void Start()
     {
         base.Start();
+        sw = new Stopwatch();
         collisions.faceDir = 1;
         audioManager = AudioManager.instance;
         treeBranch = FindObjectOfType<TreeBranch>();
@@ -39,15 +43,31 @@ public class Controller2D : RaycastController
     // Overloaded method for the convenience of the moving platform (PlatformController class)
     public void Move(Vector2 moveAmount, bool standingOnPlatform)
     {
-        Move(moveAmount, Vector2.zero, standingOnPlatform);
+        Move(moveAmount, Vector2.zero, false, standingOnPlatform);
     }
 
-    public void Move(Vector2 moveAmount, Vector2 input, bool standingOnPlatform = false)
+    public void Move(Vector2 moveAmount, Vector2 input, bool isDoubleJumping, bool standingOnPlatform = false)
     {
         UpdateRaycastOrigins();
         collisions.Reset();
         collisions.moveAmountOld = moveAmount;
         playerInput = input;
+        // currently uses variable from the class. Should get the shift key.
+        //if (Input.GetKey(KeyCode.LeftShift))
+        //{
+        //    if(sw.ElapsedMilliseconds < 50)
+        //    {
+        //        UnityEngine.Debug.Log("jumping!!!");
+        //        sw.Start();
+        //        moveAmount.x *= 4;
+        //        moveAmount.y *= 2;
+        //    }
+        //    else
+        //    {
+        //        UnityEngine.Debug.Log("resetting");
+        //        Invoke("ResetSw", 2f);
+        //    }
+        //}
 
         if (moveAmount.y < 0)
         {
@@ -100,7 +120,7 @@ public class Controller2D : RaycastController
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
 
-            Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
+            UnityEngine.Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
 
             if (hit)
             {
@@ -158,7 +178,7 @@ public class Controller2D : RaycastController
             rayOrigin += Vector2.right * (verticalRaySpacing * i + moveAmount.x);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
 
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY /*   * rayLength   */ , Color.red);
+            UnityEngine.Debug.DrawRay(rayOrigin, Vector2.up * directionY /*   * rayLength   */ , Color.red);
 
             if (hit)
             {
@@ -245,7 +265,7 @@ public class Controller2D : RaycastController
             rayOrigin += Vector2.right * (verticalRaySpacing * i * moveAmount.x);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * -rayLength, 5, collisionMask);
 
-            Debug.DrawRay(rayOrigin, Vector2.up * -rayLength /*   * rayLength   */ , Color.red);
+            UnityEngine.Debug.DrawRay(rayOrigin, Vector2.up * -rayLength /*   * rayLength   */ , Color.red);
 
             /* Detects if the player lands on a branch and bumps it down slightly
             */
@@ -347,6 +367,11 @@ public class Controller2D : RaycastController
     void ResetFallingThroughPlatform()
     {
         collisions.fallingThroughPlatform = false;
+    }
+
+    void ResetSw()
+    {
+        sw.Reset();
     }
 
     public PlatformType GetPlatformType()

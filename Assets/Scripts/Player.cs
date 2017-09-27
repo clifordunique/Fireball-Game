@@ -49,6 +49,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public Vector3 velocity;
     float velocityXSmoothing;
     public bool isInWater = false;
+    public bool isDoubleJumping;
     PlatformType platformType;
 
     SpriteRenderer sr;
@@ -66,6 +67,9 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     float velocityXOld;
     float velocityYOld;
+
+    // Power ups
+    public bool canDoubleJump;
 
     //CameraShake variables
     public float camShakeAmt = 0.1f;
@@ -120,7 +124,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             ToggleIsInUnderbrush();
         }
 
-        controller.Move(velocity * Time.deltaTime, directionalInput);
+        controller.Move(velocity * Time.deltaTime, directionalInput, isDoubleJumping);
 
         if (isInWater)
         {
@@ -247,10 +251,12 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 velocity.x = -wallDirX * wallLeap.x;
                 velocity.y = wallLeap.y;
             }
+            isDoubleJumping = false;
         }
         // Regular jumping
         if (controller.collisions.below)
         {
+            isDoubleJumping = false;
             if (controller.collisions.slidingDownMaxSlope)
             {
                 if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x)) // Not jumping against max slope
@@ -263,7 +269,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
             {
                 velocity.y = maxJumpVelocity;
             }
-
+        }
+        if (canDoubleJump && !controller.collisions.below && !isDoubleJumping)
+        {
+            velocity.y = maxJumpVelocity;
+            isDoubleJumping = true;
         }
     }
 
