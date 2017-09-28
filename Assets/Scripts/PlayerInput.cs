@@ -16,13 +16,17 @@ public class PlayerInput : MonoBehaviour {
         Vector2 directionalInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         player.SetDirectionalInput(directionalInput);
 
-        if(Input.GetButtonDown("Jump"))
+        if(Input.GetButtonDown("Jump") && !Input.GetButton("Shift"))
         {
             player.OnJumpInputDown();
         }
-        if(Input.GetButtonUp("Jump"))
+        if(Input.GetButtonUp("Jump") && !Input.GetButton("Shift"))
         {
             player.OnJumpInputUp();
+        }
+        if (Input.GetButton("Shift"))
+        {
+            player.OnShiftInput();
         }
     }
 }

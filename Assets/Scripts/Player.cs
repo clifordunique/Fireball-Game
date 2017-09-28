@@ -6,6 +6,7 @@
  * It also handles wall jumping and calculating the velocity.
  */
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -70,6 +71,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     // Power ups
     public bool canDoubleJump;
+    bool timeIsOut = false;
 
     //CameraShake variables
     public float camShakeAmt = 0.1f;
@@ -270,11 +272,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 velocity.y = maxJumpVelocity;
             }
         }
-        if (canDoubleJump && !controller.collisions.below && !isDoubleJumping)
-        {
-            velocity.y = maxJumpVelocity;
-            isDoubleJumping = true;
-        }
+
     }
 
     public void OnJumpInputUp()
@@ -283,6 +281,68 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             velocity.y = minJumpVelocity;
         }
+    }
+
+    /* Controls the sprint powerup, or whatever it is.
+     * Basically, on the shift input, the player shoots in whatever direction the directionalInput is.
+     */
+    public void OnShiftInput()
+    {
+        if (controller.collisions.below)
+        {
+            isDoubleJumping = false;
+        }
+        if (!timeIsOut && canDoubleJump && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S)))
+        {
+            if((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
+            {
+                StartCoroutine("SprintTimer");
+                velocity = directionalInput * moveSpeed * 2;
+                isDoubleJumping = true;
+            }
+            //if (!controller.collisions.below && !isDoubleJumping && Input.GetButtonDown("Jump"))
+            //{
+            //    velocity.y = maxJumpVelocity;
+            //    isDoubleJumping = true;
+            //    StartCoroutine("SprintTimer");
+            //}
+            //if(controller.collisions.below && Input.GetButtonDown("Jump"))
+            //{
+            //    velocity.y = maxJumpVelocity;
+            //    StartCoroutine("SprintTimer");
+            //}
+            //if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+            //{
+            //    velocity.x = velocity.x + Mathf.Sign(directionalInput.x) * 10;
+            //    StartCoroutine("SprintTimer");
+            //}
+        }
+    }
+
+    IEnumerator SprintTimer()
+    {
+        int max = 5;
+        int initial = 0;
+        while (initial < max)
+        {
+            initial++;
+            yield return null;
+        }
+        timeIsOut = true;
+        StopAllCoroutines();
+        StartCoroutine("SprintRecharge");
+    }
+
+    IEnumerator SprintRecharge()
+    {
+        int max = 50;
+        int initial = 0;
+        while (initial < max)
+        {
+            initial++;
+            yield return null;
+        }
+        timeIsOut = false;
     }
 
     void HandleWallSliding()
