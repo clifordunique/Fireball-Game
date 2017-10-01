@@ -53,6 +53,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public bool isDoubleJumping;
     PlatformType platformType;
 
+    CameraShake camShake;
     SpriteRenderer sr;
     CollisionInfo colInfo;
     Controller2D controller;
@@ -104,6 +105,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         health = maxHealth;
         anim.SetFloat("Fire Health", fireHealth);
+        camShake = GameMaster.gm.GetComponent<CameraShake>();
+        if (camShake == null)
+        {
+            Debug.LogError("No CameraShake found on the GameMaster.");
+        }
         //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
         //audioClips = new string[14];
         //for (int i = 0; i < audioClips.Length; i++)
@@ -296,8 +302,10 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             if((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
             {
+                camShake.Shake(.2f, .1f);
                 StartCoroutine("SprintTimer");
-                velocity = directionalInput * moveSpeed * 2;
+                velocity.x = directionalInput.x * moveSpeed * 4;
+                velocity.y = directionalInput.y * moveSpeed * 2;
                 isDoubleJumping = true;
             }
             //if (!controller.collisions.below && !isDoubleJumping && Input.GetButtonDown("Jump"))
