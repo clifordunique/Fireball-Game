@@ -49,10 +49,9 @@ public class TreeBranch : MonoBehaviour
                 {
                     StartCoroutine(RotateChildrenStart());
                 }
+                collided = true;
             }
         }
-
-        collided = true;
     }
 
     public virtual void OnCollisionExit2D(Collision2D col)
@@ -66,9 +65,9 @@ public class TreeBranch : MonoBehaviour
                 {
                     StartCoroutine(RotateChildrenStart());
                 }
+                collided = false;
             }
         }
-        collided = false;
         //if(collided == true){
         //	rotated = true
         //}
@@ -105,7 +104,7 @@ public class TreeBranch : MonoBehaviour
 
         for (int i = 0; i < children.Length; i++)
         {
-            StartCoroutine(RotateChildren(children[i], i % 2 == 2 ? -1:1));
+            StartCoroutine(RotateChildren(children[i], i % 2 == 2 ? -1 : 1));
             yield return null;
         }
     }

@@ -8,7 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWeapon : MonoBehaviour
+public class PlayerWeapon : Projectile
 {
     public Transform explodeParticles;
     public int damage = 4;
@@ -23,12 +23,10 @@ public class PlayerWeapon : MonoBehaviour
 
     AudioManager audioManager;
     Enemy enemy;
-    BoxCollider2D collider;
 
     void Start()
     {
         audioManager = AudioManager.instance;
-        collider = GetComponent<BoxCollider2D>();
         rotation = FindObjectOfType<Attack>().GetDirection();
     }
 
