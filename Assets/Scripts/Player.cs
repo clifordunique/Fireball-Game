@@ -85,9 +85,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public delegate void OnUnderbrush();
     public event OnUnderbrush onUnderbrushEvent;
 
-    //public delegate void ShittyShittityShit();
-    //public event ShittyShittityShit fingPoop;
-
     void Start()
     {
         audioManager = AudioManager.instance;
@@ -131,7 +128,10 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             ToggleIsInUnderbrush();
         }
-
+        if (Input.GetButton("Shift"))
+        {
+            OnShiftInput();
+        }
         controller.Move(velocity * Time.deltaTime, directionalInput, isDoubleJumping);
 
         if (isInWater)
@@ -242,26 +242,32 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public void OnJumpInputDown()
     {
         // Wall jumping
-        if (wallSliding)
-        {
-            if (wallDirX == directionalInput.x)
-            {
-                velocity.x = -wallDirX * wallJumpClimb.x;
-                velocity.y = wallJumpClimb.y;
-            }
-            else if (directionalInput.x == 0)
-            {
-                velocity.x = -wallDirX * wallJumpOff.x;
-                velocity.y = wallJumpOff.y;
-            }
-            else // Input opposite to wall direction
-            {
-                velocity.x = -wallDirX * wallLeap.x;
-                velocity.y = wallLeap.y;
-            }
-            isDoubleJumping = false;
-        }
+        //if (wallSliding)
+        //{
+        //    if (wallDirX == directionalInput.x)
+        //    {
+        //        velocity.x = -wallDirX * wallJumpClimb.x;
+        //        velocity.y = wallJumpClimb.y;
+        //    }
+        //    else if (directionalInput.x == 0)
+        //    {
+        //        velocity.x = -wallDirX * wallJumpOff.x;
+        //        velocity.y = wallJumpOff.y;
+        //    }
+        //    else // Input opposite to wall direction
+        //    {
+        //        velocity.x = -wallDirX * wallLeap.x;
+        //        velocity.y = wallLeap.y;
+        //    }
+        //    isDoubleJumping = false;
+        //}
         // Regular jumping
+        //if (Input.GetButton("Shift"))
+        //{
+        //    OnShiftInput();
+        //}
+        //else
+        //{
         if (controller.collisions.below)
         {
             isDoubleJumping = false;
@@ -278,7 +284,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 velocity.y = maxJumpVelocity;
             }
         }
-
+        //}
     }
 
     public void OnJumpInputUp()
@@ -298,14 +304,22 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             isDoubleJumping = false;
         }
-        if (!timeIsOut && canDoubleJump && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S)))
+        if (!timeIsOut && canDoubleJump && (Input.GetButton("Jump") || Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
         {
-            if((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
+            if ((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
             {
                 camShake.Shake(.2f, .1f);
                 StartCoroutine("SprintTimer");
-                velocity.x = directionalInput.x * moveSpeed * 4;
-                velocity.y = directionalInput.y * moveSpeed * 2;
+                Vector2 direction = new Vector2(directionalInput.x, directionalInput.y).normalized;
+                velocity.x = direction.x * moveSpeed * 3;
+                if (velocity.x == 0)
+                {
+                    velocity.y = direction.y * moveSpeed * 2f;
+                }
+                else
+                {
+                    velocity.y = direction.y * moveSpeed * 2.5f;
+                }
                 isDoubleJumping = true;
             }
             //if (!controller.collisions.below && !isDoubleJumping && Input.GetButtonDown("Jump"))

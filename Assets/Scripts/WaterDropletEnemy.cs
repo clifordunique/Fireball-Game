@@ -36,12 +36,14 @@ public class WaterDropletEnemy : Enemy
     Transform player;
     Animator anim;
     Collider2D playerCollider;
+    Collider2D collider;
 
     public override void Start()
     {
         base.Start();
         sw = new Stopwatch();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        collider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         audioManager = AudioManager.instance;
         sr = GetComponent<SpriteRenderer>();
@@ -276,7 +278,7 @@ public class WaterDropletEnemy : Enemy
 
     void OnFireChange(bool isFire)
     {
-        Physics2D.IgnoreCollision(playerCollider, GetComponent<Collider2D>(), isFire);
+        Physics2D.IgnoreCollision(playerCollider, collider, isFire);
     }
 
     void OnCollisionEnter2D(Collision2D col)
