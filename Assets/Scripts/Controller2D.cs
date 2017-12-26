@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Diagnostics;
 
 public class Controller2D : RaycastController
@@ -11,6 +10,8 @@ public class Controller2D : RaycastController
     float speedBySlopeAngleClimb;
     float speedBySlopeAngleDescend;
     Stopwatch sw;
+
+    public LayerMask collisionMask2;
 
     public delegate void OnHitBranch();
     public event OnHitBranch hitBranchEvent;
@@ -81,6 +82,7 @@ public class Controller2D : RaycastController
 
         //Always check for horizontal collisions to enable wall sliding in case player jumps while right next to a wall.
         HorizontalCollisions(ref moveAmount);
+
         //Do the downward raycasts if close enough to the tree
         if (treeBranch != null)
         {
@@ -95,6 +97,7 @@ public class Controller2D : RaycastController
         {
             VerticalCollisions(ref moveAmount);
         }
+        HorizontalCollisions2(ref moveAmount);
 
         transform.Translate(moveAmount);
         // Added standingOnPlatform boolean so that if we are on a platform we can still jump
@@ -162,6 +165,48 @@ public class Controller2D : RaycastController
 
                     collisions.left = directionX == -1;
                     collisions.right = directionX == 1;
+                }
+            }
+        }
+    }
+
+    void HorizontalCollisions2(ref Vector2 moveAmount)
+    {
+        float directionX = collisions.faceDir;
+        float rayLength = Mathf.Abs(moveAmount.x) + skinWidth;
+
+        if (Mathf.Abs(moveAmount.x) < skinWidth)
+        {
+            rayLength = 2 * skinWidth;
+        }
+
+        for (int i = 0; i < horizontalRayCount; i++)
+        {
+            Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
+            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask2);
+
+            UnityEngine.Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
+
+            if (hit)
+            {
+                if (hit.distance == 0)
+                {
+                    continue;
+                }
+                float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+                if (collisions.below)
+                {
+                    moveAmount.x = (hit.distance - skinWidth) * directionX;
+                    rayLength = hit.distance;
+
+                    collisions.left = directionX == -1;
+                    collisions.right = directionX == 1;
+                }
+                else
+                {
+                    continue;
                 }
             }
         }

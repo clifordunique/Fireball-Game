@@ -121,7 +121,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     void Update()
     {
         CalculateVelocity();
-        HandleWallSliding();
+        //HandleWallSliding();
         DetectUnderBrush();
 
         if (Input.GetKeyDown(KeyCode.Z))
@@ -470,14 +470,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
             fireHealth += _health;
             isFire = true;
             anim.SetFloat("Fire Health", fireHealth);
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("Done"))
-        {
-            SceneManager.LoadScene("Level03");
         }
     }
 
