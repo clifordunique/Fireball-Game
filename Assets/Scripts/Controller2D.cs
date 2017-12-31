@@ -9,6 +9,7 @@ public class Controller2D : RaycastController
     public float maxSlopeAngle = 80;
     float speedBySlopeAngleClimb;
     float speedBySlopeAngleDescend;
+    bool grounded;
     Stopwatch sw;
 
     public LayerMask collisionMask2;
@@ -70,6 +71,11 @@ public class Controller2D : RaycastController
         //    }
         //}
 
+        if(moveAmount.y > 0 && !collisions.climingSlope)
+        {
+            grounded = false;
+        }
+
         if (moveAmount.y < 0)
         {
             DescendSlope(ref moveAmount);
@@ -97,7 +103,7 @@ public class Controller2D : RaycastController
         {
             VerticalCollisions(ref moveAmount);
         }
-        HorizontalCollisions2(ref moveAmount);
+        //HorizontalCollisions2(ref moveAmount);
 
         transform.Translate(moveAmount);
         // Added standingOnPlatform boolean so that if we are on a platform we can still jump
@@ -120,6 +126,8 @@ public class Controller2D : RaycastController
         for (int i = 0; i < horizontalRayCount; i++)
         {
             Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
+            //UnityEngine.Debug.Log(rayOrigin.x + " " + rayOrigin.y + " " + directionX);
+            UnityEngine.Debug.Log(raycastOrigins.bottomLeft + " " + raycastOrigins.bottomRight + " " + directionX);
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
 
@@ -131,6 +139,26 @@ public class Controller2D : RaycastController
                 if (hit.distance == 0)
                 {
                     continue;
+                }
+                //Logic for ignoring certain colliders whilst jumping
+                if (hit.collider.CompareTag("Jump Ignore"))
+                {
+                    if(hit.distance == 0)
+                    {
+                        continue;
+                    }
+                    if (grounded)
+                    {
+                        moveAmount.x = (hit.distance - skinWidth) * directionX;
+                        rayLength = hit.distance;
+
+                        collisions.left = directionX == -1;
+                        collisions.right = directionX == 1;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
 
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
@@ -170,47 +198,48 @@ public class Controller2D : RaycastController
         }
     }
 
-    void HorizontalCollisions2(ref Vector2 moveAmount)
-    {
-        float directionX = collisions.faceDir;
-        float rayLength = Mathf.Abs(moveAmount.x) + skinWidth;
+    //void HorizontalCollisions2(ref Vector2 moveAmount)
+    //{
+    //    float directionX = collisions.faceDir;
+    //    float rayLength = Mathf.Abs(moveAmount.x) + skinWidth;
 
-        if (Mathf.Abs(moveAmount.x) < skinWidth)
-        {
-            rayLength = 2 * skinWidth;
-        }
+    //    if (Mathf.Abs(moveAmount.x) < skinWidth)
+    //    {
+    //        rayLength = 2 * skinWidth;
+    //    }
 
-        for (int i = 0; i < horizontalRayCount; i++)
-        {
-            Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
-            rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask2);
+    //    for (int i = 0; i < horizontalRayCount; i++)
+    //    {
+    //        Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
+    //        rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+    //        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask2);
 
-            UnityEngine.Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
+    //        //UnityEngine.Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
 
-            if (hit)
-            {
-                if (hit.distance == 0)
-                {
-                    continue;
-                }
-                float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+    //        if (hit)
+    //        {
+    //            if (hit.distance == 0)
+    //            {
+    //                continue;
+    //            }
+    //            float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 
-                if (collisions.below)
-                {
-                    moveAmount.x = (hit.distance - skinWidth) * directionX;
-                    rayLength = hit.distance;
+    //            if (collisions.below)
+    //            {
+    //                moveAmount.x = (hit.distance - skinWidth) * directionX;
 
-                    collisions.left = directionX == -1;
-                    collisions.right = directionX == 1;
-                }
-                else
-                {
-                    continue;
-                }
-            }
-        }
-    }
+    //                rayLength = hit.distance;
+
+    //                collisions.left = directionX == -1;
+    //                collisions.right = directionX == 1;
+    //            }
+    //            else
+    //            {
+    //                continue;
+    //            }
+    //        }
+    //    }
+    //}
 
     void VerticalCollisions(ref Vector2 moveAmount)
     {
@@ -227,11 +256,17 @@ public class Controller2D : RaycastController
 
             if (hit)
             {
+                grounded = true;
                 if (hit.collider.tag == "FallBoundary")
                 {
                     GameMaster.KillPlayer(player);
                 }
 
+                // If the player is inside a Jump Ignore collider then it he should ignore it.
+                if(hit.distance == 0 && hit.collider.CompareTag("Jump Ignore"))
+                {
+                    continue;
+                }
                 // Allows player to jump though platforms if they have the "Through" tag
                 if (hit.collider.tag == "Through" || hit.collider.tag == "Branch")
                 {
