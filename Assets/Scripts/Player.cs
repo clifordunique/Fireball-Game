@@ -498,4 +498,9 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         isInWater = _isInWater;
     }
+
+    public bool isClimbingSlope()
+    {
+        return controller.collisions.descendingSlope;
+    }
 }

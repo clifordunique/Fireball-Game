@@ -6,6 +6,7 @@ public class CameraFollow : MonoBehaviour {
     public Controller2D target;
     public float verticalOffset;
     public float lookAheadDstX;
+    public float lookAheadDstY;
     public float lookSmoothTimeX;
     public float verticalSmoothTime;
     public Vector2 focusAreaSize;
@@ -16,9 +17,15 @@ public class CameraFollow : MonoBehaviour {
     float targetLookAheadX;
     float lookAheadDirX;
     float smoothLookVelocityX;
+
+    float currentLookAheadY;
+    float targetLookAheadY;
+    float lookAheadDirY;
+    float smoothLookVelocityY;
     float smoothVelocityY;
 
-    bool lookAheadStopped;
+    bool lookAheadStoppedX;
+    bool lookAheadStoppedY;
 
     void Start()
     {
@@ -39,18 +46,37 @@ public class CameraFollow : MonoBehaviour {
         if(focusArea.velocity.x != 0)
         {
             // If the focus area is moving, set it sign appropriately
-            lookAheadDirX = Mathf.Sign(focusArea.velocity.x);
+            lookAheadDirX = Mathf.Sign(focusArea.velocity.x); // IDEA::: change focusArea.velocity to playerinput.velocity...
             if(Mathf.Sign(target.playerInput.x) == Mathf.Sign(focusArea.velocity.x) && target.playerInput.x != 0)
             {
-                lookAheadStopped = false;
+                lookAheadStoppedX = false;
                 targetLookAheadX = lookAheadDirX * lookAheadDstX;
             }
             else
             {
-                if(!lookAheadStopped)
+                if(!lookAheadStoppedX)
                 {
-                    lookAheadStopped = true;
+                    lookAheadStoppedX = true;
                     targetLookAheadX = currentLookAheadX + (lookAheadDirX * lookAheadDstX - currentLookAheadX) / 4f;
+                }
+            }
+        }
+
+        if (focusArea.velocity.y != 0)
+        {
+            // If the focus area is moving, set it sign appropriately
+            lookAheadDirY = Mathf.Sign(focusArea.velocity.y);
+            if (/*Mathf.Sign(target.playerInput.y) == Mathf.Sign(focusArea.velocity.y) &&*/ /*focusArea.velocity.y != 0 && */((focusArea.velocity.y < 0 && target.collisions.descendingSlope) || focusArea.velocity.y > 0))
+            {
+                lookAheadStoppedY = false;
+                targetLookAheadY = lookAheadDirY * lookAheadDstY;
+            }
+            else
+            {
+                if (!lookAheadStoppedY) // Problems here still!!!
+                {
+                    lookAheadStoppedY = true;
+                    targetLookAheadY = currentLookAheadY + (lookAheadDirY * lookAheadDstY - currentLookAheadY) / 4f;
                 }
             }
         }
@@ -59,9 +85,11 @@ public class CameraFollow : MonoBehaviour {
         currentLookAheadX = Mathf.SmoothDamp(currentLookAheadX, targetLookAheadX, ref smoothLookVelocityX, lookSmoothTimeX);
 
         //Vertical smoothing
-        focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
+        currentLookAheadY = Mathf.SmoothDamp(currentLookAheadY, targetLookAheadY, ref smoothLookVelocityY, verticalSmoothTime);
+        //focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
 
         focusPosition += Vector2.right * currentLookAheadX;
+        focusPosition += Vector2.up * currentLookAheadY;
         transform.position = (Vector3)focusPosition + Vector3.forward * -10;
     }
 
