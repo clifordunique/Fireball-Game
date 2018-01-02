@@ -11,6 +11,7 @@ public class Controller2D : RaycastController
     float speedBySlopeAngleDescend;
     bool grounded;
     Stopwatch sw;
+    public Vector2 playerVelocity;
 
     public LayerMask collisionMask2;
 
@@ -111,6 +112,7 @@ public class Controller2D : RaycastController
         {
             collisions.below = true;
         }
+        playerVelocity = moveAmount;
     }
 
     void HorizontalCollisions(ref Vector2 moveAmount)
@@ -127,7 +129,6 @@ public class Controller2D : RaycastController
         {
             Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
             //UnityEngine.Debug.Log(rayOrigin.x + " " + rayOrigin.y + " " + directionX);
-            UnityEngine.Debug.Log(raycastOrigins.bottomLeft + " " + raycastOrigins.bottomRight + " " + directionX);
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
 
@@ -363,7 +364,7 @@ public class Controller2D : RaycastController
         }
     }
 
-
+    // Idea - get a vector that is equal to moveAmount
     void ClimbSlope(ref Vector2 moveAmount, float _slopeAngle, Vector2 slopeNormal)
     {
         float moveDistance = Mathf.Abs(moveAmount.x);

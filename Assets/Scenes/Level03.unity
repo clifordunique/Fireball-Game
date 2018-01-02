@@ -1969,8 +1969,8 @@ MonoBehaviour:
   lookAheadDstX: 7
   lookAheadDstY: 4
   lookSmoothTimeX: 0.5
-  verticalSmoothTime: 0.3
-  focusAreaSize: {x: 4, y: 3}
+  verticalSmoothTime: 0.5
+  focusAreaSize: {x: 3, y: 2}
 --- !u!81 &250900567
 AudioListener:
   m_ObjectHideFlags: 0
@@ -5632,6 +5632,16 @@ Prefab:
     - target: {fileID: 4954820814285686, guid: 9c25303708b5a4a4898ab685e2fa7443, type: 2}
       propertyPath: m_LocalScale.y
       value: 0.4794054
+      objectReference: {fileID: 0}
+    - target: {fileID: 114712337831951650, guid: 9c25303708b5a4a4898ab685e2fa7443,
+        type: 2}
+      propertyPath: maxJumpHeight
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114712337831951650, guid: 9c25303708b5a4a4898ab685e2fa7443,
+        type: 2}
+      propertyPath: moveSpeed
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c25303708b5a4a4898ab685e2fa7443, type: 2}

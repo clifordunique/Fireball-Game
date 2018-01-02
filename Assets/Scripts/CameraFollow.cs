@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraFollow : MonoBehaviour {
+public class CameraFollow : MonoBehaviour
+{
 
     public Controller2D target;
     public float verticalOffset;
@@ -35,7 +36,7 @@ public class CameraFollow : MonoBehaviour {
     // All player movement has been finished for the frame in its own update method
     void LateUpdate()
     {
-        if(target.collider != null)
+        if (target.collider != null)
         {
             focusArea.Update(target.collider.bounds);
         }
@@ -43,18 +44,18 @@ public class CameraFollow : MonoBehaviour {
         Vector2 focusPosition = focusArea.center + Vector2.up * verticalOffset;
 
         // Block stopping the lookahead if the character stops moving
-        if(focusArea.velocity.x != 0)
+        if (focusArea.velocity.x != 0)
         {
             // If the focus area is moving, set it sign appropriately
-            lookAheadDirX = Mathf.Sign(focusArea.velocity.x); // IDEA::: change focusArea.velocity to playerinput.velocity...
-            if(Mathf.Sign(target.playerInput.x) == Mathf.Sign(focusArea.velocity.x) && target.playerInput.x != 0)
+            lookAheadDirX = Mathf.Sign(focusArea.velocity.x);
+            if (Mathf.Sign(target.playerInput.x) == Mathf.Sign(focusArea.velocity.x) && target.playerInput.x != 0)
             {
                 lookAheadStoppedX = false;
                 targetLookAheadX = lookAheadDirX * lookAheadDstX;
             }
             else
             {
-                if(!lookAheadStoppedX)
+                if (!lookAheadStoppedX)
                 {
                     lookAheadStoppedX = true;
                     targetLookAheadX = currentLookAheadX + (lookAheadDirX * lookAheadDstX - currentLookAheadX) / 4f;
@@ -66,15 +67,22 @@ public class CameraFollow : MonoBehaviour {
         {
             // If the focus area is moving, set it sign appropriately
             lookAheadDirY = Mathf.Sign(focusArea.velocity.y);
-            if (/*Mathf.Sign(target.playerInput.y) == Mathf.Sign(focusArea.velocity.y) &&*/ /*focusArea.velocity.y != 0 && */((focusArea.velocity.y < 0 && target.collisions.descendingSlope) || focusArea.velocity.y > 0))
+            Debug.Log(target.playerVelocity.y + " " + focusArea.velocity.y);
+            if (Mathf.Sign(target.playerVelocity.y) == Mathf.Sign(focusArea.velocity.y) 
+                && (target.playerVelocity.y > .01f || (target.playerVelocity.y < -.01f && target.collisions.descendingSlope)))
             {
-                lookAheadStoppedY = false;
-                targetLookAheadY = lookAheadDirY * lookAheadDstY;
+                //if (((focusArea.velocity.y < 0 && target.collisions.descendingSlope) || focusArea.velocity.y > 0))
+                //{
+                    lookAheadStoppedY = false;
+                    targetLookAheadY = lookAheadDirY * lookAheadDstY;
+                //}
             }
             else
             {
-                if (!lookAheadStoppedY) // Problems here still!!!
+                Debug.Log("first");
+                if (!lookAheadStoppedY)
                 {
+                    Debug.Log("second");
                     lookAheadStoppedY = true;
                     targetLookAheadY = currentLookAheadY + (lookAheadDirY * lookAheadDstY - currentLookAheadY) / 4f;
                 }
@@ -105,7 +113,7 @@ public class CameraFollow : MonoBehaviour {
         public Vector2 velocity;
         float left, right;
         float top, bottom;
-        
+
         public FocusArea(Bounds targetBounds, Vector2 size)
         {
             left = targetBounds.center.x - size.x / 2;
@@ -120,11 +128,11 @@ public class CameraFollow : MonoBehaviour {
         public void Update(Bounds targetBounds)
         {
             float shiftX = 0;
-            if(targetBounds.min.x < left)
+            if (targetBounds.min.x < left)
             {
                 shiftX = targetBounds.min.x - left;
             }
-            else if(targetBounds.max.x > right)
+            else if (targetBounds.max.x > right)
             {
                 shiftX = targetBounds.max.x - right;
             }

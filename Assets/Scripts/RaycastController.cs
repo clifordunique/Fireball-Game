@@ -51,7 +51,6 @@ public class RaycastController : MonoBehaviour {
         raycastOrigins.bottomRight = new Vector2(bounds.max.x, bounds.min.y);
         raycastOrigins.topLeft = new Vector2(bounds.min.x, bounds.max.y);
         raycastOrigins.topRight = new Vector2(bounds.max.x, bounds.max.y);
-        UnityEngine.Debug.Log(raycastOrigins.bottomLeft);
     }
 
     public void CalculateRaySpacing()
