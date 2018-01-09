@@ -34,10 +34,10 @@ public class Loader : MonoBehaviour {
     {
         //maxHealth = player.maxHealth;
         //maxFireHealth = player.maxFireHealth;
-        fireHealth = player.fireHealth;
+        //fireHealth = player.fireHealth;
         //moveSpeed = player.moveSpeed;
         //maxJumpHeight = player.maxJumpHeight;
-        isFire = player.isFire;
+        //isFire = player.isFire;
         //Debug.Log(isFire + "  " + fireHealth);
     }
 
@@ -47,10 +47,9 @@ public class Loader : MonoBehaviour {
     {
         //player.maxHealth  = maxHealth;
         //player.maxFireHealth  = maxFireHealth;
-        player.fireHealth = (float)fireHealth;
+        //player.fireHealth = (float)fireHealth;
         //player.moveSpeed  = moveSpeed;
         //player.maxJumpHeight  = maxJumpHeight;
-        player.isFire = (bool)isFire;
-        Debug.Log(isFire + "  " + fireHealth); /////////    NOT WORKING WTH 
+        //player.isFire = (bool)isFire;
     }
 }

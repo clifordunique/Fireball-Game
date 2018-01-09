@@ -22,10 +22,10 @@ public class GameMaster : MonoBehaviour
         {
             gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
         }
-        if (FindObjectOfType<Player>() != null)
-        {
-            //FindObjectOfType<Player>().fingPoop += KillPlayer;
-        }
+        //if (FindObjectOfType<Player>() != null)
+        //{
+        //    //FindObjectOfType<Player>().fingPoop += KillPlayer;
+        //}
         //if (FindObjectOfType<Controller2D>() != null)
         //{
         //    FindObjectOfType<Controller2D>().hitBranchEvent += OnHitBranch;

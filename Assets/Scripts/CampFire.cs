@@ -12,10 +12,12 @@ public class CampFire : MonoBehaviour {
     public event OnLevelEnd levelEndEvent;
 
     GameMaster gm;
+    PlayerStats stats;
 	
     void Start()
     {
-        gm = FindObjectOfType<GameMaster>();
+        gm = GameMaster.gm;
+        stats = PlayerStats.instance;
     }
 
 	void Update () {
@@ -23,7 +25,7 @@ public class CampFire : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.GetComponent<Player>() != null && col.GetComponent<Player>().isFire)
+        if (col.GetComponent<Player>() != null && stats.isFire())
         {
             Instantiate(fire, new Vector2(transform.position.x + displacementX, transform.position.y + displacementY), transform.rotation);
             if (levelEndEvent != null)

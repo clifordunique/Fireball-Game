@@ -67,7 +67,6 @@ public class CameraFollow : MonoBehaviour
         {
             // If the focus area is moving, set it sign appropriately
             lookAheadDirY = Mathf.Sign(focusArea.velocity.y);
-            Debug.Log(target.playerVelocity.y + " " + focusArea.velocity.y);
             if (Mathf.Sign(target.playerVelocity.y) == Mathf.Sign(focusArea.velocity.y) 
                 && (target.playerVelocity.y > .01f || (target.playerVelocity.y < -.01f && target.collisions.descendingSlope)))
             {
@@ -79,10 +78,8 @@ public class CameraFollow : MonoBehaviour
             }
             else
             {
-                Debug.Log("first");
                 if (!lookAheadStoppedY)
                 {
-                    Debug.Log("second");
                     lookAheadStoppedY = true;
                     targetLookAheadY = currentLookAheadY + (lookAheadDirY * lookAheadDstY - currentLookAheadY) / 4f;
                 }

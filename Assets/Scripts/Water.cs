@@ -11,10 +11,13 @@ public class Water : MonoBehaviour {
     public int damage = 10;
 
     AudioManager audioManager;
+    PlayerStats stats;
 
 
     void Start () {
         audioManager = AudioManager.instance;
+        stats = PlayerStats.instance;
+
         Vector2[] waypoints = null;
         for (int j = 0; j < pathHolder.Length; j++)
         {
@@ -44,8 +47,8 @@ public class Water : MonoBehaviour {
     {
         if (col.gameObject.GetComponent<Player>() != null)
         {
-            Player player = col.gameObject.GetComponent<Player>();
-            if (player.isFire)
+            //Player player = col.gameObject.GetComponent<Player>();
+            if (stats.isFire())
             {
                 audioManager.PlaySound("Water Hiss Long");
             }
@@ -61,8 +64,8 @@ public class Water : MonoBehaviour {
     {
         if (col.gameObject.GetComponent<Player>() != null)
         {
-            Player player = col.gameObject.GetComponent<Player>();
-            if (player.isFire)
+            //Player player = col.gameObject.GetComponent<Player>();
+            if (stats.isFire())
             {
                 audioManager.StopSound("Water Hiss Long");
                 audioManager.PlaySound("Water Hiss End");

@@ -16,7 +16,7 @@ public class BigRaycastController : MonoBehaviour
     public LayerMask collisionMask;
 
     public const float skinWidth = .015f;
-    const float dstBetweenRays = 3f;
+    const float dstBetweenRays = 1f;
     [HideInInspector]
     public int horizontalRayCount;
     [HideInInspector]

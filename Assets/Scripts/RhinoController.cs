@@ -79,7 +79,7 @@ public class RhinoController : BigRaycastController
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
 
-            Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
+            Debug.DrawRay(rayOrigin, Vector2.right * directionX * 5, Color.blue);
 
             if (hit)
             {
@@ -137,7 +137,7 @@ public class RhinoController : BigRaycastController
             rayOrigin += Vector2.right * (verticalRaySpacing * i + moveAmount.x);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
 
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY /*   * rayLength   */ , Color.red);
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY *rayLength , Color.blue);
 
             if (hit)
             {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RechargeFire : MonoBehaviour {
 
-    public float healAmount = 1;
+    public int healAmount = 1;
 
     void OnTriggerStay2D(Collider2D col)
     {

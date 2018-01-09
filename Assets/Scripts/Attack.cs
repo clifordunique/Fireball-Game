@@ -13,11 +13,14 @@ public class Attack : MonoBehaviour
     public Transform firePoint;
     public float speed = 10f;
     Stopwatch sw;
-    AudioManager audioManager;
     Vector2 direction;
+
+    AudioManager audioManager;
+    PlayerStats stats;
 
     void Start()
     {
+        stats = PlayerStats.instance;
         firePoint = transform.Find("FirePoint");
         sw = new Stopwatch();
         audioManager = AudioManager.instance;
@@ -25,7 +28,7 @@ public class Attack : MonoBehaviour
 
     void Update()
     {
-        if (GetComponent<Player>().isFire)
+        if (stats.isFire())
         {
             sw.Start();
             if (sw.ElapsedMilliseconds > 500)

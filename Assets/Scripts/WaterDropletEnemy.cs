@@ -29,6 +29,7 @@ public class WaterDropletEnemy : Enemy
     bool canSeePlayer = false;
 
     AudioManager audioManager;
+    PlayerStats stats;
 
     SpriteRenderer sr;
     Stopwatch sw;
@@ -43,6 +44,7 @@ public class WaterDropletEnemy : Enemy
         base.Start();
         sw = new Stopwatch();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        stats = PlayerStats.instance;
         collider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         audioManager = AudioManager.instance;
@@ -91,7 +93,7 @@ public class WaterDropletEnemy : Enemy
             // If the player is in front of the water droplet
             if ((transform.localScale.x < 0 && (player.position.x > transform.position.x)) || transform.localScale.x > 0 && (player.position.x < transform.position.x))
             {
-                if (!Physics.Linecast(transform.position, player.position, mask) && player.GetComponent<Player>().isFire)
+                if (!Physics.Linecast(transform.position, player.position, mask) && stats.isFire())
                 {
                     if (anim.GetFloat("Speed") <= speed)
                     {
@@ -159,7 +161,7 @@ public class WaterDropletEnemy : Enemy
         StartCoroutine(GetDirectionToPlayer());
         while (transform.position.x != player.position.x)
         {
-            if (!player.GetComponent<Player>().isFire)
+            if (!stats.isFire())
             {
                 StopAllCoroutines();
                 SetWaypoints();
@@ -276,7 +278,7 @@ public class WaterDropletEnemy : Enemy
         }
     }
 
-    void OnFireChange(bool isFire)
+    void OnFireChange(bool isFire) // TODO: change this to access playerstats
     {
         Physics2D.IgnoreCollision(playerCollider, collider, isFire);
     }
@@ -286,7 +288,7 @@ public class WaterDropletEnemy : Enemy
         if (col.gameObject.CompareTag("Player"))
         {
             Player player = col.gameObject.GetComponent<Player>();
-            if (player.isFire)
+            if (stats.isFire())
             {
                 UnityEngine.Debug.Log("Damaging player");
                 player.DamageFire((int)(damage * ((health + 6 / health) / maxHealth)));

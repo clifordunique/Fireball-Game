@@ -23,16 +23,16 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     public float health;
 
-    // Variables to be carried over to the next scene start
+    // Variables to be moved to playerstats
     public float maxHealth;
-    public float maxFireHealth;
-    public float fireHealth;
+    //public float maxFireHealth;
+    //public float fireHealth;
     public float moveSpeed = 40;
-    public float maxJumpHeight;
-    public bool isFire = true;
+    //public bool isFire = true;
     // End
 
     GameMaster gm;
+    private PlayerStats stats;
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
@@ -47,6 +47,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     float gravityOriginal;
     float maxJumpVelocity;  // gravity * timeToJumpApex
     float minJumpVelocity;
+    public float maxJumpHeight;
     public Vector3 velocity;
     float velocityXSmoothing;
     public bool isInWater = false;
@@ -87,6 +88,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void Start()
     {
+        stats = PlayerStats.instance;
+        stats.curFireHealth = stats.maxFireHealth;
         audioManager = AudioManager.instance;
         if (audioManager == null)
         {
@@ -101,7 +104,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         health = maxHealth;
-        anim.SetFloat("Fire Health", fireHealth);
+        anim.SetFloat("Fire Health", stats.curFireHealth);
         camShake = GameMaster.gm.GetComponent<CameraShake>();
         if (camShake == null)
         {
@@ -212,21 +215,19 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void DealWithFire()
     {
-        anim.SetFloat("Fire Health", fireHealth);
-        if (fireHealth <= 0)
+        anim.SetFloat("Fire Health", stats.curFireHealth);
+        if (stats.curFireHealth<= 0)
         {
-            isFire = false;
             if (onFireChangeEvent != null)
             {
-                onFireChangeEvent(!isFire);
+                onFireChangeEvent(true);
             }
         }
         else
         {
-            isFire = true;
             if (onFireChangeEvent != null)
             {
-                onFireChangeEvent(!isFire);
+                onFireChangeEvent(false);
             }
         }
     }
@@ -452,24 +453,26 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     public void DamageFire(int _damage)
     {
-        if (fireHealth >= 0)
+        if (stats.curFireHealth >= 0)
         {
-            fireHealth -= _damage;
-            anim.SetFloat("Fire Health", fireHealth);
-            if (fireHealth <= 0)
-            {
-                isFire = false;
-            }
+            //fireHealth -= _damage;
+            stats.curFireHealth -= _damage;
+            anim.SetFloat("Fire Health", stats.curFireHealth);
+            //if (stats.curFireHealth <= 0)
+            //{
+            //    isFire = false;
+            //}
         }
     }
 
-    public void HealFire(float _health)
+    public void HealFire(int _health)
     {
-        if (fireHealth < maxFireHealth)
+        if (stats.curFireHealth < stats.maxFireHealth)
         {
-            fireHealth += _health;
-            isFire = true;
-            anim.SetFloat("Fire Health", fireHealth);
+            //fireHealth += _health;
+            stats.curFireHealth += _health;
+            //isFire = true;
+            anim.SetFloat("Fire Health", stats.curFireHealth);
         }
     }
 
@@ -479,10 +482,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (health < 0)
         {
             Effect();
-            //if (fingPoop != null)
-            //{
-            //    fingPoop(); // kills the player
-            //}
             GameMaster.KillPlayer(this);
         }
     }
