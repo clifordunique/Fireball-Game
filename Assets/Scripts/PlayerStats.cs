@@ -5,7 +5,7 @@ public class PlayerStats : MonoBehaviour {
     public static PlayerStats instance;
 
     public int maxHealth = 30;
-    private int _curHealth;
+    public int _curHealth;
     public int curHealth
     {
         get { return _curHealth; }
@@ -13,7 +13,7 @@ public class PlayerStats : MonoBehaviour {
     }
 
     public int maxFireHealth = 30;
-    public int _curFireHealth;
+    private int _curFireHealth;
     public int curFireHealth
     {
         get { return _curFireHealth; }

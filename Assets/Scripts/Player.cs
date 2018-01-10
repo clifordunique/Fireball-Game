@@ -21,10 +21,10 @@ public class Player : MonoBehaviour, FallInWaterableObject
     float accelerationTimeDescendingSlope = .5f;
     float accelerationTimeClimbingSlope = .1f;
 
-    public float health;
 
     // Variables to be moved to playerstats
     public float maxHealth;
+    public float health;
     //public float maxFireHealth;
     //public float fireHealth;
     public float moveSpeed = 40;
@@ -103,7 +103,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
         gm = GameMaster.gm;
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-        health = maxHealth;
+        //health = maxHealth;
+        stats.curHealth = stats.maxHealth;
         anim.SetFloat("Fire Health", stats.curFireHealth);
         camShake = GameMaster.gm.GetComponent<CameraShake>();
         if (camShake == null)
@@ -323,22 +324,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 }
                 isDoubleJumping = true;
             }
-            //if (!controller.collisions.below && !isDoubleJumping && Input.GetButtonDown("Jump"))
-            //{
-            //    velocity.y = maxJumpVelocity;
-            //    isDoubleJumping = true;
-            //    StartCoroutine("SprintTimer");
-            //}
-            //if(controller.collisions.below && Input.GetButtonDown("Jump"))
-            //{
-            //    velocity.y = maxJumpVelocity;
-            //    StartCoroutine("SprintTimer");
-            //}
-            //if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-            //{
-            //    velocity.x = velocity.x + Mathf.Sign(directionalInput.x) * 10;
-            //    StartCoroutine("SprintTimer");
-            //}
         }
     }
 
@@ -455,13 +440,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         if (stats.curFireHealth >= 0)
         {
-            //fireHealth -= _damage;
             stats.curFireHealth -= _damage;
             anim.SetFloat("Fire Health", stats.curFireHealth);
-            //if (stats.curFireHealth <= 0)
-            //{
-            //    isFire = false;
-            //}
         }
     }
 
@@ -469,17 +449,16 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         if (stats.curFireHealth < stats.maxFireHealth)
         {
-            //fireHealth += _health;
             stats.curFireHealth += _health;
-            //isFire = true;
             anim.SetFloat("Fire Health", stats.curFireHealth);
         }
     }
 
     public void DamagePlayer(int _damage)
     {
-        health -= _damage;
-        if (health < 0)
+        //health -= _damage;
+        stats.curHealth -= _damage;
+        if (stats.curHealth <= 0)
         {
             Effect();
             GameMaster.KillPlayer(this);
@@ -490,7 +469,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         audioManager.PlaySound("PlayerDie");
         Instantiate(deathPrefab, transform.position, Quaternion.Euler(0, 0, 0));
-        //Destroy(gameObject);
     }
 
     void FallInWaterableObject.SetIsInWater(bool _isInWater)

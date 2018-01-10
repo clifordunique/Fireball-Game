@@ -1507,6 +1507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   maxFireHealth: 30
+  _curFireHealth: 0
 --- !u!1 &210894758
 GameObject:
   m_ObjectHideFlags: 0
@@ -5623,11 +5624,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4954820814285686, guid: 9c25303708b5a4a4898ab685e2fa7443, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 146.4
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 4954820814285686, guid: 9c25303708b5a4a4898ab685e2fa7443, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 40.3
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4954820814285686, guid: 9c25303708b5a4a4898ab685e2fa7443, type: 2}
       propertyPath: m_LocalPosition.z
