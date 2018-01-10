@@ -23,8 +23,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
 
     // Variables to be moved to playerstats
-    public float maxHealth;
-    public float health;
+    //public float maxHealth;
+    //public float health;
     //public float maxFireHealth;
     //public float fireHealth;
     public float moveSpeed = 40;
@@ -33,6 +33,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     GameMaster gm;
     private PlayerStats stats;
+    [SerializeField]
+    private StatusIndicator statusIndicator;
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
@@ -90,22 +92,30 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         stats = PlayerStats.instance;
         stats.curFireHealth = stats.maxFireHealth;
+        stats.curHealth = stats.maxHealth;
         audioManager = AudioManager.instance;
         if (audioManager == null)
         {
             Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
         }
+        if (statusIndicator == null)
+        {
+            Debug.Log("No status indicator referenced on Player");
+        }
+        else
+        {
+            statusIndicator.SetHealth(stats.curHealth, stats.maxHealth);
+            statusIndicator.SetFireHealth(stats.curFireHealth, stats.maxFireHealth);
+        }
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        anim.SetFloat("Fire Health", stats.curFireHealth);
         controller = GetComponent<Controller2D>();
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         gravityOriginal = gravity;
         gm = GameMaster.gm;
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-        //health = maxHealth;
-        stats.curHealth = stats.maxHealth;
-        anim.SetFloat("Fire Health", stats.curFireHealth);
         camShake = GameMaster.gm.GetComponent<CameraShake>();
         if (camShake == null)
         {
@@ -443,6 +453,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             stats.curFireHealth -= _damage;
             anim.SetFloat("Fire Health", stats.curFireHealth);
         }
+        statusIndicator.SetFireHealth(stats.curFireHealth, stats.maxFireHealth);
     }
 
     public void HealFire(int _health)
@@ -452,17 +463,18 @@ public class Player : MonoBehaviour, FallInWaterableObject
             stats.curFireHealth += _health;
             anim.SetFloat("Fire Health", stats.curFireHealth);
         }
+        statusIndicator.SetFireHealth(stats.curFireHealth, stats.maxFireHealth);
     }
 
     public void DamagePlayer(int _damage)
     {
-        //health -= _damage;
         stats.curHealth -= _damage;
         if (stats.curHealth <= 0)
         {
             Effect();
             GameMaster.KillPlayer(this);
         }
+        statusIndicator.SetHealth(stats.curHealth, stats.maxHealth);
     }
 
     void Effect()

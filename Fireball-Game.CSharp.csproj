@@ -111,6 +111,7 @@
     <Compile Include="Assets\Scripts\RhinoAttack.cs" />
     <Compile Include="Assets\Scripts\RhinoController.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
+    <Compile Include="Assets\Scripts\StatusIndicator.cs" />
     <Compile Include="Assets\Scripts\TreeBranch.cs" />
     <Compile Include="Assets\Scripts\Underbrush.cs" />
     <Compile Include="Assets\Scripts\Water.cs" />
