@@ -116,7 +116,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         gm = GameMaster.gm;
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
-        camShake = GameMaster.gm.GetComponent<CameraShake>();
+        camShake = gm.GetComponent<CameraShake>();
         if (camShake == null)
         {
             Debug.LogError("No CameraShake found on the GameMaster.");

@@ -2,30 +2,21 @@
 
 public class CameraShake : MonoBehaviour
 {
+    CameraFollow cam;
 
-    public Camera mainCam;
-    public CameraFollow cam;
-
-    Vector2 originalPos;
     float shakeAmount = 0;
 
     void Awake()
     {
-        if (mainCam == null)
+        if (cam == null)
         {
-            mainCam = Camera.main;
+            cam = Camera.main.GetComponent<CameraFollow>();
         }
-    }
-
-    void Update()
-    {
-        Vector3 camPos = mainCam.transform.position;
     }
 
     public void Shake(float amt, float length)
     {
         shakeAmount = amt;
-        originalPos = mainCam.transform.position;
         InvokeRepeating("DoShake", 0, 0.01f);
         Invoke("StopShake", length);
     }
@@ -34,15 +25,11 @@ public class CameraShake : MonoBehaviour
     {
         if (shakeAmount > 0)
         {
-            Vector3 camPos = mainCam.transform.position;
+            Vector3 camPos = cam.transform.position;
 
             float offsetX = Random.value * shakeAmount * 2 - shakeAmount;
             float offsetY = Random.value * shakeAmount * 2 - shakeAmount;
             cam.UpdateShake(offsetX, offsetY);
-            camPos.x += offsetX;
-            camPos.y += offsetY;
-
-            mainCam.transform.position = camPos;
         }
     }
 
@@ -50,6 +37,5 @@ public class CameraShake : MonoBehaviour
     {
         CancelInvoke("DoShake");
         cam.UpdateShake(0, 0);
-        mainCam.transform.localPosition = originalPos;
     }
 }
