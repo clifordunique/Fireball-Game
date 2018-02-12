@@ -68,8 +68,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1142831243971000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.2, y: -3.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 175.6, y: 51.9, z: 0}
+  m_LocalScale: {x: 0.34605542, y: 0.35318342, z: 0.7367114}
   m_Children:
   - {fileID: 4610838431662128}
   m_Father: {fileID: 0}
@@ -144,13 +144,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 98560
+    m_Bits: 256
   horizontalRayCount: 0
   verticalRayCount: 0
   horizontalRaySpacing: 0
   verticalRaySpacing: 0
   collider: {fileID: 0}
+  shiftKeyDown: 0
   maxSlopeAngle: 70
+  playerVelocity: {x: 0, y: 0}
+  collisionMask2:
+    serializedVersion: 2
+    m_Bits: 524288
   playerInput: {x: 0, y: 0}
 --- !u!114 &114425041110971448
 MonoBehaviour:
@@ -179,24 +184,22 @@ MonoBehaviour:
   underBrushLayerMask:
     serializedVersion: 2
     m_Bits: 16384
-  health: 0
-  maxHealth: 10
-  maxFireHealth: 30
-  fireHealth: 30
-  moveSpeed: 18
-  maxJumpHeight: 6
-  isFire: 1
+  moveSpeed: 8
+  statusIndicator: {fileID: 0}
   wallJumpClimb: {x: 3, y: 20}
   wallJumpOff: {x: 10, y: 10}
   wallLeap: {x: 18, y: 10}
   wallSlideSpeedMax: 3
   wallStickTime: 0.15
+  maxJumpHeight: 2.3
   velocity: {x: 0, y: 0, z: 0}
   isInWater: 0
+  isDoubleJumping: 0
   deathPrefab: {fileID: 1730261801472782, guid: b1555f563add0f64dbdbc00a3a5435f8,
     type: 2}
-  camShakeAmt: 0.2
-  camShakeLength: 0.1
+  canDoubleJump: 1
+  camShakeAmt: 0.3
+  camShakeLength: 0.3
 --- !u!212 &212573370417917614
 SpriteRenderer:
   m_ObjectHideFlags: 1

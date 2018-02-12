@@ -4,6 +4,7 @@ public class CameraShake : MonoBehaviour
 {
 
     public Camera mainCam;
+    public CameraFollow cam;
 
     Vector2 originalPos;
     float shakeAmount = 0;
@@ -37,6 +38,7 @@ public class CameraShake : MonoBehaviour
 
             float offsetX = Random.value * shakeAmount * 2 - shakeAmount;
             float offsetY = Random.value * shakeAmount * 2 - shakeAmount;
+            cam.UpdateShake(offsetX, offsetY);
             camPos.x += offsetX;
             camPos.y += offsetY;
 
@@ -47,6 +49,7 @@ public class CameraShake : MonoBehaviour
     void StopShake()
     {
         CancelInvoke("DoShake");
+        cam.UpdateShake(0, 0);
         mainCam.transform.localPosition = originalPos;
     }
 }

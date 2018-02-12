@@ -28,6 +28,9 @@ public class CameraFollow : MonoBehaviour
     bool lookAheadStoppedX;
     bool lookAheadStoppedY;
 
+    float shakeX = 0;
+    float shakeY = 0;
+
     void Start()
     {
         focusArea = new FocusArea(target.collider.bounds, focusAreaSize);
@@ -61,20 +64,23 @@ public class CameraFollow : MonoBehaviour
                     targetLookAheadX = currentLookAheadX + (lookAheadDirX * lookAheadDstX - currentLookAheadX) / 4f;
                 }
             }
+
+            //if (!(target.playerVelocity.y < -0.1f))
+            //{
+            //    lookAheadStoppedY = false;
+            //    targetLookAheadY = lookAheadDstY;
+            //}
         }
 
         if (focusArea.velocity.y != 0)
         {
             // If the focus area is moving, set it sign appropriately
             lookAheadDirY = Mathf.Sign(focusArea.velocity.y);
-            if (Mathf.Sign(target.playerVelocity.y) == Mathf.Sign(focusArea.velocity.y) 
+            if (Mathf.Sign(target.playerVelocity.y) == Mathf.Sign(focusArea.velocity.y)
                 && (target.playerVelocity.y > .01f || (target.playerVelocity.y < -.01f && target.collisions.descendingSlope)))
             {
-                //if (((focusArea.velocity.y < 0 && target.collisions.descendingSlope) || focusArea.velocity.y > 0))
-                //{
-                    lookAheadStoppedY = false;
-                    targetLookAheadY = lookAheadDirY * lookAheadDstY;
-                //}
+                lookAheadStoppedY = false;
+                targetLookAheadY = lookAheadDirY * lookAheadDstY;
             }
             else
             {
@@ -87,15 +93,22 @@ public class CameraFollow : MonoBehaviour
         }
 
         // Horizontal smoothing
-        currentLookAheadX = Mathf.SmoothDamp(currentLookAheadX, targetLookAheadX, ref smoothLookVelocityX, lookSmoothTimeX);
+        currentLookAheadX = Mathf.SmoothDamp(currentLookAheadX, targetLookAheadX, ref smoothLookVelocityX, lookSmoothTimeX) + shakeX;
 
         //Vertical smoothing
-        currentLookAheadY = Mathf.SmoothDamp(currentLookAheadY, targetLookAheadY, ref smoothLookVelocityY, verticalSmoothTime);
+        currentLookAheadY = Mathf.SmoothDamp(currentLookAheadY, targetLookAheadY, ref smoothLookVelocityY, verticalSmoothTime) + shakeY;
         //focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
+        //Debug.Log("target: " + targetLookAheadY + " current: " + currentLookAheadY + " focus: " + focusPosition);
 
         focusPosition += Vector2.right * currentLookAheadX;
         focusPosition += Vector2.up * currentLookAheadY;
         transform.position = (Vector3)focusPosition + Vector3.forward * -10;
+    }
+
+    public void UpdateShake(float _shakeX, float _shakeY)
+    {
+        shakeX = _shakeX;
+        shakeY = _shakeY;
     }
 
     void OnDrawGizmos()

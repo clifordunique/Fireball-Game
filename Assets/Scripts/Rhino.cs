@@ -8,6 +8,7 @@ public class Rhino : Enemy {
     public LayerMask layerMask;
     public Transform head;
     public Transform eye;
+    public float dstToPlayer = 10f;
     public float easeAmount;
     public float rotateUpTarget = -10f;
     public float rotateDownTarget = 10;
@@ -73,8 +74,8 @@ public class Rhino : Enemy {
         if(player != null)
         {
             Vector2 directionToPlayer = player.transform.position - eye.position;
-            RaycastHit2D hit = Physics2D.Raycast(eye.position, directionToPlayer, 25, layerMask);
-            Debug.DrawRay(eye.position, directionToPlayer * 25, Color.red);
+            RaycastHit2D hit = Physics2D.Raycast(eye.position, directionToPlayer, dstToPlayer, layerMask);
+            Debug.DrawRay(eye.position, directionToPlayer * dstToPlayer, Color.red);
             if (hit && hit.transform.gameObject.tag == "Player" && hit.transform.gameObject.GetComponent<SpriteRenderer>().sortingLayerName == "Player")
             {
                 if (seePlayerEvent != null)
