@@ -55,6 +55,10 @@ public class CameraFollow : MonoBehaviour
             {
                 lookAheadStoppedX = false;
                 targetLookAheadX = lookAheadDirX * lookAheadDstX;
+                //if (target.playerVelocity.y > -0.01f)
+                //{
+                //    targetLookAheadY = currentLookAheadY + (lookAheadDstY - currentLookAheadY) / 4f;
+                //}
             }
             else
             {
@@ -62,6 +66,9 @@ public class CameraFollow : MonoBehaviour
                 {
                     lookAheadStoppedX = true;
                     targetLookAheadX = currentLookAheadX + (lookAheadDirX * lookAheadDstX - currentLookAheadX) / 4f;
+
+                    // NOT FULLY FUNCTIONAL CODE:
+                    //targetLookAheadY = currentLookAheadY + (lookAheadDirY * lookAheadDstY - currentLookAheadY) / 4f;
                 }
             }
 
