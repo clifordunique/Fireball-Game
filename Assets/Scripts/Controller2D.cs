@@ -13,8 +13,6 @@ public class Controller2D : RaycastController
     Stopwatch sw;
     public Vector2 playerVelocity;
 
-    public LayerMask collisionMask2;
-
     public delegate void OnHitBranch();
     public event OnHitBranch hitBranchEvent;
 
@@ -22,7 +20,7 @@ public class Controller2D : RaycastController
     public event NotGrounded notGroundedEvent;
 
     // Weird stuff
-    TreeBranch treeBranch;
+    TreeBranch treeBranch; // try to get rid of this...
     Player player;
     AudioManager audioManager;
 
@@ -91,6 +89,7 @@ public class Controller2D : RaycastController
         HorizontalCollisions(ref moveAmount);
 
         //Do the downward raycasts if close enough to the tree
+        // This is weird crap
         if (treeBranch != null)
         {
             float dstToTreeBranch = Mathf.Abs(transform.position.x - treeBranch.transform.position.x);

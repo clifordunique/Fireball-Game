@@ -4,20 +4,15 @@ using UnityEngine;
 
 /* This script allows game objects to follow the camera from a certain offset
  */
-public class FollowCamera : MonoBehaviour {
+public class FollowCamera : MonoBehaviour
+{
 
     public int offsetX = 1;
     public int offsetY = 10;
-    public Transform[] targets;
+    public Transform target;
 
-	void Start () {
-		
-	}
-	
-	void Update () {
-		for (int i = 0; i < targets.Length; i++)
-        {
-            targets[i].transform.position = new Vector2(transform.position.x + offsetX, transform.position.y + offsetY);
-        }
-	}
+    void Update()
+    {
+        transform.position = new Vector2(target.transform.position.x + offsetX, target.transform.position.y + offsetY);
+    }
 }

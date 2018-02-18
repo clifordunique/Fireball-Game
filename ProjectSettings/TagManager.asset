@@ -15,6 +15,8 @@ TagManager:
   - Grass
   - Obstacle
   - Jump Ignore
+  - PlayerWeapon
+  - Snow
   layers:
   - Default
   - TransparentFX
@@ -31,11 +33,11 @@ TagManager:
   - Foreground
   - Branch
   - UnderBrush
-  - Rhino Back
-  - Rock
+  - 
+  - 
   - Enemy
   - Fire Hittable
-  - Test
+  - 
   - 
   - 
   - 

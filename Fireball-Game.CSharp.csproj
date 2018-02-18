@@ -114,6 +114,7 @@
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\StatusIndicator.cs" />
     <Compile Include="Assets\Scripts\TreeBranch.cs" />
+    <Compile Include="Assets\Scripts\TriggerSensor.cs" />
     <Compile Include="Assets\Scripts\Underbrush.cs" />
     <Compile Include="Assets\Scripts\Water.cs" />
     <Compile Include="Assets\Scripts\WaterDropletEnemy.cs" />
