@@ -57,7 +57,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     PlatformType platformType;
 
     CameraShake camShake;
-    SpriteRenderer sr;
+    SpriteRenderer[] srs;
     CollisionInfo colInfo;
     Controller2D controller;
     Animator anim;
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             statusIndicator.SetHealth(stats.curHealth, stats.maxHealth);
             statusIndicator.SetFireHealth(stats.curFireHealth, stats.maxFireHealth);
         }
-        sr = GetComponent<SpriteRenderer>();
+        srs = GetComponentsInChildren<SpriteRenderer>();
         anim = GetComponent<Animator>();
         anim.SetFloat("Fire Health", stats.curFireHealth);
         controller = GetComponent<Controller2D>();
@@ -175,6 +175,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void DetectUnderBrush()
     {
+        var srs = GetComponentsInChildren<SpriteRenderer>();
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, 1f, underBrushLayerMask);
         if (hit)
         {
@@ -184,14 +185,20 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 // This if is so that if the player goes out of the underbrush but quickly goes back in he won't suddenly be in the Player layer
                 if (wantsToBeInUnderBrush)
                 {
-                    sr.sortingLayerName = "Behind Underbrush";
+                    for(int i = 0; i < srs.Length; i++)
+                    {
+                        srs[i].sortingLayerName = "Behind Underbrush";
+                    }
                 }
             }
         }
         else
         {
             isNearUnderbrush = false;
-            sr.sortingLayerName = "Player";
+            for (int i = 0; i < srs.Length; i++)
+            {
+                srs[i].sortingLayerName = "Player";
+            }
         }
     }
 
@@ -202,19 +209,24 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (isNearUnderbrush)
         {
             audioManager.PlaySound("underbrush");
-            if (sr.sortingLayerName == "Player")
+            if (srs[0].sortingLayerName == "Player")
             {
-                sr.sortingLayerName = "Behind Underbrush";
+                for (int i = 0; i < srs.Length; i++)
+                {
+                    srs[i].sortingLayerName = "Behind Underbrush";
+                }
                 wantsToBeInUnderBrush = true;
                 if (onUnderbrushEvent != null)
                 {
                     onUnderbrushEvent();
                 }
-
             }
             else
             {
-                sr.sortingLayerName = "Player";
+                for (int i = 0; i < srs.Length; i++)
+                {
+                    srs[i].sortingLayerName = "Player";
+                }
                 wantsToBeInUnderBrush = false;
                 if (onUnderbrushEvent != null)
                 {
@@ -226,7 +238,9 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void DealWithFire()
     {
-        anim.SetFloat("Fire Health", stats.curFireHealth);
+        //anim.SetFloat("Fire Health", stats.curFireHealth);
+        anim.SetFloat("Speed", Mathf.Abs(velocity.x));
+       
         if (stats.curFireHealth<= 0)
         {
             if (onFireChangeEvent != null)
@@ -451,7 +465,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (stats.curFireHealth >= 0)
         {
             stats.curFireHealth -= _damage;
-            anim.SetFloat("Fire Health", stats.curFireHealth);
+            //anim.SetFloat("Fire Health", stats.curFireHealth);
         }
         statusIndicator.SetFireHealth(stats.curFireHealth, stats.maxFireHealth);
     }
@@ -461,7 +475,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (stats.curFireHealth < stats.maxFireHealth)
         {
             stats.curFireHealth += _health;
-            anim.SetFloat("Fire Health", stats.curFireHealth);
+            //anim.SetFloat("Fire Health", stats.curFireHealth);
         }
         statusIndicator.SetFireHealth(stats.curFireHealth, stats.maxFireHealth);
     }
