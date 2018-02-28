@@ -185,7 +185,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 // This if is so that if the player goes out of the underbrush but quickly goes back in he won't suddenly be in the Player layer
                 if (wantsToBeInUnderBrush)
                 {
-                    for(int i = 0; i < srs.Length; i++)
+                    for (int i = 0; i < srs.Length; i++)
                     {
                         srs[i].sortingLayerName = "Behind Underbrush";
                     }
@@ -240,8 +240,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         //anim.SetFloat("Fire Health", stats.curFireHealth);
         anim.SetFloat("Speed", Mathf.Abs(velocity.x));
-       
-        if (stats.curFireHealth<= 0)
+
+        if (stats.curFireHealth <= 0)
         {
             if (onFireChangeEvent != null)
             {
@@ -263,6 +263,17 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public void SetDirectionalInput(Vector2 input)
     {
         directionalInput = input;
+        if (directionalInput.x != 0)
+        {
+            if (directionalInput.x > 0)
+            {
+                transform.localScale = new Vector2(1, transform.localScale.y);
+            }
+            else
+            {
+                transform.localScale = new Vector2(-1, transform.localScale.y);
+            }
+        }
     }
 
     public void OnJumpInputDown()
