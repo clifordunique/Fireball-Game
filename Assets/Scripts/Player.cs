@@ -240,6 +240,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         //anim.SetFloat("Fire Health", stats.curFireHealth);
         anim.SetFloat("Speed", Mathf.Abs(velocity.x));
+        anim.SetBool("Grounded", controller.collisions.below);
 
         if (stats.curFireHealth <= 0)
         {
