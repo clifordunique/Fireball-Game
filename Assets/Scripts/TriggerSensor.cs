@@ -10,7 +10,6 @@ public class TriggerSensor : MonoBehaviour {
     {
         if(col.GetComponent<Player>() != null)
         {
-            Debug.Log("It has happened");
             objectToBeEnabled.gameObject.SetActive(true);
         }
     }
