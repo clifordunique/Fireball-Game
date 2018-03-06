@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
-
     public static GameMaster gm;
 
     public GameObject endLevelUI;
-
+    
     AudioManager audioManager;
+    public enum ambience { FOREST, DARKFOREST, SNOW };  // To be used in determining background ambience
     public string[] forestBackgroundArray;
     string[] woodCrackClips;
     string[] grassPlatformAudioClips;
@@ -121,26 +121,15 @@ public class GameMaster : MonoBehaviour
         switch (action)
         {
             case 1:
-                LevelEnd();
+                Utilities.instance.LoadNextLevel();
                 break;
             case 2:
-                RestartLevel();
+                Utilities.instance.RestartLevel();                
                 break;
             default:
                 Debug.LogError("Not a valid case for FadeOut Function");
                 break;
         }
-    }
-
-    void RestartLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    void LevelEnd()
-    {
-        //loader.SavePlayerStats()
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     /*
     IEnumerator waitToLoad(float seconds)
