@@ -282,19 +282,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Attack.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\BigBranch.cs" />
     <Compile Include="Assets\Scripts\BigRaycastController.cs" />
-    <Compile Include="Assets\Scripts\CameraFollow.cs" />
-    <Compile Include="Assets\Scripts\CameraShake.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\CampFire.cs" />
-    <Compile Include="Assets\Scripts\Controller2D.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\FallInWaterableObject.cs" />
     <Compile Include="Assets\Scripts\FloatOnWater.cs" />
     <Compile Include="Assets\Scripts\FollowCamera.cs" />
-    <Compile Include="Assets\Scripts\GameMaster.cs" />
+    <Compile Include="Assets\Scripts\GameMaster\CameraShake.cs" />
+    <Compile Include="Assets\Scripts\GameMaster\GameMaster.cs" />
+    <Compile Include="Assets\Scripts\GameMaster\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\GameMaster\Utilities.cs" />
     <Compile Include="Assets\Scripts\GroundChildrenFade.cs" />
     <Compile Include="Assets\Scripts\GroundFade.cs" />
     <Compile Include="Assets\Scripts\ISmashable.cs" />
@@ -303,13 +303,14 @@
     <Compile Include="Assets\Scripts\Parallaxing.cs" />
     <Compile Include="Assets\Scripts\Plant.cs" />
     <Compile Include="Assets\Scripts\PlatformController.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\Attack.cs" />
+    <Compile Include="Assets\Scripts\Player\Controller2D.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerWeapon.cs" />
+    <Compile Include="Assets\Scripts\Player\Projectile.cs" />
     <Compile Include="Assets\Scripts\PlayerDestroy.cs" />
-    <Compile Include="Assets\Scripts\PlayerInput.cs" />
-    <Compile Include="Assets\Scripts\PlayerStats.cs" />
-    <Compile Include="Assets\Scripts\PlayerWeapon.cs" />
     <Compile Include="Assets\Scripts\PondBasin.cs" />
-    <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Scripts\RaycastController.cs" />
     <Compile Include="Assets\Scripts\RechargeFire.cs" />
     <Compile Include="Assets\Scripts\Rhino.cs" />
@@ -318,10 +319,11 @@
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\StatusIndicator.cs" />
     <Compile Include="Assets\Scripts\TreeBranch.cs" />
-    <Compile Include="Assets\Scripts\TriggerSensor.cs" />
+    <Compile Include="Assets\Scripts\TriggerSensor\TriggerSensor.cs" />
+    <Compile Include="Assets\Scripts\TriggerSensor\TSEnableObject.cs" />
+    <Compile Include="Assets\Scripts\TriggerSensor\TSModifyCamera.cs" />
     <Compile Include="Assets\Scripts\UI\PauseButton.cs" />
     <Compile Include="Assets\Scripts\Underbrush.cs" />
-    <Compile Include="Assets\Scripts\Utilities.cs" />
     <Compile Include="Assets\Scripts\Water.cs" />
     <Compile Include="Assets\Scripts\WaterDropletEnemy.cs" />
     <Compile Include="Assets\Scripts\WaterSplat.cs" />
