@@ -8,9 +8,13 @@ public class PauseButton : MonoBehaviour {
 
     public GameObject pauseMenuUI;
 
+    Animator anim;
+    Attack playerAttack;
+
 	// Use this for initialization
 	void Start () {
-		
+        playerAttack = FindObjectOfType<Attack>();
+        anim = pauseMenuUI.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -23,6 +27,8 @@ public class PauseButton : MonoBehaviour {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+        playerAttack.enabled = false;
+        anim.Play("PauseMenuDown");
     }
 
     public void Restart()
@@ -40,5 +46,6 @@ public class PauseButton : MonoBehaviour {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        playerAttack.enabled = true;
     }
 }

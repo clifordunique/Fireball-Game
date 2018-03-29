@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using System.Diagnostics;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Player))]
 public class Attack : MonoBehaviour
@@ -40,7 +41,10 @@ public class Attack : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     sw.Reset();
-                    Shoot();
+                    if (!EventSystem.current.IsPointerOverGameObject())
+                    {
+                        Shoot();
+                    }
                 }
             }
         }
