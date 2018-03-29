@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fireball-Game.CSharp", "Fireball-Game.CSharp.csproj", "{B1253BC4-5C35-EE78-E564-B9B2CDCC861F}"
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fireball-Game", "Fireball-Game.csproj", "{655E34E3-E4CF-DEDE-40F6-AE48F7683F1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B1253BC4-5C35-EE78-E564-B9B2CDCC861F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1253BC4-5C35-EE78-E564-B9B2CDCC861F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1253BC4-5C35-EE78-E564-B9B2CDCC861F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1253BC4-5C35-EE78-E564-B9B2CDCC861F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{655E34E3-E4CF-DEDE-40F6-AE48F7683F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{655E34E3-E4CF-DEDE-40F6-AE48F7683F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{655E34E3-E4CF-DEDE-40F6-AE48F7683F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{655E34E3-E4CF-DEDE-40F6-AE48F7683F1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
