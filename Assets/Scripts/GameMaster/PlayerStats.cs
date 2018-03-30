@@ -13,7 +13,7 @@ public class PlayerStats : MonoBehaviour {
     }
 
     public int maxFireHealth = 30;
-    private int _curFireHealth;
+    public int _curFireHealth;
     public int curFireHealth
     {
         get { return _curFireHealth; }

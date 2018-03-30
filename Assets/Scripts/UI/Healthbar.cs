@@ -3,22 +3,27 @@ using UnityEngine;
 
 public class Healthbar : MonoBehaviour
 {
-
     public GameObject coverItem;
-    public Transform pos;
-    public int healthAmount;
+    public Transform posHealth;
+    public Transform posFireHealth;
+    public int healthAmount = 0;
+    public int fireHealthAmount = 0;
 
     int offset = 3;
     int maxCovers = 35;
-    Vector2 position;
-    Stack<GameObject> coverStack;
+    Vector2 positionH;
+    Vector2 positionF;
+    Stack<GameObject> healthStack;
+    Stack<GameObject> fireHealthStack;
     PlayerStats stats;
 
     void Start()
     {
         // initialization
-        position = pos.position;
-        coverStack = new Stack<GameObject>();
+        positionH = posHealth.position;
+        positionF = posFireHealth.position;
+        healthStack = new Stack<GameObject>();
+        fireHealthStack = new Stack<GameObject>();
         stats = PlayerStats.instance;
     }
 
@@ -26,6 +31,7 @@ public class Healthbar : MonoBehaviour
     void Update()
     {
         healthAmount = maxCovers * (stats.maxHealth - stats.curHealth) / stats.maxHealth;
+        fireHealthAmount = maxCovers * (stats.maxFireHealth - stats.curFireHealth) / stats.maxFireHealth;
         UpdateHealthBar();
     }
 
@@ -36,33 +42,32 @@ public class Healthbar : MonoBehaviour
     void UpdateHealthBar()
     {
         // Player is losing health
-        if (coverStack.Count < healthAmount)
+        if (healthStack.Count < healthAmount && healthStack.Count < maxCovers)
         {
-            GameObject temp = Instantiate(coverItem, position, coverItem.transform.rotation, this.transform);
-            coverStack.Push(temp);
-            position = new Vector2(position.x - offset, position.y);            // offset is the distance from the old sprite to where the new sprite will be instantiated
+            GameObject temp = Instantiate(coverItem, positionH, coverItem.transform.rotation, posHealth);
+            healthStack.Push(temp);
+            positionH = new Vector2(positionH.x - offset, positionH.y);            // offset is the distance from the old sprite to where the new sprite will be instantiated
         }
         // Player is gaining health
-        if (coverStack.Count > healthAmount)
+        if (healthStack.Count > healthAmount && healthStack.Count > 0)
         {
-            GameObject temp = coverStack.Pop();
+            GameObject temp = healthStack.Pop();
             Destroy(temp);
-            position = new Vector2(position.x + offset, position.y);
+            positionH = new Vector2(positionH.x + offset, positionH.y);
         }
-    }
-
-    public void SetHealth(int health)
-    {
-
-    }
-
-    public void SetFireHealth(int health)
-    {
-
-    }
-
-    public void SetMax(int maxHealth, int maxFireHealth)
-    {
-
+        // Player is losing fire health
+        if (fireHealthStack.Count < fireHealthAmount && fireHealthStack.Count < maxCovers)
+        {
+            GameObject temp = Instantiate(coverItem, positionF, coverItem.transform.rotation, posFireHealth);
+            fireHealthStack.Push(temp);
+            positionF = new Vector2(positionF.x - offset, positionF.y);            // offset is the distance from the old sprite to where the new sprite will be instantiated
+        }
+        // Player is gaining fire health
+        if (fireHealthStack.Count > fireHealthAmount && fireHealthStack.Count > 0)
+        {
+                GameObject temp = fireHealthStack.Pop();
+                Destroy(temp);
+                positionF = new Vector2(positionF.x + offset, positionF.y);
+        }
     }
 }

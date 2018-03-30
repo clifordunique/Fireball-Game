@@ -98,16 +98,16 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
         }
-        if (statusIndicator == null)
-        {
-            Debug.Log("No status indicator referenced on Player");
-        }
-        else
-        {
-            statusIndicator.SetMax(stats.maxHealth, stats.maxFireHealth);
-            statusIndicator.SetHealth(stats.curHealth);
-            statusIndicator.SetFireHealth(stats.curFireHealth);
-        }
+        //if (statusIndicator == null)
+        //{
+        //    Debug.Log("No status indicator referenced on Player");
+        //}
+        //else
+        //{
+        //    statusIndicator.SetMax(stats.maxHealth, stats.maxFireHealth);
+        //    statusIndicator.SetHealth(stats.curHealth);
+        //    statusIndicator.SetFireHealth(stats.curFireHealth);
+        //}
         srs = GetComponentsInChildren<SpriteRenderer>();
         anim = GetComponent<Animator>();
         anim.SetFloat("Fire Health", stats.curFireHealth);
@@ -480,7 +480,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             stats.curFireHealth -= _damage;
             //anim.SetFloat("Fire Health", stats.curFireHealth);
         }
-        statusIndicator.SetFireHealth(stats.curFireHealth);
+        //statusIndicator.SetFireHealth(stats.curFireHealth);
     }
 
     public void HealFire(int _health)
@@ -490,7 +490,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             stats.curFireHealth += _health;
             //anim.SetFloat("Fire Health", stats.curFireHealth);
         }
-        statusIndicator.SetFireHealth(stats.curFireHealth);
+        //statusIndicator.SetFireHealth(stats.curFireHealth);
     }
 
     public void DamagePlayer(int _damage)
@@ -501,7 +501,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             Effect();
             GameMaster.KillPlayer(this);
         }
-        statusIndicator.SetHealth(stats.curHealth);
+        //statusIndicator.SetHealth(stats.curHealth);
     }
 
     void Effect()
