@@ -34,7 +34,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     GameMaster gm;
     private PlayerStats stats;
     [SerializeField]
-    private StatusIndicator statusIndicator;
+    private Healthbar statusIndicator;
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
@@ -104,8 +104,9 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
         else
         {
-            statusIndicator.SetHealth(stats.curHealth, stats.maxHealth);
-            statusIndicator.SetFireHealth(stats.curFireHealth, stats.maxFireHealth);
+            statusIndicator.SetMax(stats.maxHealth, stats.maxFireHealth);
+            statusIndicator.SetHealth(stats.curHealth);
+            statusIndicator.SetFireHealth(stats.curFireHealth);
         }
         srs = GetComponentsInChildren<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -479,7 +480,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             stats.curFireHealth -= _damage;
             //anim.SetFloat("Fire Health", stats.curFireHealth);
         }
-        statusIndicator.SetFireHealth(stats.curFireHealth, stats.maxFireHealth);
+        statusIndicator.SetFireHealth(stats.curFireHealth);
     }
 
     public void HealFire(int _health)
@@ -489,7 +490,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             stats.curFireHealth += _health;
             //anim.SetFloat("Fire Health", stats.curFireHealth);
         }
-        statusIndicator.SetFireHealth(stats.curFireHealth, stats.maxFireHealth);
+        statusIndicator.SetFireHealth(stats.curFireHealth);
     }
 
     public void DamagePlayer(int _damage)
@@ -500,7 +501,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             Effect();
             GameMaster.KillPlayer(this);
         }
-        statusIndicator.SetHealth(stats.curHealth, stats.maxHealth);
+        statusIndicator.SetHealth(stats.curHealth);
     }
 
     void Effect()

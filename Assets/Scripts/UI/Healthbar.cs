@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Healthbar : MonoBehaviour
@@ -7,23 +6,26 @@ public class Healthbar : MonoBehaviour
 
     public GameObject coverItem;
     public Transform pos;
-    public int percent=0;
-    public int offset;
+    public int healthAmount;
 
-    int count=0;
+    int offset = 3;
+    int maxCovers = 35;
     Vector2 position;
     Stack<GameObject> coverStack;
+    PlayerStats stats;
 
     void Start()
     {
         // initialization
         position = pos.position;
         coverStack = new Stack<GameObject>();
+        stats = PlayerStats.instance;
     }
 
 
     void Update()
     {
+        healthAmount = maxCovers * (stats.maxHealth - stats.curHealth) / stats.maxHealth;
         UpdateHealthBar();
     }
 
@@ -34,20 +36,33 @@ public class Healthbar : MonoBehaviour
     void UpdateHealthBar()
     {
         // Player is losing health
-        if (count < percent)
+        if (coverStack.Count < healthAmount)
         {
             GameObject temp = Instantiate(coverItem, position, coverItem.transform.rotation, this.transform);
             coverStack.Push(temp);
-            count++;
-            position = new Vector2(position.x - offset, position.y);            // offset is the distance from the olde sprite to where the new sprite will be instantiated
+            position = new Vector2(position.x - offset, position.y);            // offset is the distance from the old sprite to where the new sprite will be instantiated
         }
         // Player is gaining health
-        if (count > percent)
+        if (coverStack.Count > healthAmount)
         {
             GameObject temp = coverStack.Pop();
             Destroy(temp);
-            count--;
             position = new Vector2(position.x + offset, position.y);
         }
+    }
+
+    public void SetHealth(int health)
+    {
+
+    }
+
+    public void SetFireHealth(int health)
+    {
+
+    }
+
+    public void SetMax(int maxHealth, int maxFireHealth)
+    {
+
     }
 }
