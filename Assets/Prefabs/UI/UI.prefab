@@ -198,7 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224752112109133812}
   - component: {fileID: 222553050306106740}
-  - component: {fileID: 114119145514725964}
+  - component: {fileID: 114871982287197376}
   m_Layer: 8
   m_Name: Health Panel
   m_TagString: Untagged
@@ -374,7 +374,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224096168085803562}
-  - component: {fileID: 114286988732066520}
   m_Layer: 8
   m_Name: FireHealth
   m_TagString: Untagged
@@ -425,7 +424,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224760086464488690}
-  - component: {fileID: 114783725028714896}
   m_Layer: 8
   m_Name: Health
   m_TagString: Untagged
@@ -536,19 +534,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114119145514725964
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1402230511006922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e331dd3e0b954348ab261820dfae47b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBarRect: {fileID: 0}
-  fireHealthBarRect: {fileID: 0}
 --- !u!114 &114128469047860240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -615,21 +600,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114286988732066520
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1833427883334130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 129731fb09c66904c9c5a753b6ca305f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coverItem: {fileID: 1311231741223298, guid: 11d47970952e3fe41841803107b566a0, type: 2}
-  pos: {fileID: 224312887116321566}
-  percent: 0
-  offset: 5
 --- !u!114 &114323831413624694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1026,21 +996,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114783725028714896
+--- !u!114 &114871982287197376
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1995430523003470}
+  m_GameObject: {fileID: 1402230511006922}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 129731fb09c66904c9c5a753b6ca305f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coverItem: {fileID: 1311231741223298, guid: 11d47970952e3fe41841803107b566a0, type: 2}
-  pos: {fileID: 224795838132416268}
-  percent: 0
-  offset: 5
+  coverItem: {fileID: 1120025291707268, guid: 4335aab4a7364de4d90e6e53adf66240, type: 2}
+  posHealth: {fileID: 224795838132416268}
+  posFireHealth: {fileID: 224312887116321566}
+  healthAmount: 0
+  fireHealthAmount: 0
 --- !u!114 &114879547790539174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1716,7 +1687,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 52, y: 11.65}
+  m_AnchoredPosition: {x: 52.25, y: 11.65}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224865705488153386
