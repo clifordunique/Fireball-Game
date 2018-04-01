@@ -10,6 +10,8 @@ public class Healthbar : MonoBehaviour
     public int fireHealthAmount = 0;
 
     int offset = 3;
+    int offsetH = 0;
+    int offsetF = 0;
     int maxCovers = 35;
     Vector2 positionH;
     Vector2 positionF;
@@ -44,30 +46,30 @@ public class Healthbar : MonoBehaviour
         // Player is losing health
         if (healthStack.Count < healthAmount && healthStack.Count < maxCovers)
         {
-            GameObject temp = Instantiate(coverItem, positionH, coverItem.transform.rotation, posHealth);
+            GameObject temp = Instantiate(coverItem, new Vector2(posHealth.position.x - offsetH, posHealth.position.y), coverItem.transform.rotation, posHealth);
             healthStack.Push(temp);
-            positionH = new Vector2(positionH.x - offset, positionH.y);            // offset is the distance from the old sprite to where the new sprite will be instantiated
+            offsetH += offset;
         }
         // Player is gaining health
         if (healthStack.Count > healthAmount && healthStack.Count > 0)
         {
             GameObject temp = healthStack.Pop();
             Destroy(temp);
-            positionH = new Vector2(positionH.x + offset, positionH.y);
+            offsetH -= offset;
         }
         // Player is losing fire health
         if (fireHealthStack.Count < fireHealthAmount && fireHealthStack.Count < maxCovers)
         {
-            GameObject temp = Instantiate(coverItem, positionF, coverItem.transform.rotation, posFireHealth);
+            GameObject temp = Instantiate(coverItem, new Vector2(posFireHealth.position.x - offsetF, posFireHealth.position.y), coverItem.transform.rotation, posFireHealth);
             fireHealthStack.Push(temp);
-            positionF = new Vector2(positionF.x - offset, positionF.y);            // offset is the distance from the old sprite to where the new sprite will be instantiated
+            offsetF += offset;
         }
         // Player is gaining fire health
         if (fireHealthStack.Count > fireHealthAmount && fireHealthStack.Count > 0)
         {
-                GameObject temp = fireHealthStack.Pop();
-                Destroy(temp);
-                positionF = new Vector2(positionF.x + offset, positionF.y);
+            GameObject temp = fireHealthStack.Pop();
+            Destroy(temp);
+            offsetF -= offset;
         }
     }
 }
