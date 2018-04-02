@@ -2,33 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseButton : MonoBehaviour {
+public class PauseButton : MonoBehaviour
+{
 
     public static bool GameIsPaused;
 
     public GameObject pauseMenuUI;
 
-    Animator anim;
+    bool isPaused = false;
     Attack playerAttack;
 
-	// Use this for initialization
-	void Start () {
-        playerAttack = FindObjectOfType<Attack>();
-        anim = pauseMenuUI.GetComponent<Animator>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    public void PauseGame()
+    // Use this for initialization
+    void Start()
     {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-        playerAttack.enabled = false;
-        anim.Play("PauseMenuDown");
+        playerAttack = FindObjectOfType<Attack>();
+    }
+
+    public void TogglePauseGame()
+    {
+        if (!GameIsPaused)
+        {
+            pauseMenuUI.SetActive(true);
+            Time.timeScale = 0f;
+            GameIsPaused = true;
+            playerAttack.enabled = false;
+        }
+        else
+        {
+            pauseMenuUI.SetActive(false);
+            Time.timeScale = 1f;
+            GameIsPaused = false;
+            playerAttack.enabled = true;
+        }
     }
 
     public void Restart()
@@ -39,13 +44,5 @@ public class PauseButton : MonoBehaviour {
     public void Exit()
     {
         Utilities.instance.Exit();
-    }
-
-    public void Resume()
-    {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
-        playerAttack.enabled = true;
     }
 }
