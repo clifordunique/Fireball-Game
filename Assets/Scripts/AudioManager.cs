@@ -76,6 +76,7 @@ public class AudioManager : MonoBehaviour {
 
     [SerializeField]
     Sound[] sounds;
+    private float volumePercent = 1;
 
     void Awake()
     {
@@ -112,7 +113,7 @@ public class AudioManager : MonoBehaviour {
         {
             if (sounds[i].name == _name)
             {
-                sounds[i].Play();
+                sounds[i].Play(volumePercent);
                 return;
             }
         }

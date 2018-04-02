@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RhinoController : BigRaycastController
+public class RhinoController : RaycastController
 {
 
     // Variables for ascending and descending slope properly

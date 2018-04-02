@@ -237,7 +237,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\BigBranch.cs" />
-    <Compile Include="Assets\Scripts\BigRaycastController.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\CampFire.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />

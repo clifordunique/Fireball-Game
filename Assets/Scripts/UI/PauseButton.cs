@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PauseButton : MonoBehaviour
 {
@@ -13,9 +11,14 @@ public class PauseButton : MonoBehaviour
     Attack playerAttack;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         playerAttack = FindObjectOfType<Attack>();
+
+        if (playerAttack == null)
+        {
+            Debug.Log("No playerAttack found");
+        }
     }
 
     public void TogglePauseGame()
@@ -25,14 +28,16 @@ public class PauseButton : MonoBehaviour
             pauseMenuUI.SetActive(true);
             Time.timeScale = 0f;
             GameIsPaused = true;
-            playerAttack.enabled = false;
+            if (playerAttack != null)
+                playerAttack.enabled = false;
         }
         else
         {
             pauseMenuUI.SetActive(false);
             Time.timeScale = 1f;
             GameIsPaused = false;
-            playerAttack.enabled = true;
+            if (playerAttack != null)
+                playerAttack.enabled = true;
         }
     }
 
@@ -44,5 +49,10 @@ public class PauseButton : MonoBehaviour
     public void Exit()
     {
         Utilities.instance.Exit();
+    }
+
+    public void SetMasterVolume(float value)
+    {
+        AudioListener.volume = value;
     }
 }

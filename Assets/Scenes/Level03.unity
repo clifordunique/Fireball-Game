@@ -4244,10 +4244,21 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 415281521}
+        m_MethodName: SetMasterVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &464622993
@@ -7335,12 +7346,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114020923968706332, guid: 8b037a005d84f55419dd03ac8d4a9324,
+    - target: {fileID: 114251884523776634, guid: 8b037a005d84f55419dd03ac8d4a9324,
         type: 2}
       propertyPath: cam
       value: 
       objectReference: {fileID: 250900570}
-    - target: {fileID: 114251884523776634, guid: 8b037a005d84f55419dd03ac8d4a9324,
+    - target: {fileID: 114020923968706332, guid: 8b037a005d84f55419dd03ac8d4a9324,
         type: 2}
       propertyPath: cam
       value: 
