@@ -147,6 +147,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             OnShiftInput();
         }
+        Debug.Log("Velocity in player: " + velocity);
         controller.Move(velocity * Time.deltaTime, directionalInput, isDoubleJumping);
 
         if (isInWater)
@@ -241,6 +242,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         //anim.SetFloat("Fire Health", stats.curFireHealth);
         anim.SetFloat("Speed", Mathf.Abs(velocity.x));
+        Debug.Log("velocity: " + velocity);
         anim.SetBool("Grounded", controller.collisions.below);
 
         if (stats.curFireHealth <= 0)
@@ -434,9 +436,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
      */
     void CalculateVelocity()
     {
+        Debug.Log("Velocity in calculate: " + velocity);
         float slopeAngleClimbSmoothTime = .05f + 1 / Mathf.Abs(controller.collisions.slopeAngle);
         float slopeAngleDescendSmoothTime = 0.15f + Mathf.Abs(controller.collisions.slopeAngle) * .001f;
-        float targetVelocityX = directionalInput.x * moveSpeed; // For Rhino script, modify this
+        float targetVelocityX = directionalInput.x * moveSpeed;
+        Debug.Log(targetVelocityX + moveSpeed);
         if (controller.collisions.climingSlope)
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleClimbSmoothTime);

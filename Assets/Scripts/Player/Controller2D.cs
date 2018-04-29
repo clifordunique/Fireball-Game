@@ -87,6 +87,7 @@ public class Controller2D : RaycastController
 
         //Always check for horizontal collisions to enable wall sliding in case player jumps while right next to a wall.
         HorizontalCollisions(ref moveAmount);
+        //UnityEngine.Debug.Log("moveAmount outside " + moveAmount);
 
         //Do the downward raycasts if close enough to the tree
         // This is weird crap
@@ -141,20 +142,25 @@ public class Controller2D : RaycastController
                     continue;
                 }
                 //Logic for ignoring certain colliders whilst jumping
+                // So... The problem is that the velocity on the player script is set, it then passes that into moveAmount, which actually moves the player in THIS script.
+                // So here we're setting moveAmount to 0, but it's already 
                 if (hit.collider.CompareTag("Jump Ignore"))
                 {
                     if(hit.distance == 0)
                     {
                         continue;
                     }
+                    // If player is grounded, don't let him move
                     if (grounded)
                     {
                         moveAmount.x = (hit.distance - skinWidth) * directionX;
+                        //UnityEngine.Debug.Log("moveAmount: " + moveAmount);
                         rayLength = hit.distance;
 
                         collisions.left = directionX == -1;
                         collisions.right = directionX == 1;
                     }
+                    // Otherwise, he should keep moving
                     else
                     {
                         continue;
