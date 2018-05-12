@@ -13,12 +13,14 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.4.0f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -250,6 +252,7 @@
     <Compile Include="Assets\Scripts\GroundChildrenFade.cs" />
     <Compile Include="Assets\Scripts\GroundFade.cs" />
     <Compile Include="Assets\Scripts\ISmashable.cs" />
+    <Compile Include="Assets\Scripts\LevelStarter.cs" />
     <Compile Include="Assets\Scripts\Loader.cs" />
     <Compile Include="Assets\Scripts\ObjectDestroy.cs" />
     <Compile Include="Assets\Scripts\Parallaxing.cs" />
@@ -272,6 +275,7 @@
     <Compile Include="Assets\Scripts\StatusIndicator.cs" />
     <Compile Include="Assets\Scripts\TreeBranch.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TriggerSensor.cs" />
+    <Compile Include="Assets\Scripts\TriggerSensor\TSSwitchBackground.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSEnableObject.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSModifyCamera.cs" />
     <Compile Include="Assets\Scripts\UI\Healthbar.cs" />

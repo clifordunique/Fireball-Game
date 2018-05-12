@@ -147,7 +147,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             OnShiftInput();
         }
-        Debug.Log("Velocity in player: " + velocity);
         controller.Move(velocity * Time.deltaTime, directionalInput, isDoubleJumping);
 
         if (isInWater)
@@ -242,7 +241,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         //anim.SetFloat("Fire Health", stats.curFireHealth);
         anim.SetFloat("Speed", Mathf.Abs(velocity.x));
-        Debug.Log("velocity: " + velocity);
         anim.SetBool("Grounded", controller.collisions.below);
 
         if (stats.curFireHealth <= 0)
@@ -431,16 +429,21 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
     }
 
+    public void OverrideVelocity()
+    {
+
+    }
+
     /* Calculates the velocity of the player depending on whether the player is on a flat area, climbing a slope,
      * or descending it. Applies a smoothing effect between the original velocity and the target velocity.
+     * Values / Objects used: Controller2D, moveSpeed, directionalInput, velocityXOld, velocityYOld
      */
     void CalculateVelocity()
     {
-        Debug.Log("Velocity in calculate: " + velocity);
         float slopeAngleClimbSmoothTime = .05f + 1 / Mathf.Abs(controller.collisions.slopeAngle);
         float slopeAngleDescendSmoothTime = 0.15f + Mathf.Abs(controller.collisions.slopeAngle) * .001f;
         float targetVelocityX = directionalInput.x * moveSpeed;
-        Debug.Log(targetVelocityX + moveSpeed);
+
         if (controller.collisions.climingSlope)
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleClimbSmoothTime);
@@ -463,12 +466,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 gm.PlayPlatformAudio((int)platformType);
             }
         }
-        /* not working
-        else if (Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocity.x) <= Mathf.Abs(velocityXOld))
-        {
-            audioManager.PlaySound("grass01");
-        }
-        */
 
         velocityXOld = velocity.x;
         velocityYOld = velocity.y;

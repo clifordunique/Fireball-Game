@@ -49,6 +49,11 @@ public class Sound
         source.Play();
     }
 
+    public void SetVolume(float _volume)
+    {
+        source.volume = _volume;
+    }
+
     public void Pause()
     {
         source.Pause();
@@ -153,6 +158,46 @@ public class AudioManager : MonoBehaviour {
 
         // no sound with _name
         Debug.LogWarning("AudioManager: Sound not found in list, " + _name);
+    }
+
+    public void Fade(string sound1, string sound2)
+    {
+        Sound tempSound1 = new Sound();
+        Sound tempSound2 = new Sound();
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].name == sound1)
+            {
+                tempSound1 = sounds[i];
+            }
+        }
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].name == sound2)
+            {
+                tempSound2 = sounds[i];
+            }
+        }
+        StartCoroutine(FadePitch(tempSound1,tempSound2));
+    }
+
+    IEnumerator FadePitch(Sound tempSound1, Sound tempSound2)
+    {
+        // getting original volume levels
+        float tempVolume1 = tempSound1.volume;
+        float tempVolume2 = tempSound2.volume;
+
+        // playing tempsound1 at 0 volume
+        tempSound1.Play(0);
+        for (float i = 0; i < tempVolume1; i += 0.001f)
+        {
+            tempSound1.SetVolume(i);
+            tempSound1.volume = i;
+            tempSound2.SetVolume(tempVolume2 - i);
+            tempSound2.volume = tempVolume2 - i;
+            yield return null;
+        }
+        tempSound2.Stop();
     }
 
     /* Pass in the string to check if it is playing

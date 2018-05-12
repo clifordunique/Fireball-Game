@@ -143,7 +143,7 @@ public class Controller2D : RaycastController
                 }
                 //Logic for ignoring certain colliders whilst jumping
                 // So... The problem is that the velocity on the player script is set, it then passes that into moveAmount, which actually moves the player in THIS script.
-                // So here we're setting moveAmount to 0, but it's already 
+                // So here we're setting moveAmount to 0, but the velocity is already set...
                 if (hit.collider.CompareTag("Jump Ignore"))
                 {
                     if(hit.distance == 0)
@@ -154,7 +154,8 @@ public class Controller2D : RaycastController
                     if (grounded)
                     {
                         moveAmount.x = (hit.distance - skinWidth) * directionX;
-                        //UnityEngine.Debug.Log("moveAmount: " + moveAmount);
+
+                        UnityEngine.Debug.Log("moveAmount: " + moveAmount);
                         rayLength = hit.distance;
 
                         collisions.left = directionX == -1;

@@ -1,15 +1,21 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+//using static Enums;
 
 public class GameMaster : MonoBehaviour
 {
+    public enum ambiance { FOREST, DARKFOREST, SNOW };  // To be used in determining background ambience
+    ambiance curBackgroundAmbiance;
+
     public static GameMaster gm;
 
     public GameObject endLevelUI;
     
     AudioManager audioManager;
-    public enum ambience { FOREST, DARKFOREST, SNOW };  // To be used in determining background ambience
+
+    //private static ambience curAmbience;
+    public string snowBackground;
     public string[] forestBackgroundArray;
     string[] woodCrackClips;
     string[] grassPlatformAudioClips;
@@ -18,6 +24,7 @@ public class GameMaster : MonoBehaviour
 
     void Awake()
     {
+        
         if (gm == null)
         {
             gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
@@ -34,20 +41,30 @@ public class GameMaster : MonoBehaviour
         {
             FindObjectOfType<CampFire>().levelEndEvent += OnLevelEnd;
         }
-    }
-
-    void Start()
-    {
         audioManager = AudioManager.instance;
         if (audioManager == null)
         {
             Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
         }
+    }
+
+    void Start()
+    {
+        
 
         LoadPlatformSounds();
         GetRandomIndex();
         PlayBackgroundMusic();
     }
+
+    //void LateUpdate()
+    //{
+    //    if (!audioManager.isPlaying(forestBackgroundArray[backgroundSoundIndex]))
+    //    {
+    //        GetRandomIndex();
+    //        PlayBackgroundMusic();
+    //    }
+    //}
 
     // Restarts the level
     public static void KillPlayer(Player player)
@@ -56,14 +73,31 @@ public class GameMaster : MonoBehaviour
         gm.StartCoroutine(gm.FadeOut(2));
     }
 
-    void LateUpdate()
+    /* Sets the curBackgroundAmbiance to whatever is passed in as a string
+     * from @backgroundAmbiance.
+     */
+    public void SetAmbianceEnum(string backgroundAmbiance)
     {
-        if (!audioManager.isPlaying(forestBackgroundArray[backgroundSoundIndex]))
+        switch (backgroundAmbiance)
         {
-            GetRandomIndex();
-            PlayBackgroundMusic();
+            case "mountainwind":
+                curBackgroundAmbiance = ambiance.SNOW;
+                PlayBackgroundMusic();
+                break;
+            case "dark forest":
+                curBackgroundAmbiance = ambiance.DARKFOREST;
+                break;
+            case "forest":
+                curBackgroundAmbiance = ambiance.FOREST;
+                PlayBackgroundMusic();
+                break;
+            default:
+                Debug.Log("poop");
+                break;
+
         }
     }
+
 
     /* Method for loading all the needed platform movement
      *  audioclips into arrays
@@ -104,7 +138,24 @@ public class GameMaster : MonoBehaviour
 
     void PlayBackgroundMusic()
     {
-        audioManager.PlaySound(forestBackgroundArray[backgroundSoundIndex]);
+        switch (curBackgroundAmbiance)
+        {
+            case ambiance.FOREST:
+                GetRandomIndex();
+                audioManager.PlaySound(forestBackgroundArray[backgroundSoundIndex]);
+                break;
+            case ambiance.DARKFOREST:
+                // play darkforest sound
+                break;
+            case ambiance.SNOW:
+                audioManager.Fade(snowBackground, forestBackgroundArray[backgroundSoundIndex]);
+                //audioManager.StopSound(forestBackgroundArray[backgroundSoundIndex]);
+                //audioManager.PlaySound(snowBackground);
+                break;
+            default:
+                Debug.Log("A non-existent ambiance enum was selected in GM.");
+                break;
+        }
     }
 
     void OnLevelEnd()

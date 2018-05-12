@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114148121480835004}
   - component: {fileID: 114743769972837944}
   - component: {fileID: 114206759410512024}
+  - component: {fileID: 114344848191458024}
   m_Layer: 0
   m_Name: _GM
   m_TagString: GM
@@ -54,6 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endLevelUI: {fileID: 0}
+  snowBackground: mountainwind
   forestBackgroundArray:
   - Woodland01
   - Woodland02
@@ -71,6 +73,18 @@ MonoBehaviour:
   maxHealth: 30
   _curHealth: 0
   maxFireHealth: 30
+  _curFireHealth: 0
+--- !u!114 &114344848191458024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503490623343074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303a4667eea33f646970a7e580cb0e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114743769972837944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -82,5 +96,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4065f001771ca584eb4eaa4b9a57241a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCam: {fileID: 0}
-  cam: {fileID: 0}
