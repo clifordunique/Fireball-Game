@@ -54,6 +54,11 @@ public class Sound
         source.volume = _volume;
     }
 
+    public float GetVolume()
+    {
+        return source.volume;
+    }
+
     public void Pause()
     {
         source.Pause();
@@ -160,6 +165,10 @@ public class AudioManager : MonoBehaviour {
         Debug.LogWarning("AudioManager: Sound not found in list, " + _name);
     }
 
+    /* Finds the sounds with string name sound1 and sound2
+     * and calls FadePitch to fade the volume of sound1 in,
+     * and fade the volume of sound2 out.
+     */
     public void Fade(string sound1, string sound2)
     {
         Sound tempSound1 = new Sound();
@@ -178,10 +187,12 @@ public class AudioManager : MonoBehaviour {
                 tempSound2 = sounds[i];
             }
         }
-        StartCoroutine(FadePitch(tempSound1,tempSound2));
+        StartCoroutine(FadeVolume(tempSound1,tempSound2));
     }
 
-    IEnumerator FadePitch(Sound tempSound1, Sound tempSound2)
+    /* Fades the volume of tempSound1 in and tempSound2 out
+     */
+    IEnumerator FadeVolume(Sound tempSound1, Sound tempSound2)
     {
         // getting original volume levels
         float tempVolume1 = tempSound1.volume;
@@ -191,10 +202,13 @@ public class AudioManager : MonoBehaviour {
         tempSound1.Play(0);
         for (float i = 0; i < tempVolume1; i += 0.001f)
         {
+            //Debug.Log(tempSound1.name + ": " + tempSound1.volume + " " + tempSound1.GetVolume() + " " + tempSound2.name + ": " + tempSound2.volume + " " + tempSound2.GetVolume());
+            // Yes, apparantly it is necessary to change both the source volume and the actual volume...
             tempSound1.SetVolume(i);
             tempSound1.volume = i;
-            tempSound2.SetVolume(tempVolume2 - i);
-            tempSound2.volume = tempVolume2 - i;
+            // calculation to decrease the volume of tempSound2 proportionally to tempSound1 since they might be at different volumes
+            tempSound2.SetVolume(tempVolume2 - i * tempVolume2 / tempVolume1);
+            tempSound2.volume = tempVolume2 - i * tempVolume2 / tempVolume1;
             yield return null;
         }
         tempSound2.Stop();

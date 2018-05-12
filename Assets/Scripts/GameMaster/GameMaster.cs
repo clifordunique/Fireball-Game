@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
-    public enum ambiance { FOREST, DARKFOREST, SNOW };  // To be used in determining background ambience
-    ambiance curBackgroundAmbiance;
+    //public enum ambiance { FOREST, DARKFOREST, SNOW };  // To be used in determining background ambience
+    public Utilities.Ambiance CurBackgroundAmbiance{ get; set; }
 
     public static GameMaster gm;
 
@@ -15,8 +15,13 @@ public class GameMaster : MonoBehaviour
     AudioManager audioManager;
 
     //private static ambience curAmbience;
-    public string snowBackground;
-    public string[] forestBackgroundArray;
+
+    // Ambiance sounds
+    string curAmbiance; // keeps track of the current ambiance for convenience
+    public string mountainAmbiance;
+    public string forestAmbiance;
+
+
     string[] woodCrackClips;
     string[] grassPlatformAudioClips;
     string audioClip;
@@ -50,11 +55,9 @@ public class GameMaster : MonoBehaviour
 
     void Start()
     {
-        
-
         LoadPlatformSounds();
-        GetRandomIndex();
-        PlayBackgroundMusic();
+        ///GetRandomIndex();
+        PlayBackgroundAmbiance();
     }
 
     //void LateUpdate()
@@ -73,29 +76,13 @@ public class GameMaster : MonoBehaviour
         gm.StartCoroutine(gm.FadeOut(2));
     }
 
-    /* Sets the curBackgroundAmbiance to whatever is passed in as a string
+    /* Sets the CurBackgroundAmbiance to whatever is passed
      * from @backgroundAmbiance.
      */
-    public void SetAmbianceEnum(string backgroundAmbiance)
+    public void SetAmbianceEnum(Utilities.Ambiance backgroundAmbiance)
     {
-        switch (backgroundAmbiance)
-        {
-            case "mountainwind":
-                curBackgroundAmbiance = ambiance.SNOW;
-                PlayBackgroundMusic();
-                break;
-            case "dark forest":
-                curBackgroundAmbiance = ambiance.DARKFOREST;
-                break;
-            case "forest":
-                curBackgroundAmbiance = ambiance.FOREST;
-                PlayBackgroundMusic();
-                break;
-            default:
-                Debug.Log("poop");
-                break;
-
-        }
+        CurBackgroundAmbiance = backgroundAmbiance;
+        PlayBackgroundAmbiance();
     }
 
 
@@ -131,26 +118,28 @@ public class GameMaster : MonoBehaviour
         }
     }
 
-    void GetRandomIndex()
-    {
-        backgroundSoundIndex = Random.Range(0, forestBackgroundArray.Length);
-    }
+    //void GetRandomIndex()
+    //{
+    //    backgroundSoundIndex = Random.Range(0, forestBackgroundArray.Length);
+    //}
 
-    void PlayBackgroundMusic()
+    /* Uses the audiomanager to play whatever sound matches up with the CurBackgroundAmbiance enum.
+     */
+    void PlayBackgroundAmbiance()
     {
-        switch (curBackgroundAmbiance)
+        switch (CurBackgroundAmbiance)
         {
-            case ambiance.FOREST:
-                GetRandomIndex();
-                audioManager.PlaySound(forestBackgroundArray[backgroundSoundIndex]);
+            case Utilities.Ambiance.FOREST:
+                //GetRandomIndex();
+                audioManager.PlaySound(forestAmbiance);
+                curAmbiance = forestAmbiance;
                 break;
-            case ambiance.DARKFOREST:
+            case Utilities.Ambiance.DARKFOREST:
                 // play darkforest sound
                 break;
-            case ambiance.SNOW:
-                audioManager.Fade(snowBackground, forestBackgroundArray[backgroundSoundIndex]);
-                //audioManager.StopSound(forestBackgroundArray[backgroundSoundIndex]);
-                //audioManager.PlaySound(snowBackground);
+            case Utilities.Ambiance.MOUNTAIN:
+                audioManager.Fade(mountainAmbiance, curAmbiance);
+                curAmbiance = mountainAmbiance;
                 break;
             default:
                 Debug.Log("A non-existent ambiance enum was selected in GM.");

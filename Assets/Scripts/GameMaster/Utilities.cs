@@ -25,4 +25,6 @@ public class Utilities : MonoBehaviour {
     {
         Debug.Log("Exiting Game");
     }
+
+    public enum Ambiance { FOREST, DARKFOREST, MOUNTAIN };
 }

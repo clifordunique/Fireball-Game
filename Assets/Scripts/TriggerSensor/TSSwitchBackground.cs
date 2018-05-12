@@ -2,7 +2,8 @@
 
 public class TSSwitchBackground : TriggerSensor {
 
-    public string backgroundAmbiance;
+    public Utilities.Ambiance backgroundAmbiance;
+
     public override void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))

@@ -154,8 +154,6 @@ public class Controller2D : RaycastController
                     if (grounded)
                     {
                         moveAmount.x = (hit.distance - skinWidth) * directionX;
-
-                        UnityEngine.Debug.Log("moveAmount: " + moveAmount);
                         rayLength = hit.distance;
 
                         collisions.left = directionX == -1;

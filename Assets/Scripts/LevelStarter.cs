@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelStarter : MonoBehaviour {
 
-    public string backgroundAmbiance;
+    public Utilities.Ambiance backgroundAmbiance;
 
 	// Use this for initialization
 	void Start () {

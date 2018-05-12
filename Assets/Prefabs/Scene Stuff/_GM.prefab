@@ -55,10 +55,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endLevelUI: {fileID: 0}
-  snowBackground: mountainwind
-  forestBackgroundArray:
-  - Woodland01
-  - Woodland02
+  mountainAmbiance: MountainWind01
+  forestAmbiance: Woodland02
 --- !u!114 &114206759410512024
 MonoBehaviour:
   m_ObjectHideFlags: 1
