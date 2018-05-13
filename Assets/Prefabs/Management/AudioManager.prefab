@@ -304,3 +304,10 @@ MonoBehaviour:
     randomVolume: 0.066
     randomPitch: 0.083
     loop: 1
+  - name: Campfire
+    clip: {fileID: 8300000, guid: c9d352a7a4c534f4a9efeac304b8bf66, type: 3}
+    volume: 1
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0.017
+    loop: 1
