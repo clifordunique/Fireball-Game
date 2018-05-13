@@ -96,7 +96,7 @@ MonoBehaviour:
     loop: 0
   - name: Woodland02
     clip: {fileID: 8300000, guid: 03cb6811fdde0104a919c2fef4ec78ba, type: 3}
-    volume: 0.35
+    volume: 0.5
     pitch: 1
     randomVolume: 0
     randomPitch: 0.05
@@ -299,15 +299,8 @@ MonoBehaviour:
     loop: 0
   - name: MountainWind01
     clip: {fileID: 8300000, guid: 55eb877096d75074bb0348d48759f1d2, type: 3}
-    volume: 0.1
+    volume: 0.2
     pitch: 1
     randomVolume: 0.066
     randomPitch: 0.083
-    loop: 1
-  - name: Campfire
-    clip: {fileID: 8300000, guid: c9d352a7a4c534f4a9efeac304b8bf66, type: 3}
-    volume: 1
-    pitch: 1
-    randomVolume: 0
-    randomPitch: 0.017
     loop: 1

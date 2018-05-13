@@ -115,9 +115,10 @@ public class AudioManager : MonoBehaviour {
 
     }
 
-    /* Plays the sound
-     * @param _name - the sound to be played
-     */
+    /// <summary>
+    /// Play a sound
+    /// </summary>
+    /// <param name="_name">The name of the sound to be played</param>
     public void PlaySound(string _name)
     {
         for (int i = 0; i < sounds.Length; i++)
@@ -133,6 +134,11 @@ public class AudioManager : MonoBehaviour {
         Debug.LogWarning("AudioManager: Sound not found in list, " + _name);
     }
 
+    /// <summary>
+    /// Play a sound at a certain volume percentage
+    /// </summary>
+    /// <param name="_name">The name of the sound to be played</param>
+    /// <param name="_volumePercent">The volume percentage for the sound</param>
     public void PlaySound(string _name, float _volumePercent)
     {
         for (int i = 0; i < sounds.Length; i++)
@@ -148,9 +154,10 @@ public class AudioManager : MonoBehaviour {
         Debug.LogWarning("AudioManager: Sound not found in list, " + _name);
     }
 
-    /* Stops the sound
-     * @param _name - the sound to be stopped
-     */
+    /// <summary>
+    /// This stops the given sound
+    /// </summary>
+    /// <param name="_name">The sound to be stopped</param>
     public void StopSound(string _name)
     {
         for (int i = 0; i < sounds.Length; i++)
@@ -166,10 +173,12 @@ public class AudioManager : MonoBehaviour {
         Debug.LogWarning("AudioManager: Sound not found in list, " + _name);
     }
 
-    /* Finds the sounds with string name sound1 and sound2
-     * and calls FadePitch to fade the volume of sound1 in,
-     * and fade the volume of sound2 out.
-     */
+    /// <summary>
+    /// This function finds sound1 and sound2 from the sounds libary and 
+    /// fades sound1 in and sound2 out.
+    /// </summary>
+    /// <param name="sound1"></param>
+    /// <param name="sound2"></param>
     public void Fade(string sound1, string sound2)
     {
         Sound tempSound1 = new Sound();
@@ -191,8 +200,12 @@ public class AudioManager : MonoBehaviour {
         StartCoroutine(FadeVolume(tempSound1,tempSound2));
     }
 
-    /* Fades the volume of tempSound1 in and tempSound2 out
-     */
+    /// <summary>
+    /// This function fades one sound in and the other out concurrently
+    /// </summary>
+    /// <param name="tempSound1">The sound that will fade in</param>
+    /// <param name="tempSound2">The sound that will fade out</param>
+    /// <returns>null</returns>
     IEnumerator FadeVolume(Sound tempSound1, Sound tempSound2)
     {
         // getting original volume levels
@@ -215,8 +228,11 @@ public class AudioManager : MonoBehaviour {
         tempSound2.Stop();
     }
 
-    /* Pass in the string to check if it is playing
-     */
+    /// <summary>
+    /// This returns true or false depending on whether or not the given string is playing.
+    /// </summary>
+    /// <param name="_name">The sound which's playing status must be checked</param>
+    /// <returns></returns>
     public bool isPlaying(string _name)
     {
         for (int i = 0; i < sounds.Length; i++)
