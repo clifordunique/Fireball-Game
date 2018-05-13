@@ -14,8 +14,6 @@ public class GameMaster : MonoBehaviour
     
     AudioManager audioManager;
 
-    //private static ambience curAmbience;
-
     // Ambiance sounds
     string curAmbiance; // keeps track of the current ambiance for convenience
     public string mountainAmbiance;
@@ -34,14 +32,6 @@ public class GameMaster : MonoBehaviour
         {
             gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
         }
-        //if (FindObjectOfType<Player>() != null)
-        //{
-        //    //FindObjectOfType<Player>().fingPoop += KillPlayer;
-        //}
-        //if (FindObjectOfType<Controller2D>() != null)
-        //{
-        //    FindObjectOfType<Controller2D>().hitBranchEvent += OnHitBranch;
-        //}
         if (FindObjectOfType<CampFire>() != null)
         {
             FindObjectOfType<CampFire>().levelEndEvent += OnLevelEnd;
@@ -56,18 +46,8 @@ public class GameMaster : MonoBehaviour
     void Start()
     {
         LoadPlatformSounds();
-        ///GetRandomIndex();
         PlayBackgroundAmbiance();
     }
-
-    //void LateUpdate()
-    //{
-    //    if (!audioManager.isPlaying(forestBackgroundArray[backgroundSoundIndex]))
-    //    {
-    //        GetRandomIndex();
-    //        PlayBackgroundMusic();
-    //    }
-    //}
 
     // Restarts the level
     public static void KillPlayer(Player player)
@@ -76,9 +56,10 @@ public class GameMaster : MonoBehaviour
         gm.StartCoroutine(gm.FadeOut(2));
     }
 
-    /* Sets the CurBackgroundAmbiance to whatever is passed
-     * from @backgroundAmbiance.
-     */
+    /// <summary>
+    /// Sets the current background ambiance to tha parameter passed in
+    /// </summary>
+    /// <param name="backgroundAmbiance">The background ambiance to be set in GameMaster</param>
     public void SetAmbianceEnum(Utilities.Ambiance backgroundAmbiance)
     {
         CurBackgroundAmbiance = backgroundAmbiance;
@@ -117,11 +98,6 @@ public class GameMaster : MonoBehaviour
             }
         }
     }
-
-    //void GetRandomIndex()
-    //{
-    //    backgroundSoundIndex = Random.Range(0, forestBackgroundArray.Length);
-    //}
 
     /* Uses the audiomanager to play whatever sound matches up with the CurBackgroundAmbiance enum.
      */
@@ -171,12 +147,4 @@ public class GameMaster : MonoBehaviour
                 break;
         }
     }
-    /*
-    IEnumerator waitToLoad(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        SceneManager.LoadScene("Level03");
-
-    }
-    */
 }

@@ -102,16 +102,17 @@ public class AudioManager : MonoBehaviour {
             instance = this;
             DontDestroyOnLoad(this);
         }
-    }
-
-    void Start()
-    {
-        for (int i = 0; i < sounds.Length; i++)
+		for (int i = 0; i < sounds.Length; i++)
         {
             GameObject _go = new GameObject("Sound_" + i + "_" + sounds[i].name);
             _go.transform.SetParent(this.transform);
             sounds[i].SetSource(_go.AddComponent<AudioSource>());
         }
+    }
+
+    void Start()
+    {
+
     }
 
     /* Plays the sound
