@@ -10,6 +10,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(FireEyes))]
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour, FallInWaterableObject
 {
@@ -239,10 +240,9 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void DealWithFire()
     {
-        //anim.SetFloat("Fire Health", stats.curFireHealth);
         anim.SetFloat("Speed", Mathf.Abs(velocity.x));
         anim.SetBool("Grounded", controller.collisions.below);
-
+        
         if (stats.curFireHealth <= 0)
         {
             if (onFireChangeEvent != null)

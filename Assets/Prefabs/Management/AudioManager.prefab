@@ -96,7 +96,7 @@ MonoBehaviour:
     loop: 0
   - name: Woodland02
     clip: {fileID: 8300000, guid: 03cb6811fdde0104a919c2fef4ec78ba, type: 3}
-    volume: 0.5
+    volume: 0.7
     pitch: 1
     randomVolume: 0
     randomPitch: 0.05

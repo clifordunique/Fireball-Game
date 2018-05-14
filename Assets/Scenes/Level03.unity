@@ -5365,6 +5365,28 @@ Transform:
   m_Father: {fileID: 1495368705}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &571819606 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1949705156578486, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+    type: 2}
+  m_PrefabInternal: {fileID: 2020139888}
+--- !u!114 &571819607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 571819606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a33a25e681bf30468dae74ff4f14e2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireEyes1: {fileID: 1881565711}
+  fireEyes2: {fileID: 1071493676}
+  flickerSpeedMaxMin: {x: 0.3, y: 1.5}
+  flickerAmountMaxMin: {x: 0.7, y: 0.9}
+  waitBtwFlickerMaxMin: {x: 0.01, y: 2}
+  fireBase: 1
 --- !u!1 &589840831
 GameObject:
   m_ObjectHideFlags: 0
@@ -8739,6 +8761,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4464682740705402, guid: 5f42d3a01a007b84ca4faafc69bac612,
     type: 2}
   m_PrefabInternal: {fileID: 1037759589}
+--- !u!212 &1071493676 stripped
+SpriteRenderer:
+  m_PrefabParentObject: {fileID: 212762160395993568, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+    type: 2}
+  m_PrefabInternal: {fileID: 2020139888}
 --- !u!1 &1074594295
 GameObject:
   m_ObjectHideFlags: 0
@@ -9504,7 +9531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1193800372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17525,6 +17552,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!212 &1881565711 stripped
+SpriteRenderer:
+  m_PrefabParentObject: {fileID: 212112991406359746, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+    type: 2}
+  m_PrefabInternal: {fileID: 2020139888}
 --- !u!1 &1886561026
 GameObject:
   m_ObjectHideFlags: 0
@@ -18604,6 +18636,16 @@ Prefab:
         type: 2}
       propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95080626955037636, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95163016676082054, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
