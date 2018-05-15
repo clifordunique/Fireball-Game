@@ -13,8 +13,6 @@ public class Healthbar : MonoBehaviour
     int offsetH = 0;
     int offsetF = 0;
     int maxCovers = 35;
-    Vector2 positionH;
-    Vector2 positionF;
     Stack<GameObject> healthStack;
     Stack<GameObject> fireHealthStack;
     PlayerStats stats;
@@ -22,8 +20,6 @@ public class Healthbar : MonoBehaviour
     void Start()
     {
         // initialization
-        positionH = posHealth.position;
-        positionF = posFireHealth.position;
         healthStack = new Stack<GameObject>();
         fireHealthStack = new Stack<GameObject>();
         stats = PlayerStats.instance;

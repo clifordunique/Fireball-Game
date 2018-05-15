@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
+using System;
 
 public class WaterDropletEnemy : Enemy
 {
@@ -31,24 +32,19 @@ public class WaterDropletEnemy : Enemy
     AudioManager audioManager;
     PlayerStats stats;
 
-    SpriteRenderer sr;
-    Stopwatch sw;
-
     Transform player;
     Animator anim;
     Collider2D playerCollider;
-    Collider2D collider;
+    Collider2D enemyCollider;
 
     public override void Start()
     {
         base.Start();
-        sw = new Stopwatch();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         stats = PlayerStats.instance;
-        collider = GetComponent<Collider2D>();
+        enemyCollider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
         audioManager = AudioManager.instance;
-        sr = GetComponent<SpriteRenderer>();
         player.GetComponent<Player>().onFireChangeEvent += OnFireChange;
         playerCollider = FindObjectOfType<Player>().GetComponent<Collider2D>();
 
@@ -120,8 +116,9 @@ public class WaterDropletEnemy : Enemy
             transform.localScale = new Vector2(-dirX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
             anim.SetFloat("Speed", speed);
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(targetWaypoint.x, transform.position.y), speed * Time.deltaTime);
-            if (transform.position.x == targetWaypoint.x)
+            if (Math.Round(transform.position.x,2) == Math.Round(targetWaypoint.x,2))
             {
+
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
                 targetWaypoint = waypoints[targetWaypointIndex];
                 anim.SetFloat("Speed", 0);
@@ -129,7 +126,6 @@ public class WaterDropletEnemy : Enemy
 
                 dirX = Mathf.Sign(targetWaypoint.x - transform.position.x);
                 transform.localScale = new Vector2(-dirX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
-                //sr.flipX = !transform.GetComponent<SpriteRenderer>().flipX;
 
                 yield return new WaitForSeconds(waitTime);
                 anim.SetFloat("Speed", speed);
@@ -234,8 +230,6 @@ public class WaterDropletEnemy : Enemy
         //TODO: make it so the splash has a forward velocity if the enemy has a forward velocity so that the splash is visible
         audioManager.PlaySound("Spat");
         audioManager.PlaySound("Water Hiss Short");
-        Vector2 direction = new Vector2(waterSplat.eulerAngles.x, waterSplat.eulerAngles.y);
-        Vector2 negDirection = new Vector2(waterSplat.eulerAngles.x, waterSplat.eulerAngles.y);
 
         // Facing you
         if ((transform.localScale.x > 0 && player.position.x < transform.position.x) || (transform.localScale.x < 0 && player.position.x > transform.position.x))
@@ -280,7 +274,7 @@ public class WaterDropletEnemy : Enemy
 
     void OnFireChange(bool isFire) // TODO: change this to access playerstats
     {
-        Physics2D.IgnoreCollision(playerCollider, collider, isFire);
+        Physics2D.IgnoreCollision(playerCollider, enemyCollider, isFire);
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -290,7 +284,6 @@ public class WaterDropletEnemy : Enemy
             Player player = col.gameObject.GetComponent<Player>();
             if (stats.isFire())
             {
-                UnityEngine.Debug.Log("Damaging player");
                 player.DamageFire((int)(damage * ((health + 6 / health) / maxHealth)));
                 audioManager.PlaySound("Water Hiss Short");
                 DamageEnemy(1000, transform.position);

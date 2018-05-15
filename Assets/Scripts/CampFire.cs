@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CampFire : MonoBehaviour {
 
@@ -11,12 +9,10 @@ public class CampFire : MonoBehaviour {
     public delegate void OnLevelEnd();
     public event OnLevelEnd levelEndEvent;
 
-    GameMaster gm;
     PlayerStats stats;
 	
     void Start()
     {
-        gm = GameMaster.gm;
         stats = PlayerStats.instance;
     }
 

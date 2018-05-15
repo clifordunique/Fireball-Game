@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("in update");
         transform.Translate(Vector3.up * speed * Time.deltaTime);
         Destroy(gameObject, 3f);
     }
@@ -24,12 +25,4 @@ public class Projectile : MonoBehaviour
         boxCollider2D.size = new Vector2(boxCollider2D.size.x, 6);
 
     }
-
-    //void OnTriggerEnter2D(Collider2D col)
-    //{
-    //    if (col.CompareTag("Obstacle"))
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
 }

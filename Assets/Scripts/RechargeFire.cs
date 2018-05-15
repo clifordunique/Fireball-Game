@@ -8,9 +8,8 @@ public class RechargeFire : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D col)
     {
-        if(col.GetComponent<Player>() != null)
+        if(col.CompareTag("Player"))
         {
-            //Debug.Log("healing player");
             Player player = col.GetComponent<Player>();
             player.HealFire(healAmount);
         }

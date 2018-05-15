@@ -77,7 +77,7 @@ public class GameMaster : MonoBehaviour
         {
             if (i < 9)
                 grassPlatformAudioClips[i] = "grass" + "0" + (i + 1);
-            else
+            if (i > 9)
                 grassPlatformAudioClips[i] = "grass" + (i + 1);
         }
     }

@@ -55,12 +55,9 @@ public class Attack : MonoBehaviour
         Vector2 targetPoint = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 heading = targetPoint - (Vector2)firePoint.transform.position;
         direction = heading.normalized;
-        float angle = Mathf.Atan2(heading.y, heading.x) * Mathf.Rad2Deg;
         audioManager.PlaySound("Fireball");
-        //UnityEngine.Debug.Log(angle);
 
         Instantiate(fireball, firePoint.position, Quaternion.FromToRotation(Vector3.up, direction));
-        //UnityEngine.Debug.Log("Speed: " + direction * speed);
     }
 
     public Vector2 GetDirection()

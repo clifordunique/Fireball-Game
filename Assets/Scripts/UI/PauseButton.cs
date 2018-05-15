@@ -7,7 +7,6 @@ public class PauseButton : MonoBehaviour
 
     public GameObject pauseMenuUI;
 
-    bool isPaused = false;
     Attack playerAttack;
 
     // Use this for initialization

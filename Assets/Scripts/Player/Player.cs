@@ -19,9 +19,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public LayerMask underBrushLayerMask;
     float accelerationTimeAirborne = .3f;
     float accelerationTimeGrounded = .2f;
-    float accelerationTimeDescendingSlope = .5f;
-    float accelerationTimeClimbingSlope = .1f;
-
 
     // Variables to be moved to playerstats
     //public float maxHealth;
@@ -34,6 +31,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     GameMaster gm;
     private PlayerStats stats;
+    FireEyes fireEyes;
     [SerializeField]
     private Healthbar statusIndicator;
 
@@ -64,8 +62,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
     Animator anim;
     AudioManager audioManager;
     public GameObject deathPrefab;
-    string audioClip = null;
-    string[] audioClips;
 
     Vector2 directionalInput;
     bool wallSliding;
@@ -91,6 +87,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void Start()
     {
+        fireEyes = GetComponent<FireEyes>();
+        if(fireEyes == null)
+        {
+            Debug.Log("No FireEyes script attached to this GameObject");
+        }
         stats = PlayerStats.instance;
         stats.curFireHealth = stats.maxFireHealth;
         stats.curHealth = stats.maxHealth;
@@ -99,19 +100,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
         }
-        //if (statusIndicator == null)
-        //{
-        //    Debug.Log("No status indicator referenced on Player");
-        //}
-        //else
-        //{
-        //    statusIndicator.SetMax(stats.maxHealth, stats.maxFireHealth);
-        //    statusIndicator.SetHealth(stats.curHealth);
-        //    statusIndicator.SetFireHealth(stats.curFireHealth);
-        //}
         srs = GetComponentsInChildren<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        anim.SetFloat("Fire Health", stats.curFireHealth);
         controller = GetComponent<Controller2D>();
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         gravityOriginal = gravity;
@@ -123,15 +113,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             Debug.LogError("No CameraShake found on the GameMaster.");
         }
-        //print("Gravity: " + gravity + " Jump Velocity: " + maxJumpVelocity);
-        //audioClips = new string[14];
-        //for (int i = 0; i < audioClips.Length; i++)
-        //{
-        //    if (i < 9)
-        //        audioClips[i] = "grass" + "0" + (i + 1);
-        //    else
-        //        audioClips[i] = "grass" + (i + 1);
-        //}
     }
 
     void Update()
@@ -242,7 +223,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         anim.SetFloat("Speed", Mathf.Abs(velocity.x));
         anim.SetBool("Grounded", controller.collisions.below);
-        
+        fireEyes.SetFireBase(stats.curFireHealth, stats.maxFireHealth);
+
         if (stats.curFireHealth <= 0)
         {
             if (onFireChangeEvent != null)

@@ -126,8 +126,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1904936755795660}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 92.7, y: 0.3, z: 10}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 22.11, y: -0.81, z: 2.1799}
+  m_LocalScale: {x: 0.87195325, y: 0.8719534, z: 0.21798836}
   m_Children:
   - {fileID: 4571420507535490}
   - {fileID: 4061543398442874}
@@ -238,11 +238,11 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 0
-  speed: 8
-  chaseSpeed: 18
+  speed: 4
+  chaseSpeed: 13
   waitTime: 0.2
   pathHolder: {fileID: 4061543398442874}
-  viewDistanceX: 25
+  viewDistanceX: 10
   viewDistanceY: 10
   waterSplat: {fileID: 4733119112230144, guid: 3be49ad4b17da4d4b99e439c2094fc51, type: 2}
   waterSplat2: {fileID: 4360988900290408, guid: b9643bf4a0ff9df4fb80c92b3937bfb9,
@@ -256,6 +256,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -271,6 +272,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -287,3 +289,5 @@ SpriteRenderer:
   m_Size: {x: 12.99, y: 13}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

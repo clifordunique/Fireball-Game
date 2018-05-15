@@ -21,17 +21,18 @@ public class FireEyes : MonoBehaviour
     /// <summary>
     /// Sets the base apha percentage for the Golem's eyes.
     /// </summary>
-    /// <param name="_fireBase">The value to set the base alpha percentage for the Golem's eyes</param>
-    void SetFireBase(float _fireBase)
+    /// <param name="_fireHealth">The current fire health</param>
+    /// <param name="_maxFireHealth">The max fire health</param>
+    public void SetFireBase(int _fireBase, int _maxFireHealth)
     {
-        fireBase = _fireBase;
+        fireBase = (float)_fireBase / (float)_maxFireHealth;
     }
 
     /// <summary>
     /// Animated the object by making it flicker darker and then back to its previous alpha.
     /// </summary>
     /// <param name="fireEyes">The SpriteRenderer to apply a flicker effect to</param>
-    /// <returns></returns>
+    /// <returns>null</returns>
     IEnumerator Flicker(SpriteRenderer fireEyes)
     {
         while (true)

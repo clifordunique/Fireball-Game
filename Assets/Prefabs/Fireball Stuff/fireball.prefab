@@ -36,9 +36,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000010934977412}
-  - component: {fileID: 114000011585283490}
   - component: {fileID: 61713767359746270}
   - component: {fileID: 114666874749738384}
+  - component: {fileID: 114713775315656536}
   m_Layer: 0
   m_Name: fireball
   m_TagString: PlayerWeapon
@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013523262210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.878, y: 0.35058, z: 7}
+  m_LocalPosition: {x: 29.367989, y: -16.686035, z: 7}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.73107076}
   m_Children:
   - {fileID: 4000011057443806}
@@ -174,18 +174,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114000011585283490
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013523262210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8166acf5719960446a2b70b65bc7d552, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 50
 --- !u!114 &114666874749738384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,7 +185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0986022b7feb9da478221730f1256d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
   explodeParticles: {fileID: 4902369504924022, guid: 2f6f88081e8284e4a84112eb3eca6080,
     type: 2}
   damage: 2
@@ -206,6 +193,18 @@ MonoBehaviour:
     m_Bits: 491776
   rayLength: 1.5
   raycastPoint: {fileID: 4553340334546108}
+--- !u!114 &114713775315656536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013523262210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8166acf5719960446a2b70b65bc7d552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 30
 --- !u!212 &212000010548945880
 SpriteRenderer:
   m_ObjectHideFlags: 1

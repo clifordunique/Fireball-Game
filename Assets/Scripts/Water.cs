@@ -84,7 +84,6 @@ public class Water : MonoBehaviour {
         waterToMove.position = waypoints[0];
         int targetWaypointIndex = 1;
         Vector2 targetWaypoint = waypoints[targetWaypointIndex];
-        BoxCollider2D collider = waterToMove.GetComponent<BoxCollider2D>();
 
         while (true)
         {

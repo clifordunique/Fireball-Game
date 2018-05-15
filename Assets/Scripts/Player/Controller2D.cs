@@ -16,9 +16,6 @@ public class Controller2D : RaycastController
     public delegate void OnHitBranch();
     public event OnHitBranch hitBranchEvent;
 
-    public delegate void NotGrounded();
-    public event NotGrounded notGroundedEvent;
-
     // Weird stuff
     TreeBranch treeBranch; // try to get rid of this...
     Player player;

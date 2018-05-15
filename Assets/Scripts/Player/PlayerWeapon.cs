@@ -4,11 +4,9 @@
  * It damages the enemy on contact.
  */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWeapon : Projectile
+public class PlayerWeapon : MonoBehaviour
 {
     public Transform explodeParticles;
     public int damage = 4;
@@ -17,16 +15,13 @@ public class PlayerWeapon : Projectile
     public Transform raycastPoint;
 
     Vector2 rotation;
-    Vector3 hitNormal;
     float rotation2;
     Quaternion startRot;
 
-    AudioManager audioManager;
     Enemy enemy;
 
     void Start()
     {
-        audioManager = AudioManager.instance;
         rotation = FindObjectOfType<Attack>().GetDirection();
     }
 
@@ -37,7 +32,6 @@ public class PlayerWeapon : Projectile
 
         if (hit)
         {
-            Quaternion.FromToRotation(Vector3.down, hitNormal);
             if (hit.collider.gameObject.tag == "Enemy")
             {
                 HitEnemy(hit);

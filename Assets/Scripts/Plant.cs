@@ -30,22 +30,16 @@ public class Plant : MonoBehaviour {
         Debug.DrawRay(raycastPoint.position, Vector3.up * dstUpDown);
         Debug.DrawRay(raycastPoint.position, Vector3.left * dstRightLeft);
         Debug.DrawRay(raycastPoint.position, Vector3.right * dstRightLeft);
-        if (hitDown || hitRight || hitLeft)
+
+        if (hitDown || hitRight || hitLeft || hitUp)
         {
             isTouchingPlayer = true;
-            //Debug.Log("is touching player" + isTouchingPlayer);
         }
         else
         {
             isTouchingPlayer = false;
-            //Debug.Log("is touching playe falser" + isTouchingPlayer);
         }
     }
-
-    //void Crap()
-    //{
-    //    Debug.Log("incrap");
-    //}
 
     void OnUnderbrush()
     {
