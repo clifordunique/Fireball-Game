@@ -11,7 +11,7 @@ public class PlayerWeapon : MonoBehaviour
     public Transform explodeParticles;
     public int damage = 4;
     public LayerMask layerMask;
-    public float rayLength = 2f;
+    public float rayLength = 0.5f;
     public Transform raycastPoint;
 
     Vector2 rotation;
@@ -56,7 +56,8 @@ public class PlayerWeapon : MonoBehaviour
 
     void Effect(RaycastHit2D hit)
     {
-        Instantiate(explodeParticles, hit.point + hit.normal * 0.7f, Quaternion.FromToRotation(Vector3.left, hit.normal));
+        Vector2 offset = hit.normal * 0.2f;
+        Instantiate(explodeParticles, hit.point + offset, Quaternion.FromToRotation(Vector3.left, hit.normal));
         Destroy(this.gameObject);
     }
 }

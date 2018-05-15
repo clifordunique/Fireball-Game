@@ -191,7 +191,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 491776
-  rayLength: 1.5
+  rayLength: 0.5
   raycastPoint: {fileID: 4553340334546108}
 --- !u!114 &114713775315656536
 MonoBehaviour:

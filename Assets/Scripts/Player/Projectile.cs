@@ -13,7 +13,6 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("in update");
         transform.Translate(Vector3.up * speed * Time.deltaTime);
         Destroy(gameObject, 3f);
     }
