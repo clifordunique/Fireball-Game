@@ -72,14 +72,15 @@ public class Controller2D : RaycastController
 
         //Do the downward raycasts if close enough to the tree
         // This is weird crap
-        if (treeBranch != null)
-        {
-            float dstToTreeBranch = Mathf.Abs(transform.position.x - treeBranch.transform.position.x);
-            if (dstToTreeBranch < 50)
-            {
-                ConstantDownwardRaycast(moveAmount);
-            }
-        }
+        //if (treeBranch != null)
+        //{
+        //    float dstToTreeBranch = Mathf.Abs(transform.position.x - treeBranch.transform.position.x);
+        //    if (dstToTreeBranch < 50)
+        //    {
+                
+        //    }
+        //}
+        ConstantDownwardRaycast(moveAmount);
 
         if (moveAmount.y != 0)
         {
@@ -248,6 +249,9 @@ public class Controller2D : RaycastController
                     GameMaster.KillPlayer(player);
                 }
 
+                // If the player is inside a Jump Ignore collider then it he should ignore it
+                // Or if the player is touching a Jump Ignore collider and is not grounded
+                if((hit.distance == 0 && hit.collider.CompareTag("Jump Ignore")) || (hit.collider.CompareTag("Jump Ignore") && !collisions.below))
                 {
                     continue;
                 }
