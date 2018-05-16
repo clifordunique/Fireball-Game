@@ -8,7 +8,6 @@
 
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(FireEyes))]
 [RequireComponent(typeof(Controller2D))]
@@ -53,7 +52,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     float velocityXSmoothing;
     public bool isInWater = false;
     public bool isDoubleJumping;
-    PlatformType platformType;
+    Utilities.PlatformType platformType;
 
     CameraShake camShake;
     SpriteRenderer[] srs;
@@ -443,10 +442,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) && controller.collisions.below)
         {
             platformType = controller.GetPlatformType();
-            if (platformType.ToString() == "grass")
-            {
-                gm.PlayPlatformAudio((int)platformType);
-            }
+            gm.PlayPlatformAudio(platformType);
         }
 
         velocityXOld = velocity.x;
@@ -461,9 +457,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (stats.curFireHealth >= 0)
         {
             stats.curFireHealth -= _damage;
-            //anim.SetFloat("Fire Health", stats.curFireHealth);
         }
-        //statusIndicator.SetFireHealth(stats.curFireHealth);
     }
 
     public void HealFire(int _health)

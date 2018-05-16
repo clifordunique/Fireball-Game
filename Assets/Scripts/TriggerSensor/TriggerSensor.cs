@@ -6,6 +6,11 @@ public class TriggerSensor : MonoBehaviour {
 
     public Transform actionObject;
 
+    private void Start()
+    {
+        
+    }
+
     public virtual void OnTriggerEnter2D(Collider2D col)
     {
         // Blank

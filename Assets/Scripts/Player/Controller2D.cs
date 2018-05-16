@@ -26,7 +26,7 @@ public class Controller2D : RaycastController
     public Vector2 playerInput;
 
     // Detecting platform type, mostly for playing sounds
-    PlatformType platformType;
+    Utilities.PlatformType platformType;
 
     public override void Start()
     {
@@ -50,22 +50,6 @@ public class Controller2D : RaycastController
         collisions.Reset();
         collisions.moveAmountOld = moveAmount;
         playerInput = input;
-        // currently uses variable from the class. Should get the shift key.
-        //if (Input.GetKey(KeyCode.LeftShift))
-        //{
-        //    if(sw.ElapsedMilliseconds < 50)
-        //    {
-        //        UnityEngine.Debug.Log("jumping!!!");
-        //        sw.Start();
-        //        moveAmount.x *= 4;
-        //        moveAmount.y *= 2;
-        //    }
-        //    else
-        //    {
-        //        UnityEngine.Debug.Log("resetting");
-        //        Invoke("ResetSw", 2f);
-        //    }
-        //}
 
         if(moveAmount.y > 0 && !collisions.climingSlope)
         {
@@ -264,13 +248,12 @@ public class Controller2D : RaycastController
                     GameMaster.KillPlayer(player);
                 }
 
-                // If the player is inside a Jump Ignore collider then it he should ignore it.
-                if(hit.distance == 0 && hit.collider.CompareTag("Jump Ignore"))
                 {
                     continue;
                 }
+
                 // Allows player to jump though platforms if they have the "Through" tag
-                if (hit.collider.tag == "Through" || hit.collider.tag == "Branch")
+                if (hit.collider.tag == "Through" || hit.collider.tag == "Wood")
                 {
                     if (directionY == 1 || hit.distance == 0)
                     {
@@ -288,18 +271,6 @@ public class Controller2D : RaycastController
                         continue;
                     }
                 }
-                if (hit.collider.tag == "Grass")
-                {
-                    platformType = PlatformType.grass;
-                }
-                else if (hit.collider.tag == "Rock")
-                {
-                    platformType = PlatformType.rock;
-                    if(moveAmount.y < -0.3f)
-                    {
-                        audioManager.PlaySound("Rock Hit");
-                    }
-                }
 
                 /* Checking for a hit. If a ray hits an object, change the moveAmount to the ray length.
                  * That way the next frame the player (following its new moveAmount) should rest on the object below it.
@@ -307,7 +278,7 @@ public class Controller2D : RaycastController
                  */
                 moveAmount.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;
-
+                
                 if (collisions.climingSlope)
                 {
                     moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(moveAmount.x);
@@ -353,13 +324,29 @@ public class Controller2D : RaycastController
             */
             if (hit)
             {
-                if (hit.collider.tag == "Branch" && hit.distance < .4f)
+                switch (hit.collider.tag)
                 {
-                    platformType = PlatformType.treeBranch;
-                    if (hitBranchEvent != null)
-                    {
-                        hitBranchEvent();
-                    }
+                    case "Grass":
+                        platformType = Utilities.PlatformType.GRASS;
+                        break;
+                    case "Rock":
+                        platformType = Utilities.PlatformType.ROCK;
+                        break;
+                    case "Snow":
+                        platformType = Utilities.PlatformType.SNOW;
+                        break;
+                    case "Wood":
+                        platformType = Utilities.PlatformType.WOOD;
+                        if(hit.collider.GetComponent<BigBranch>() != null && hit.distance < .4f)
+                        {
+                            if (hitBranchEvent != null)
+                            {
+                                hitBranchEvent();
+                            }
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -456,10 +443,8 @@ public class Controller2D : RaycastController
         sw.Reset();
     }
 
-    public PlatformType GetPlatformType()
+    public Utilities.PlatformType GetPlatformType()
     {
         return platformType;
     }
 }
-
-public enum PlatformType { grass, rock, treeBranch, snow }

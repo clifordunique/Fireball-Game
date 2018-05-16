@@ -11,4 +11,12 @@ public class TSSwitchBackground : TriggerSensor {
             GameMaster.gm.SetAmbianceEnum(backgroundAmbiance);
         }
     }
+
+    public override void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            Destroy(this);
+        }
+    }
 }

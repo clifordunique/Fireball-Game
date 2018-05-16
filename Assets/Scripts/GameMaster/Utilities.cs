@@ -27,4 +27,6 @@ public class Utilities : MonoBehaviour {
     }
 
     public enum Ambiance { FOREST, DARKFOREST, MOUNTAIN };
+
+    public enum PlatformType { GRASS, SNOW, ROCK, WOOD }
 }

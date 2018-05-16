@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 20468883}
   m_Layer: 8
   m_Name: Other Colliders 1
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -704,7 +704,7 @@ GameObject:
   - component: {fileID: 60986290}
   m_Layer: 0
   m_Name: BigBranchParent3
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -721,7 +721,6 @@ Transform:
   m_Children:
   - {fileID: 2091320395}
   - {fileID: 1741062761}
-  - {fileID: 1287436479}
   - {fileID: 1594731904}
   m_Father: {fileID: 0}
   m_RootOrder: 28
@@ -802,7 +801,7 @@ GameObject:
   - component: {fileID: 63740838}
   m_Layer: 8
   m_Name: Other Colliders 2
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1010,7 +1009,7 @@ GameObject:
   - component: {fileID: 99775902}
   m_Layer: 8
   m_Name: Big Tree Branch01
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1489,7 +1488,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 44
+  m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 23.552002}
 --- !u!1 &159376701
 GameObject:
@@ -1830,7 +1829,7 @@ GameObject:
   - component: {fileID: 210894762}
   m_Layer: 8
   m_Name: Collider1
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2129,7 +2128,7 @@ Transform:
   m_Children:
   - {fileID: 1486041972}
   m_Father: {fileID: 0}
-  m_RootOrder: 45
+  m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!61 &234390393
 BoxCollider2D:
@@ -2213,7 +2212,7 @@ GameObject:
   - component: {fileID: 235057914}
   m_Layer: 8
   m_Name: Snowy_ground03
-  m_TagString: Obstacle
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2303,7 +2302,7 @@ Transform:
   m_LocalScale: {x: 1.2157329, y: 1.2157329, z: 1.2157329}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 48
+  m_RootOrder: 49
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.46800002}
 --- !u!1001 &240279289
 Prefab:
@@ -3201,7 +3200,7 @@ Transform:
   m_LocalScale: {x: 0.34605542, y: 0.35318342, z: 0.7367114}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 50
+  m_RootOrder: 51
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &314790867
 GameObject:
@@ -3497,7 +3496,7 @@ GameObject:
   - component: {fileID: 353654542}
   m_Layer: 8
   m_Name: Branch Parent
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3526,7 +3525,7 @@ GameObject:
   - component: {fileID: 374560211}
   m_Layer: 8
   m_Name: BigBranchParent2
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3695,7 +3694,7 @@ Transform:
   m_LocalScale: {x: 1.1185575, y: 1.1415974, z: 2.3812778}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 40
+  m_RootOrder: 41
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.9840001}
 --- !u!1 &396972844
 GameObject:
@@ -4642,7 +4641,7 @@ GameObject:
   - component: {fileID: 459289627}
   m_Layer: 8
   m_Name: Branch Parent
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5034,7 +5033,7 @@ Transform:
   - {fileID: 805513373}
   - {fileID: 1654316509}
   m_Father: {fileID: 0}
-  m_RootOrder: 35
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &499916960
 GameObject:
@@ -5049,7 +5048,7 @@ GameObject:
   - component: {fileID: 499916962}
   m_Layer: 8
   m_Name: Collider1
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5598,7 +5597,7 @@ GameObject:
   - component: {fileID: 569086319}
   m_Layer: 8
   m_Name: Branch Parent
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5907,7 +5906,7 @@ Transform:
   m_LocalScale: {x: 0.72671634, y: 0.74168515, z: 0.7367114}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 37
+  m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 24.916}
 --- !u!60 &606482748
 PolygonCollider2D:
@@ -5938,6 +5937,139 @@ PolygonCollider2D:
       - {x: -0.77721053, y: 0.2223721}
       - {x: 12.140559, y: 0.86329347}
       - {x: 10.514263, y: 1.825047}
+--- !u!1 &612493203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 612493204}
+  - component: {fileID: 612493206}
+  - component: {fileID: 612493205}
+  - component: {fileID: 612493207}
+  m_Layer: 8
+  m_Name: Collider
+  m_TagString: Wood
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &612493204
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 612493203}
+  m_LocalRotation: {x: -0, y: 0, z: 0.004270554, w: 0.9999909}
+  m_LocalPosition: {x: 3.7399983, y: 3.0700004, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1887433027}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.48900002}
+--- !u!114 &612493205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 612493203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c332c2762b58243ae5a220014f2f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationOrigin: {fileID: 1887433027}
+  children: []
+  easeAmount: 0.1
+  rotationSpeed: 10
+  rotateAmt: 60
+  childRotateAmt: 0
+  leftSideOfTree: 1
+--- !u!60 &612493206
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 612493203}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 9.09, y: 6.44}
+    newSize: {x: 9.09, y: 6.44}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -2.3672228, y: -1.0000222}
+      - {x: -2.101536, y: -0.72289747}
+      - {x: -1.8319944, y: -0.5638471}
+      - {x: -1.6810492, y: -0.52615255}
+      - {x: -1.5781311, y: -0.4722076}
+      - {x: -1.1552542, y: 0.09329023}
+      - {x: -0.89824486, y: 0.5541581}
+      - {x: -0.5254939, y: 1.0661585}
+      - {x: -0.27797505, y: 1.3050412}
+      - {x: 0.033870663, y: 1.3750695}
+      - {x: 0.70258266, y: 1.5979782}
+      - {x: 1.2896043, y: 1.9230803}
+      - {x: 1.7647393, y: 2.07636}
+      - {x: 2.1451302, y: 2.1532717}
+      - {x: 2.7324517, y: 2.1588545}
+      - {x: 3.2044227, y: 2.3803437}
+      - {x: 3.4238777, y: 2.5405862}
+      - {x: 3.6106968, y: 2.6508865}
+      - {x: 3.942367, y: 2.8342009}
+      - {x: 4.4699874, y: 3.152929}
+      - {x: 3.9379885, y: 2.750586}
+      - {x: 3.5834556, y: 2.5033593}
+      - {x: 2.8952374, y: 2.1439195}
+      - {x: 2.702682, y: 2.0715015}
+      - {x: 2.183753, y: 2.058458}
+      - {x: 1.6919537, y: 1.9502696}
+      - {x: 1.3599591, y: 1.789289}
+      - {x: 0.8142397, y: 1.4657661}
+      - {x: 0.40347072, y: 1.3202233}
+      - {x: -0.14185065, y: 1.1058604}
+      - {x: -0.6244016, y: 0.4753464}
+      - {x: -1.1557688, y: -0.40972793}
+      - {x: -1.5906261, y: -0.7109671}
+      - {x: -2.1857655, y: -1.214631}
+      - {x: -3.9021173, y: -2.6286979}
+      - {x: -4.3315387, y: -2.8237853}
+      - {x: -3.974618, y: -2.3191934}
+      - {x: -3.6535206, y: -1.8080348}
+      - {x: -3.2612324, y: -1.5116729}
+      - {x: -2.6098776, y: -1.139542}
+--- !u!50 &612493207
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 612493203}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &649670693
 GameObject:
   m_ObjectHideFlags: 0
@@ -5986,7 +6118,7 @@ Transform:
   - {fileID: 464622994}
   - {fileID: 723262800}
   m_Father: {fileID: 0}
-  m_RootOrder: 34
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &651354240
 Prefab:
@@ -6137,7 +6269,7 @@ GameObject:
   - component: {fileID: 683896087}
   m_Layer: 0
   m_Name: Big Tree Branch03
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6754,7 +6886,7 @@ GameObject:
   - component: {fileID: 760075614}
   m_Layer: 8
   m_Name: Snowy_ground02
-  m_TagString: Untagged
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6843,7 +6975,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 43
+  m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 26.419}
 --- !u!1 &771342951
 GameObject:
@@ -6930,7 +7062,7 @@ GameObject:
   - component: {fileID: 785408934}
   m_Layer: 8
   m_Name: Snowy_ground
-  m_TagString: Untagged
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7107,7 +7239,7 @@ GameObject:
   - component: {fileID: 803387682}
   m_Layer: 8
   m_Name: Other Colliders 1
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7280,7 +7412,7 @@ GameObject:
   - component: {fileID: 807053517}
   m_Layer: 0
   m_Name: Branch Parent
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7461,7 +7593,7 @@ GameObject:
   - component: {fileID: 831168857}
   m_Layer: 8
   m_Name: Snowy_ground_transition2
-  m_TagString: Untagged
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7989,7 +8121,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 51
+  m_RootOrder: 52
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &874928663
 Rigidbody2D:
@@ -8179,7 +8311,7 @@ GameObject:
   - component: {fileID: 903402773}
   m_Layer: 8
   m_Name: Collider1
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8308,7 +8440,7 @@ GameObject:
   - component: {fileID: 907349030}
   m_Layer: 8
   m_Name: Parent1 (1)
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8572,7 +8704,7 @@ GameObject:
   - component: {fileID: 985308463}
   m_Layer: 8
   m_Name: Collider1 (1)
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8700,7 +8832,7 @@ GameObject:
   - component: {fileID: 986458435}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8945,7 +9077,7 @@ Transform:
   m_LocalScale: {x: 1.4257034, y: 1.4550698, z: 3.0351553}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 38
+  m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 26.187002}
 --- !u!1 &1021629040
 GameObject:
@@ -9495,7 +9627,7 @@ GameObject:
   - component: {fileID: 1123892338}
   m_Layer: 0
   m_Name: BigBranchParent4
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9507,7 +9639,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1123892337}
   m_LocalRotation: {x: -0, y: -0, z: 0.23190375, w: 0.9727388}
-  m_LocalPosition: {x: 126.61, y: 21.8, z: 0}
+  m_LocalPosition: {x: 126.61, y: 21.15, z: 0}
   m_LocalScale: {x: 0.38309643, y: 0.39098734, z: 0.81556726}
   m_Children:
   - {fileID: 807053517}
@@ -9952,7 +10084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1193800372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10263,7 +10395,7 @@ GameObject:
   - component: {fileID: 1236908357}
   m_Layer: 8
   m_Name: BigBranchParent6
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10354,7 +10486,7 @@ Transform:
   m_LocalScale: {x: 1.1185575, y: 1.1415974, z: 2.3812778}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 39
+  m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.9840001}
 --- !u!1 &1258413201
 GameObject:
@@ -10442,7 +10574,7 @@ GameObject:
   - component: {fileID: 1264857028}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10601,113 +10733,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 33b06e1f318e15349af2e577eb168688, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1287436478
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1287436479}
-  - component: {fileID: 1287436480}
-  - component: {fileID: 1287436482}
-  - component: {fileID: 1287436481}
-  m_Layer: 8
-  m_Name: Collider 2
-  m_TagString: Branch
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1287436479
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1287436478}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.2, y: -6.81, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 60986290}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &1287436480
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1287436478}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.0190258, y: -0.27351236}
-      - {x: 2.6131163, y: -0.6099796}
-      - {x: 3.7708874, y: -1.1790586}
-      - {x: 4.4150925, y: -1.1637917}
-      - {x: 3.240819, y: -0.8181772}
-      - {x: 2.6101294, y: -0.27444124}
-      - {x: 1.2798462, y: 0.20457315}
-      - {x: 0.22138786, y: 0.017685413}
-      - {x: -0.5093775, y: 0.09109926}
-      - {x: -2.1107874, y: 0.8199601}
-      - {x: -1.8525434, y: 0.46656084}
-      - {x: -0.81536007, y: -0.047556877}
-      - {x: 0.15893555, y: -0.24011183}
-      - {x: 0.9423218, y: -0.07609081}
---- !u!114 &1287436481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1287436478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67c332c2762b58243ae5a220014f2f9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationOrigin: {fileID: 1741062761}
-  children: []
-  easeAmount: 0.5
-  rotationSpeed: 10
-  rotateAmt: 70
-  childRotateAmt: 10
-  leftSideOfTree: 0
---- !u!50 &1287436482
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1287436478}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
 --- !u!1 &1292482021
 GameObject:
   m_ObjectHideFlags: 0
@@ -10719,7 +10744,7 @@ GameObject:
   - component: {fileID: 1292482022}
   m_Layer: 8
   m_Name: Big Tree Branch02
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11051,7 +11076,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 46
+  m_RootOrder: 47
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1324669208
 GameObject:
@@ -11136,7 +11161,7 @@ GameObject:
   - component: {fileID: 1331111247}
   m_Layer: 8
   m_Name: BigBranchParent5
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11155,7 +11180,7 @@ Transform:
   - {fileID: 499916961}
   - {fileID: 1359541134}
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1342233475
 GameObject:
@@ -11248,7 +11273,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1349481129}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.1, y: -5.1, z: 40}
+  m_LocalPosition: {x: 7.37, y: -2.3, z: 40}
   m_LocalScale: {x: 1.9687788, y: 1.9687788, z: 0.19687787}
   m_Children: []
   m_Father: {fileID: 2033520121}
@@ -11311,7 +11336,7 @@ GameObject:
   - component: {fileID: 1359541137}
   m_Layer: 8
   m_Name: Collider2
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11430,7 +11455,7 @@ GameObject:
   - component: {fileID: 1370814513}
   m_Layer: 8
   m_Name: Big Tree Branch01
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11717,7 +11742,7 @@ GameObject:
   - component: {fileID: 1432161393}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15582,7 +15607,7 @@ GameObject:
   - component: {fileID: 1495368705}
   m_Layer: 8
   m_Name: BigBranchParent (1)
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15815,7 +15840,7 @@ GameObject:
   - component: {fileID: 1545428496}
   m_Layer: 0
   m_Name: Big Tree Branch04
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15953,7 +15978,7 @@ GameObject:
   - component: {fileID: 1594731906}
   m_Layer: 8
   m_Name: Collider 3
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15969,7 +15994,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 60986290}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &1594731905
 PolygonCollider2D:
@@ -16202,7 +16227,7 @@ GameObject:
   - component: {fileID: 1636471815}
   m_Layer: 0
   m_Name: BigBranchParent4 (1)
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16220,7 +16245,7 @@ Transform:
   - {fileID: 2091264115}
   - {fileID: 903402772}
   m_Father: {fileID: 0}
-  m_RootOrder: 32
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -15.990001}
 --- !u!4 &1641768009 stripped
 Transform:
@@ -16610,7 +16635,7 @@ Transform:
   m_LocalScale: {x: 0.72671634, y: 0.74168515, z: 0.7367114}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 36
+  m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 24.183}
 --- !u!60 &1652505865
 PolygonCollider2D:
@@ -17154,7 +17179,7 @@ GameObject:
   - component: {fileID: 1741062761}
   m_Layer: 0
   m_Name: Branch Parent
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17509,7 +17534,7 @@ GameObject:
   - component: {fileID: 1842713186}
   m_Layer: 0
   m_Name: Big Tree Branch04
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17757,7 +17782,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 49
+  m_RootOrder: 50
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.18}
 --- !u!1 &1874858818
 GameObject:
@@ -18022,6 +18047,36 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1887433026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1887433027}
+  m_Layer: 8
+  m_Name: BigBranchParent7
+  m_TagString: Wood
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1887433027
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1887433026}
+  m_LocalRotation: {x: -0, y: -0, z: 0.4418375, w: 0.8970951}
+  m_LocalPosition: {x: 130.09, y: 25.46, z: 0}
+  m_LocalScale: {x: -0.7273197, y: 0.7422998, z: 1.54838}
+  m_Children:
+  - {fileID: 1892102550}
+  - {fileID: 612493204}
+  m_Father: {fileID: 0}
+  m_RootOrder: 31
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 52.442}
 --- !u!1 &1888607357
 GameObject:
   m_ObjectHideFlags: 0
@@ -18032,7 +18087,7 @@ GameObject:
   - component: {fileID: 1888607358}
   m_Layer: 8
   m_Name: BigBranchParent
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18127,6 +18182,79 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1892102549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1892102550}
+  - component: {fileID: 1892102552}
+  m_Layer: 8
+  m_Name: Big Tree Branch05.3
+  m_TagString: Wood
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1892102550
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1892102549}
+  m_LocalRotation: {x: -0, y: 0, z: 0.005549938, w: 0.9999846}
+  m_LocalPosition: {x: 3.7222826, y: 3.041444, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1887433027}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1892102552
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1892102549}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 871239437
+  m_SortingLayer: -2
+  m_SortingOrder: -2
+  m_Sprite: {fileID: 21300000, guid: bd652db227ca4b84db7174717e3b319e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 9.09, y: 6.44}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &1905482543
 GameObject:
   m_ObjectHideFlags: 0
@@ -18187,7 +18315,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 42
+  m_RootOrder: 43
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1905486892
 GameObject:
@@ -18261,7 +18389,7 @@ Transform:
   m_LocalScale: {x: 0.72671634, y: 0.74168515, z: 1.5415273}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 33
+  m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &1905486895
 PolygonCollider2D:
@@ -18575,7 +18703,7 @@ GameObject:
   - component: {fileID: 1958674649}
   m_Layer: 8
   m_Name: Other Colliders 2
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18955,11 +19083,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 5.6
+      value: 132.3
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.6
+      value: 23.28
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.z
@@ -19276,7 +19404,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 47
+  m_RootOrder: 48
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2067619464
 GameObject:
@@ -19289,7 +19417,7 @@ GameObject:
   - component: {fileID: 2067619466}
   m_Layer: 8
   m_Name: Big Tree Branch05.1
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19422,7 +19550,7 @@ Transform:
   m_LocalScale: {x: 0.72691613, y: 0.74188906, z: 1.5475193}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 41
+  m_RootOrder: 42
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.9840001}
 --- !u!1 &2091264114
 GameObject:
@@ -19434,7 +19562,7 @@ GameObject:
   - component: {fileID: 2091264115}
   m_Layer: 0
   m_Name: Branch Parent
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19466,7 +19594,7 @@ GameObject:
   - component: {fileID: 2091320396}
   m_Layer: 8
   m_Name: Collider 1
-  m_TagString: Branch
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19661,7 +19789,7 @@ GameObject:
   - component: {fileID: 2109200900}
   m_Layer: 8
   m_Name: Snowy_ground (1)
-  m_TagString: Untagged
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

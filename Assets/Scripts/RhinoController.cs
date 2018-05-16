@@ -193,29 +193,6 @@ public class RhinoController : RaycastController
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * -rayLength, 5, collisionMask);
 
             Debug.DrawRay(rayOrigin, Vector2.up * -rayLength /*   * rayLength   */ , Color.red);
-
-            /* Detects if the player lands on a branch and bumps it down slightly
-            */
-            if (hit)
-            {
-                if (hit.collider.tag == "Branch" && hit.distance < .4f)
-                {
-                    Debug.Log(hit.distance);
-                    if (hit.transform.eulerAngles.z < 3.5f && hitBranchEvent != null)
-                    {
-                        // Currently subscribed to by TreeBranch and GM
-                        hitBranchEvent();
-                    }
-                    else if (hit.transform.eulerAngles.z > 4.5f && hit.transform.eulerAngles.z < 7 && hitBranchEvent != null)
-                    {
-                        hitBranchEvent();
-                    }
-                    else if (hit.transform.eulerAngles.z > 9f && branchBreakEvent != null)
-                    {
-                        branchBreakEvent();
-                    }
-                }
-            }
         }
     }
 

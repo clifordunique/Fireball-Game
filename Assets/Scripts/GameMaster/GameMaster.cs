@@ -82,18 +82,28 @@ public class GameMaster : MonoBehaviour
         }
     }
 
-    public void PlayPlatformAudio(int platformIndex)
+    public void PlayPlatformAudio(Utilities.PlatformType platformIndex)
     {
         if (!audioManager.isPlaying(audioClip) || audioClip == null)
         {
             switch (platformIndex)
             {
-                case 0:
+                case Utilities.PlatformType.GRASS:
                     audioClip = grassPlatformAudioClips[Random.Range(0, grassPlatformAudioClips.Length)];
                     audioManager.PlaySound(audioClip);
+                    Debug.Log("Playing grass sound");
+                    break;
+                case Utilities.PlatformType.ROCK:
+                    Debug.Log("Playing Rock sound");
+                    break;
+                case Utilities.PlatformType.SNOW:
+                    Debug.Log("Playing snow sound");
+                    break;
+                case Utilities.PlatformType.WOOD:
+                    Debug.Log("Playing wood sound");
                     break;
                 default:
-                    Debug.Log("something otehr than grass playing");
+                    Debug.Log("Some other index got sent through somehow...");
                     break;
             }
         }
