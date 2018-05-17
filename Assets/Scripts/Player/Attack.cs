@@ -1,11 +1,13 @@
 ﻿/* Author: John Paul Depew
- * Allows whatever object this is attached to to shoot
- * using the mouse
+ * Allows Player to shoot using the mouse.
+ * Idea: This script probably controls too much. Maybe the play input script should take care of mouse input and send it to here or something.
+ * Another script should take care of the animation, like maybe the player script.
  */
 
 using UnityEngine;
 using System.Diagnostics;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 [RequireComponent(typeof(Player))]
 public class Attack : MonoBehaviour
@@ -13,7 +15,10 @@ public class Attack : MonoBehaviour
     public PlayerWeapon fireball;
     public Transform firePoint;
     public float speed = 10f;
-    Stopwatch sw;
+    public Animator headAnim;
+    public float mouthSpeed = 0.1f;
+
+    Stopwatch sw1;
     Vector2 direction;
 
     AudioManager audioManager;
@@ -23,7 +28,7 @@ public class Attack : MonoBehaviour
     {
         stats = PlayerStats.instance;
         firePoint = transform.Find("FirePoint");
-        sw = new Stopwatch();
+        sw1 = new Stopwatch();
         audioManager = AudioManager.instance;
     }
 
@@ -31,8 +36,8 @@ public class Attack : MonoBehaviour
     {
         if (stats.isFire())
         {
-            sw.Start();
-            if (sw.ElapsedMilliseconds > 500)
+            sw1.Start();
+            if (sw1.ElapsedMilliseconds > 500)
             {
                 if (firePoint == null)
                 {
@@ -40,7 +45,7 @@ public class Attack : MonoBehaviour
                 }
                 if (Input.GetMouseButtonDown(0))
                 {
-                    sw.Reset();
+                    sw1.Reset();
                     if (!EventSystem.current.IsPointerOverGameObject())
                     {
                         Shoot();
@@ -55,9 +60,54 @@ public class Attack : MonoBehaviour
         Vector2 targetPoint = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 heading = targetPoint - (Vector2)firePoint.transform.position;
         direction = heading.normalized;
-        audioManager.PlaySound("Fireball");
+        Effect();
 
         Instantiate(fireball, firePoint.position, Quaternion.FromToRotation(Vector3.up, direction));
+    }
+
+    /// <summary>
+    /// This function starts the stopwatch and plays the fireball sound
+    /// </summary>
+    void Effect()
+    {
+        StopAllCoroutines();
+        StartCoroutine(OpenMouth());
+        audioManager.PlaySound("Fireball");
+    }
+
+    /// <summary>
+    /// Changes the BlowingFire parameter for the golem head to 1, which opens the mouth.
+    /// </summary>
+    /// <returns>null</returns>
+    IEnumerator OpenMouth()
+    {
+        float blowingFire = headAnim.GetFloat("BlowingFire");
+
+        while (blowingFire < 1)
+        {
+            // It is going to 1.1 instead of 1 because otherwise it'll keep lerping into infinity
+            blowingFire = Mathf.Lerp(blowingFire, 1.1f, mouthSpeed);
+            headAnim.SetFloat("BlowingFire", blowingFire);
+            yield return null;
+        }
+        StartCoroutine(CloseMouth());
+    }
+
+    /// <summary>
+    /// Changes the BlowingFire parameter for the golem head to 0, which closes the mouth.
+    /// </summary>
+    /// <returns>null</returns>
+    IEnumerator CloseMouth()
+    {
+        float blowingFire = headAnim.GetFloat("BlowingFire");
+
+        while (blowingFire > 0)
+        {
+            // It is going to -0.1 instead of 0 because otherwise it'll keep lerping into infinity
+            blowingFire = Mathf.Lerp(blowingFire, -0.1f, mouthSpeed);
+            headAnim.SetFloat("BlowingFire", blowingFire);
+            yield return null;
+        }
     }
 
     public Vector2 GetDirection()

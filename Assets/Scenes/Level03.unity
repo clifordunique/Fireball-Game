@@ -9281,11 +9281,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4464682740705402, guid: 5f42d3a01a007b84ca4faafc69bac612,
     type: 2}
   m_PrefabInternal: {fileID: 1037759589}
---- !u!212 &1071493676 stripped
-SpriteRenderer:
-  m_PrefabParentObject: {fileID: 212762160395993568, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-    type: 2}
-  m_PrefabInternal: {fileID: 2020139888}
 --- !u!1 &1074594295
 GameObject:
   m_ObjectHideFlags: 0
@@ -10222,28 +10217,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 71.3637, y: 12.33993}
   m_EdgeRadius: 0
---- !u!1 &1213657825 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1812255519232518, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-    type: 2}
-  m_PrefabInternal: {fileID: 2020139888}
---- !u!114 &1213657833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1213657825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a33a25e681bf30468dae74ff4f14e2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireEyes1: {fileID: 1881565711}
-  fireEyes2: {fileID: 1071493676}
-  flickerSpeedMaxMin: {x: 0.3, y: 1.5}
-  flickerAmountMaxMin: {x: 0.7, y: 0.9}
-  waitBtwFlickerMaxMin: {x: 0.01, y: 2}
-  fireBase: 1
 --- !u!1 &1223065533
 GameObject:
   m_ObjectHideFlags: 0
@@ -17935,11 +17908,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!212 &1881565711 stripped
-SpriteRenderer:
-  m_PrefabParentObject: {fileID: 212112991406359746, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-    type: 2}
-  m_PrefabInternal: {fileID: 2020139888}
 --- !u!1 &1886561026
 GameObject:
   m_ObjectHideFlags: 0
@@ -19112,26 +19080,6 @@ Prefab:
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_RootOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 212112991406359746, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212762160395993568, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 95080626955037636, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 95163016676082054, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}

@@ -100,7 +100,6 @@ public class GameMaster : MonoBehaviour
                     Debug.Log("Playing snow sound");
                     break;
                 case Utilities.PlatformType.WOOD:
-                    Debug.Log("Playing wood sound");
                     break;
                 default:
                     Debug.Log("Some other index got sent through somehow...");

@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 114795061961262616}
   - component: {fileID: 114523503786425666}
   - component: {fileID: 212294081340330008}
+  - component: {fileID: 114765935818208596}
   m_Layer: 10
   m_Name: Golem
   m_TagString: Player
@@ -209,7 +210,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1812255519232518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.414963, y: 130.23051, z: 0.7242643}
+  m_LocalPosition: {x: 132.3, y: 23.28, z: 0.7242643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4400936544659590}
@@ -257,7 +258,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1354035976275148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15067321, y: 0.10996948, z: 0}
+  m_LocalPosition: {x: 0.01, y: 0.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4395252159646168}
@@ -388,6 +389,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 256
+  dstBetweenRays: 0.15
   horizontalRayCount: 0
   verticalRayCount: 0
   horizontalRaySpacing: 0
@@ -411,6 +413,8 @@ MonoBehaviour:
   fireball: {fileID: 114666874749738384, guid: 1f24b9e59f56d5c43af7c149e93d5c24, type: 2}
   firePoint: {fileID: 4498542388881238}
   speed: 5
+  headAnim: {fileID: 95163016676082054}
+  mouthSpeed: 0.2
 --- !u!114 &114629726805755846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -443,6 +447,23 @@ MonoBehaviour:
   canDoubleJump: 1
   camShakeAmt: 0.3
   camShakeLength: 0.3
+--- !u!114 &114765935818208596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812255519232518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a33a25e681bf30468dae74ff4f14e2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireEyes1: {fileID: 212112991406359746}
+  fireEyes2: {fileID: 212762160395993568}
+  flickerSpeedMaxMin: {x: 0.3, y: 1.5}
+  flickerAmountMaxMin: {x: 0.7, y: 0.9}
+  waitBtwFlickerMaxMin: {x: 0.01, y: 2}
+  fireBase: 1
 --- !u!114 &114795061961262616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -487,7 +508,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1943060679
   m_SortingLayer: 1
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300004, guid: 9b4cda6dda3eb394091f7117616f5e66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -531,7 +552,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1943060679
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300002, guid: 9b4cda6dda3eb394091f7117616f5e66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -575,7 +596,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1943060679
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9b4cda6dda3eb394091f7117616f5e66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -751,7 +772,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1943060679
   m_SortingLayer: 1
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300006, guid: 9b4cda6dda3eb394091f7117616f5e66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
