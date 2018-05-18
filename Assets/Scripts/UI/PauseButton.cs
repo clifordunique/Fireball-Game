@@ -3,8 +3,6 @@
 public class PauseButton : MonoBehaviour
 {
 
-    public static bool GameIsPaused;
-
     public GameObject pauseMenuUI;
 
     Attack playerAttack;
@@ -22,21 +20,19 @@ public class PauseButton : MonoBehaviour
 
     public void TogglePauseGame()
     {
-        if (!GameIsPaused)
+        if (GameMaster.gm.CurState == Utilities.State.RUNNING)
         {
             pauseMenuUI.SetActive(true);
-            Time.timeScale = 0f;
-            GameIsPaused = true;
             if (playerAttack != null)
                 playerAttack.enabled = false;
+            Utilities.instance.Pause();
         }
         else
         {
             pauseMenuUI.SetActive(false);
-            Time.timeScale = 1f;
-            GameIsPaused = false;
             if (playerAttack != null)
                 playerAttack.enabled = true;
+            Utilities.instance.UnPause();
         }
     }
 

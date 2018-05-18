@@ -24,7 +24,6 @@ public class WaterDropletEnemy : Enemy
     public Transform waterSplat2;
 
     Vector2 dirToPlayer;
-    Vector2 dirToPlayerOld;
 
     int damage = 10;
     bool canSeePlayer = false;
@@ -185,7 +184,6 @@ public class WaterDropletEnemy : Enemy
         {
             dirToPlayer = (player.position - transform.position);
             yield return new WaitForSeconds(.5f);
-            dirToPlayerOld = dirToPlayer;
         }
     }
 

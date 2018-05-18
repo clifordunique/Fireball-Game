@@ -50,7 +50,10 @@ public class Rhino : Enemy {
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
+        // First check and see if the state is paused. If it is, return.
+        if (GameMaster.gm.CurState == Utilities.State.PAUSED) return;
 
         // Velocity on y axis reset if collision above or below player
         if (controller.collisions.above || controller.collisions.below)
@@ -141,7 +144,6 @@ public class Rhino : Enemy {
         anim.Play("Run");
         StartCoroutine(Charging());
         rhinoRun.Play();
-        //audioManager.PlaySound("rhino run");
     }
 
     IEnumerator Charging()

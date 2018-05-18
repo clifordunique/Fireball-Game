@@ -37,7 +37,7 @@ public class Attack : MonoBehaviour
         if (stats.isFire())
         {
             sw1.Start();
-            if (sw1.ElapsedMilliseconds > 500)
+            if (sw1.ElapsedMilliseconds > 100)
             {
                 if (firePoint == null)
                 {

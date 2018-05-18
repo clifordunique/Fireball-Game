@@ -67,7 +67,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
     int wallDirX;
 
     float velocityXOld;
-    float velocityYOld;
 
     // Power ups
     public bool canDoubleJump;
@@ -417,7 +416,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     /* Calculates the velocity of the player depending on whether the player is on a flat area, climbing a slope,
      * or descending it. Applies a smoothing effect between the original velocity and the target velocity.
-     * Values / Objects used: Controller2D, moveSpeed, directionalInput, velocityXOld, velocityYOld
+     * Values / Objects used: Controller2D, moveSpeed, directionalInput, velocityXOld
      */
     void CalculateVelocity()
     {
@@ -446,7 +445,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
 
         velocityXOld = velocity.x;
-        velocityYOld = velocity.y;
         velocity.y += gravity * Time.deltaTime;
     }
 

@@ -19,7 +19,6 @@ public class Controller2D : RaycastController
     // Weird stuff
     TreeBranch treeBranch; // try to get rid of this...
     Player player;
-    AudioManager audioManager;
 
     public CollisionInfo collisions;
     [HideInInspector]
@@ -33,7 +32,6 @@ public class Controller2D : RaycastController
         base.Start();
         sw = new Stopwatch();
         collisions.faceDir = 1;
-        audioManager = AudioManager.instance;
         treeBranch = FindObjectOfType<TreeBranch>();
         player = GetComponent<Player>();
     }

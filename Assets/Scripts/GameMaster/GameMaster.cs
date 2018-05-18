@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-//using static Enums;
 
 public class GameMaster : MonoBehaviour
 {
     //public enum ambiance { FOREST, DARKFOREST, SNOW };  // To be used in determining background ambience
     public Utilities.Ambiance CurBackgroundAmbiance{ get; set; }
-
+    public Utilities.State CurState { get; set; }
     public static GameMaster gm;
 
     public GameObject endLevelUI;
@@ -27,7 +26,7 @@ public class GameMaster : MonoBehaviour
 
     void Awake()
     {
-        
+        CurState = Utilities.State.RUNNING;
         if (gm == null)
         {
             gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
@@ -91,13 +90,10 @@ public class GameMaster : MonoBehaviour
                 case Utilities.PlatformType.GRASS:
                     audioClip = grassPlatformAudioClips[Random.Range(0, grassPlatformAudioClips.Length)];
                     audioManager.PlaySound(audioClip);
-                    Debug.Log("Playing grass sound");
                     break;
                 case Utilities.PlatformType.ROCK:
-                    Debug.Log("Playing Rock sound");
                     break;
                 case Utilities.PlatformType.SNOW:
-                    Debug.Log("Playing snow sound");
                     break;
                 case Utilities.PlatformType.WOOD:
                     break;

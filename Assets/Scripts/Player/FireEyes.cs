@@ -6,7 +6,8 @@ public class FireEyes : MonoBehaviour
 {
 
     public SpriteRenderer fireEyes1, fireEyes2;
-    public Vector2 flickerSpeedMaxMin = new Vector2(0.3f, 1.5f);
+    // Should be between 0 and 1, and oddly enough, the lower the speed, the slower the flicker.
+    public Vector2 flickerSpeedMaxMin = new Vector2(0.2f, 1f);
     public Vector2 flickerAmountMaxMin = new Vector2(0.7f, 0.9f);
     public Vector2 waitBtwFlickerMaxMin = new Vector2(0.01f, 2f);
 

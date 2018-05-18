@@ -9,11 +9,6 @@ public class RhinoController : RaycastController
     float speedBySlopeAngleClimb;
     float speedBySlopeAngleDescend;
 
-    public delegate void OnHitBranch();
-    public event OnHitBranch hitBranchEvent;
-    public delegate void OnBranchBreak();
-    public event OnBranchBreak branchBreakEvent;
-
     public CollisionInfo collisions;
     [HideInInspector]
     public Vector2 playerInput;
@@ -49,7 +44,6 @@ public class RhinoController : RaycastController
 
         //Always check for horizontal collisions to enable wall sliding in case player jumps while right next to a wall.
         HorizontalCollisions(ref moveAmount);
-        ConstantDownwardRaycast(moveAmount);
         if (moveAmount.y != 0)
         {
             VerticalCollisions(ref moveAmount);
@@ -180,19 +174,6 @@ public class RhinoController : RaycastController
                     collisions.slopeNormal = hit.normal;
                 }
             }
-        }
-    }
-
-    void ConstantDownwardRaycast(Vector2 moveAmount)
-    {
-        float rayLength = Mathf.Abs(moveAmount.y) + skinWidth;
-        for (int i = 0; i < verticalRayCount; i++)
-        {
-            Vector2 rayOrigin = raycastOrigins.bottomLeft;
-            rayOrigin += Vector2.right * (verticalRaySpacing * i * moveAmount.x);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * -rayLength, 5, collisionMask);
-
-            Debug.DrawRay(rayOrigin, Vector2.up * -rayLength /*   * rayLength   */ , Color.red);
         }
     }
 

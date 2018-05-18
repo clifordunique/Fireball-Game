@@ -3344,7 +3344,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4104672465267970, guid: 021bca08c0612fb4cb0d3f2094c2261a, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1904936755795660, guid: 021bca08c0612fb4cb0d3f2094c2261a, type: 2}
       propertyPath: m_Name
@@ -3382,7 +3382,7 @@ Prefab:
     - target: {fileID: 114801917443570476, guid: 021bca08c0612fb4cb0d3f2094c2261a,
         type: 2}
       propertyPath: chaseSpeed
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 021bca08c0612fb4cb0d3f2094c2261a, type: 2}
@@ -3424,12 +3424,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4104672465267970, guid: 021bca08c0612fb4cb0d3f2094c2261a, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114801917443570476, guid: 021bca08c0612fb4cb0d3f2094c2261a,
         type: 2}
       propertyPath: chaseSpeed
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 95984268816671748, guid: 021bca08c0612fb4cb0d3f2094c2261a,
         type: 2}
@@ -9915,7 +9915,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4084536330692472, guid: 5c2e43948bc20024b84e95554c8ceaf4, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114648225553489990, guid: 5c2e43948bc20024b84e95554c8ceaf4,
         type: 2}
@@ -10079,7 +10079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1193800372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19051,11 +19051,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 132.3
+      value: 2.9
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 23.28
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.z
@@ -19079,7 +19079,32 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114765935818208596, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+        type: 2}
+      propertyPath: flickerSpeedMaxMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114765935818208596, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+        type: 2}
+      propertyPath: flickerAmountMaxMin.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114765935818208596, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+        type: 2}
+      propertyPath: waitBtwFlickerMaxMin.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114765935818208596, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+        type: 2}
+      propertyPath: flickerSpeedMaxMin.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114765935818208596, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+        type: 2}
+      propertyPath: waitBtwFlickerMaxMin.x
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
@@ -19152,7 +19177,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2031799800}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50.5, y: -3.34, z: 75}
+  m_LocalPosition: {x: -50.5, y: -2.8, z: 75}
   m_LocalScale: {x: 2.181821, y: 2.181821, z: 0}
   m_Children: []
   m_Father: {fileID: 2033520121}
