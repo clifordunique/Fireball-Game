@@ -92,9 +92,9 @@
     <Compile Include="Assets\Scripts\PondBasin.cs" />
     <Compile Include="Assets\Scripts\RaycastController.cs" />
     <Compile Include="Assets\Scripts\RechargeFire.cs" />
-    <Compile Include="Assets\Scripts\Rhino.cs" />
-    <Compile Include="Assets\Scripts\RhinoAttack.cs" />
-    <Compile Include="Assets\Scripts\RhinoController.cs" />
+    <Compile Include="Assets\Scripts\Rhino\Rhino.cs" />
+    <Compile Include="Assets\Scripts\Rhino\RhinoAttack.cs" />
+    <Compile Include="Assets\Scripts\Rhino\RhinoController.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\StatusIndicator.cs" />
     <Compile Include="Assets\Scripts\TreeBranch.cs" />
@@ -108,11 +108,11 @@
     <Compile Include="Assets\Scripts\Water.cs" />
     <Compile Include="Assets\Scripts\WaterDropletEnemy.cs" />
     <Compile Include="Assets\Scripts\WaterSplat.cs" />
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/jpdep/Desktop/Unity/Fireball-Game/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/jpdep/Desktop/Unity/Fireball-Game/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>C:/Users/jpdep/Desktop/Unity/Fireball-Game/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

@@ -21,7 +21,8 @@ public class CampFire : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.GetComponent<Player>() != null && stats.isFire())
+        Debug.Log("trigger endter");
+        if (col.CompareTag("PlayerWeapon"))
         {
             Instantiate(fire, new Vector2(transform.position.x + displacementX, transform.position.y + displacementY), transform.rotation);
             if (levelEndEvent != null)
