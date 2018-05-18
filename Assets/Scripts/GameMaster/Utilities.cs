@@ -29,15 +29,25 @@ public class Utilities : MonoBehaviour {
         Debug.Log("Exiting Game");
     }
 
+    /// <summary>
+    /// Pauses the game, setting timeScale to 0, pausing the AudioListener, and setting the 
+    /// state in GM to paused.
+    /// </summary>
     public void Pause()
     {
         Time.timeScale = 0f;
+        AudioListener.pause = true;
         gm.CurState = State.PAUSED;
     }
 
+    /// <summary>
+    /// Pauses the game, setting timeScale to 1, unpausing the AudioListener, and setting the 
+    /// state in GM to running.
+    /// </summary>
     public void UnPause()
     {
         Time.timeScale = 1f;
+        AudioListener.pause = false;
         gm.CurState = State.RUNNING;
     }
 

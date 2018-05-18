@@ -5,7 +5,6 @@
  */
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
 using System;
@@ -52,6 +51,12 @@ public class WaterDropletEnemy : Enemy
 
     void Update()
     {
+        // First check and see if the state is paused. If it is, return.
+        if (GameMaster.gm.CurState == Utilities.State.PAUSED)
+        {
+            return;
+        }
+
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -129,7 +134,8 @@ public class WaterDropletEnemy : Enemy
                 yield return new WaitForSeconds(waitTime);
                 anim.SetFloat("Speed", speed);
             }
-            yield return null;
+
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
@@ -171,7 +177,7 @@ public class WaterDropletEnemy : Enemy
                 dirToPlayer.y = 0;
             }
             transform.Translate(dirToPlayer.normalized * chaseSpeed / 50);
-            yield return null;
+            yield return new WaitForSeconds(0.01f);
         }
     }
 

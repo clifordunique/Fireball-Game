@@ -150,8 +150,8 @@ public class Rhino : Enemy {
     {
         moveSpeed = 0.2f;
         while (true)
-        {
-            if(Mathf.Abs(moveSpeed) < maxMoveSpeed)
+        { 
+            if (Mathf.Abs(moveSpeed) < maxMoveSpeed)
             {
                 moveSpeed = moveSpeed + 0.02f;
             }
