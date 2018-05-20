@@ -99,6 +99,8 @@
     <Compile Include="Assets\Scripts\StatusIndicator.cs" />
     <Compile Include="Assets\Scripts\TreeBranch.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TriggerSensor.cs" />
+    <Compile Include="Assets\Scripts\TriggerSensor\TSEDFade.cs" />
+    <Compile Include="Assets\Scripts\TriggerSensor\TSEnableDisableObject.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSEnableObject.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSModifyCamera.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSSwitchBackground.cs" />
