@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class TSEDFade : TSEnableDisableObject
 {
-
     public float min, max;
 
     public override void OnTriggerEnter2D(Collider2D col)
