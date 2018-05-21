@@ -76,7 +76,6 @@
     <Compile Include="Assets\Scripts\GroundFade.cs" />
     <Compile Include="Assets\Scripts\ISmashable.cs" />
     <Compile Include="Assets\Scripts\LevelStarter.cs" />
-    <Compile Include="Assets\Scripts\Loader.cs" />
     <Compile Include="Assets\Scripts\ObjectDestroy.cs" />
     <Compile Include="Assets\Scripts\Parallaxing.cs" />
     <Compile Include="Assets\Scripts\Plant.cs" />
@@ -85,10 +84,10 @@
     <Compile Include="Assets\Scripts\Player\Controller2D.cs" />
     <Compile Include="Assets\Scripts\Player\FireEyes.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerDestroy.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerWeapon.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile.cs" />
-    <Compile Include="Assets\Scripts\PlayerDestroy.cs" />
     <Compile Include="Assets\Scripts\PondBasin.cs" />
     <Compile Include="Assets\Scripts\RaycastController.cs" />
     <Compile Include="Assets\Scripts\RechargeFire.cs" />
@@ -96,6 +95,7 @@
     <Compile Include="Assets\Scripts\Rhino\RhinoAttack.cs" />
     <Compile Include="Assets\Scripts\Rhino\RhinoController.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\StatusIndicator.cs" />
     <Compile Include="Assets\Scripts\TreeBranch.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TriggerSensor.cs" />

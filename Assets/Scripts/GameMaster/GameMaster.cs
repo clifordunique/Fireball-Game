@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
@@ -35,15 +34,16 @@ public class GameMaster : MonoBehaviour
         {
             FindObjectOfType<CampFire>().levelEndEvent += OnLevelEnd;
         }
+    }
+
+    void Start()
+    {
         audioManager = AudioManager.instance;
         if (audioManager == null)
         {
             Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
         }
-    }
-
-    void Start()
-    {
+        SaveLoad.Load();
         LoadPlatformSounds();
         PlayBackgroundAmbiance();
     }
@@ -111,7 +111,6 @@ public class GameMaster : MonoBehaviour
         switch (CurBackgroundAmbiance)
         {
             case Utilities.Ambiance.FOREST:
-                //GetRandomIndex();
                 audioManager.PlaySound(forestAmbiance);
                 curAmbiance = forestAmbiance;
                 break;

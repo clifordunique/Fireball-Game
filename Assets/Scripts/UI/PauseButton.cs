@@ -26,6 +26,7 @@ public class PauseButton : MonoBehaviour
 
     public void Exit()
     {
+        SaveLoad.Save();
         Utilities.instance.Exit();
     }
 

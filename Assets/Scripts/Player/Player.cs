@@ -69,7 +69,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     float velocityXOld;
 
     // Power ups
-    public bool canDoubleJump;
+    //public bool canDoubleJump;
     bool timeIsOut = false;
 
     //CameraShake variables
@@ -323,7 +323,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             isDoubleJumping = false;
         }
-        if (!timeIsOut && canDoubleJump && (Input.GetButton("Jump") || Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
+        if (!timeIsOut && stats.zoom && (Input.GetButton("Jump") || Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
         {
             if ((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
             {

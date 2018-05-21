@@ -8,6 +8,7 @@ public class LevelStarter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        new WaitForSeconds(0.1f);
         GameMaster.gm.SetAmbianceEnum(backgroundAmbiance);
 	}
 }

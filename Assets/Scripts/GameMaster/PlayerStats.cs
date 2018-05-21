@@ -4,6 +4,14 @@ public class PlayerStats : MonoBehaviour {
 
     public static PlayerStats instance;
 
+    // Powerups
+    private bool _zoom;
+    public bool zoom
+    {
+        get { return _zoom; }
+        set { _zoom = zoom; }
+    }
+
     public int maxHealth = 30;
     private int _curHealth;
     public int curHealth
@@ -13,7 +21,7 @@ public class PlayerStats : MonoBehaviour {
     }
 
     public int maxFireHealth = 30;
-    public int _curFireHealth;
+    private int _curFireHealth;
     public int curFireHealth
     {
         get { return _curFireHealth; }
