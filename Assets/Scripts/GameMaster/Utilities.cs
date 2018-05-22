@@ -56,4 +56,6 @@ public class Utilities : MonoBehaviour {
     public enum PlatformType { GRASS, SNOW, ROCK, WOOD }
 
     public enum State { PAUSED, RUNNING }
+
+    public enum PowerUps { ZOOM }
 }

@@ -91,8 +91,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
             Debug.Log("No FireEyes script attached to this GameObject");
         }
         stats = PlayerStats.instance;
-        stats.curFireHealth = stats.maxFireHealth;
-        stats.curHealth = stats.maxHealth;
+        stats.CurFireHealth = stats.MaxFireHealth;
+        stats.CurHealth = stats.MaxHealth;
         audioManager = AudioManager.instance;
         if (audioManager == null)
         {
@@ -221,9 +221,9 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         anim.SetFloat("Speed", Mathf.Abs(velocity.x));
         anim.SetBool("Grounded", controller.collisions.below);
-        fireEyes.SetFireBase(stats.curFireHealth, stats.maxFireHealth);
+        fireEyes.SetFireBase(stats.CurFireHealth, stats.MaxFireHealth);
 
-        if (stats.curFireHealth <= 0)
+        if (stats.CurFireHealth <= 0)
         {
             if (onFireChangeEvent != null)
             {
@@ -323,7 +323,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             isDoubleJumping = false;
         }
-        if (!timeIsOut && stats.zoom && (Input.GetButton("Jump") || Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
+        if (!timeIsOut && stats.Zoom && (Input.GetButton("Jump") || Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
         {
             if ((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
             {
@@ -452,17 +452,17 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     public void DamageFire(int _damage)
     {
-        if (stats.curFireHealth >= 0)
+        if (stats.CurFireHealth >= 0)
         {
-            stats.curFireHealth -= _damage;
+            stats.CurFireHealth -= _damage;
         }
     }
 
     public void HealFire(int _health)
     {
-        if (stats.curFireHealth < stats.maxFireHealth)
+        if (stats.CurFireHealth < stats.MaxFireHealth)
         {
-            stats.curFireHealth += _health;
+            stats.CurFireHealth += _health;
             //anim.SetFloat("Fire Health", stats.curFireHealth);
         }
         //statusIndicator.SetFireHealth(stats.curFireHealth);
@@ -470,8 +470,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     public void DamagePlayer(int _damage)
     {
-        stats.curHealth -= _damage;
-        if (stats.curHealth <= 0)
+        stats.CurHealth -= _damage;
+        if (stats.CurHealth <= 0)
         {
             Effect();
             GameMaster.KillPlayer(this);

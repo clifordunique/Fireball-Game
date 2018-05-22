@@ -129,6 +129,7 @@ public class GameMaster : MonoBehaviour
 
     void OnLevelEnd()
     {
+        SaveLoad.Save();
         StartCoroutine(FadeOut(1));
         FindObjectOfType<CampFire>().levelEndEvent -= OnLevelEnd;
     }

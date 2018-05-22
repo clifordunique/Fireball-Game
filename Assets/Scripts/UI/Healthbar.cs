@@ -28,8 +28,8 @@ public class Healthbar : MonoBehaviour
 
     void Update()
     {
-        healthAmount = maxCovers * (stats.maxHealth - stats.curHealth) / stats.maxHealth;
-        fireHealthAmount = maxCovers * (stats.maxFireHealth - stats.curFireHealth) / stats.maxFireHealth;
+        healthAmount = maxCovers * (stats.MaxHealth - stats.CurHealth) / stats.MaxHealth;
+        fireHealthAmount = maxCovers * (stats.MaxFireHealth - stats.CurFireHealth) / stats.MaxFireHealth;
         UpdateHealthBar();
     }
 

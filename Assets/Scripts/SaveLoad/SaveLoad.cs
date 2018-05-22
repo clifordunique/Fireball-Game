@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Collections.Generic;
 
 public static class SaveLoad {
 
@@ -12,7 +11,7 @@ public static class SaveLoad {
         FileStream file = File.Create(Application.persistentDataPath + "/savedGames.gd");
 
         PlayerData data = new PlayerData();
-        data.zoom = PlayerStats.instance.zoom;
+        data.zoom = PlayerStats.instance.Zoom;
 
         bf.Serialize(file, data);
         file.Close();
@@ -25,10 +24,10 @@ public static class SaveLoad {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
             PlayerData data = (PlayerData)bf.Deserialize(file);
-            Debug.Log("Loading file: " + data.zoom);
 
             file.Close();
-            PlayerStats.instance.zoom = data.zoom;
+
+            PlayerStats.instance.Zoom = data.zoom;
         }
     }
 }

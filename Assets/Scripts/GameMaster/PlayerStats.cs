@@ -5,32 +5,40 @@ public class PlayerStats : MonoBehaviour {
     public static PlayerStats instance;
 
     // Powerups
-    private bool _zoom;
-    public bool zoom
+    private bool zoom;
+    public bool Zoom
     {
-        get { return _zoom; }
-        set { _zoom = zoom; }
+        get { return zoom; }
+        set { zoom = value; }
     }
 
-    public int maxHealth = 30;
-    private int _curHealth;
-    public int curHealth
-    {
-        get { return _curHealth; }
-        set { _curHealth = Mathf.Clamp(value, 0, maxHealth); }
-    }
+    private int maxHealth = 30;
+    private int curHealth;
+    private int maxFireHealth = 30;
+    private int curFireHealth;
 
-    public int maxFireHealth = 30;
-    private int _curFireHealth;
-    public int curFireHealth
+    public int MaxHealth
     {
-        get { return _curFireHealth; }
-        set { _curFireHealth = Mathf.Clamp(value, 0, maxFireHealth); }
+        get { return maxHealth; }
+    }
+    public int CurHealth
+    {
+        get { return curHealth; }
+        set { curHealth = Mathf.Clamp(value, 0, MaxHealth); }
+    }
+    public int MaxFireHealth
+    {
+        get { return maxFireHealth; }
+    }
+    public int CurFireHealth
+    {
+        get { return curFireHealth; }
+        set { curFireHealth = Mathf.Clamp(value, 0, MaxFireHealth); }
     }
 
     public bool isFire()
     {
-        return _curFireHealth > 0;
+        return curFireHealth > 0;
     }
 
     void Awake()
@@ -38,6 +46,19 @@ public class PlayerStats : MonoBehaviour {
         if (instance == null)
         {
             instance = this;
+        }
+    }
+
+    public void EnablePowerup(Utilities.PowerUps powerup)
+    {
+        switch (powerup)
+        {
+            case Utilities.PowerUps.ZOOM:
+                zoom = true;
+                break;
+            default:
+                Debug.Log("Powerup is not in PlayerStats.");
+                break;
         }
     }
 }
