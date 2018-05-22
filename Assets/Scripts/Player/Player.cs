@@ -115,6 +115,9 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void Update()
     {
+        // First check and see if the state is paused. If it is, return.
+        if (Utilities.CurState == Utilities.State.PAUSED) return;
+
         CalculateVelocity();
         //HandleWallSliding();
         DetectUnderBrush();

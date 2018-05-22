@@ -142,10 +142,10 @@ public class GameMaster : MonoBehaviour
         switch (action)
         {
             case 1:
-                Utilities.instance.LoadNextLevel();
+                Utilities.LoadNextLevel();
                 break;
             case 2:
-                Utilities.instance.RestartLevel();                
+                Utilities.RestartLevel();                
                 break;
             default:
                 Debug.LogError("Not a valid case for FadeOut Function");

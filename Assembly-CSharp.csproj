@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerWeapon.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile.cs" />
     <Compile Include="Assets\Scripts\PondBasin.cs" />
+    <Compile Include="Assets\Scripts\Powerup\FadeMask.cs" />
     <Compile Include="Assets\Scripts\RaycastController.cs" />
     <Compile Include="Assets\Scripts\RechargeFire.cs" />
     <Compile Include="Assets\Scripts\Rhino\Rhino.cs" />

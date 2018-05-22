@@ -1,0 +1,2 @@
+C:\Users\jpdep\Desktop\Unity\Fireball-Game\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\jpdep\Desktop\Unity\Fireball-Game\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
