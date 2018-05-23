@@ -5,16 +5,15 @@ public class Utilities : MonoBehaviour {
 
     public static Utilities instance;
 
-    public static State CurState = State.RUNNING;
+    GameMaster gm;
 
- //   GameMaster gm;
+    // Use this for initialization
+    void Start()
+    {
+        instance = this;
+        gm = GameMaster.gm;
+    }
 
-	//// Use this for initialization
-	//void Start () {
- //       instance = this;
- //       gm = GameMaster.gm;
-	//}
-	
     public static void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -35,22 +34,22 @@ public class Utilities : MonoBehaviour {
     /// Pauses the game, setting timeScale to 0, pausing the AudioListener, and setting the 
     /// state in GM to paused.
     /// </summary>
-    public static void Pause()
+    public void Pause()
     {
         Time.timeScale = 0f;
         AudioListener.pause = true;
-        CurState = State.PAUSED;
+        gm.CurState = State.PAUSED;
     }
 
     /// <summary>
     /// Pauses the game, setting timeScale to 1, unpausing the AudioListener, and setting the 
     /// state in GM to running.
     /// </summary>
-    public static void UnPause()
+    public void UnPause()
     {
         Time.timeScale = 1f;
         AudioListener.pause = false;
-        CurState = State.RUNNING;
+        gm.CurState = State.RUNNING;
     }
 
     public enum Ambiance { FOREST, DARKFOREST, MOUNTAIN };

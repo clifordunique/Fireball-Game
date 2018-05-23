@@ -7,15 +7,15 @@ public class PauseButton : MonoBehaviour
 
     public void TogglePauseGame()
     {
-        if (Utilities.CurState == Utilities.State.RUNNING)
+        if (GameMaster.gm.CurState == Utilities.State.RUNNING)
         {
             pauseMenuUI.SetActive(true);
-            Utilities.Pause();
+            Utilities.instance.Pause();
         }
         else
         {
             pauseMenuUI.SetActive(false);
-            Utilities.UnPause();
+            Utilities.instance.UnPause();
         }
     }
 

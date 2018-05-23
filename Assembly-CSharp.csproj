@@ -97,7 +97,6 @@
     <Compile Include="Assets\Scripts\Rhino\RhinoController.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
-    <Compile Include="Assets\Scripts\StatusIndicator.cs" />
     <Compile Include="Assets\Scripts\TreeBranch.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TriggerSensor.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSEDFade.cs" />

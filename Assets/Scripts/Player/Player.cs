@@ -63,7 +63,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public GameObject deathPrefab;
 
     Vector2 directionalInput;
-    bool wallSliding;
+    //bool wallSliding;
     int wallDirX;
 
     float velocityXOld;
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     void Update()
     {
         // First check and see if the state is paused. If it is, return.
-        if (Utilities.CurState == Utilities.State.PAUSED) return;
+        if (gm.CurState == Utilities.State.PAUSED) return;
 
         CalculateVelocity();
         //HandleWallSliding();
@@ -373,44 +373,46 @@ public class Player : MonoBehaviour, FallInWaterableObject
         timeIsOut = false;
     }
 
-    void HandleWallSliding()
-    {
-        wallDirX = (controller.collisions.left) ? -1 : 1;
-        wallSliding = false;
-        if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
-        {
-            wallSliding = true;
-            if (Input.GetKey(KeyCode.DownArrow))
-            {
-                wallSliding = false;
-                return;
-            }
+    // I'm not sure if I'll do wall sliding or not...
+    //
+    //void HandleWallSliding()
+    //{
+    //    wallDirX = (controller.collisions.left) ? -1 : 1;
+    //    wallSliding = false;
+    //    if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
+    //    {
+    //        wallSliding = true;
+    //        if (Input.GetKey(KeyCode.DownArrow))
+    //        {
+    //            wallSliding = false;
+    //            return;
+    //        }
 
-            if (velocity.y < -wallSlideSpeedMax)
-            {
-                velocity.y = -wallSlideSpeedMax;
-            }
-            // Creating a little time that the player sticks to the wall before making a leap away from the wall
-            if (timeToWallUnstick > 0)
-            {
-                velocityXSmoothing = 0;
-                velocity.x = 0;
+    //        if (velocity.y < -wallSlideSpeedMax)
+    //        {
+    //            velocity.y = -wallSlideSpeedMax;
+    //        }
+    //        // Creating a little time that the player sticks to the wall before making a leap away from the wall
+    //        if (timeToWallUnstick > 0)
+    //        {
+    //            velocityXSmoothing = 0;
+    //            velocity.x = 0;
 
-                if (directionalInput.x != wallDirX && directionalInput.x != 0)
-                {
-                    timeToWallUnstick -= Time.deltaTime;
-                }
-                else
-                {
-                    timeToWallUnstick = wallStickTime;
-                }
-            }
-            else
-            {
-                timeToWallUnstick = wallStickTime;
-            }
-        }
-    }
+    //            if (directionalInput.x != wallDirX && directionalInput.x != 0)
+    //            {
+    //                timeToWallUnstick -= Time.deltaTime;
+    //            }
+    //            else
+    //            {
+    //                timeToWallUnstick = wallStickTime;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            timeToWallUnstick = wallStickTime;
+    //        }
+    //    }
+    //}
 
     public void OverrideVelocity()
     {
