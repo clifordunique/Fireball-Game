@@ -3,7 +3,6 @@
 public class Enemy: MonoBehaviour {
 
     public float maxHealth = 10;
-    [SerializeField]
     protected float health;
 
     public virtual void Start()

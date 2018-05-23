@@ -3,6 +3,8 @@ using System;
 
 public class CameraFollow : MonoBehaviour
 {
+    public GameObject audioListenerPos;
+
     public Controller2D target;
     public float verticalOffset;
     public float lookAheadDstX;
@@ -28,7 +30,7 @@ public class CameraFollow : MonoBehaviour
     float targetLookAheadY;
     float lookAheadDirY;
     float smoothLookVelocityY;
-    float smoothVelocityY;
+    readonly float smoothVelocityY;
 
     bool lookAheadStoppedX;
     bool lookAheadStoppedY;
@@ -44,6 +46,8 @@ public class CameraFollow : MonoBehaviour
     // All player movement has been finished for the frame in its own update method
     void LateUpdate()
     {
+        audioListenerPos.transform.position = focusArea.center;
+
         if (target.collider != null)
         {
             focusArea.Update(target.collider.bounds);

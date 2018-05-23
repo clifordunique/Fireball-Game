@@ -222,7 +222,7 @@ public class WaterDropletEnemy : Enemy
             StopAllCoroutines();
             StartCoroutine(ChasePlayer(false));
         }
-        if (health <= 0)
+        if (health <= 5)
         {
             FindObjectOfType<Player>().onFireChangeEvent -= OnFireChange;
             Destroy(this.gameObject);

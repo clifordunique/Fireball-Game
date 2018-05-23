@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class RhinoAttack : MonoBehaviour {
 
-
-    public Camera cam;
     public float directionX = -1;
     public Transform rayOriginPos;
     //public delegate void OnRhinoHitPlayer();
@@ -75,14 +73,5 @@ public class RhinoAttack : MonoBehaviour {
     public void Effect(float amt, float length)
     {
         camShake.Shake(amt, length);
-    }
-
-    IEnumerator ZoomCamera()
-    {
-        while (cam.orthographicSize > 10)
-        {
-            cam.orthographicSize -= 0.5f;
-            yield return null;
-        }
     }
 }
