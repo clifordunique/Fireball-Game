@@ -111,6 +111,9 @@
     <Compile Include="Assets\Scripts\Water.cs" />
     <Compile Include="Assets\Scripts\WaterDropletEnemy.cs" />
     <Compile Include="Assets\Scripts\WaterSplat.cs" />
+    <None Include="Assets\Material\Shader\IceShaderFastSimleBackFace.shader" />
+    <None Include="Assets\Material\Shader\IceShaderFastSimple.shader" />
+    <None Include="Assets\Material\Shader\IceShaderDistortion.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/jpdep/Desktop/Unity/Fireball-Game/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

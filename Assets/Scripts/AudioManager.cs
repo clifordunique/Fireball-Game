@@ -1,11 +1,10 @@
 ﻿/* Name: AudioManager.cs
- * Author: Brackeys
+ * Author: Brackeys and John Paul Depew
  * Description: Contains a Sound and AudioManager class. The sound class has settings for volume, pitch, randomness, and looping.
  * AudioManager contains an array of Sound objects and functions for playing and stopping the sound.
  */
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -80,13 +79,13 @@ public class Sound
     }
 }
 
-public class AudioManager : MonoBehaviour {
+public class AudioManager : MonoBehaviour
+{
 
     public static AudioManager instance;
 
     [SerializeField]
     Sound[] sounds;
-    private float volumePercent = 1;
 
     void Awake()
     {
@@ -102,7 +101,7 @@ public class AudioManager : MonoBehaviour {
             instance = this;
             DontDestroyOnLoad(this);
         }
-		for (int i = 0; i < sounds.Length; i++)
+        for (int i = 0; i < sounds.Length; i++)
         {
             GameObject _go = new GameObject("Sound_" + i + "_" + sounds[i].name);
             _go.transform.SetParent(this.transform);
@@ -110,9 +109,10 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    void Start()
+    public float GetVolume(string _name)
     {
-
+        Sound tempSound = FindSound(_name);
+        return tempSound.GetVolume();
     }
 
     /// <summary>
@@ -121,17 +121,11 @@ public class AudioManager : MonoBehaviour {
     /// <param name="_name">The name of the sound to be played</param>
     public void PlaySound(string _name)
     {
-        for (int i = 0; i < sounds.Length; i++)
-        {
-            if (sounds[i].name == _name)
-            {
-                sounds[i].Play(volumePercent);
-                return;
-            }
-        }
-
-        // no sound with _name
-        Debug.LogWarning("AudioManager: Sound not found in list, " + _name);
+        Sound tempSound = FindSound(_name);
+        if (tempSound != null)
+            tempSound.Play();
+        else
+            Debug.LogWarning("Trying to play a nonexistent sound");
     }
 
     /// <summary>
@@ -141,17 +135,8 @@ public class AudioManager : MonoBehaviour {
     /// <param name="_volumePercent">The volume percentage for the sound</param>
     public void PlaySound(string _name, float _volumePercent)
     {
-        for (int i = 0; i < sounds.Length; i++)
-        {
-            if (sounds[i].name == _name)
-            {
-                sounds[i].Play(_volumePercent);
-                return;
-            }
-        }
-
-        // no sound with _name
-        Debug.LogWarning("AudioManager: Sound not found in list, " + _name);
+        Sound tempSound = FindSound(_name);
+        tempSound.Play(_volumePercent);
     }
 
     /// <summary>
@@ -160,44 +145,33 @@ public class AudioManager : MonoBehaviour {
     /// <param name="_name">The sound to be stopped</param>
     public void StopSound(string _name)
     {
-        for (int i = 0; i < sounds.Length; i++)
-        {
-            if (sounds[i].name == _name)
-            {
-                sounds[i].Stop();
-                return;
-            }
-        }
-
-        // no sound with _name
-        Debug.LogWarning("AudioManager: Sound not found in list, " + _name);
+        Sound tempSound = FindSound(_name);
+        tempSound.Stop();
     }
 
     /// <summary>
-    /// This function finds sound1 and sound2 from the sounds libary and 
-    /// fades sound1 in and sound2 out.
+    /// Fades sound1 in and sound2 out at the same speed
     /// </summary>
-    /// <param name="sound1"></param>
-    /// <param name="sound2"></param>
-    public void Fade(string sound1, string sound2)
+    /// <param name="sound1">The sound to fade in</param>
+    /// <param name="sound2">The sound to fade out</param>
+    public void FadeBetweenTwoSounds(string sound1, string sound2)
     {
-        Sound tempSound1 = new Sound();
-        Sound tempSound2 = new Sound();
-        for (int i = 0; i < sounds.Length; i++)
-        {
-            if (sounds[i].name == sound1)
-            {
-                tempSound1 = sounds[i];
-            }
-        }
-        for (int i = 0; i < sounds.Length; i++)
-        {
-            if (sounds[i].name == sound2)
-            {
-                tempSound2 = sounds[i];
-            }
-        }
-        StartCoroutine(FadeVolume(tempSound1,tempSound2));
+        Sound tempSound1 = FindSound(sound1);
+        Sound tempSound2 = FindSound(sound2);
+
+        StartCoroutine(FadeVolume(tempSound1, tempSound2));
+    }
+
+    /// <summary>
+    /// Fades sound to a level given by volumePercentage
+    /// </summary>
+    /// <param name="sound">Sound to fade</param>
+    /// <param name="volumePercentage">Volume percentage for the sound</param>
+    /// <param name="fadeSpeed">The speed at which the sound fades out</param>
+    public void FadeSound(string sound, float volumePercentage, float fadeSpeed)
+    {
+        Sound tempSound = FindSound(sound);
+        StartCoroutine(FadeVolume(tempSound, volumePercentage, fadeSpeed));
     }
 
     /// <summary>
@@ -216,7 +190,6 @@ public class AudioManager : MonoBehaviour {
         tempSound1.Play(0);
         for (float i = 0; i < tempVolume1; i += 0.001f)
         {
-            //Debug.Log(tempSound1.name + ": " + tempSound1.volume + " " + tempSound1.GetVolume() + " " + tempSound2.name + ": " + tempSound2.volume + " " + tempSound2.GetVolume());
             // Yes, apparantly it is necessary to change both the source volume and the actual volume...
             tempSound1.SetVolume(i);
             tempSound1.volume = i;
@@ -229,20 +202,63 @@ public class AudioManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// Fades a sound to a certain volume percentage by a certain speed between 0 and 1
+    /// </summary>
+    /// <param name="sound">The sound to fade</param>
+    /// <param name="volumePercentage">The percentage between 0 and 1 to fade the sound to</param>
+    /// <param name="fadeSpeed">The amount the sound increases by each frame</param>
+    /// <returns></returns>
+    IEnumerator FadeVolume(Sound sound, float volumePercentage, float fadeSpeed)
+    {
+        if (volumePercentage > sound.volume)
+        {
+            for (float i = sound.volume; i < volumePercentage; i += fadeSpeed)
+            {
+                sound.SetVolume(i);
+                sound.volume = i;
+                yield return null;
+            }
+        }
+        else // volumePercentage < sound.volume
+        {
+            for (float i = sound.volume; i > volumePercentage; i -= fadeSpeed)
+            {
+                sound.SetVolume(i);
+                sound.volume = i;
+                yield return null;
+            }
+        }
+    }
+
+    /// <summary>
     /// This returns true or false depending on whether or not the given string is playing.
     /// </summary>
     /// <param name="_name">The sound which's playing status must be checked</param>
     /// <returns></returns>
     public bool isPlaying(string _name)
     {
+        Sound tempSound = FindSound(_name);
+        if (tempSound != null)
+            return tempSound.isPlaying();
+        else
+            return false;
+    }
+
+    /// <summary>
+    /// Checks the sounds array for a sound name
+    /// </summary>
+    /// <param name="_name">The sound to be searched for</param>
+    /// <returns></returns>
+    private Sound FindSound(string _name)
+    {
         for (int i = 0; i < sounds.Length; i++)
         {
             if (sounds[i].name == _name)
             {
-                return sounds[i].isPlaying();
+                return sounds[i];
             }
         }
         Debug.LogWarning("AudioManager: Sound not found in list, " + _name);
-        return false;
+        return null;
     }
 }

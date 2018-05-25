@@ -4,6 +4,18 @@ using UnityEngine;
 public class TSEDFade : TSEnableDisableObject
 {
     public float min, max;
+    public string soundToFade;
+    public float volumePercentageFade = 0.1f;
+    public float fadeSpeed = 0.01f;
+
+    AudioManager am;
+    float originalVolume;
+
+    private void Start()
+    {
+        am = AudioManager.instance;
+        originalVolume = am.GetVolume(soundToFade);
+    }
 
     public override void OnTriggerEnter2D(Collider2D col)
     {
@@ -13,6 +25,7 @@ public class TSEDFade : TSEnableDisableObject
             base.OnTriggerEnter2D(col);
             StopAllCoroutines();
             StartCoroutine(Fade(temp, min, true));
+            am.FadeSound(soundToFade, volumePercentageFade, fadeSpeed);
         }
     }
 
@@ -23,6 +36,7 @@ public class TSEDFade : TSEnableDisableObject
             SpriteMask temp = actionObject.GetComponent<SpriteMask>();
             StopAllCoroutines();
             StartCoroutine(Fade(temp, max, false));
+            am.FadeSound(soundToFade, originalVolume, fadeSpeed);
         }
     }
 

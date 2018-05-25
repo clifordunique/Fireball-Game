@@ -76,7 +76,7 @@ public class GameMaster : MonoBehaviour
         {
             if (i < 9)
                 grassPlatformAudioClips[i] = "grass" + "0" + (i + 1);
-            if (i > 9)
+            if (i >= 9)
                 grassPlatformAudioClips[i] = "grass" + (i + 1);
         }
     }
@@ -118,7 +118,7 @@ public class GameMaster : MonoBehaviour
                 // play darkforest sound
                 break;
             case Utilities.Ambiance.MOUNTAIN:
-                audioManager.Fade(mountainAmbiance, curAmbiance);
+                audioManager.FadeBetweenTwoSounds(mountainAmbiance, curAmbiance);
                 curAmbiance = mountainAmbiance;
                 break;
             default:
