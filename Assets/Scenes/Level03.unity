@@ -23510,13 +23510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3995063421ae64fab93de4ab579e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plane: {fileID: 0}
-  icePlane: {fileID: 0}
-  iceBall: {fileID: 2100000, guid: 87a9dcdf0c5e34e429933a6ad4aab46d, type: 2}
-  dirLight: {fileID: 0}
-  day: {fileID: 0}
-  night: {fileID: 0}
-  isDay: 0
 --- !u!4 &1776389256
 Transform:
   m_ObjectHideFlags: 0
@@ -29887,6 +29880,16 @@ Prefab:
     - target: {fileID: 114629726805755846, guid: e07aacbdf40c39642a5e4e9b979f21b6,
         type: 2}
       propertyPath: canDoubleJump
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61993334759003356, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61993334759003356, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+        type: 2}
+      propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
