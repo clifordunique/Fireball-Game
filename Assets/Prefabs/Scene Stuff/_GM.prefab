@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4351d54eab553408ed01e846a2bba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundAmbiance: 2
   endLevelUI: {fileID: 0}
   mountainAmbiance: MountainWind01
   forestAmbiance: Woodland02
@@ -68,10 +69,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1aa8cd4fb5090a4a8ea4c5c438ca7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
-  _curHealth: 0
-  maxFireHealth: 30
-  _curFireHealth: 0
 --- !u!114 &114344848191458024
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -75,7 +75,6 @@
     <Compile Include="Assets\Scripts\GroundChildrenFade.cs" />
     <Compile Include="Assets\Scripts\GroundFade.cs" />
     <Compile Include="Assets\Scripts\ISmashable.cs" />
-    <Compile Include="Assets\Scripts\LevelStarter.cs" />
     <Compile Include="Assets\Scripts\ObjectDestroy.cs" />
     <Compile Include="Assets\Scripts\Parallaxing.cs" />
     <Compile Include="Assets\Scripts\Plant.cs" />

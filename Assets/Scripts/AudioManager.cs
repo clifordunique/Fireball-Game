@@ -158,7 +158,7 @@ public class AudioManager : MonoBehaviour
     {
         Sound tempSound1 = FindSound(sound1);
         Sound tempSound2 = FindSound(sound2);
-
+        Debug.Log(tempSound1.name + " " + tempSound2.name);
         StartCoroutine(FadeVolume(tempSound1, tempSound2));
     }
 
@@ -185,7 +185,7 @@ public class AudioManager : MonoBehaviour
         // getting original volume levels
         float tempVolume1 = tempSound1.volume;
         float tempVolume2 = tempSound2.volume;
-
+        
         // playing tempsound1 at 0 volume
         tempSound1.Play(0);
         for (float i = 0; i < tempVolume1; i += 0.001f)
