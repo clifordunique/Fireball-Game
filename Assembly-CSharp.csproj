@@ -70,7 +70,6 @@
     <Compile Include="Assets\Scripts\GameMaster\CameraShake.cs" />
     <Compile Include="Assets\Scripts\GameMaster\GameMaster.cs" />
     <Compile Include="Assets\Scripts\GameMaster\PlayerStats.cs" />
-    <Compile Include="Assets\Scripts\GameMaster\UsedEnumerators.cs" />
     <Compile Include="Assets\Scripts\GameMaster\Utilities.cs" />
     <Compile Include="Assets\Scripts\GroundChildrenFade.cs" />
     <Compile Include="Assets\Scripts\GroundFade.cs" />

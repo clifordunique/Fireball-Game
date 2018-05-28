@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 114743769972837944}
   - component: {fileID: 114206759410512024}
   - component: {fileID: 114344848191458024}
+  - component: {fileID: 114921689595484170}
+  - component: {fileID: 114095405598262990}
   m_Layer: 0
   m_Name: _GM
   m_TagString: GM
@@ -43,6 +45,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114095405598262990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503490623343074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!114 &114148121480835004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,7 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4351d54eab553408ed01e846a2bba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundAmbiance: 2
+  CurBackgroundAmbiance: 0
+  CurState: 0
   endLevelUI: {fileID: 0}
   mountainAmbiance: MountainWind01
   forestAmbiance: Woodland02
@@ -91,3 +112,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4065f001771ca584eb4eaa4b9a57241a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114921689595484170
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503490623343074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5

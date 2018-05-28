@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour
 {
     public Utilities.Ambiance CurBackgroundAmbiance;
-    public Utilities.State CurState;
+    public Utilities.State CurState { get; set; }
     public static GameMaster gm;
 
     public GameObject endLevelUI;
@@ -82,6 +82,7 @@ public class GameMaster : MonoBehaviour
                 case Utilities.PlatformType.ROCK:
                     break;
                 case Utilities.PlatformType.SNOW:
+                    //Debug.Log("Playing snow sound.");
                     break;
                 case Utilities.PlatformType.WOOD:
                     break;
