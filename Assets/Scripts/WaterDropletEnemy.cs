@@ -30,7 +30,7 @@ public class WaterDropletEnemy : Enemy
     AudioManager audioManager;
     PlayerStats stats;
 
-    Transform player;
+    public Transform player;
     Animator anim;
     Collider2D playerCollider;
     Collider2D enemyCollider;
@@ -38,7 +38,6 @@ public class WaterDropletEnemy : Enemy
     public override void Start()
     {
         base.Start();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         stats = PlayerStats.instance;
         enemyCollider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
@@ -57,10 +56,6 @@ public class WaterDropletEnemy : Enemy
             return;
         }
 
-        if (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-        }
         if (!canSeePlayer)
         {
             canSeePlayer = CanSeePlayer();
@@ -88,16 +83,19 @@ public class WaterDropletEnemy : Enemy
      */
     bool CanSeePlayer()
     {
-        if (Mathf.Abs(transform.position.x - player.position.x) < viewDistanceX && Mathf.Abs(transform.position.y - player.position.y) < viewDistanceY)
+        if (player != null)
         {
-            // If the player is in front of the water droplet
-            if ((transform.localScale.x < 0 && (player.position.x > transform.position.x)) || transform.localScale.x > 0 && (player.position.x < transform.position.x))
+            if (Mathf.Abs(transform.position.x - player.position.x) < viewDistanceX && Mathf.Abs(transform.position.y - player.position.y) < viewDistanceY)
             {
-                if (!Physics.Linecast(transform.position, player.position, mask) && stats.isFire())
+                // If the player is in front of the water droplet
+                if ((transform.localScale.x < 0 && (player.position.x > transform.position.x)) || transform.localScale.x > 0 && (player.position.x < transform.position.x))
                 {
-                    if (anim.GetFloat("Speed") <= speed)
+                    if (!Physics.Linecast(transform.position, player.position, mask) && stats.isFire())
                     {
-                        return true;
+                        if (anim.GetFloat("Speed") <= speed)
+                        {
+                            return true;
+                        }
                     }
                 }
             }
@@ -120,7 +118,7 @@ public class WaterDropletEnemy : Enemy
             transform.localScale = new Vector2(-dirX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
             anim.SetFloat("Speed", speed);
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(targetWaypoint.x, transform.position.y), speed * Time.deltaTime);
-            if (Math.Round(transform.position.x,2) == Math.Round(targetWaypoint.x,2))
+            if (Math.Round(transform.position.x, 2) == Math.Round(targetWaypoint.x, 2))
             {
 
                 targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
@@ -160,7 +158,7 @@ public class WaterDropletEnemy : Enemy
             yield return StartCoroutine(Jump());
         }
         StartCoroutine(GetDirectionToPlayer());
-        while (transform.position.x != player.position.x)
+        while (player != null && transform.position.x != player.position.x)
         {
             if (!stats.isFire())
             {
@@ -186,7 +184,7 @@ public class WaterDropletEnemy : Enemy
      */
     IEnumerator GetDirectionToPlayer()
     {
-        while (true)
+        while (player != null && true)
         {
             dirToPlayer = (player.position - transform.position);
             yield return new WaitForSeconds(.5f);

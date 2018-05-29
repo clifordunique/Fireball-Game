@@ -18,6 +18,7 @@ public class Utilities : MonoBehaviour {
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
+        AudioListener.pause = false;
     }
 
     public static void LoadNextLevel()
