@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using UnityEngine;
 
 public class GameMaster : MonoBehaviour
@@ -8,19 +9,25 @@ public class GameMaster : MonoBehaviour
     public static GameMaster gm;
 
     public GameObject endLevelUI;
-    
+
     AudioManager audioManager;
+    Stopwatch sw;
 
     // Ambiance sounds
     string curAmbianceName; // keeps track of the current ambiance name for convenience
     public string mountainAmbiance;
     public string forestAmbiance;
 
+    // Footstep sounds
+    public string stoneWoodSound;
 
     string[] woodCrackClips;
     string[] grassPlatformAudioClips;
     string audioClip;
     int backgroundSoundIndex;
+
+    public float timeBetweenFootsteps;
+    float timer;
 
     void Awake()
     {
@@ -40,11 +47,12 @@ public class GameMaster : MonoBehaviour
         audioManager = AudioManager.instance;
         if (audioManager == null)
         {
-            Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
+            UnityEngine.Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
         }
         SaveLoad.Load();
         LoadPlatformSounds();
         PlayBackgroundAmbiance();
+        sw = new Stopwatch();
     }
 
     // Restarts the level
@@ -69,27 +77,36 @@ public class GameMaster : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Plays platform audio every 400 milliseconds
+    /// </summary>
+    /// <param name="platformIndex"></param>
     public void PlayPlatformAudio(Utilities.PlatformType platformIndex)
     {
-        if (!audioManager.isPlaying(audioClip) || audioClip == null)
+        if (sw.ElapsedMilliseconds > 400 || !sw.IsRunning)
         {
             switch (platformIndex)
             {
                 case Utilities.PlatformType.GRASS:
                     audioClip = grassPlatformAudioClips[Random.Range(0, grassPlatformAudioClips.Length)];
-                    audioManager.PlaySound(audioClip);
                     break;
                 case Utilities.PlatformType.ROCK:
                     break;
                 case Utilities.PlatformType.SNOW:
-                    //Debug.Log("Playing snow sound.");
                     break;
                 case Utilities.PlatformType.WOOD:
+                    audioClip = stoneWoodSound;
                     break;
                 default:
-                    Debug.Log("Some other index got sent through somehow...");
+                    audioClip = "";
                     break;
             }
+            if (audioClip != "")
+            {
+                audioManager.PlaySound(audioClip);
+            }
+            sw.Reset();
+            sw.Start();
         }
     }
 
@@ -123,7 +140,7 @@ public class GameMaster : MonoBehaviour
                 Utilities.RestartLevel();
                 break;
             default:
-                Debug.LogError("Not a valid case for FadeOut Function");
+                UnityEngine.Debug.LogError("Not a valid case for FadeOut Function");
                 break;
         }
     }
@@ -167,7 +184,7 @@ public class GameMaster : MonoBehaviour
                 curAmbianceName = mountainAmbiance;
                 break;
             default:
-                Debug.Log("A non-existent ambiance enum was selected in GM.");
+                UnityEngine.Debug.Log("A non-existent ambiance enum was selected in GM.");
                 break;
         }
     }

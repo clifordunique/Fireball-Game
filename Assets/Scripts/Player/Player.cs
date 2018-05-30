@@ -54,6 +54,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public bool isDoubleJumping;
     Utilities.PlatformType platformType;
 
+    bool grounded;
+
     CameraShake camShake;
     SpriteRenderer[] srs;
     CollisionInfo colInfo;
@@ -222,7 +224,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void DealWithFire()
     {
-        anim.SetFloat("Speed", Mathf.Abs(velocity.x));
+        // value between 0 and 1 to correctly set variables in the blend tree
+        // In other words, the player walks faster or slower depending on speed.
+        // However, it doesn't matter if the player is going up or down hill... dang it
+        float speedValue = velocity.sqrMagnitude / (moveSpeed * moveSpeed + 5);
+        anim.SetFloat("Speed", Mathf.Abs(speedValue));
         anim.SetBool("Grounded", controller.collisions.below);
         fireEyes.SetFireBase(stats.CurFireHealth, stats.MaxFireHealth);
 
@@ -424,6 +430,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         float slopeAngleDescendSmoothTime = 0.15f + Mathf.Abs(controller.collisions.slopeAngle) * .001f;
         float targetVelocityX = directionalInput.x * moveSpeed;
 
+        // This doesn't take account for actual speed
         if (controller.collisions.climingSlope)
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleClimbSmoothTime);
@@ -438,10 +445,21 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
 
         // Sound plays when the player starts, but not necessarily when he is slowing down
-        if (Mathf.Abs(velocity.x) > .5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) && controller.collisions.below)
+        if (Mathf.Abs(velocity.x) > 0.5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) && controller.collisions.below)
         {
             platformType = controller.GetPlatformType();
             gm.PlayPlatformAudio(platformType);
+        }
+
+        if(grounded == false && controller.collisions.below)
+        {
+            grounded = true;
+            platformType = controller.GetPlatformType();
+            gm.PlayPlatformAudio(platformType);
+        }
+        else if (!controller.collisions.below)
+        {
+            grounded = false;
         }
 
         velocityXOld = velocity.x;
