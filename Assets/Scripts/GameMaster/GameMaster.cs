@@ -55,6 +55,15 @@ public class GameMaster : MonoBehaviour
         sw = new Stopwatch();
     }
 
+    private void Update()
+    {
+        if(sw.ElapsedMilliseconds > 600)
+        {
+            sw.Start();
+            sw.Reset();
+        }
+    }
+
     // Restarts the level
     public static void KillPlayer(Player player)
     {
@@ -78,21 +87,27 @@ public class GameMaster : MonoBehaviour
     }
 
     /// <summary>
-    /// Plays platform audio every 400 milliseconds
+    /// Plays platform audio which changes speed based on the player's velocity.
     /// </summary>
-    /// <param name="platformIndex"></param>
-    public void PlayPlatformAudio(Utilities.PlatformType platformIndex)
+    /// <param name="platformType">The current platform type</param>
+    /// <param name="velocityMagnitude">The player's current magnitued</param>
+    /// <param name="moveSpeed">The pre-set moveSpeed for the player</param>
+    public void PlayPlatformAudio(Utilities.PlatformType platformType, float velocityMagnitude, float moveSpeed)
     {
-        if (sw.ElapsedMilliseconds > 400 || !sw.IsRunning)
+        float millisecondsMultiplier = moveSpeed / velocityMagnitude;
+
+        if (sw.ElapsedMilliseconds > 400 * millisecondsMultiplier || !sw.IsRunning)
         {
-            switch (platformIndex)
+            switch (platformType)
             {
                 case Utilities.PlatformType.GRASS:
                     audioClip = grassPlatformAudioClips[Random.Range(0, grassPlatformAudioClips.Length)];
                     break;
                 case Utilities.PlatformType.ROCK:
+                    // Not implemented yet
                     break;
                 case Utilities.PlatformType.SNOW:
+                    // Not implemented yet
                     break;
                 case Utilities.PlatformType.WOOD:
                     audioClip = stoneWoodSound;

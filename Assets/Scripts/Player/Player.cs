@@ -88,7 +88,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     void Start()
     {
         fireEyes = GetComponent<FireEyes>();
-        if(fireEyes == null)
+        if (fireEyes == null)
         {
             Debug.Log("No FireEyes script attached to this GameObject");
         }
@@ -426,6 +426,17 @@ public class Player : MonoBehaviour, FallInWaterableObject
      */
     void CalculateVelocity()
     {
+        // Affecting player speed when on slopes
+        float safetyValue = 0.05f;
+        float maxDiffDivisor = 1 / safetyValue;
+        float slopeAngleBtw0and1 = Mathf.Abs(controller.collisions.slopeAngle) / controller.maxSlopeAngle + safetyValue;
+        float diffValue = (1 / Mathf.Abs(1 - slopeAngleBtw0and1)) / maxDiffDivisor; // Weirdo equation for calculating a multiplier for climbing/descending slopes
+        float climbMultiplier = 1 - diffValue;
+        float descendMultiplier = 1 + diffValue;
+
+        //Debug.Log(climbMultiplier + " Descend: " + descendMultiplier);
+
+        // Affecting player acceleration
         float slopeAngleClimbSmoothTime = .05f + 1 / Mathf.Abs(controller.collisions.slopeAngle);
         float slopeAngleDescendSmoothTime = 0.15f + Mathf.Abs(controller.collisions.slopeAngle) * .001f;
         float targetVelocityX = directionalInput.x * moveSpeed;
@@ -433,11 +444,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
         // This doesn't take account for actual speed
         if (controller.collisions.climingSlope)
         {
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleClimbSmoothTime);
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX * climbMultiplier, ref velocityXSmoothing, slopeAngleClimbSmoothTime);
         }
         else if (controller.collisions.descendingSlope && Mathf.Abs(velocityXOld) > 1f)
         {
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, slopeAngleDescendSmoothTime);
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX * descendMultiplier, ref velocityXSmoothing, slopeAngleDescendSmoothTime);
         }
         else
         {
@@ -448,14 +459,15 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (Mathf.Abs(velocity.x) > 0.5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) && controller.collisions.below)
         {
             platformType = controller.GetPlatformType();
-            gm.PlayPlatformAudio(platformType);
+            gm.PlayPlatformAudio(platformType, velocity.magnitude, moveSpeed);
         }
 
-        if(grounded == false && controller.collisions.below)
+        // Landing after jumping 
+        if (grounded == false && controller.collisions.below)
         {
             grounded = true;
             platformType = controller.GetPlatformType();
-            gm.PlayPlatformAudio(platformType);
+            gm.PlayPlatformAudio(platformType, velocity.magnitude, moveSpeed);
         }
         else if (!controller.collisions.below)
         {
