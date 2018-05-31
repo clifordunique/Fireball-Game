@@ -434,8 +434,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
         float climbMultiplier = 1 - diffValue;
         float descendMultiplier = 1 + diffValue;
 
-        //Debug.Log(climbMultiplier + " Descend: " + descendMultiplier);
-
         // Affecting player acceleration
         float slopeAngleClimbSmoothTime = .05f + 1 / Mathf.Abs(controller.collisions.slopeAngle);
         float slopeAngleDescendSmoothTime = 0.15f + Mathf.Abs(controller.collisions.slopeAngle) * .001f;
