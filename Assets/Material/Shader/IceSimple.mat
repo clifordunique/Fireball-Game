@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: IceSimple
-  m_Shader: {fileID: 4800000, guid: 92346ec92984e8f458f65ded91c9746d, type: 3}
+  m_Shader: {fileID: 4800000, guid: e265ec3e717d23b46aaa9e5267adb31c, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
@@ -20,7 +20,7 @@ Material:
     m_TexEnvs:
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: f20ef6394a329114c94d93a68ef967f8, type: 3}
-        m_Scale: {x: 0.05, y: 0.05}
+        m_Scale: {x: 0.1, y: 0.1}
         m_Offset: {x: 0.21, y: 0}
     - _BumpMapGlass:
         m_Texture: {fileID: 0}
@@ -55,12 +55,12 @@ Material:
     - _BumpAmt: 0
     - _ClipRange: 0.76785713
     - _ColorStrength: 0.26785713
-    - _Cutoff: 0.85
+    - _Cutoff: 0.81
     - _FPOW: 10
     - _LightStr: 1
     - _Opacity: 0.35
     - _OpacityMain: 0
-    - _R0: 0.9
+    - _R0: 1.31
     - _ReflectionStrength: 7.6
     - _RimPower: 8
     - _Shininess: 1

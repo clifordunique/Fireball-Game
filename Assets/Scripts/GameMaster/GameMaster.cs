@@ -104,10 +104,10 @@ public class GameMaster : MonoBehaviour
                     audioClip = grassPlatformAudioClips[Random.Range(0, grassPlatformAudioClips.Length)];
                     break;
                 case Utilities.PlatformType.ROCK:
-                    // Not implemented yet
+                    audioClip = "";
                     break;
                 case Utilities.PlatformType.SNOW:
-                    // Not implemented yet
+                    audioClip = "";
                     break;
                 case Utilities.PlatformType.WOOD:
                     audioClip = stoneWoodSound;
