@@ -7224,6 +7224,11 @@ MonoBehaviour:
   moveUpAmount: 3
   stepDst: 5
   player: {fileID: 2134510030}
+  rayStartPos: {x: 0, y: -2.2, z: 0}
+  rayLength: 0.5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &2064600814
 GameObject:
   m_ObjectHideFlags: 0

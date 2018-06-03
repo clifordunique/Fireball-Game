@@ -9,16 +9,18 @@ public class IceLegMove : MonoBehaviour
     public float stepDst = 20f;
     public Player player;
 
-    // Use this for initialization
+    public Vector3 rayStartPos;
+    public float rayLength = 0.5f;
+    public LayerMask layerMask;
+
     void Start()
     {
         StartCoroutine(Walk());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
+        
     }
 
     IEnumerator Walk()
@@ -67,9 +69,17 @@ public class IceLegMove : MonoBehaviour
         Transform currentLeg = iceLegs[currentLegIndex];
         float targetPosY = currentLeg.position.y - moveUpAmount;
         float moveSpeed = 0.5f;
+        bool hitGround = false;
 
-        while (currentLeg.position.y >= targetPosY)
+        UnityEngine.Debug.DrawRay(currentLeg.position + rayStartPos, Vector2.down * rayLength, Color.red);
+
+        while (!hitGround)
         {
+            RaycastHit2D hit = Physics2D.Raycast(currentLeg.position + rayStartPos, Vector2.down, rayLength, layerMask);
+            if (hit)
+            {
+                hitGround = true;
+            }
             currentLeg.position = new Vector3(currentLeg.position.x, currentLeg.position.y - moveSpeed, currentLeg.position.z);
             yield return null;
         }
