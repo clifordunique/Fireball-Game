@@ -59,17 +59,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\KriptoFX\IceShader\Scripts\FreezeBehaviour.cs" />
+    <Compile Include="Assets\KriptoFX\IceShader\Scripts\Gui.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\BigBranch.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\CampFire.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Chain Ice Monster\IceLeg.cs" />
     <Compile Include="Assets\Scripts\Enemies\Chain Ice Monster\IceLegMove.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Rhino\Rhino.cs" />
     <Compile Include="Assets\Scripts\Enemies\Rhino\RhinoAttack.cs" />
     <Compile Include="Assets\Scripts\Enemies\Rhino\RhinoController.cs" />
     <Compile Include="Assets\Scripts\Enemies\Water Droplet Enemy\WaterDropletEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Water Droplet Enemy\WaterSplat.cs" />
-    <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\FallInWaterableObject.cs" />
     <Compile Include="Assets\Scripts\FloatOnWater.cs" />
     <Compile Include="Assets\Scripts\FollowCamera.cs" />

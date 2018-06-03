@@ -55,7 +55,7 @@ Material:
     - _BumpAmt: 0
     - _ClipRange: 0.76785713
     - _ColorStrength: 0.26785713
-    - _Cutoff: 0.81
+    - _Cutoff: 0.8
     - _FPOW: 10
     - _LightStr: 1
     - _Opacity: 0.35
