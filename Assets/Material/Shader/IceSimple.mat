@@ -20,8 +20,8 @@ Material:
     m_TexEnvs:
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: f20ef6394a329114c94d93a68ef967f8, type: 3}
-        m_Scale: {x: 0.1, y: 0.1}
-        m_Offset: {x: 0.21, y: 0}
+        m_Scale: {x: 0.05, y: 0.05}
+        m_Offset: {x: 0, y: 0}
     - _BumpMapGlass:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -65,8 +65,8 @@ Material:
     - _RimPower: 8
     - _Shininess: 1
     m_Colors:
-    - _Color: {r: 0.14705884, g: 0.14705884, b: 0.14705884, a: 1}
+    - _Color: {r: 0.26802254, g: 0.17568529, b: 0.7924528, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
-    - _ReflectColor: {r: 0.6999892, g: 0.7798018, b: 0.8897059, a: 1}
+    - _ReflectColor: {r: 0.73522645, g: 0.69803923, b: 0.8901961, a: 1}
     - _RimColor: {r: 0.9381339, g: 0.9264706, b: 1, a: 0}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
