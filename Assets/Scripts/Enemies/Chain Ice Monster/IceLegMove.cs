@@ -15,8 +15,11 @@ public class IceLegMove : MonoBehaviour
     public float rayLength = 0.5f;
     public LayerMask layerMask;
 
+    CameraShake camShake;
+
     void Start()
     {
+        camShake = GameMaster.gm.GetComponent<CameraShake>();
         StartCoroutine(Walk());
     }
 
@@ -50,7 +53,7 @@ public class IceLegMove : MonoBehaviour
     {
         Transform currentLeg = iceLegs[currentLegIndex].transform;
         float targetPosY = currentLeg.position.y + moveUpAmount;
-        float moveSpeed = 0.5f;
+        float moveSpeed = 0.3f;
 
         while (currentLeg.position.y < targetPosY)
         {
@@ -67,7 +70,7 @@ public class IceLegMove : MonoBehaviour
         Transform currentLeg = iceLegs[currentLegIndex].transform;
         float dirToPlayer = Mathf.Sign(player.transform.position.x - currentLeg.position.x);
         float targetPosX = currentLeg.position.x + stepDst * dirToPlayer;
-        float moveSpeed = 0.5f;
+        float moveSpeed = 0.3f;
 
         while (currentLeg.position.x * dirToPlayer < targetPosX * dirToPlayer)
         {
@@ -79,25 +82,33 @@ public class IceLegMove : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Moves the leg at currentLegIndex down until it detects a collision with an object
+    /// </summary>
+    /// <param name="currentLegIndex">The index of the leg to move down</param>
+    /// <returns></returns>
     IEnumerator MoveDown(int currentLegIndex)
     {
         Transform currentLeg = iceLegs[currentLegIndex].transform;
-        float targetPosY = currentLeg.position.y - moveUpAmount;
-        float moveSpeed = 0.5f;
+        float moveSpeed = 1.4f;
         bool hitGround = false;
 
-        UnityEngine.Debug.DrawRay(currentLeg.position + rayStartPos, Vector2.down * rayLength, Color.red);
+        // Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
 
         while (!hitGround)
         {
             if (iceLegs[currentLegIndex] != null)
             {
                 RaycastHit2D hit = Physics2D.Raycast(currentLeg.position + rayStartPos, Vector2.down, rayLength, layerMask);
+                Debug.DrawRay(currentLeg.position + rayStartPos, Vector2.down * rayLength, Color.red);
                 if (hit)
                 {
+                    camShake.Shake(0.08f, 0.08f);
                     hitGround = true;
+                    break;
                 }
                 currentLeg.position = new Vector3(currentLeg.position.x, currentLeg.position.y - moveSpeed, currentLeg.position.z);
+
                 yield return null;
             }
         }

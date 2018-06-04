@@ -25,8 +25,17 @@ public class IceLeg : Enemy
         Effect(position);
     }
 
-    void Effect(Vector2 position)
+    /// <summary>
+    /// Creates effect for damaging enemy
+    /// </summary>
+    /// <param name="hitPos">The position of the hit on the enemy</param>
+    void Effect(Vector2 hitPos)
     {
-        Instantiate(spriteMask, position, transform.rotation, transform);
+        float dirToHit = Mathf.Sign(hitPos.x - transform.position.x);
+        float offset = dirToHit > 0 ? -0.2f : 0.2f;
+        Vector3 angle = dirToHit > 0 ? -spriteMask.transform.rotation.eulerAngles : spriteMask.transform.rotation.eulerAngles;
+        SpriteMask newSpriteMask = Instantiate(spriteMask, new Vector2(hitPos.x + offset, hitPos.y), Quaternion.Euler(angle));
+        newSpriteMask.transform.localScale = new Vector3(newSpriteMask.transform.localScale.x * (-dirToHit), newSpriteMask.transform.localScale.y, newSpriteMask.transform.localScale.y);
+        newSpriteMask.transform.SetParent(transform);
     }
 }
