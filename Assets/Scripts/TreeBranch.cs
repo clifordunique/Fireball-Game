@@ -17,25 +17,14 @@ public class TreeBranch : MonoBehaviour
     public float childRotateAmt = 10;
     public bool leftSideOfTree;
 
-    float originalRotation;
-
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
-        originalRotation = transform.rotation.z;
         if (!leftSideOfTree)
         {
             rotationSpeed = -rotationSpeed;
         }
-
-        //audioManager = AudioManager.instance;
-
-        //woodCrackClips = new string[7];
-        //for (int i = 0; i < woodCrackClips.Length; i++)
-        //{
-        //    woodCrackClips[i] = "woodcrack0" + (i + 1);
-        //}
     }
 
     public virtual void OnCollisionEnter2D(Collision2D col)
@@ -68,9 +57,6 @@ public class TreeBranch : MonoBehaviour
                 collided = false;
             }
         }
-        //if(collided == true){
-        //	rotated = true
-        //}
     }
 
     /* Rotates rotationOrigin a certain amount
@@ -92,11 +78,6 @@ public class TreeBranch : MonoBehaviour
             rotationOrigin.Rotate(Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
             yield return null;
         }
-        //if (rotateBack)
-        //{
-        //    Debug.Log("Back up");
-        //    StartCoroutine(Rotate(-2 * rotationSpeed, false));
-        //}
     }
 
     IEnumerator RotateChildrenStart()
@@ -126,22 +107,6 @@ public class TreeBranch : MonoBehaviour
             yield return null;
         }
     }
-
-    //IEnumerator RotateUp(float rotation)
-    //{
-    //    float deltaRotation = 0;
-    //    float rotationPercentage;
-
-    //    while (deltaRotation > -rotateAmt)
-    //    {
-    //        deltaRotation += rotation;
-    //        rotationPercentage = Mathf.Abs(deltaRotation / rotateAmt);
-    //        rotationPercentage = Mathf.Clamp01(rotationPercentage);
-    //        float easedPercentBetweenRotation = Ease(rotationPercentage);
-    //        rotationOrigin.Rotate(Vector3.forward, easedPercentBetweenRotation * rotation * Time.deltaTime);
-    //        yield return null;
-    //    }
-    //}
 
     float Ease(float x)
     {

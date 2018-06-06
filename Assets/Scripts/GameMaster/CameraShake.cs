@@ -17,7 +17,7 @@ public class CameraShake : MonoBehaviour
     /// <summary>
     /// Shakes the camera
     /// </summary>
-    /// <param name="amt">The amount to displace or shake the camera</param>
+    /// <param name="amt">The amount to displace/shake the camera</param>
     /// <param name="length">The amount of time to shake the camera</param>
     public void Shake(float amt, float length)
     {

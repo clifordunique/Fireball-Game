@@ -2619,11 +2619,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 10.04
+      value: 0.77
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: -0.74
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.z
@@ -6284,7 +6284,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2015789113}
   m_LocalRotation: {x: -0, y: -0, z: 0.009425356, w: 0.99995565}
-  m_LocalPosition: {x: 13.092016, y: -0.23925984, z: -0.11132811}
+  m_LocalPosition: {x: 22.85, y: 2.96, z: -0.11132811}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1951957345}
@@ -6316,6 +6316,7 @@ MonoBehaviour:
   stepDst: 5
   crippleWaitTime: 0.4
   player: {fileID: 2134510030}
+  seePlayerDst: 10
   rayStartPos: {x: 0, y: -1.5, z: 0}
   rayLength: 1
   layerMask:
