@@ -840,6 +840,7 @@ Transform:
   m_LocalScale: {x: 1.6524596, y: 1.6524593, z: 1.6524595}
   m_Children:
   - {fileID: 152825240}
+  - {fileID: 1469126212}
   m_Father: {fileID: 1305106997}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -857,8 +858,14 @@ MonoBehaviour:
   maxHealth: 10
   health: 0
   metalBrace: {fileID: 152825240}
+  tipOfIce: {fileID: 1469126212}
   spriteMask: {fileID: 331393242190331826, guid: c5041ac33dc28eb44aebc49e8273d3bf,
     type: 2}
+  rayStartPos: {x: 0, y: 0, z: 0}
+  rayLength: 2.5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!60 &278713614
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1847,6 +1854,34 @@ Transform:
   m_Father: {fileID: 2015789115}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &552053799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 552053800}
+  m_Layer: 17
+  m_Name: Tip (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &552053800
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 552053799}
+  m_LocalRotation: {x: -0, y: -0, z: -0.33299634, w: 0.94292814}
+  m_LocalPosition: {x: 0.094, y: -1.42, z: 0}
+  m_LocalScale: {x: 1.2459509, y: 1.5302708, z: 1.182232}
+  m_Children: []
+  m_Father: {fileID: 770525131}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &618341992
 GameObject:
   m_ObjectHideFlags: 0
@@ -2442,6 +2477,7 @@ Transform:
   m_LocalScale: {x: 1.3654352, y: 1.5558732, z: 1.4861888}
   m_Children:
   - {fileID: 1331934531}
+  - {fileID: 552053800}
   m_Father: {fileID: 1399631760}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2459,8 +2495,14 @@ MonoBehaviour:
   maxHealth: 10
   health: 0
   metalBrace: {fileID: 1331934531}
+  tipOfIce: {fileID: 552053800}
   spriteMask: {fileID: 331276797507186958, guid: 28f7b50e6f14ad248a94b1413c9ec38d,
     type: 2}
+  rayStartPos: {x: 0, y: 0, z: 0}
+  rayLength: 2.4
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!60 &770525133
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2941,6 +2983,34 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &961440691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 961440692}
+  m_Layer: 17
+  m_Name: Tip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &961440692
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 961440691}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.114, y: -1.449, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1007472677}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &964604451
 Prefab:
   m_ObjectHideFlags: 0
@@ -3414,14 +3484,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1007472675}
-  m_LocalRotation: {x: -0, y: -0, z: -0.0147137735, w: 0.99989176}
-  m_LocalPosition: {x: 11.310259, y: 0.56242263, z: 0.1113281}
+  m_LocalRotation: {x: -0, y: -0, z: -0.33299622, w: 0.94292814}
+  m_LocalPosition: {x: 11.310259, y: 0.5624226, z: 0.1113281}
   m_LocalScale: {x: 1.7875491, y: 2.2567818, z: 1.7570199}
   m_Children:
   - {fileID: 534327229}
+  - {fileID: 961440692}
   m_Father: {fileID: 1468581495}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.6860001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -38.901}
 --- !u!233 &1007472678
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -3497,8 +3568,14 @@ MonoBehaviour:
   maxHealth: 10
   health: 0
   metalBrace: {fileID: 534327229}
+  tipOfIce: {fileID: 961440692}
   spriteMask: {fileID: 331984672470753688, guid: fbe6df2eb4d3f4a4692e4ec21c2b6a23,
     type: 2}
+  rayStartPos: {x: 0, y: -8.6, z: 0}
+  rayLength: 3.4
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!60 &1007472682
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -4690,6 +4767,34 @@ Transform:
   - {fileID: 1007472677}
   m_Father: {fileID: 2015789115}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1469126211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1469126212}
+  m_Layer: 17
+  m_Name: Tip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1469126212
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1469126211}
+  m_LocalRotation: {x: -0, y: -0, z: -0.33299628, w: 0.94292814}
+  m_LocalPosition: {x: 0.102, y: -1.5, z: 0}
+  m_LocalScale: {x: 1.0817511, y: 1.3657098, z: 1.0632756}
+  m_Children: []
+  m_Father: {fileID: 278713612}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1542326227
 GameObject:
@@ -6312,11 +6417,13 @@ MonoBehaviour:
   - {fileID: 1007472681}
   - {fileID: 278713613}
   - {fileID: 770525132}
+  head: {fileID: 1951957345}
   moveUpAmount: 3
   stepDst: 5
+  legCallbackDst: 20
   crippleWaitTime: 0.4
   player: {fileID: 2134510030}
-  seePlayerDst: 10
+  seePlayerDst: 20
   rayStartPos: {x: 0, y: -1.5, z: 0}
   rayLength: 1
   layerMask:

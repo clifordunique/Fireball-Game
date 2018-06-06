@@ -1,12 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IceLegMove : MonoBehaviour
 {
     public IceLeg[] iceLegs;
+    public Transform head;
     public float moveUpAmount = 5f;
-    public float stepDst = 20f;
+    public float stepDst = 5f;
+    public float legCallbackDst = 20f;
     public float crippleWaitTime = 0.4f;
 
     public Player player;
@@ -24,11 +25,6 @@ public class IceLegMove : MonoBehaviour
         StartCoroutine(Walk());
     }
 
-    private void Update()
-    {
-
-    }
-
     IEnumerator Walk()
     {
         while (true)
@@ -37,7 +33,7 @@ public class IceLegMove : MonoBehaviour
             {
                 if (iceLegs[i].health > 0)
                 {
-                    bool seePlayer = Mathf.Abs(iceLegs[i].transform.position.x - player.transform.position.x) < seePlayerDst;
+                    bool seePlayer = Mathf.Abs(head.transform.position.x - player.transform.position.x) < seePlayerDst;
                     yield return MoveUp(i);
                     yield return MoveToPos(i);
                     if (seePlayer)
@@ -117,10 +113,11 @@ public class IceLegMove : MonoBehaviour
 
         if (iceLegs[currentLegIndex] != null)
         {
-            while (currentLeg.transform.rotation != angleToPlayer)
+            while (currentLeg.transform.rotation.eulerAngles.z > angleToPlayer.eulerAngles.z + 0.1f || currentLeg.transform.rotation.eulerAngles.z < angleToPlayer.eulerAngles.z - 0.1f)
             {
                 if (iceLegs[currentLegIndex] != null)
                 {
+                    Debug.Log("Still rotating " + currentLeg.transform.rotation + " " + angleToPlayer);
                     currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angleToPlayer, Time.deltaTime * speed);
                     yield return null;
                 }
@@ -138,6 +135,7 @@ public class IceLegMove : MonoBehaviour
         Transform currentLeg = iceLegs[currentLegIndex].transform;
         Vector2 dirToPlayer = player.transform.position - currentLeg.position;
         dirToPlayer.Normalize();
+        float dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
         float moveSpeed = 1.4f;
         bool hitGround = false;
 
@@ -147,15 +145,18 @@ public class IceLegMove : MonoBehaviour
         {
             if (iceLegs[currentLegIndex] != null)
             {
-                RaycastHit2D hit = Physics2D.Raycast(currentLeg.position + rayStartPos, dirToPlayer, rayLength, layerMask);
-                Debug.DrawRay(currentLeg.position + rayStartPos, dirToPlayer * rayLength, Color.red);
-                if (hit)
+                if (iceLegs[currentLegIndex].hit)
                 {
                     camShake.Shake(0.08f, 0.08f);
                     hitGround = true;
                     break;
                 }
                 currentLeg.Translate(Vector2.down * moveSpeed);
+                if (dstFromHead > legCallbackDst)
+                {
+                    break;
+                }
+                dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
 
                 yield return null;
             }
@@ -170,7 +171,7 @@ public class IceLegMove : MonoBehaviour
     /// <returns></returns>
     IEnumerator MoveDown(int currentLegIndex)
     {
-        Transform currentLeg = iceLegs[currentLegIndex].transform;
+        IceLeg currentLeg = iceLegs[currentLegIndex];
         float moveSpeed = 1.4f;
         bool hitGround = false;
 
@@ -178,17 +179,15 @@ public class IceLegMove : MonoBehaviour
 
         while (!hitGround)
         {
-            if (iceLegs[currentLegIndex] != null)
+            if (currentLeg != null)
             {
-                RaycastHit2D hit = Physics2D.Raycast(currentLeg.position + rayStartPos, Vector2.down, rayLength, layerMask);
-                Debug.DrawRay(currentLeg.position + rayStartPos, Vector2.down * rayLength, Color.red);
-                if (hit)
+                if (currentLeg.hit)
                 {
                     camShake.Shake(0.08f, 0.08f);
                     hitGround = true;
                     break;
                 }
-                currentLeg.position = new Vector3(currentLeg.position.x, currentLeg.position.y - moveSpeed, currentLeg.position.z);
+                currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y - moveSpeed, currentLeg.transform.position.z);
 
                 yield return null;
             }

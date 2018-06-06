@@ -1,11 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class IceLeg : Enemy
 {
     public Transform metalBrace;
+    public Transform tipOfIce;
     public SpriteMask spriteMask;
+
+    public RaycastHit2D hit;
+    public Vector3 rayStartPos;
+    public float rayLength = 0.5f;
+    public LayerMask layerMask;
+
+    private void Update()
+    {
+        Vector3 direction = tipOfIce.position- transform.position;
+        Debug.DrawRay(transform.position, direction.normalized * rayLength, Color.red);
+        hit = Physics2D.Raycast(transform.position, direction.normalized, rayLength, layerMask);
+    }
 
     public override void DamageEnemy(int _damage, Vector2 position)
     {
