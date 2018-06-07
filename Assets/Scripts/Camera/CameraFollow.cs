@@ -12,12 +12,16 @@ public class CameraFollow : MonoBehaviour
     public float lookSmoothTimeX;
     public float verticalSmoothTime;
     public Vector2 focusAreaSize;
+
     private bool modLooking = false;
     public bool ModLooking
     {
         get { return modLooking; }
         set { modLooking = value; }
     }
+
+    public Enemy enemyToFollow;
+    public float followEnemyDst;
 
     FocusArea focusArea;
 
@@ -56,14 +60,14 @@ public class CameraFollow : MonoBehaviour
         Vector2 focusPosition = focusArea.center + Vector2.up * verticalOffset;
 
         // Check if something is modifying the lookahead
-        if (!modLooking)
-        {
             HorizontalLookahead();
-        }
-        else
-        {
-            HorizontalLookaheadMod();
-        }
+        //if (!modLooking)
+        //{
+        //}
+        //else
+        //{
+        //    HorizontalLookaheadMod();
+        //}
         VerticalLookahead();
 
         // Horizontal smoothing
@@ -114,7 +118,25 @@ public class CameraFollow : MonoBehaviour
             if (Mathf.Sign(target.playerInput.x) == Mathf.Sign(focusArea.velocity.x) && target.playerInput.x != 0)
             {
                 lookAheadStoppedX = false;
-                targetLookAheadX = lookAheadDirX * lookAheadDstX;
+
+                float dstToEnemy = 1000;
+                if(enemyToFollow != null)
+                {
+                    dstToEnemy = enemyToFollow.transform.position.x - focusArea.center.x;
+                }
+                Debug.Log("Dst to enemy: " + dstToEnemy);
+
+                if(enemyToFollow == null || !(Mathf.Abs(dstToEnemy) < followEnemyDst))
+                {
+                    targetLookAheadX = lookAheadDirX * lookAheadDstX;
+                }
+                else
+                {
+                    Debug.Log("weirdsadf');");
+                    lookAheadDirX = Mathf.Sign(dstToEnemy);
+                    targetLookAheadX = lookAheadDirX * Mathf.Abs(dstToEnemy) / 2;
+                }
+
                 //if (target.playerVelocity.y > -0.01f)
                 //{
                 //    targetLookAheadY = currentLookAheadY + (lookAheadDstY - currentLookAheadY) / 4f;

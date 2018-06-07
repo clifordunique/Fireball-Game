@@ -836,13 +836,13 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 278713608}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.6643322, y: 1.1137646, z: 0.1113281}
-  m_LocalScale: {x: 1.6524596, y: 1.6524593, z: 1.6524595}
+  m_LocalPosition: {x: -3.6839993, y: 0.39400017, z: 0.00097654015}
+  m_LocalScale: {x: 1.6524594, y: 1.652459, z: 1.6524595}
   m_Children:
   - {fileID: 152825240}
   - {fileID: 1469126212}
-  m_Father: {fileID: 1305106997}
-  m_RootOrder: 0
+  m_Father: {fileID: 1951957345}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &278713613
 MonoBehaviour:
@@ -857,6 +857,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   health: 0
+  seePlayerDistanceX: 8
+  seePlayerDistanceY: 3
+  cameraFollow: 0
   metalBrace: {fileID: 152825240}
   tipOfIce: {fileID: 1469126212}
   spriteMask: {fileID: 331393242190331826, guid: c5041ac33dc28eb44aebc49e8273d3bf,
@@ -1691,7 +1694,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 543539561}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.1213322, y: -0.19823533, z: 0.111328125}
+  m_LocalPosition: {x: -4.2269998, y: -0.9179998, z: 0.0009765625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1085864341}
@@ -1706,8 +1709,8 @@ Transform:
   - {fileID: 1978640311}
   - {fileID: 93782058}
   - {fileID: 618661430}
-  m_Father: {fileID: 2015789115}
-  m_RootOrder: 2
+  m_Father: {fileID: 1951957345}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &552053799
 GameObject:
@@ -2327,14 +2330,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 770525127}
-  m_LocalRotation: {x: -0, y: -0, z: 0.009425356, w: 0.99995565}
-  m_LocalPosition: {x: -5.01, y: 0.41, z: -0.013671882}
-  m_LocalScale: {x: 1.3654352, y: 1.5558732, z: 1.4861888}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.8668122, y: 0.20426476, z: 0.00097654015}
+  m_LocalScale: {x: 1.3654352, y: 1.5558728, z: 1.4861888}
   m_Children:
   - {fileID: 1331934531}
   - {fileID: 552053800}
-  m_Father: {fileID: 1399631760}
-  m_RootOrder: 0
+  m_Father: {fileID: 1951957345}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &770525132
 MonoBehaviour:
@@ -2349,6 +2352,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   health: 0
+  seePlayerDistanceX: 8
+  seePlayerDistanceY: 3
+  cameraFollow: 0
   metalBrace: {fileID: 1331934531}
   tipOfIce: {fileID: 552053800}
   spriteMask: {fileID: 331276797507186958, guid: 28f7b50e6f14ad248a94b1413c9ec38d,
@@ -3128,7 +3134,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 974050312}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.232332, y: -0.15823531, z: 0.111328125}
+  m_LocalPosition: {x: 4.884, y: -0.8779999, z: 0.0009765625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1309716487}
@@ -3143,8 +3149,8 @@ Transform:
   - {fileID: 1147931367}
   - {fileID: 911643571}
   - {fileID: 1286981734}
-  m_Father: {fileID: 2015789115}
-  m_RootOrder: 1
+  m_Father: {fileID: 1951957345}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &981280781
 GameObject:
@@ -4000,12 +4006,11 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1305106996}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.3483315, y: -0.7197646, z: -0.11035156}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 278713612}
-  m_Father: {fileID: 2015789115}
+  m_Children: []
+  m_Father: {fileID: 1951957345}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1305479747
@@ -4030,12 +4035,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1305479747}
   m_LocalRotation: {x: -0, y: -0, z: -0.009425356, w: 0.99995565}
-  m_LocalPosition: {x: 11.4829, y: 0.4196645, z: 0.124999985}
+  m_LocalPosition: {x: 4.134568, y: -0.3001001, z: 0.014648423}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1918820956}
-  m_Father: {fileID: 2015789115}
-  m_RootOrder: 4
+  m_Children: []
+  m_Father: {fileID: 1951957345}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1309716483
 GameObject:
@@ -4538,13 +4542,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1399631759}
-  m_LocalRotation: {x: 0, y: -0, z: -0.009425356, w: 0.99995565}
-  m_LocalPosition: {x: 11.482898, y: 0.4196645, z: 0.124999985}
+  m_LocalRotation: {x: -0, y: -0, z: -0.009425356, w: 0.99995565}
+  m_LocalPosition: {x: 4.134568, y: -0.3001001, z: 0.014648423}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 770525131}
-  m_Father: {fileID: 2015789115}
-  m_RootOrder: 6
+  m_Children: []
+  m_Father: {fileID: 1951957345}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1469126211
 GameObject:
@@ -5043,6 +5046,8 @@ MonoBehaviour:
   lookSmoothTimeX: 0.5
   verticalSmoothTime: 0.5
   focusAreaSize: {x: 1.5, y: 2.7}
+  enemyToFollow: {fileID: 1951957347}
+  followEnemyDst: 10
 --- !u!124 &1675023706
 Behaviour:
   m_ObjectHideFlags: 0
@@ -5795,7 +5800,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1904123682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.312332, y: 0.6917646, z: 0.111328125}
+  m_LocalPosition: {x: 0.9640007, y: -0.027999997, z: 0.0009765625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 741113303}
@@ -5810,8 +5815,8 @@ Transform:
   - {fileID: 1760296600}
   - {fileID: 1025530264}
   - {fileID: 958958173}
-  m_Father: {fileID: 2015789115}
-  m_RootOrder: 3
+  m_Father: {fileID: 1951957345}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1918820955
 GameObject:
@@ -5839,14 +5844,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1918820955}
-  m_LocalRotation: {x: -0, y: -0, z: 0.009425356, w: 0.99995565}
-  m_LocalPosition: {x: 0.68, y: 0.03, z: -0.013671882}
-  m_LocalScale: {x: 1.3654352, y: 1.5558732, z: 1.4861888}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.815013, y: -0.28292337, z: 0.00097654015}
+  m_LocalScale: {x: 1.3654352, y: 1.5558728, z: 1.4861888}
   m_Children:
   - {fileID: 971361836}
   - {fileID: 1873941188}
-  m_Father: {fileID: 1305479748}
-  m_RootOrder: 0
+  m_Father: {fileID: 1951957345}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &1918820957
 PolygonCollider2D:
@@ -5891,6 +5896,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   health: 0
+  seePlayerDistanceX: 8
+  seePlayerDistanceY: 3
+  cameraFollow: 0
   metalBrace: {fileID: 971361836}
   tipOfIce: {fileID: 1873941188}
   spriteMask: {fileID: 331276797507186958, guid: 28f7b50e6f14ad248a94b1413c9ec38d,
@@ -5999,8 +6007,9 @@ GameObject:
   - component: {fileID: 1951957344}
   - component: {fileID: 1951957343}
   - component: {fileID: 1951957346}
+  - component: {fileID: 1951957347}
   m_Layer: 0
-  m_Name: Placeholder
+  m_Name: Chain Ice Creature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6077,12 +6086,21 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1951957342}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.3483315, y: 0.7197646, z: 0.11035156}
+  m_LocalRotation: {x: -0, y: -0, z: 0.009425356, w: 0.99995565}
+  m_LocalPosition: {x: 30.183458, y: 3.818152, z: -0.0009765476}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2015789115}
-  m_RootOrder: 0
+  m_Children:
+  - {fileID: 974050313}
+  - {fileID: 543539562}
+  - {fileID: 1904123683}
+  - {fileID: 1305479748}
+  - {fileID: 1918820956}
+  - {fileID: 1305106997}
+  - {fileID: 278713612}
+  - {fileID: 1399631760}
+  - {fileID: 770525131}
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1951957346
 BoxCollider2D:
@@ -6109,6 +6127,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.3552518, y: 1.8153744}
   m_EdgeRadius: 0
+--- !u!114 &1951957347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1951957342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3208f3c48d58924fb8536aa8bda276f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  health: 0
+  seePlayerDistanceX: 8
+  seePlayerDistanceY: 3
+  cameraFollow: 1
+  iceLegs:
+  - {fileID: 1918820958}
+  - {fileID: 278713613}
+  - {fileID: 770525132}
+  head: {fileID: 1951957345}
+  moveUpAmount: 3
+  stepDst: 5
+  legCallbackDst: 20
+  crippleWaitTime: 0.4
+  player: {fileID: 2134510030}
+  seePlayerDst: 15
+  rayStartPos: {x: 0, y: -1.5, z: 0}
+  rayLength: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1978640307
 GameObject:
   m_ObjectHideFlags: 0
@@ -6347,69 +6397,6 @@ Transform:
   m_Father: {fileID: 974050313}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2015789113
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2015789115}
-  - component: {fileID: 2015789116}
-  m_Layer: 0
-  m_Name: Chain Ice Creature
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2015789115
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2015789113}
-  m_LocalRotation: {x: -0, y: -0, z: 0.009425356, w: 0.99995565}
-  m_LocalPosition: {x: 22.85, y: 2.96, z: -0.11132811}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1951957345}
-  - {fileID: 974050313}
-  - {fileID: 543539562}
-  - {fileID: 1904123683}
-  - {fileID: 1305479748}
-  - {fileID: 1305106997}
-  - {fileID: 1399631760}
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.08}
---- !u!114 &2015789116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2015789113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3208f3c48d58924fb8536aa8bda276f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iceLegs:
-  - {fileID: 1918820958}
-  - {fileID: 278713613}
-  - {fileID: 770525132}
-  head: {fileID: 1951957345}
-  moveUpAmount: 3
-  stepDst: 5
-  legCallbackDst: 20
-  crippleWaitTime: 0.4
-  player: {fileID: 2134510030}
-  seePlayerDst: 15
-  rayStartPos: {x: 0, y: -1.5, z: 0}
-  rayLength: 1
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!1 &2064600814
 GameObject:
   m_ObjectHideFlags: 0

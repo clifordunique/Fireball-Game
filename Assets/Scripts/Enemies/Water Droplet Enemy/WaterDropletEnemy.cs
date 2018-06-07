@@ -16,11 +16,8 @@ public class WaterDropletEnemy : Enemy
     public float chaseSpeed = 12;
     public float waitTime = .2f;
     public Transform pathHolder;
-    public float viewDistanceX = 8;
-    public float viewDistanceY = 3;
 
     public Transform waterSplat;
-    public Transform waterSplat2;
 
     Vector2 dirToPlayer;
 
@@ -64,7 +61,7 @@ public class WaterDropletEnemy : Enemy
         {
             StopAllCoroutines();
             StartCoroutine(ChasePlayer(true));
-            canSeePlayer = false;
+            canSeePlayer = false; // Now it won't start a bunch of coroutines
         }
     }
 
@@ -85,7 +82,7 @@ public class WaterDropletEnemy : Enemy
     {
         if (player != null)
         {
-            if (Mathf.Abs(transform.position.x - player.position.x) < viewDistanceX && Mathf.Abs(transform.position.y - player.position.y) < viewDistanceY)
+            if (Mathf.Abs(transform.position.x - player.position.x) < seePlayerDistanceX && Mathf.Abs(transform.position.y - player.position.y) < seePlayerDistanceY)
             {
                 // If the player is in front of the water droplet
                 if ((transform.localScale.x < 0 && (player.position.x > transform.position.x)) || transform.localScale.x > 0 && (player.position.x < transform.position.x))
@@ -215,7 +212,7 @@ public class WaterDropletEnemy : Enemy
 
         Effect(pos);
 
-        if (Mathf.Abs(transform.position.x - player.position.x) < viewDistanceX && Mathf.Abs(transform.position.y - player.position.y) < viewDistanceY)
+        if (Mathf.Abs(transform.position.x - player.position.x) < seePlayerDistanceX && Mathf.Abs(transform.position.y - player.position.y) < seePlayerDistanceY)
         {
             StopAllCoroutines();
             StartCoroutine(ChasePlayer(false));
@@ -241,11 +238,13 @@ public class WaterDropletEnemy : Enemy
             {
                 if (anim.GetFloat("Speed") == 0)
                 {
-                    Instantiate(waterSplat2, new Vector2(position.x + 2, position.y), Quaternion.Euler(Vector2.right));
+                    Transform tempWaterSplat = Instantiate(waterSplat, new Vector2(position.x + 2, position.y), Quaternion.Euler(Vector2.right));
+                    tempWaterSplat.localScale = new Vector2(-tempWaterSplat.localScale.x, tempWaterSplat.localScale.y);
                 }
                 else
                 {
-                    Instantiate(waterSplat2, position, Quaternion.Euler(Vector2.right));
+                    Transform tempWaterSplat = Instantiate(waterSplat, position, Quaternion.Euler(Vector2.right));
+                    tempWaterSplat.localScale = new Vector2(-tempWaterSplat.localScale.x, tempWaterSplat.localScale.y);
                 }
             }
             else // Player is to the right
@@ -269,7 +268,8 @@ public class WaterDropletEnemy : Enemy
             }
             else // Player is to the right
             {
-                Instantiate(waterSplat2, position, Quaternion.Euler(Vector2.right));
+                Transform tempWaterSplat = Instantiate(waterSplat, position, Quaternion.Euler(Vector2.right));
+                tempWaterSplat.localScale = new Vector2(-tempWaterSplat.localScale.x, tempWaterSplat.localScale.y);
             }
         }
     }

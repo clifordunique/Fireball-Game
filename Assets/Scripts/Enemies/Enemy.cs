@@ -4,6 +4,9 @@ public class Enemy: MonoBehaviour {
 
     public float maxHealth = 10;
     public float health;
+    public float seePlayerDistanceX = 8;
+    public float seePlayerDistanceY = 3;
+    public bool cameraFollow = false;
 
     public virtual void Start()
     {

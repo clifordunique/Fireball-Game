@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class IceLegMove : MonoBehaviour
+public class IceLegMove : Enemy
 {
     public IceLeg[] iceLegs;
     public Transform head;
@@ -19,8 +19,9 @@ public class IceLegMove : MonoBehaviour
 
     CameraShake camShake;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
         camShake = GameMaster.gm.GetComponent<CameraShake>();
         StartCoroutine(Walk());
     }
@@ -80,8 +81,6 @@ public class IceLegMove : MonoBehaviour
         float targetPosX = currentLeg.position.x + stepDst * dirToPlayer;
         float moveSpeed = 0.3f;
 
-        Debug.Log("Moving to position");
-
         while (currentLeg.position.x * dirToPlayer < targetPosX * dirToPlayer)
         {
             if (iceLegs[currentLegIndex] != null)
@@ -106,8 +105,6 @@ public class IceLegMove : MonoBehaviour
         Quaternion angleToPlayer = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
         StopCoroutine("RotateDownwards");
-
-        Debug.Log("Rotating to player");
 
         if (iceLegs[currentLegIndex] != null)
         {
@@ -135,8 +132,6 @@ public class IceLegMove : MonoBehaviour
         float dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
         float moveSpeed = 1.4f;
         bool hitGround = false;
-
-        Debug.Log("Moving to Player");
 
         while (!hitGround)
         {
@@ -171,8 +166,7 @@ public class IceLegMove : MonoBehaviour
         IceLeg currentLeg = iceLegs[currentLegIndex];
         float moveSpeed = 1.4f;
         bool hitGround = false;
-
-        Debug.Log("Moving down");
+        float dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
 
         while (!hitGround)
         {
@@ -185,7 +179,12 @@ public class IceLegMove : MonoBehaviour
                     break;
                 }
                 currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y - moveSpeed, currentLeg.transform.position.z);
-
+                // This makes sure that if he walks off a cliff he doesn't fall forever
+                dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
+                if (dstFromHead > legCallbackDst)
+                {
+                    break;
+                }
                 yield return new WaitForSeconds(.01f);
             }
         }
@@ -196,13 +195,10 @@ public class IceLegMove : MonoBehaviour
         Transform currentLeg = iceLegs[currentLegIndex].transform;
         Quaternion downwardAngle = Quaternion.AngleAxis(0, Vector3.forward);
 
-        Debug.Log("Rotating down");
-
         if (iceLegs[currentLegIndex] != null)
         {
             while (currentLeg.transform.rotation != downwardAngle)
             {
-                Debug.Log("Still rotating downwards");
                 if (iceLegs[currentLegIndex] != null)
                 {
                     currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, downwardAngle, Time.deltaTime * 5);

@@ -2168,6 +2168,8 @@ MonoBehaviour:
   lookSmoothTimeX: 0.5
   verticalSmoothTime: 0.5
   focusAreaSize: {x: 1.5, y: 2.7}
+  enemyToFollow: {fileID: 1658367168}
+  followEnemyDst: 20
 --- !u!124 &250900568
 Behaviour:
   m_ObjectHideFlags: 0
@@ -16150,6 +16152,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1739428050946014, guid: 1c0c22ffdfa42b1469e088bed08caec9, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c0c22ffdfa42b1469e088bed08caec9, type: 2}
   m_IsPrefabParent: 0
@@ -16973,6 +16979,12 @@ PolygonCollider2D:
       - {x: -3.3231711, y: -0.40325648}
       - {x: -5.918747, y: -0.3555183}
       - {x: -13.108352, y: 2.1915698}
+--- !u!114 &1658367168 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114420960566381860, guid: 8b037a005d84f55419dd03ac8d4a9324,
+    type: 2}
+  m_PrefabInternal: {fileID: 887183818}
+  m_Script: {fileID: 11500000, guid: b4e286cf37ac0304b826dc9ca0188b4d, type: 3}
 --- !u!1001 &1681466603
 Prefab:
   m_ObjectHideFlags: 0
@@ -28016,11 +28028,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.4
+      value: 64.5
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.4
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.z
