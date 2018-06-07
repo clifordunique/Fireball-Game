@@ -13,7 +13,7 @@ public class IceLeg : Enemy
 
     private void Update()
     {
-        Vector3 direction = tipOfIce.position- transform.position;
+        Vector3 direction = tipOfIce.position - transform.position;
         Debug.DrawRay(transform.position, direction.normalized * rayLength, Color.red);
         hit = Physics2D.Raycast(transform.position, direction.normalized, rayLength, layerMask);
     }
@@ -23,14 +23,8 @@ public class IceLeg : Enemy
         health -= _damage;
         if (health <= 0)
         {
-            metalBrace.parent = transform.parent;
-            Rigidbody2D metalRb2D = metalBrace.GetComponent<Rigidbody2D>();
+            UpdateRigidbody();
 
-            metalBrace.GetComponent<BoxCollider2D>().enabled = true;
-            metalRb2D.bodyType = RigidbodyType2D.Dynamic;
-            metalRb2D.mass = 50;
-            metalRb2D.gravityScale = 5;
-            
             Destroy(this.gameObject);
         }
         Effect(position);
@@ -48,5 +42,16 @@ public class IceLeg : Enemy
         SpriteMask newSpriteMask = Instantiate(spriteMask, new Vector2(hitPos.x + offset, hitPos.y), Quaternion.Euler(angle));
         newSpriteMask.transform.localScale = new Vector3(newSpriteMask.transform.localScale.x * (-dirToHit), newSpriteMask.transform.localScale.y, newSpriteMask.transform.localScale.y);
         newSpriteMask.transform.SetParent(transform);
+    }
+
+    public void UpdateRigidbody()
+    {
+        Rigidbody2D metalRb2D = metalBrace.GetComponent<Rigidbody2D>();
+        metalBrace.parent = this.transform.parent;
+        metalBrace.GetComponent<BoxCollider2D>().enabled = true;
+
+        metalRb2D.bodyType = RigidbodyType2D.Dynamic;
+        metalRb2D.mass = 50;
+        metalRb2D.gravityScale = 5;
     }
 }

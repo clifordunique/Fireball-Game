@@ -51,26 +51,24 @@ public class IceLegMove : MonoBehaviour
                     yield return new WaitForSeconds(crippleWaitTime);
                 }
             }
-            yield return null;
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
     IEnumerator MoveUp(int currentLegIndex)
     {
-        Transform currentLeg = iceLegs[currentLegIndex].transform;
-        float targetPosY = currentLeg.position.y + moveUpAmount;
+        IceLeg currentLeg = iceLegs[currentLegIndex];
+        float targetPosY = currentLeg.transform.position.y + moveUpAmount;
         float moveSpeed = 0.3f;
-
-        Debug.Log("Moving up");
 
         StartCoroutine("RotateDownwards", currentLegIndex);
 
-        while (currentLeg.position.y < targetPosY)
+        while (currentLeg.transform.position.y < targetPosY)
         {
             if (iceLegs[currentLegIndex] != null) // add this check in case the ice leg was destroyed in the middle of it's coroutine
             {
-                currentLeg.position = new Vector3(currentLeg.position.x, currentLeg.position.y + moveSpeed, currentLeg.position.z);
-                yield return null;
+                currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y + moveSpeed, currentLeg.transform.position.z);
+                yield return new WaitForSeconds(0.01f);
             }
         }
     }
@@ -89,7 +87,7 @@ public class IceLegMove : MonoBehaviour
             if (iceLegs[currentLegIndex] != null)
             {
                 currentLeg.position = new Vector3(currentLeg.position.x + moveSpeed * dirToPlayer, currentLeg.position.y, currentLeg.position.z);
-                yield return null;
+                yield return new WaitForSeconds(0.01f);
             }
         }
     }
@@ -117,9 +115,8 @@ public class IceLegMove : MonoBehaviour
             {
                 if (iceLegs[currentLegIndex] != null)
                 {
-                    Debug.Log("Still rotating " + currentLeg.transform.rotation + " " + angleToPlayer);
                     currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angleToPlayer, Time.deltaTime * speed);
-                    yield return null;
+                    yield return new WaitForSeconds(0.01f);
                 }
             }
         }
@@ -132,8 +129,8 @@ public class IceLegMove : MonoBehaviour
     /// <returns></returns>
     IEnumerator MoveToPlayer(int currentLegIndex)
     {
-        Transform currentLeg = iceLegs[currentLegIndex].transform;
-        Vector2 dirToPlayer = player.transform.position - currentLeg.position;
+        IceLeg currentLeg = iceLegs[currentLegIndex];
+        Vector2 dirToPlayer = player.transform.position - currentLeg.transform.position;
         dirToPlayer.Normalize();
         float dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
         float moveSpeed = 1.4f;
@@ -143,22 +140,22 @@ public class IceLegMove : MonoBehaviour
 
         while (!hitGround)
         {
-            if (iceLegs[currentLegIndex] != null)
+            if (currentLeg != null)
             {
-                if (iceLegs[currentLegIndex].hit)
+                if (currentLeg.hit)
                 {
                     camShake.Shake(0.08f, 0.08f);
                     hitGround = true;
                     break;
                 }
-                currentLeg.Translate(Vector2.down * moveSpeed);
+                currentLeg.transform.Translate(Vector2.down * moveSpeed);
                 if (dstFromHead > legCallbackDst)
                 {
                     break;
                 }
                 dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
 
-                yield return null;
+                yield return new WaitForSeconds(.01f);
             }
         }
 
@@ -189,7 +186,7 @@ public class IceLegMove : MonoBehaviour
                 }
                 currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y - moveSpeed, currentLeg.transform.position.z);
 
-                yield return null;
+                yield return new WaitForSeconds(.01f);
             }
         }
     }
@@ -209,7 +206,7 @@ public class IceLegMove : MonoBehaviour
                 if (iceLegs[currentLegIndex] != null)
                 {
                     currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, downwardAngle, Time.deltaTime * 5);
-                    yield return null;
+                    yield return new WaitForSeconds(0.01f);
                 }
             }
         }
