@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class CameraFollow : MonoBehaviour
         set { modLooking = value; }
     }
 
-    public Enemy enemyToFollow;
+    public List<Enemy> enemiesToFollow;
     public float followEnemyDst;
 
     FocusArea focusArea;
@@ -60,14 +61,7 @@ public class CameraFollow : MonoBehaviour
         Vector2 focusPosition = focusArea.center + Vector2.up * verticalOffset;
 
         // Check if something is modifying the lookahead
-            HorizontalLookahead();
-        //if (!modLooking)
-        //{
-        //}
-        //else
-        //{
-        //    HorizontalLookaheadMod();
-        //}
+        HorizontalLookahead();
         VerticalLookahead();
 
         // Horizontal smoothing
@@ -120,21 +114,19 @@ public class CameraFollow : MonoBehaviour
                 lookAheadStoppedX = false;
 
                 float dstToEnemy = 1000;
-                if(enemyToFollow != null)
+                if(enemiesToFollow.Count > 0)
                 {
-                    dstToEnemy = enemyToFollow.transform.position.x - focusArea.center.x;
+                    dstToEnemy = CalculateCameraPos();
                 }
-                Debug.Log("Dst to enemy: " + dstToEnemy);
 
-                if(enemyToFollow == null || !(Mathf.Abs(dstToEnemy) < followEnemyDst))
+                if(enemiesToFollow.Count == 0)
                 {
                     targetLookAheadX = lookAheadDirX * lookAheadDstX;
                 }
                 else
                 {
-                    Debug.Log("weirdsadf');");
                     lookAheadDirX = Mathf.Sign(dstToEnemy);
-                    targetLookAheadX = lookAheadDirX * Mathf.Abs(dstToEnemy) / 2;
+                    targetLookAheadX = lookAheadDirX * Mathf.Abs(dstToEnemy) / (enemiesToFollow.Count + 1);
                 }
 
                 //if (target.playerVelocity.y > -0.01f)
@@ -160,6 +152,22 @@ public class CameraFollow : MonoBehaviour
             //    targetLookAheadY = lookAheadDstY;
             //}
         }
+    }
+
+    float CalculateCameraPos()
+    {
+        float dst = 0;
+        foreach (Enemy e in enemiesToFollow)
+        {
+            if (e == null)
+            {
+                enemiesToFollow.Remove(e);
+                break;
+            }
+            dst += e.transform.position.x - focusArea.center.x;
+        }
+
+        return dst;
     }
 
     /* This function looks ahead in the positive direction x
@@ -251,6 +259,31 @@ public class CameraFollow : MonoBehaviour
             bottom += shiftY;
             center = new Vector2((left + right) / 2, (top + bottom) / 2);
             velocity = new Vector2(shiftX, shiftY);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Enemy>() != null)
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+            if (enemy.cameraFollow)
+            {
+                Debug.Log(enemy);
+                enemiesToFollow.Add(enemy);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Enemy>() != null)
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+            if (enemy.cameraFollow)
+            {
+                enemiesToFollow.Remove(enemy);
+            }
         }
     }
 }

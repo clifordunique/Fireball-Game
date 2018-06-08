@@ -64,13 +64,10 @@ public class IceLegMove : Enemy
 
         StartCoroutine("RotateDownwards", currentLegIndex);
 
-        while (currentLeg.transform.position.y < targetPosY)
+        while (currentLeg != null && currentLeg.transform.position.y < targetPosY)
         {
-            if (iceLegs[currentLegIndex] != null) // add this check in case the ice leg was destroyed in the middle of it's coroutine
-            {
-                currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y + moveSpeed, currentLeg.transform.position.z);
-                yield return new WaitForSeconds(0.01f);
-            }
+            currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y + moveSpeed, currentLeg.transform.position.z);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
@@ -81,13 +78,10 @@ public class IceLegMove : Enemy
         float targetPosX = currentLeg.position.x + stepDst * dirToPlayer;
         float moveSpeed = 0.3f;
 
-        while (currentLeg.position.x * dirToPlayer < targetPosX * dirToPlayer)
+        while (currentLeg != null && currentLeg.position.x * dirToPlayer < targetPosX * dirToPlayer)
         {
-            if (iceLegs[currentLegIndex] != null)
-            {
-                currentLeg.position = new Vector3(currentLeg.position.x + moveSpeed * dirToPlayer, currentLeg.position.y, currentLeg.position.z);
-                yield return new WaitForSeconds(0.01f);
-            }
+            currentLeg.position = new Vector3(currentLeg.position.x + moveSpeed * dirToPlayer, currentLeg.position.y, currentLeg.position.z);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
@@ -106,15 +100,12 @@ public class IceLegMove : Enemy
 
         StopCoroutine("RotateDownwards");
 
-        if (iceLegs[currentLegIndex] != null)
+        while (currentLeg != null && (currentLeg.transform.rotation.eulerAngles.z > angleToPlayer.eulerAngles.z + 0.1f || currentLeg.transform.rotation.eulerAngles.z < angleToPlayer.eulerAngles.z - 0.1f))
         {
-            while (currentLeg.transform.rotation.eulerAngles.z > angleToPlayer.eulerAngles.z + 0.1f || currentLeg.transform.rotation.eulerAngles.z < angleToPlayer.eulerAngles.z - 0.1f)
+            if (iceLegs[currentLegIndex] != null)
             {
-                if (iceLegs[currentLegIndex] != null)
-                {
-                    currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angleToPlayer, Time.deltaTime * speed);
-                    yield return new WaitForSeconds(0.01f);
-                }
+                currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angleToPlayer, Time.deltaTime * speed);
+                yield return new WaitForSeconds(0.01f);
             }
         }
     }
@@ -127,31 +118,33 @@ public class IceLegMove : Enemy
     IEnumerator MoveToPlayer(int currentLegIndex)
     {
         IceLeg currentLeg = iceLegs[currentLegIndex];
-        Vector2 dirToPlayer = player.transform.position - currentLeg.transform.position;
-        dirToPlayer.Normalize();
-        float dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
+        Vector2 dirToPlayer;
+        float dstFromHead = 0;
+        if (currentLeg != null)
+        {
+            dirToPlayer = player.transform.position - currentLeg.transform.position;
+            dirToPlayer.Normalize();
+            dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
+        }
         float moveSpeed = 1.4f;
         bool hitGround = false;
 
-        while (!hitGround)
+        while (currentLeg != null && !hitGround)
         {
-            if (currentLeg != null)
+            if (currentLeg.hit)
             {
-                if (currentLeg.hit)
-                {
-                    camShake.Shake(0.08f, 0.08f);
-                    hitGround = true;
-                    break;
-                }
-                currentLeg.transform.Translate(Vector2.down * moveSpeed);
-                if (dstFromHead > legCallbackDst)
-                {
-                    break;
-                }
-                dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
-
-                yield return new WaitForSeconds(.01f);
+                camShake.Shake(0.08f, 0.08f);
+                hitGround = true;
+                break;
             }
+            currentLeg.transform.Translate(Vector2.down * moveSpeed);
+            if (dstFromHead > legCallbackDst)
+            {
+                break;
+            }
+            dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
+
+            yield return new WaitForSeconds(.01f);
         }
 
     }
@@ -166,28 +159,30 @@ public class IceLegMove : Enemy
         IceLeg currentLeg = iceLegs[currentLegIndex];
         float moveSpeed = 1.4f;
         bool hitGround = false;
-        float dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
-
-        while (!hitGround)
+        float dstFromHead = 0;
+        if (currentLeg != null)
         {
-            if (currentLeg != null)
-            {
-                if (currentLeg.hit)
-                {
-                    camShake.Shake(0.08f, 0.08f);
-                    hitGround = true;
-                    break;
-                }
-                currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y - moveSpeed, currentLeg.transform.position.z);
-                // This makes sure that if he walks off a cliff he doesn't fall forever
-                dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
-                if (dstFromHead > legCallbackDst)
-                {
-                    break;
-                }
-                yield return new WaitForSeconds(.01f);
-            }
+            dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
         }
+
+        while (currentLeg != null && !hitGround)
+        {
+            if (currentLeg.hit)
+            {
+                camShake.Shake(0.08f, 0.08f);
+                hitGround = true;
+                break;
+            }
+            currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y - moveSpeed, currentLeg.transform.position.z);
+            // This makes sure that if he walks off a cliff he doesn't fall forever
+            dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
+            if (dstFromHead > legCallbackDst)
+            {
+                break;
+            }
+            yield return new WaitForSeconds(.01f);
+        }
+
     }
 
     IEnumerator RotateDownwards(int currentLegIndex)
@@ -195,16 +190,10 @@ public class IceLegMove : Enemy
         Transform currentLeg = iceLegs[currentLegIndex].transform;
         Quaternion downwardAngle = Quaternion.AngleAxis(0, Vector3.forward);
 
-        if (iceLegs[currentLegIndex] != null)
+        while (currentLeg != null && currentLeg.transform.rotation != downwardAngle)
         {
-            while (currentLeg.transform.rotation != downwardAngle)
-            {
-                if (iceLegs[currentLegIndex] != null)
-                {
-                    currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, downwardAngle, Time.deltaTime * 5);
-                    yield return new WaitForSeconds(0.01f);
-                }
-            }
+            currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, downwardAngle, Time.deltaTime * 5);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 }
