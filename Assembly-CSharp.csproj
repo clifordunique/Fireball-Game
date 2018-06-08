@@ -108,7 +108,6 @@
     <Compile Include="Assets\Scripts\TriggerSensor\TSEnableDisableObject.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSEnableObject.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSEnablePowerups.cs" />
-    <Compile Include="Assets\Scripts\TriggerSensor\TSModifyCamera.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSSwitchBackground.cs" />
     <Compile Include="Assets\Scripts\UI\Healthbar.cs" />
     <Compile Include="Assets\Scripts\UI\PauseButton.cs" />

@@ -58,30 +58,36 @@ public class IceLegMove : Enemy
 
     IEnumerator MoveUp(int currentLegIndex)
     {
-        IceLeg currentLeg = iceLegs[currentLegIndex];
-        float targetPosY = currentLeg.transform.position.y + moveUpAmount;
-        float moveSpeed = 0.3f;
-
-        StartCoroutine("RotateDownwards", currentLegIndex);
-
-        while (currentLeg != null && currentLeg.transform.position.y < targetPosY)
+        if (iceLegs[currentLegIndex] != null)
         {
-            currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y + moveSpeed, currentLeg.transform.position.z);
-            yield return new WaitForSeconds(0.01f);
+            IceLeg currentLeg = iceLegs[currentLegIndex];
+            float targetPosY = currentLeg.transform.position.y + moveUpAmount;
+            float moveSpeed = 0.3f;
+
+            StartCoroutine("RotateDownwards", currentLegIndex);
+
+            while (currentLeg != null && currentLeg.transform.position.y < targetPosY)
+            {
+                currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y + moveSpeed, currentLeg.transform.position.z);
+                yield return new WaitForSeconds(0.01f);
+            }
         }
     }
 
     IEnumerator MoveToPos(int currentLegIndex)
     {
-        Transform currentLeg = iceLegs[currentLegIndex].transform;
-        float dirToPlayer = Mathf.Sign(player.transform.position.x - currentLeg.position.x);
-        float targetPosX = currentLeg.position.x + stepDst * dirToPlayer;
-        float moveSpeed = 0.3f;
-
-        while (currentLeg != null && currentLeg.position.x * dirToPlayer < targetPosX * dirToPlayer)
+        if (iceLegs[currentLegIndex] != null)
         {
-            currentLeg.position = new Vector3(currentLeg.position.x + moveSpeed * dirToPlayer, currentLeg.position.y, currentLeg.position.z);
-            yield return new WaitForSeconds(0.01f);
+            IceLeg currentLeg = iceLegs[currentLegIndex];
+            float dirToPlayer = Mathf.Sign(player.transform.position.x - currentLeg.transform.position.x);
+            float targetPosX = currentLeg.transform.position.x + stepDst * dirToPlayer;
+            float moveSpeed = 0.3f;
+
+            while (currentLeg != null && currentLeg.transform.position.x * dirToPlayer < targetPosX * dirToPlayer)
+            {
+                currentLeg.transform.position = new Vector3(currentLeg.transform.position.x + moveSpeed * dirToPlayer, currentLeg.transform.position.y, currentLeg.transform.position.z);
+                yield return new WaitForSeconds(0.01f);
+            }
         }
     }
 
@@ -92,20 +98,23 @@ public class IceLegMove : Enemy
     /// <returns></returns>
     IEnumerator PointAtPlayer(int currentLegIndex)
     {
-        float speed = 20f;
-        Transform currentLeg = iceLegs[currentLegIndex].transform;
-        Vector3 vectorToTarget = currentLeg.position - player.transform.position;
-        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
-        Quaternion angleToPlayer = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-
-        StopCoroutine("RotateDownwards");
-
-        while (currentLeg != null && (currentLeg.transform.rotation.eulerAngles.z > angleToPlayer.eulerAngles.z + 0.1f || currentLeg.transform.rotation.eulerAngles.z < angleToPlayer.eulerAngles.z - 0.1f))
+        if (iceLegs[currentLegIndex] != null)
         {
-            if (iceLegs[currentLegIndex] != null)
+            Transform currentLeg = iceLegs[currentLegIndex].transform;
+            float speed = 20f;
+            Vector3 vectorToTarget = currentLeg.position - player.transform.position;
+            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+            Quaternion angleToPlayer = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+
+            StopCoroutine("RotateDownwards");
+
+            while (currentLeg != null && (currentLeg.transform.rotation.eulerAngles.z > angleToPlayer.eulerAngles.z + 0.1f || currentLeg.transform.rotation.eulerAngles.z < angleToPlayer.eulerAngles.z - 0.1f))
             {
-                currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angleToPlayer, Time.deltaTime * speed);
-                yield return new WaitForSeconds(0.01f);
+                if (iceLegs[currentLegIndex] != null)
+                {
+                    currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angleToPlayer, Time.deltaTime * speed);
+                    yield return new WaitForSeconds(0.01f);
+                }
             }
         }
     }
@@ -117,34 +126,32 @@ public class IceLegMove : Enemy
     /// <returns></returns>
     IEnumerator MoveToPlayer(int currentLegIndex)
     {
-        IceLeg currentLeg = iceLegs[currentLegIndex];
-        Vector2 dirToPlayer;
-        float dstFromHead = 0;
-        if (currentLeg != null)
+        if (iceLegs[currentLegIndex] != null)
         {
-            dirToPlayer = player.transform.position - currentLeg.transform.position;
+            IceLeg currentLeg = iceLegs[currentLegIndex];
+            Vector2 dirToPlayer = player.transform.position - currentLeg.transform.position;
             dirToPlayer.Normalize();
-            dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
-        }
-        float moveSpeed = 1.4f;
-        bool hitGround = false;
+            float dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
+            float moveSpeed = 1.4f;
+            bool hitGround = false;
 
-        while (currentLeg != null && !hitGround)
-        {
-            if (currentLeg.hit)
+            while (currentLeg != null && !hitGround)
             {
-                camShake.Shake(0.08f, 0.08f);
-                hitGround = true;
-                break;
-            }
-            currentLeg.transform.Translate(Vector2.down * moveSpeed);
-            if (dstFromHead > legCallbackDst)
-            {
-                break;
-            }
-            dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
+                if (currentLeg.hit)
+                {
+                    camShake.Shake(0.08f, 0.08f);
+                    hitGround = true;
+                    break;
+                }
+                currentLeg.transform.Translate(Vector2.down * moveSpeed);
+                if (dstFromHead > legCallbackDst)
+                {
+                    break;
+                }
+                dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
 
-            yield return new WaitForSeconds(.01f);
+                yield return new WaitForSeconds(.01f);
+            }
         }
 
     }
@@ -156,44 +163,47 @@ public class IceLegMove : Enemy
     /// <returns></returns>
     IEnumerator MoveDown(int currentLegIndex)
     {
-        IceLeg currentLeg = iceLegs[currentLegIndex];
-        float moveSpeed = 1.4f;
-        bool hitGround = false;
-        float dstFromHead = 0;
-        if (currentLeg != null)
-        {
-            dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
-        }
 
-        while (currentLeg != null && !hitGround)
+        if (iceLegs[currentLegIndex] != null)
         {
-            if (currentLeg.hit)
+            IceLeg currentLeg = iceLegs[currentLegIndex];
+            float moveSpeed = 1.4f;
+            bool hitGround = false;
+            float dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
+
+            while (currentLeg != null && !hitGround)
             {
-                camShake.Shake(0.08f, 0.08f);
-                hitGround = true;
-                break;
+                if (currentLeg.hit)
+                {
+                    camShake.Shake(0.08f, 0.08f);
+                    hitGround = true;
+                    break;
+                }
+                currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y - moveSpeed, currentLeg.transform.position.z);
+                // This makes sure that if he walks off a cliff he doesn't fall forever
+                dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
+                if (dstFromHead > legCallbackDst)
+                {
+                    break;
+                }
+                yield return new WaitForSeconds(.01f);
             }
-            currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y - moveSpeed, currentLeg.transform.position.z);
-            // This makes sure that if he walks off a cliff he doesn't fall forever
-            dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
-            if (dstFromHead > legCallbackDst)
-            {
-                break;
-            }
-            yield return new WaitForSeconds(.01f);
         }
 
     }
 
     IEnumerator RotateDownwards(int currentLegIndex)
     {
-        Transform currentLeg = iceLegs[currentLegIndex].transform;
-        Quaternion downwardAngle = Quaternion.AngleAxis(0, Vector3.forward);
-
-        while (currentLeg != null && currentLeg.transform.rotation != downwardAngle)
+        if (iceLegs[currentLegIndex] != null)
         {
-            currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, downwardAngle, Time.deltaTime * 5);
-            yield return new WaitForSeconds(0.01f);
+            Transform currentLeg = iceLegs[currentLegIndex].transform;
+            Quaternion downwardAngle = Quaternion.AngleAxis(0, Vector3.forward);
+
+            while (currentLeg != null && currentLeg.transform.rotation != downwardAngle)
+            {
+                currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, downwardAngle, Time.deltaTime * 5);
+                yield return new WaitForSeconds(0.01f);
+            }
         }
     }
 }

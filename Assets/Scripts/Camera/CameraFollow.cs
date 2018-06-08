@@ -14,13 +14,6 @@ public class CameraFollow : MonoBehaviour
     public float verticalSmoothTime;
     public Vector2 focusAreaSize;
 
-    private bool modLooking = false;
-    public bool ModLooking
-    {
-        get { return modLooking; }
-        set { modLooking = value; }
-    }
-
     public List<Enemy> enemiesToFollow;
     public float followEnemyDst;
 
@@ -113,18 +106,13 @@ public class CameraFollow : MonoBehaviour
             {
                 lookAheadStoppedX = false;
 
-                float dstToEnemy = 1000;
-                if(enemiesToFollow.Count > 0)
-                {
-                    dstToEnemy = CalculateCameraPos();
-                }
-
                 if(enemiesToFollow.Count == 0)
                 {
                     targetLookAheadX = lookAheadDirX * lookAheadDstX;
                 }
                 else
                 {
+                    float dstToEnemy = CalculateCameraPos() + lookAheadDirX * lookAheadDstX;
                     lookAheadDirX = Mathf.Sign(dstToEnemy);
                     targetLookAheadX = lookAheadDirX * Mathf.Abs(dstToEnemy) / (enemiesToFollow.Count + 1);
                 }
@@ -168,38 +156,6 @@ public class CameraFollow : MonoBehaviour
         }
 
         return dst;
-    }
-
-    /* This function looks ahead in the positive direction x
-    */
-    private void HorizontalLookaheadMod()
-    {
-        // Block stopping the lookahead if the character stops moving
-        if (focusArea.velocity.x != 0)
-        {
-            // If the focus area is moving, set it sign appropriately
-            lookAheadDirX = Math.Abs(Mathf.Sign(focusArea.velocity.x));
-            if (Mathf.Sign(target.playerInput.x) == Mathf.Sign(focusArea.velocity.x) && target.playerInput.x != 0)
-            {
-                lookAheadStoppedX = false;
-                targetLookAheadX = lookAheadDirX * lookAheadDstX;
-                //if (target.playerVelocity.y > -0.01f)
-                //{
-                //    targetLookAheadY = currentLookAheadY + (lookAheadDstY - currentLookAheadY) / 4f;
-                //}
-            }
-            else
-            {
-                if (!lookAheadStoppedX)
-                {
-                    lookAheadStoppedX = true;
-                    targetLookAheadX = currentLookAheadX + (lookAheadDirX * lookAheadDstX - currentLookAheadX) / 4f;
-
-                    // NOT FULLY FUNCTIONAL CODE:
-                    //targetLookAheadY = currentLookAheadY + (lookAheadDirY * lookAheadDstY - currentLookAheadY) / 4f;
-                }
-            }
-        }
     }
 
     public void UpdateShake(float _shakeX, float _shakeY)
@@ -269,7 +225,6 @@ public class CameraFollow : MonoBehaviour
             Enemy enemy = collision.GetComponent<Enemy>();
             if (enemy.cameraFollow)
             {
-                Debug.Log(enemy);
                 enemiesToFollow.Add(enemy);
             }
         }

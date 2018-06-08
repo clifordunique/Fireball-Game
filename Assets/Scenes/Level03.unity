@@ -2597,7 +2597,7 @@ Transform:
   m_LocalScale: {x: 0.34605542, y: 0.35318342, z: 0.7367114}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 37
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &307936277
 MonoBehaviour:
@@ -2942,7 +2942,7 @@ Prefab:
     - target: {fileID: 114801917443570476, guid: 021bca08c0612fb4cb0d3f2094c2261a,
         type: 2}
       propertyPath: chaseSpeed
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114801917443570476, guid: 021bca08c0612fb4cb0d3f2094c2261a,
         type: 2}
@@ -2957,6 +2957,11 @@ Prefab:
     - target: {fileID: 1669923620122148, guid: 021bca08c0612fb4cb0d3f2094c2261a, type: 2}
       propertyPath: m_Name
       value: Enemy 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114801917443570476, guid: 021bca08c0612fb4cb0d3f2094c2261a,
+        type: 2}
+      propertyPath: speed
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 021bca08c0612fb4cb0d3f2094c2261a, type: 2}
@@ -3003,7 +3008,7 @@ Prefab:
     - target: {fileID: 114801917443570476, guid: 021bca08c0612fb4cb0d3f2094c2261a,
         type: 2}
       propertyPath: chaseSpeed
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 95984268816671748, guid: 021bca08c0612fb4cb0d3f2094c2261a,
         type: 2}
@@ -3019,6 +3024,11 @@ Prefab:
         type: 2}
       propertyPath: cameraFollow
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114801917443570476, guid: 021bca08c0612fb4cb0d3f2094c2261a,
+        type: 2}
+      propertyPath: speed
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 021bca08c0612fb4cb0d3f2094c2261a, type: 2}
@@ -4289,7 +4299,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 38
+  m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -73.09801}
 --- !u!1 &518648666
 GameObject:
@@ -7468,11 +7478,6 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 1916751607}
-    - target: {fileID: 114346155798154036, guid: c50233cfd87cf4d4483e89bcca65a549,
-        type: 2}
-      propertyPath: enemyToFollow
-      value: 
-      objectReference: {fileID: 1658367168}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c50233cfd87cf4d4483e89bcca65a549, type: 2}
   m_IsPrefabParent: 0
@@ -9853,94 +9858,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2eb7552741cd29488151a2faac33c42, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1319987752
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1319987756}
-  - component: {fileID: 1319987755}
-  - component: {fileID: 1319987754}
-  - component: {fileID: 1319987753}
-  m_Layer: 0
-  m_Name: Trigger Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1319987753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1319987752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aba570dd161dc9242be521461cbaf482, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionObject: {fileID: 250900571}
---- !u!50 &1319987754
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1319987752}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
---- !u!61 &1319987755
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1319987752}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -4.7427177, y: -0.47741747}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 20.799706, y: 5.5919027}
-  m_EdgeRadius: 0
---- !u!4 &1319987756
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1319987752}
-  m_LocalRotation: {x: -1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: 80.93, y: 7.39, z: 14.699998}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 36
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1324669208
 GameObject:
   m_ObjectHideFlags: 0
@@ -16964,12 +16881,6 @@ PolygonCollider2D:
       - {x: -3.3231711, y: -0.40325648}
       - {x: -5.918747, y: -0.3555183}
       - {x: -13.108352, y: 2.1915698}
---- !u!114 &1658367168 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114420960566381860, guid: 8b037a005d84f55419dd03ac8d4a9324,
-    type: 2}
-  m_PrefabInternal: {fileID: 887183818}
-  m_Script: {fileID: 11500000, guid: b4e286cf37ac0304b826dc9ca0188b4d, type: 3}
 --- !u!1001 &1681466603
 Prefab:
   m_ObjectHideFlags: 0
@@ -28013,11 +27924,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 64.5
+      value: 15.6
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 6.5
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.z
