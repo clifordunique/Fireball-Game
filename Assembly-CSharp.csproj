@@ -59,6 +59,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Anima2D\Scripts\Bone2D.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\Control.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\EditorUpdaterProxy.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\Ik2D.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\IkCCD2D.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\IkGroup.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\IkLimb2D.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\IkSolver2D.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\IkSolver2DCCD.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\IkSolver2DLimb.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\MathUtils.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\Pose.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\PoseManager.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\SpriteMesh.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\SpriteMeshAnimation.cs" />
+    <Compile Include="Assets\Anima2D\Scripts\SpriteMeshInstance.cs" />
     <Compile Include="Assets\KriptoFX\IceShader\Scripts\FreezeBehaviour.cs" />
     <Compile Include="Assets\KriptoFX\IceShader\Scripts\Gui.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
@@ -113,7 +129,10 @@
     <Compile Include="Assets\Scripts\UI\PauseButton.cs" />
     <Compile Include="Assets\Scripts\Underbrush.cs" />
     <Compile Include="Assets\Scripts\Water.cs" />
+    <None Include="Assets\Anima2D\Version.txt" />
     <None Include="Assets\Material\Shader\IceShaderFastSimleBackFace.shader" />
+    <None Include="Assets\Anima2D\Licenses.txt" />
+    <None Include="Assets\Anima2D\Readme.txt" />
     <None Include="Assets\Material\Shader\IceShaderFastSimple.shader" />
     <None Include="Assets\Material\Shader\IceShaderDistortion.shader" />
     <Reference Include="UnityEditor.StandardEvents">
