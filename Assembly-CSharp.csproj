@@ -85,11 +85,12 @@
     <Compile Include="Assets\Scripts\Enemies\Chain Ice Monster\IceLegMove.cs" />
     <Compile Include="Assets\Scripts\Enemies\Chain Ice Monster\MaskFadeIn.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Path Following Enemies\Ice Guy\IceGuy.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Path Following Enemies\Water Droplet Enemy\WaterDropletEnemy.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Path Following Enemies\Water Droplet Enemy\WaterSplat.cs" />
     <Compile Include="Assets\Scripts\Enemies\Rhino\Rhino.cs" />
     <Compile Include="Assets\Scripts\Enemies\Rhino\RhinoAttack.cs" />
     <Compile Include="Assets\Scripts\Enemies\Rhino\RhinoController.cs" />
-    <Compile Include="Assets\Scripts\Enemies\Water Droplet Enemy\WaterDropletEnemy.cs" />
-    <Compile Include="Assets\Scripts\Enemies\Water Droplet Enemy\WaterSplat.cs" />
     <Compile Include="Assets\Scripts\FallInWaterableObject.cs" />
     <Compile Include="Assets\Scripts\FloatOnWater.cs" />
     <Compile Include="Assets\Scripts\FollowCamera.cs" />
