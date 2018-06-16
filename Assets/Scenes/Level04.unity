@@ -2002,7 +2002,7 @@ GameObject:
   m_Layer: 0
   m_Name: w1
   m_TagString: Untagged
-  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3346,12 +3346,17 @@ Prefab:
     - target: {fileID: 61993334759003356, guid: e07aacbdf40c39642a5e4e9b979f21b6,
         type: 2}
       propertyPath: m_Offset.y
-      value: 0
+      value: 0.1040349
       objectReference: {fileID: 0}
     - target: {fileID: 114629726805755846, guid: e07aacbdf40c39642a5e4e9b979f21b6,
         type: 2}
       propertyPath: statusIndicator
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 61993334759003356, guid: e07aacbdf40c39642a5e4e9b979f21b6,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.7246313
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
@@ -3683,7 +3688,7 @@ GameObject:
   m_Layer: 0
   m_Name: w2
   m_TagString: Untagged
-  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3937,7 +3942,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1739428050946014, guid: 1c0c22ffdfa42b1469e088bed08caec9, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224399453953022780, guid: 1c0c22ffdfa42b1469e088bed08caec9,
         type: 2}
@@ -4888,9 +4893,9 @@ GameObject:
   - component: {fileID: 1139636393}
   - component: {fileID: 1139636395}
   - component: {fileID: 1139636394}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Ice Guy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4955,15 +4960,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   health: 0
-  seePlayerDistanceX: 10
+  seePlayerDistanceX: 20
   seePlayerDistanceY: 3
-  cameraFollow: 0
-  mask:
-    serializedVersion: 2
-    m_Bits: 1024
+  cameraFollow: 1
   speed: 2
   chaseSpeed: 7
   waitTime: 0.2
+  damageToPlayerFire: 10
+  damageToPlayerHealth: 5
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
   pathHolder: {fileID: 1148404143}
   player: {fileID: 287030050}
 --- !u!61 &1139636394
