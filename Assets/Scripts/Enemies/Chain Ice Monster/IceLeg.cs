@@ -38,9 +38,8 @@ public class IceLeg : Enemy
     {
         float dirToHit = Mathf.Sign(hitPos.x - transform.position.x);
         float offset = dirToHit > 0 ? -0.2f : 0.2f;
-        Vector3 angle = dirToHit > 0 ? -spriteMask.transform.rotation.eulerAngles : spriteMask.transform.rotation.eulerAngles;
-        SpriteMask newSpriteMask = Instantiate(spriteMask, new Vector2(hitPos.x + offset, hitPos.y), Quaternion.Euler(angle));
-        newSpriteMask.transform.localScale = new Vector3(newSpriteMask.transform.localScale.x * (-dirToHit), newSpriteMask.transform.localScale.y, newSpriteMask.transform.localScale.y);
+        Vector3 angle = dirToHit > 0 ? -transform.rotation.eulerAngles : transform.rotation.eulerAngles;
+        SpriteMask newSpriteMask = Instantiate(spriteMask, new Vector2(hitPos.x + offset, hitPos.y), Quaternion.Euler(Vector3.forward));
         newSpriteMask.transform.SetParent(transform);
     }
 

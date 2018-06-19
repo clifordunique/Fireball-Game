@@ -16,17 +16,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public float minJumpHeight = 1;
     public float timeToJumpApex = .4f;
     public LayerMask underBrushLayerMask;
-    float accelerationTimeAirborne = .3f;
-    float accelerationTimeGrounded = .2f;
 
-    // Variables to be moved to playerstats
-    //public float maxHealth;
-    //public float health;
-    //public float maxFireHealth;
-    //public float fireHealth;
+    float accelerationTimeAirborne = .3f;
+    float accelerationTimeGrounded = .07f;
+
     public float moveSpeed = 40;
-    //public bool isFire = true;
-    // End
 
     GameMaster gm;
     private PlayerStats stats;
@@ -434,19 +428,16 @@ public class Player : MonoBehaviour, FallInWaterableObject
         float climbMultiplier = 1 - diffValue;
         float descendMultiplier = 1 + diffValue;
 
-        // Affecting player acceleration
-        float slopeAngleClimbSmoothTime = .05f + 1 / Mathf.Abs(controller.collisions.slopeAngle);
-        float slopeAngleDescendSmoothTime = 0.15f + Mathf.Abs(controller.collisions.slopeAngle) * .001f;
         float targetVelocityX = directionalInput.x * moveSpeed;
 
         // This doesn't take account for actual speed
         if (controller.collisions.climingSlope)
         {
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX * climbMultiplier, ref velocityXSmoothing, slopeAngleClimbSmoothTime);
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX * climbMultiplier, ref velocityXSmoothing, accelerationTimeGrounded * climbMultiplier);
         }
         else if (controller.collisions.descendingSlope && Mathf.Abs(velocityXOld) > 1f)
         {
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX * descendMultiplier, ref velocityXSmoothing, slopeAngleDescendSmoothTime);
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX * descendMultiplier, ref velocityXSmoothing, accelerationTimeGrounded * descendMultiplier * 1.5f);
         }
         else
         {

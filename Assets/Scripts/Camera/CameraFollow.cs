@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 using System.Collections.Generic;
 
 public class CameraFollow : MonoBehaviour
@@ -62,8 +61,6 @@ public class CameraFollow : MonoBehaviour
 
         //Vertical smoothing
         currentLookAheadY = Mathf.SmoothDamp(currentLookAheadY, targetLookAheadY, ref smoothLookVelocityY, verticalSmoothTime) + shakeY;
-        //focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
-        //Debug.Log("target: " + targetLookAheadY + " current: " + currentLookAheadY + " focus: " + focusPosition);
 
         focusPosition += Vector2.right * currentLookAheadX;
         focusPosition += Vector2.up * currentLookAheadY;
@@ -72,24 +69,19 @@ public class CameraFollow : MonoBehaviour
 
     private void VerticalLookahead()
     {
-        if (focusArea.velocity.y != 0)
+        // If the focus area is moving, set it sign appropriately
+        lookAheadDirY = Mathf.Sign(focusArea.velocity.y);
+        if (Mathf.Sign(target.playerVelocity.y) == Mathf.Sign(focusArea.velocity.y)
+            && (target.playerVelocity.y < -0.05f && target.collisions.descendingSlope))
         {
-            // If the focus area is moving, set it sign appropriately
-            lookAheadDirY = Mathf.Sign(focusArea.velocity.y);
-            if (Mathf.Sign(target.playerVelocity.y) == Mathf.Sign(focusArea.velocity.y)
-                && (target.playerVelocity.y > .01f || (target.playerVelocity.y < -.01f && target.collisions.descendingSlope)))
-            {
-                lookAheadStoppedY = false;
-                targetLookAheadY = lookAheadDirY * lookAheadDstY;
-            }
-            else
-            {
-                if (!lookAheadStoppedY)
-                {
-                    lookAheadStoppedY = true;
-                    targetLookAheadY = currentLookAheadY + (lookAheadDirY * lookAheadDstY - currentLookAheadY) / 4f;
-                }
-            }
+            //lookAheadStoppedY = false;
+            targetLookAheadY = lookAheadDirY * lookAheadDstY;
+            Debug.Log(target.playerVelocity.y);
+        }
+        else // it'll just look up
+        {
+            lookAheadStoppedY = true;
+            targetLookAheadY = lookAheadDstY;
         }
     }
 
@@ -106,7 +98,7 @@ public class CameraFollow : MonoBehaviour
             {
                 lookAheadStoppedX = false;
 
-                if(enemiesToFollow.Count == 0)
+                if (enemiesToFollow.Count == 0)
                 {
                     targetLookAheadX = lookAheadDirX * lookAheadDstX;
                 }
@@ -116,11 +108,6 @@ public class CameraFollow : MonoBehaviour
                     lookAheadDirX = Mathf.Sign(dstToEnemy);
                     targetLookAheadX = lookAheadDirX * Mathf.Abs(dstToEnemy) / (enemiesToFollow.Count + 1);
                 }
-
-                //if (target.playerVelocity.y > -0.01f)
-                //{
-                //    targetLookAheadY = currentLookAheadY + (lookAheadDstY - currentLookAheadY) / 4f;
-                //}
             }
             else
             {
@@ -128,17 +115,8 @@ public class CameraFollow : MonoBehaviour
                 {
                     lookAheadStoppedX = true;
                     targetLookAheadX = currentLookAheadX + (lookAheadDirX * lookAheadDstX - currentLookAheadX) / 4f;
-
-                    // NOT FULLY FUNCTIONAL CODE:
-                    //targetLookAheadY = currentLookAheadY + (lookAheadDirY * lookAheadDstY - currentLookAheadY) / 4f;
                 }
             }
-
-            //if (!(target.playerVelocity.y < -0.1f))
-            //{
-            //    lookAheadStoppedY = false;
-            //    targetLookAheadY = lookAheadDstY;
-            //}
         }
     }
 

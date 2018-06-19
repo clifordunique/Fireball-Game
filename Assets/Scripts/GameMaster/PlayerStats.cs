@@ -16,6 +16,7 @@ public class PlayerStats : MonoBehaviour {
     private int curHealth;
     private int maxFireHealth = 30;
     private int curFireHealth;
+    private int intervalBetweenFireHealing = 5;
 
     public int MaxHealth
     {
@@ -41,11 +42,23 @@ public class PlayerStats : MonoBehaviour {
         return curFireHealth > 0;
     }
 
+    float time;
+
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
+        }
+        time = Time.time;
+    }
+
+    void Update()
+    {        
+        if(Time.time - time > intervalBetweenFireHealing && curFireHealth < maxFireHealth)
+        {
+            time = Time.time;
+            curFireHealth++;
         }
     }
 

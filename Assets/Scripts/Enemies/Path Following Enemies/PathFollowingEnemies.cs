@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -9,7 +8,8 @@ using UnityEngine;
 public class PathFollowingEnemies : Enemy
 {
     public float speed = 8;
-    public float chaseSpeed = 12;
+    public float chaseSpeed = 10;
+    public float accelerationSpeed = 5;
     public float waitTime = .2f;
 
     public int damageToPlayerFire = 10;
@@ -37,12 +37,12 @@ public class PathFollowingEnemies : Enemy
         anim = GetComponent<Animator>();
         audioManager = AudioManager.instance;
 
-
+        playerCollider = player.GetComponent<Collider2D>();
         enemyCollider = GetComponent<Collider2D>();
 
-        player.GetComponent<Player>().onFireChangeEvent += OnFireChange;
-        playerCollider = FindObjectOfType<Player>().GetComponent<Collider2D>();
-
+        //player.GetComponent<Player>().onFireChangeEvent += OnFireChange;
+        //playerCollider = FindObjectOfType<Player>().GetComponent<Collider2D>();
+        IgnorePlayer();
         SetWaypoints();
     }
 
@@ -56,11 +56,6 @@ public class PathFollowingEnemies : Enemy
         StartCoroutine(FollowPath(waypoints));
     }
 
-    void OnFireChange(bool isFire) // TODO: change this to access playerstats
-    {
-        Physics2D.IgnoreCollision(playerCollider, enemyCollider, isFire);
-    }
-
     /* Damages the enemy and destroys it if its health is less than zero
 */
     public override void DamageEnemy(int _damage, Vector2 pos)
@@ -70,64 +65,19 @@ public class PathFollowingEnemies : Enemy
 
         Effect(pos);
 
-        if (Mathf.Abs(transform.position.x - player.position.x) < seePlayerDistanceX && Mathf.Abs(transform.position.y - player.position.y) < seePlayerDistanceY)
-        {
-            StopAllCoroutines();
-            StartCoroutine(ChasePlayer(false));
-        }
+        StopAllCoroutines();
+        StartCoroutine(ChasePlayer(false));
+
         if (health <= 5)
         {
-            FindObjectOfType<Player>().onFireChangeEvent -= OnFireChange;
+            //FindObjectOfType<Player>().onFireChangeEvent -= OnFireChange;
             Destroy(this.gameObject);
         }
     }
 
     protected virtual void Effect(Vector2 position)
     {
-        //TODO: make it so the splash has a forward velocity if the enemy has a forward velocity so that the splash is visible
 
-        // Facing you
-        if ((transform.localScale.x > 0 && player.position.x < transform.position.x) || (transform.localScale.x < 0 && player.position.x > transform.position.x))
-        {
-            // Player is to the left
-            if (player.position.x < transform.position.x)
-            {
-                if (anim.GetFloat("Speed") == 0)
-                {
-                    //Transform tempWaterSplat = Instantiate(waterSplat, new Vector2(position.x + 2, position.y), Quaternion.Euler(Vector2.right));
-                    //tempWaterSplat.localScale = new Vector2(-tempWaterSplat.localScale.x, tempWaterSplat.localScale.y);
-                }
-                else
-                {
-                    //Transform tempWaterSplat = Instantiate(waterSplat, position, Quaternion.Euler(Vector2.right));
-                    //tempWaterSplat.localScale = new Vector2(-tempWaterSplat.localScale.x, tempWaterSplat.localScale.y);
-                }
-            }
-            else // Player is to the right
-            {
-                if (anim.GetFloat("Speed") == 0)
-                {
-                    //Instantiate(waterSplat, new Vector2(position.x - 2, position.y), Quaternion.Euler(Vector2.right));
-                }
-                else
-                {
-                    //Instantiate(waterSplat, position, Quaternion.Euler(Vector2.right));
-                }
-            }
-        }
-        else // not facing the player
-        {
-            // Player is to the left
-            if (player.position.x < transform.position.x)
-            {
-                //Instantiate(waterSplat, position, Quaternion.Euler(Vector2.right));
-            }
-            else // Player is to the right
-            {
-                //Transform tempWaterSplat = Instantiate(waterSplat, position, Quaternion.Euler(Vector2.right));
-                //tempWaterSplat.localScale = new Vector2(-tempWaterSplat.localScale.x, tempWaterSplat.localScale.y);
-            }
-        }
     }
 
     /* Tests whether the enemy can see the player or not
@@ -145,9 +95,10 @@ public class PathFollowingEnemies : Enemy
             for (int i = 0; i < horizontalRayCount; i++)
             {
                 RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + offset), Vector2.right * dirX, seePlayerDistanceX, playerMask);
-                Debug.DrawRay(transform.position + new Vector3(0,offset,0), new Vector3(dirX * seePlayerDistanceX, 0, 0));
+                Debug.DrawRay(transform.position + new Vector3(0, offset, 0), new Vector3(dirX * seePlayerDistanceX, 0, 0));
                 if (hit && stats.isFire())
                 {
+                    IgnorePlayer();
                     return true;
                 }
                 offset -= 0.5f;
@@ -210,11 +161,6 @@ public class PathFollowingEnemies : Enemy
         StartCoroutine(ChasePlayer(true));
     }
 
-    void SetLocalScale(float dirX)
-    {
-        transform.localScale = new Vector2(-dirX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
-    }
-
     /* Coroutine where the enemy chases the player
      * @param shouldJump - whether or not the player should jump
      */
@@ -223,9 +169,7 @@ public class PathFollowingEnemies : Enemy
         anim.SetFloat("Speed", chaseSpeed);
         float dirToPlayerX = Mathf.Sign(player.position.x - transform.position.x);
         transform.localScale = new Vector2(-dirToPlayerX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
-        float maxChaseSpeed = 0.1f;
         float velocityX = 0;
-        float accelerationAmount = 0.005f;
 
         //Wait for the enemy to finish jumping, then chase the player
         if (shouldJump)
@@ -237,6 +181,7 @@ public class PathFollowingEnemies : Enemy
         {
             if (!stats.isFire())
             {
+                IgnorePlayer();
                 StopAllCoroutines();
                 SetWaypoints();
             }
@@ -244,9 +189,9 @@ public class PathFollowingEnemies : Enemy
 
             transform.localScale = new Vector2(-dirToPlayerX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
 
-            if (Mathf.Abs(velocityX) < maxChaseSpeed || Mathf.Sign(velocityX) != Mathf.Sign(delayedDirToPlayer))
+            if (Mathf.Abs(velocityX) < chaseSpeed / 100 || Mathf.Sign(velocityX) != Mathf.Sign(delayedDirToPlayer))
             {
-                velocityX += accelerationAmount * dirToPlayerX;
+                velocityX += (accelerationSpeed / 1000) * dirToPlayerX;
             }
 
             transform.Translate(new Vector2(velocityX, 0));
@@ -278,5 +223,10 @@ public class PathFollowingEnemies : Enemy
             transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x, transform.position.y + jumpHeight), .09f);
             yield return null;
         }
+    }
+
+    void IgnorePlayer()
+    {
+        Physics2D.IgnoreCollision(playerCollider, enemyCollider, !stats.isFire());
     }
 }
