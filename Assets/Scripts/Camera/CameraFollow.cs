@@ -76,7 +76,6 @@ public class CameraFollow : MonoBehaviour
         {
             //lookAheadStoppedY = false;
             targetLookAheadY = lookAheadDirY * lookAheadDstY;
-            Debug.Log(target.playerVelocity.y);
         }
         else // it'll just look up
         {

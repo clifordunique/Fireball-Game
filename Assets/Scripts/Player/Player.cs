@@ -9,6 +9,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(ParentMotionBlur))]
 [RequireComponent(typeof(FireEyes))]
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour, FallInWaterableObject
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     bool grounded;
 
+    private ParentMotionBlur blur;
     CameraShake camShake;
     SpriteRenderer[] srs;
     CollisionInfo colInfo;
@@ -107,6 +109,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             Debug.LogError("No CameraShake found on the GameMaster.");
         }
+        blur = GetComponent<ParentMotionBlur>();
     }
 
     void Update()
@@ -353,6 +356,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         int initial = 0;
         while (initial < max)
         {
+            blur.Blur();
             initial++;
             yield return null;
         }
