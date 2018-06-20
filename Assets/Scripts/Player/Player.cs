@@ -352,13 +352,14 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     IEnumerator SprintTimer()
     {
+        audioManager.PlaySound("Zoom");
         int max = 5;
         int initial = 0;
         while (initial < max)
         {
             blur.Blur();
             initial++;
-            yield return null;
+            yield return new WaitForSeconds(0.01f);
         }
         timeIsOut = true;
         StopAllCoroutines();

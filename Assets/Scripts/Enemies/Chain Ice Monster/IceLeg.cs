@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class IceLeg : Enemy
 {
     public Transform metalBrace;
     public Transform tipOfIce;
     public SpriteMask spriteMask;
+
+    AudioSource audioSource;
 
     public RaycastHit2D hit;
     public Vector3 rayStartPos;
@@ -16,6 +19,7 @@ public class IceLeg : Enemy
         Vector3 direction = tipOfIce.position - transform.position;
         Debug.DrawRay(transform.position, direction.normalized * rayLength, Color.red);
         hit = Physics2D.Raycast(transform.position, direction.normalized, rayLength, layerMask);
+        audioSource = GetComponent<AudioSource>();
     }
 
     public override void DamageEnemy(int _damage, Vector2 position)
@@ -52,5 +56,10 @@ public class IceLeg : Enemy
         metalRb2D.bodyType = RigidbodyType2D.Dynamic;
         metalRb2D.mass = 50;
         metalRb2D.gravityScale = 5;
+    }
+
+    public void PlayAudio()
+    {
+        audioSource.Play();
     }
 }

@@ -18,12 +18,14 @@ public class IceLegMove : Enemy
     public LayerMask layerMask;
 
     CameraShake camShake;
+    AudioManager audioManager;
 
     public override void Start()
     {
         base.Start();
         camShake = GameMaster.gm.GetComponent<CameraShake>();
         StartCoroutine(Walk());
+        audioManager = AudioManager.instance;
     }
 
     IEnumerator Walk()
@@ -152,6 +154,7 @@ public class IceLegMove : Enemy
 
                 yield return new WaitForSeconds(.01f);
             }
+            currentLeg.PlayAudio();
         }
 
     }
@@ -188,6 +191,7 @@ public class IceLegMove : Enemy
                 }
                 yield return new WaitForSeconds(.01f);
             }
+            currentLeg.PlayAudio();
         }
 
     }
