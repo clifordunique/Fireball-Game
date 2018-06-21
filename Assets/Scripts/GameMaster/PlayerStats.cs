@@ -37,7 +37,7 @@ public class PlayerStats : MonoBehaviour {
         set { curFireHealth = Mathf.Clamp(value, 0, MaxFireHealth); }
     }
 
-    public bool isFire()
+    public bool IsFire()
     {
         return curFireHealth > 0;
     }

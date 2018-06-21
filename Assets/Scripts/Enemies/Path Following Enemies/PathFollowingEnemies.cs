@@ -12,13 +12,11 @@ public class PathFollowingEnemies : Enemy
     public float accelerationSpeed = 5;
     public float waitTime = .2f;
 
-    public int damageToPlayerFire = 10;
-    public int damageToPlayerHealth = 10;
-
     public LayerMask playerMask;
     public Transform pathHolder;
 
     protected float delayedDirToPlayer;
+    private bool isPlayerFire;
 
     protected AudioManager audioManager;
     protected PlayerStats stats;
@@ -42,8 +40,17 @@ public class PathFollowingEnemies : Enemy
 
         //player.GetComponent<Player>().onFireChangeEvent += OnFireChange;
         //playerCollider = FindObjectOfType<Player>().GetComponent<Collider2D>();
-        IgnorePlayer();
+        ToggleIgnorePlayer();
+        isPlayerFire = stats.IsFire();
         SetWaypoints();
+    }
+
+    private void Update()
+    {
+        if(isPlayerFire != stats.IsFire())
+        {
+            ToggleIgnorePlayer();
+        }
     }
 
     private void SetWaypoints()
@@ -96,9 +103,8 @@ public class PathFollowingEnemies : Enemy
             {
                 RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + offset), Vector2.right * dirX, seePlayerDistanceX, playerMask);
                 Debug.DrawRay(transform.position + new Vector3(0, offset, 0), new Vector3(dirX * seePlayerDistanceX, 0, 0));
-                if (hit && stats.isFire())
+                if (hit && stats.IsFire())
                 {
-                    IgnorePlayer();
                     return true;
                 }
                 offset -= 0.5f;
@@ -112,7 +118,7 @@ public class PathFollowingEnemies : Enemy
         if (col.gameObject.CompareTag("Player"))
         {
             Player player = col.gameObject.GetComponent<Player>();
-            if (stats.isFire())
+            if (stats.IsFire())
             {
                 player.DamageFire((int)(damageToPlayerFire * ((health + 6 / health) / maxHealth)));
                 player.DamagePlayer((int)(damageToPlayerHealth * (health + 6 / health) / maxHealth));
@@ -179,9 +185,9 @@ public class PathFollowingEnemies : Enemy
         StartCoroutine(GetDirectionToPlayer());
         while (player != null)
         {
-            if (!stats.isFire())
+            if (!stats.IsFire())
             {
-                IgnorePlayer();
+                ToggleIgnorePlayer();
                 StopAllCoroutines();
                 SetWaypoints();
             }
@@ -225,8 +231,8 @@ public class PathFollowingEnemies : Enemy
         }
     }
 
-    void IgnorePlayer()
+    void ToggleIgnorePlayer()
     {
-        Physics2D.IgnoreCollision(playerCollider, enemyCollider, !stats.isFire());
+        Physics2D.IgnoreCollision(playerCollider, enemyCollider, !stats.IsFire());
     }
 }

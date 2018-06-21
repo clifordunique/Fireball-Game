@@ -48,7 +48,7 @@ public class Water : MonoBehaviour {
         if (col.gameObject.GetComponent<Player>() != null)
         {
             //Player player = col.gameObject.GetComponent<Player>();
-            if (stats.isFire())
+            if (stats.IsFire())
             {
                 audioManager.PlaySound("Water Hiss Long");
             }
@@ -65,7 +65,7 @@ public class Water : MonoBehaviour {
         if (col.gameObject.GetComponent<Player>() != null)
         {
             //Player player = col.gameObject.GetComponent<Player>();
-            if (stats.isFire())
+            if (stats.IsFire())
             {
                 audioManager.StopSound("Water Hiss Long");
                 audioManager.PlaySound("Water Hiss End");

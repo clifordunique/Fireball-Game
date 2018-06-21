@@ -17,6 +17,8 @@ public class IceLegMove : Enemy
     public float rayLength = 0.5f;
     public LayerMask layerMask;
 
+    private bool damagePlayer = false;
+
     CameraShake camShake;
     AudioManager audioManager;
 
@@ -34,7 +36,7 @@ public class IceLegMove : Enemy
         {
             for (int i = 0; i < iceLegs.Length; i++)
             {
-                if (iceLegs[i].health > 0)
+                if (iceLegs[i].health > 0 && player != null)
                 {
                     bool seePlayer = Mathf.Abs(head.transform.position.x - player.transform.position.x) < seePlayerDst;
                     yield return MoveUp(i);
@@ -60,7 +62,7 @@ public class IceLegMove : Enemy
 
     IEnumerator MoveUp(int currentLegIndex)
     {
-        if (iceLegs[currentLegIndex] != null)
+        if (iceLegs[currentLegIndex] != null && player != null)
         {
             IceLeg currentLeg = iceLegs[currentLegIndex];
             float targetPosY = currentLeg.transform.position.y + moveUpAmount;
@@ -78,7 +80,7 @@ public class IceLegMove : Enemy
 
     IEnumerator MoveToPos(int currentLegIndex)
     {
-        if (iceLegs[currentLegIndex] != null)
+        if (iceLegs[currentLegIndex] != null && player != null)
         {
             IceLeg currentLeg = iceLegs[currentLegIndex];
             float dirToPlayer = Mathf.Sign(player.transform.position.x - currentLeg.transform.position.x);
@@ -100,7 +102,7 @@ public class IceLegMove : Enemy
     /// <returns></returns>
     IEnumerator PointAtPlayer(int currentLegIndex)
     {
-        if (iceLegs[currentLegIndex] != null)
+        if (iceLegs[currentLegIndex] != null && player != null)
         {
             Transform currentLeg = iceLegs[currentLegIndex].transform;
             float speed = 20f;
@@ -128,7 +130,8 @@ public class IceLegMove : Enemy
     /// <returns></returns>
     IEnumerator MoveToPlayer(int currentLegIndex)
     {
-        if (iceLegs[currentLegIndex] != null)
+        damagePlayer = true;
+        if (iceLegs[currentLegIndex] != null && player != null)
         {
             IceLeg currentLeg = iceLegs[currentLegIndex];
             Vector2 dirToPlayer = player.transform.position - currentLeg.transform.position;
@@ -141,9 +144,18 @@ public class IceLegMove : Enemy
             {
                 if (currentLeg.hit)
                 {
-                    camShake.Shake(0.08f, 0.08f);
-                    hitGround = true;
-                    break;
+                    if (currentLeg.hit.collider.CompareTag("Player") && damagePlayer)
+                    {
+                        player.DamagePlayer(damageToPlayerHealth);
+                        camShake.Shake(0.08f, 0.08f);
+                        damagePlayer = false;
+                    }
+                    else
+                    {
+                        camShake.Shake(0.08f, 0.08f);
+                        hitGround = true;
+                        break;
+                    }
                 }
                 currentLeg.transform.Translate(Vector2.down * moveSpeed);
                 if (dstFromHead > legCallbackDst)
@@ -154,6 +166,7 @@ public class IceLegMove : Enemy
 
                 yield return new WaitForSeconds(.01f);
             }
+            damagePlayer = false;
             currentLeg.PlayAudio();
         }
 
@@ -166,8 +179,8 @@ public class IceLegMove : Enemy
     /// <returns></returns>
     IEnumerator MoveDown(int currentLegIndex)
     {
-
-        if (iceLegs[currentLegIndex] != null)
+        damagePlayer = true;
+        if (iceLegs[currentLegIndex] != null && player != null)
         {
             IceLeg currentLeg = iceLegs[currentLegIndex];
             float moveSpeed = 1.4f;
@@ -178,9 +191,18 @@ public class IceLegMove : Enemy
             {
                 if (currentLeg.hit)
                 {
-                    camShake.Shake(0.08f, 0.08f);
-                    hitGround = true;
-                    break;
+                    if (currentLeg.hit.collider.CompareTag("Player") && damagePlayer)
+                    {
+                        player.DamagePlayer(damageToPlayerHealth);
+                        camShake.Shake(0.08f, 0.08f);
+                        damagePlayer = false;
+                    }
+                    else
+                    {
+                        camShake.Shake(0.08f, 0.08f);
+                        hitGround = true;
+                        break;
+                    }
                 }
                 currentLeg.transform.position = new Vector3(currentLeg.transform.position.x, currentLeg.transform.position.y - moveSpeed, currentLeg.transform.position.z);
                 // This makes sure that if he walks off a cliff he doesn't fall forever
@@ -191,6 +213,7 @@ public class IceLegMove : Enemy
                 }
                 yield return new WaitForSeconds(.01f);
             }
+            damagePlayer = false;
             currentLeg.PlayAudio();
         }
 
@@ -198,7 +221,7 @@ public class IceLegMove : Enemy
 
     IEnumerator RotateDownwards(int currentLegIndex)
     {
-        if (iceLegs[currentLegIndex] != null)
+        if (iceLegs[currentLegIndex] != null && player != null)
         {
             Transform currentLeg = iceLegs[currentLegIndex].transform;
             Quaternion downwardAngle = Quaternion.AngleAxis(0, Vector3.forward);

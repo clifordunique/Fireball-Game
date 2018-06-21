@@ -37,7 +37,7 @@ public class Attack : MonoBehaviour
         // First check and see if the state is paused. If it is, return.
         if (GameMaster.gm.CurState == Utilities.State.PAUSED) return;
 
-        if (stats.isFire())
+        if (stats.IsFire())
         {
             sw1.Start();
             if (sw1.ElapsedMilliseconds > 100)

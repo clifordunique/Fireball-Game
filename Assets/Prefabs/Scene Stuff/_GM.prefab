@@ -75,10 +75,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurBackgroundAmbiance: 0
-  CurState: 0
   endLevelUI: {fileID: 0}
   mountainAmbiance: MountainWind01
   forestAmbiance: Woodland02
+  stoneWoodSound: StoneWood03
+  timeBetweenFootsteps: 0.3
 --- !u!114 &114206759410512024
 MonoBehaviour:
   m_ObjectHideFlags: 1

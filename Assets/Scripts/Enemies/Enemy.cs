@@ -6,6 +6,8 @@ public class Enemy: MonoBehaviour {
     public float health;
     public float seePlayerDistanceX = 8;
     public float seePlayerDistanceY = 3;
+    public int damageToPlayerFire = 10;
+    public int damageToPlayerHealth = 10;
     public bool cameraFollow = false;
 
     public virtual void Start()

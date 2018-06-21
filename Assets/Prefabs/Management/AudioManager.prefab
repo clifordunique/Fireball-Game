@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1991461213699472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.1, y: -0.5, z: 0}
+  m_LocalPosition: {x: 6.1579027, y: 6.4549556, z: 0}
   m_LocalScale: {x: 0.34605542, y: 0.35318342, z: 0.7367114}
   m_Children: []
   m_Father: {fileID: 0}
@@ -324,4 +324,18 @@ MonoBehaviour:
     pitch: 1
     randomVolume: 0.113
     randomPitch: 0.339
+    loop: 0
+  - name: Zoom
+    clip: {fileID: 8300000, guid: d99cda83be430994ca38f4e93abe4a68, type: 3}
+    volume: 0.15
+    pitch: 1
+    randomVolume: 0.113
+    randomPitch: 0.189
+    loop: 0
+  - name: Ice Crunch
+    clip: {fileID: 8300000, guid: 2dbfd40a8d155eb46bbf2bfe2f1543e8, type: 3}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0.113
+    randomPitch: 0.189
     loop: 0

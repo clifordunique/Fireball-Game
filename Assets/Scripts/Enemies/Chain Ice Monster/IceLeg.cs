@@ -7,14 +7,14 @@ public class IceLeg : Enemy
     public Transform tipOfIce;
     public SpriteMask spriteMask;
 
-    AudioSource audioSource;
-
     public RaycastHit2D hit;
     public Vector3 rayStartPos;
     public float rayLength = 0.5f;
     public LayerMask layerMask;
 
-    private void Update()
+    AudioSource audioSource;
+
+    private void LateUpdate()
     {
         Vector3 direction = tipOfIce.position - transform.position;
         Debug.DrawRay(transform.position, direction.normalized * rayLength, Color.red);
