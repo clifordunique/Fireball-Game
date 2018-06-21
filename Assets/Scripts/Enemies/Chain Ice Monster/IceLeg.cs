@@ -8,7 +8,7 @@ public class IceLeg : Enemy
     public SpriteMask spriteMask;
 
     public RaycastHit2D hit;
-    public Vector3 rayStartPos;
+    public float rayStartOffset;
     public float rayLength = 0.5f;
     public LayerMask layerMask;
 
@@ -17,8 +17,8 @@ public class IceLeg : Enemy
     private void LateUpdate()
     {
         Vector3 direction = tipOfIce.position - transform.position;
-        Debug.DrawRay(transform.position, direction.normalized * rayLength, Color.red);
-        hit = Physics2D.Raycast(transform.position, direction.normalized, rayLength, layerMask);
+        Debug.DrawRay(transform.position +  direction * rayStartOffset, direction.normalized * rayLength, Color.red);
+        hit = Physics2D.Raycast(transform.position + direction * rayStartOffset, direction.normalized, rayLength, layerMask);
         audioSource = GetComponent<AudioSource>();
     }
 

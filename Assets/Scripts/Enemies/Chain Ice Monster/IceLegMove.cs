@@ -13,7 +13,6 @@ public class IceLegMove : Enemy
     public Player player;
     public float seePlayerDst = 10;
 
-    public Vector3 rayStartPos;
     public float rayLength = 0.5f;
     public LayerMask layerMask;
 
@@ -144,17 +143,18 @@ public class IceLegMove : Enemy
             {
                 if (currentLeg.hit)
                 {
-                    if (currentLeg.hit.collider.CompareTag("Player") && damagePlayer)
+                    if (!currentLeg.hit.collider.CompareTag("Player"))
+                    {
+                        camShake.Shake(0.08f, 0.08f);
+                        hitGround = true;
+                        currentLeg.PlayAudio();
+                        break;
+                    }
+                    else if (damagePlayer)
                     {
                         player.DamagePlayer(damageToPlayerHealth);
                         camShake.Shake(0.08f, 0.08f);
                         damagePlayer = false;
-                    }
-                    else
-                    {
-                        camShake.Shake(0.08f, 0.08f);
-                        hitGround = true;
-                        break;
                     }
                 }
                 currentLeg.transform.Translate(Vector2.down * moveSpeed);
@@ -167,7 +167,6 @@ public class IceLegMove : Enemy
                 yield return new WaitForSeconds(.01f);
             }
             damagePlayer = false;
-            currentLeg.PlayAudio();
         }
 
     }
