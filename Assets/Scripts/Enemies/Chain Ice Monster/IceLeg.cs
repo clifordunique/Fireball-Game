@@ -16,8 +16,8 @@ public class IceLeg : Enemy
 
     private void LateUpdate()
     {
-        Vector3 direction = tipOfIce.position - transform.position;
-        Debug.DrawRay(transform.position +  direction * rayStartOffset, direction.normalized * rayLength, Color.red);
+        Vector3 direction = GetDownwardsDirection();
+        Debug.DrawRay(transform.position + direction * rayStartOffset, direction.normalized * rayLength, Color.red);
         hit = Physics2D.Raycast(transform.position + direction * rayStartOffset, direction.normalized, rayLength, layerMask);
         audioSource = GetComponent<AudioSource>();
     }
@@ -33,6 +33,28 @@ public class IceLeg : Enemy
         }
         Effect(position);
     }
+
+    public Vector3 GetDownwardsDirection()
+    {
+        return (tipOfIce.position - transform.position).normalized;
+    }
+
+    /// <summary>
+    /// Creates a raycast from the leg to the ground
+    /// </summary>
+    /// <returns>Returns the hit</returns>
+    //public Quaternion RaycastGroundDetector()
+    //{
+    //    Vector3 direction = GetDownwardsDirection();
+    //    Debug.DrawRay(transform.position + direction * rayStartOffset, direction.normalized * 50, Color.red);
+    //    RaycastHit2D hit = Physics2D.Raycast(transform.position + direction * rayStartOffset, direction.normalized, 50, groundLayerMask);
+
+    //        Quaternion angle = Quaternion.FromToRotation(Vector2.up, new Vector3(hit.normal.x, hit.normal.y));
+    //        Debug.Log(direction + " " + hit.normal);
+
+    //        return angle;
+
+    //}
 
     /// <summary>
     /// Creates effect for damaging enemy

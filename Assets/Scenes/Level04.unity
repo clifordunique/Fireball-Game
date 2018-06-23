@@ -1089,8 +1089,8 @@ MonoBehaviour:
   tipOfIce: {fileID: 1469126212}
   spriteMask: {fileID: 331393242190331826, guid: c5041ac33dc28eb44aebc49e8273d3bf,
     type: 2}
-  rayStartOffset: 0.7
-  rayLength: 0.8
+  rayStartOffset: 2.3
+  rayLength: 0.5
   layerMask:
     serializedVersion: 2
     m_Bits: 1280
@@ -3141,11 +3141,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 14.58
+      value: 26.01
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.02
+      value: 3.22
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3320,8 +3320,8 @@ MonoBehaviour:
   tipOfIce: {fileID: 552053800}
   spriteMask: {fileID: 331276797507186958, guid: 28f7b50e6f14ad248a94b1413c9ec38d,
     type: 2}
-  rayStartOffset: 0.7
-  rayLength: 0.8
+  rayStartOffset: 2
+  rayLength: 0.4
   layerMask:
     serializedVersion: 2
     m_Bits: 1280
@@ -5760,7 +5760,7 @@ PolygonCollider2D:
     - - {x: -4.565346, y: 2.2756796}
       - {x: -4.9664917, y: 1.7694807}
       - {x: 0.24481201, y: -0.42556047}
-      - {x: 6.5774307, y: 3.7551718}
+      - {x: 30.965858, y: 3.921834}
       - {x: 2.876564, y: 3.3366356}
       - {x: 1.1690445, y: 3.230914}
       - {x: 0.2181778, y: 3.2238092}
@@ -8023,8 +8023,8 @@ MonoBehaviour:
   tipOfIce: {fileID: 1873941188}
   spriteMask: {fileID: 331276797507186958, guid: 28f7b50e6f14ad248a94b1413c9ec38d,
     type: 2}
-  rayStartOffset: 0.7
-  rayLength: 0.8
+  rayStartOffset: 2
+  rayLength: 0.4
   layerMask:
     serializedVersion: 2
     m_Bits: 1280
@@ -8329,7 +8329,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1951957342}
   m_LocalRotation: {x: -0, y: -0, z: 0.009425356, w: 0.99995565}
-  m_LocalPosition: {x: 20.4, y: 2.1, z: -0.0009765476}
+  m_LocalPosition: {x: 75.15, y: 16.32, z: -0.0009765476}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 974050313}
@@ -8382,21 +8382,21 @@ MonoBehaviour:
   seePlayerDistanceX: 8
   seePlayerDistanceY: 3
   damageToPlayerFire: 0
-  damageToPlayerHealth: 5
+  damageToPlayerHealth: 1
   cameraFollow: 1
   iceLegs:
   - {fileID: 1918820958}
   - {fileID: 278713613}
   - {fileID: 770525132}
   head: {fileID: 1951957345}
-  moveUpAmount: 3
+  moveUpAmount: 4
   stepDst: 5
   legCallbackDst: 20
   crippleWaitTime: 0.4
   player: {fileID: 2134510030}
   seePlayerDst: 15
   rayLength: 1
-  layerMask:
+  groundLayerMask:
     serializedVersion: 2
     m_Bits: 256
 --- !u!1 &1978640307
