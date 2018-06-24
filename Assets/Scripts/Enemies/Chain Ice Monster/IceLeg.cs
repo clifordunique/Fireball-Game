@@ -7,18 +7,16 @@ public class IceLeg : Enemy
     public Transform tipOfIce;
     public SpriteMask spriteMask;
 
-    public RaycastHit2D hit;
     public float rayStartOffset;
     public float rayLength = 0.5f;
-    public LayerMask layerMask;
+    private RaycastHit2D hit;
+    private RaycastHit2D groundDetector;
 
     AudioSource audioSource;
 
-    private void LateUpdate()
+    public override void Start()
     {
-        Vector3 direction = GetDownwardsDirection();
-        Debug.DrawRay(transform.position + direction * rayStartOffset, direction.normalized * rayLength, Color.red);
-        hit = Physics2D.Raycast(transform.position + direction * rayStartOffset, direction.normalized, rayLength, layerMask);
+        base.Start();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -40,21 +38,30 @@ public class IceLeg : Enemy
     }
 
     /// <summary>
-    /// Creates a raycast from the leg to the ground
+    /// Gets the short hit from the leg for detecting impacts
     /// </summary>
-    /// <returns>Returns the hit</returns>
-    //public Quaternion RaycastGroundDetector()
-    //{
-    //    Vector3 direction = GetDownwardsDirection();
-    //    Debug.DrawRay(transform.position + direction * rayStartOffset, direction.normalized * 50, Color.red);
-    //    RaycastHit2D hit = Physics2D.Raycast(transform.position + direction * rayStartOffset, direction.normalized, 50, groundLayerMask);
+    /// <param name="mask">The layermask for the ray to pay attention to</param>
+    /// <returns>The hit info</returns>
+    public RaycastHit2D GetHit(LayerMask mask)
+    {
+        Vector3 direction = GetDownwardsDirection();
+        Debug.DrawRay(transform.position + direction * rayStartOffset, direction.normalized * rayLength, Color.red);
+        hit = Physics2D.Raycast(transform.position + direction * rayStartOffset, direction.normalized, rayLength, mask);
+        return hit;
+    }
 
-    //        Quaternion angle = Quaternion.FromToRotation(Vector2.up, new Vector3(hit.normal.x, hit.normal.y));
-    //        Debug.Log(direction + " " + hit.normal);
-
-    //        return angle;
-
-    //}
+    /// <summary>
+    /// Gets the longer hit from the leg for detecting info about the ground
+    /// </summary>
+    /// <param name="mask">The layermask for the ray to pay attention to</param>
+    /// <returns>The hit info</returns>
+    public RaycastHit2D GetGroundDetectorHit(LayerMask mask)
+    {
+        Vector3 direction = GetDownwardsDirection();
+        Debug.DrawRay(transform.position, direction.normalized * 30, Color.red);
+        groundDetector = Physics2D.Raycast(transform.position + direction, direction.normalized, 30, mask);
+        return groundDetector;
+    }
 
     /// <summary>
     /// Creates effect for damaging enemy

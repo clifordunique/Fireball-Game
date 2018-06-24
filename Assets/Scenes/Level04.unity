@@ -1089,11 +1089,8 @@ MonoBehaviour:
   tipOfIce: {fileID: 1469126212}
   spriteMask: {fileID: 331393242190331826, guid: c5041ac33dc28eb44aebc49e8273d3bf,
     type: 2}
-  rayStartOffset: 2.3
-  rayLength: 0.5
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1280
+  rayStartOffset: 1
+  rayLength: 2
 --- !u!60 &278713614
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3320,11 +3317,8 @@ MonoBehaviour:
   tipOfIce: {fileID: 552053800}
   spriteMask: {fileID: 331276797507186958, guid: 28f7b50e6f14ad248a94b1413c9ec38d,
     type: 2}
-  rayStartOffset: 2
-  rayLength: 0.4
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1280
+  rayStartOffset: 1
+  rayLength: 1.9
 --- !u!60 &770525133
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -8023,11 +8017,8 @@ MonoBehaviour:
   tipOfIce: {fileID: 1873941188}
   spriteMask: {fileID: 331276797507186958, guid: 28f7b50e6f14ad248a94b1413c9ec38d,
     type: 2}
-  rayStartOffset: 2
-  rayLength: 0.4
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1280
+  rayStartOffset: 1
+  rayLength: 1.9
 --- !u!233 &1918820959
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -8382,7 +8373,7 @@ MonoBehaviour:
   seePlayerDistanceX: 8
   seePlayerDistanceY: 3
   damageToPlayerFire: 0
-  damageToPlayerHealth: 1
+  damageToPlayerHealth: 5
   cameraFollow: 1
   iceLegs:
   - {fileID: 1918820958}
@@ -8396,7 +8387,10 @@ MonoBehaviour:
   player: {fileID: 2134510030}
   seePlayerDst: 15
   rayLength: 1
-  groundLayerMask:
+  groundImpactMask:
+    serializedVersion: 2
+    m_Bits: 1280
+  groundDetectorMask:
     serializedVersion: 2
     m_Bits: 256
 --- !u!1 &1978640307
