@@ -249,8 +249,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!60 &102105978
-PolygonCollider2D:
+--- !u!70 &102105978
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -261,25 +261,9 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 22, y: 7.5}
-    newSize: {x: 22, y: 7.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 10.463831, y: 2.1151385}
-      - {x: 8.639691, y: 1.3967482}
-      - {x: -10.574024, y: 0.86366785}
-      - {x: -8.2896595, y: 2.1719785}
-      - {x: -5.8790774, y: 3.1053007}
-      - {x: 1.8892306, y: 3.2318437}
-      - {x: 8.821479, y: 3.2264922}
+  m_Offset: {x: -2.4430199, y: 0.122338735}
+  m_Size: {x: 25.736542, y: 6.125317}
+  m_Direction: 1
 --- !u!212 &102105979
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -499,8 +483,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2.48}
-  m_Size: {x: 13.83, y: 1.1}
+  m_Offset: {x: 0, y: 1.44}
+  m_Size: {x: 13.83, y: 3.25}
   m_Direction: 1
 --- !u!212 &149397880
 SpriteRenderer:
@@ -4171,7 +4155,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1739428050946014, guid: 1c0c22ffdfa42b1469e088bed08caec9, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224399453953022780, guid: 1c0c22ffdfa42b1469e088bed08caec9,
         type: 2}
@@ -5530,8 +5514,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2.48}
-  m_Size: {x: 13.83, y: 1.1}
+  m_Offset: {x: 0, y: 1.39}
+  m_Size: {x: 15.96, y: 3.5}
   m_Direction: 1
 --- !u!212 &1225795740
 SpriteRenderer:
@@ -5967,8 +5951,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2.48}
-  m_Size: {x: 13.83, y: 1.1}
+  m_Offset: {x: 0.0000003476768, y: 1.0712259}
+  m_Size: {x: 13.83, y: 3.9175222}
   m_Direction: 1
 --- !u!212 &1323405292
 SpriteRenderer:
@@ -6202,8 +6186,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2.48}
-  m_Size: {x: 13.83, y: 1.1}
+  m_Offset: {x: 0, y: 1.23}
+  m_Size: {x: 20.11, y: 3.62}
   m_Direction: 1
 --- !u!212 &1359478572
 SpriteRenderer:

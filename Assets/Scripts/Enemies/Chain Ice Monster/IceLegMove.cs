@@ -34,9 +34,17 @@ public class IceLegMove : Enemy
         {
             for (int i = 0; i < iceLegs.Length; i++)
             {
-                if (iceLegs[i].health > 0 && player != null)
+                if (iceLegs[i].health > 0)
                 {
-                    bool seePlayer = Mathf.Abs(head.transform.position.x - player.transform.position.x) < seePlayerDst;
+                    bool seePlayer;
+                    if (player != null)
+                    {
+                        seePlayer = Mathf.Abs(head.transform.position.x - player.transform.position.x) < seePlayerDst;
+                    }
+                    else
+                    {
+                        seePlayer = false;
+                    }
                     yield return MoveUp(i);
                     if (seePlayer)
                     {
@@ -60,7 +68,7 @@ public class IceLegMove : Enemy
 
     IEnumerator MoveUp(int currentLegIndex)
     {
-        if (iceLegs[currentLegIndex] != null && player != null)
+        if (iceLegs[currentLegIndex] != null)
         {
             IceLeg currentLeg = iceLegs[currentLegIndex];
             float moveSpeed = 0.15f;
@@ -80,13 +88,19 @@ public class IceLegMove : Enemy
 
     IEnumerator MoveToPos(int currentLegIndex)
     {
-        if (iceLegs[currentLegIndex] != null && player != null)
+        if (iceLegs[currentLegIndex] != null)
         {
             IceLeg currentLeg = iceLegs[currentLegIndex];
-            float dirToPlayerX = Mathf.Sign(player.transform.position.x - currentLeg.transform.position.x);
-            float dirToPlayerY = Mathf.Sign(player.transform.position.y - currentLeg.transform.position.y);
-            float targetPosX = currentLeg.transform.position.x + stepDst * dirToPlayerX;
-            float targetPosY = currentLeg.transform.position.y + stepDst * dirToPlayerY;
+            float dirToPlayerX;
+            if (player != null)
+            {
+                dirToPlayerX = Mathf.Sign(player.transform.position.x - currentLeg.transform.position.x);
+            }
+            else
+            {
+                dirToPlayerX = -1;
+            }
+            //float dirToPlayerY = Mathf.Sign(player.transform.position.y - currentLeg.transform.position.y);
 
             float moveSpeed = .3f;
             RaycastHit2D hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
@@ -99,14 +113,16 @@ public class IceLegMove : Enemy
             {
                 while (currentLeg != null && counter < moveAmount && !currentLeg.GetHit(groundImpactMask))
                 {
+
+                    // Get values
+                    hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
+                    Quaternion angle = Quaternion.FromToRotation(Vector2.up, hit.normal);
                     counter++;
 
-                    Quaternion angle = Quaternion.FromToRotation(Vector2.up, hit.normal);
-
-                    currentLeg.transform.Translate(Vector2.right * dirToPlayerX * moveSpeed);
+                    // Movement
                     currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angle, 0.2f);
+                    currentLeg.transform.Translate(Vector2.right * dirToPlayerX * moveSpeed);
 
-                    hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
                     yield return new WaitForSeconds(0.01f);
                 }
             }
@@ -116,11 +132,12 @@ public class IceLegMove : Enemy
 
                 while (currentLeg != null && currentLeg.transform.rotation != downwardAngle)
                 {
-                    currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, downwardAngle, Time.deltaTime * 5);
+                    currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, downwardAngle, Time.deltaTime * 20);
+                    currentLeg.transform.Translate(Vector2.right * dirToPlayerX * moveSpeed);
+
                     yield return new WaitForSeconds(0.01f);
                 }
             }
-
         }
     }
 
@@ -160,13 +177,14 @@ public class IceLegMove : Enemy
             IceLeg currentLeg = iceLegs[currentLegIndex];
             Vector2 dirToPlayer = player.transform.position - currentLeg.transform.position;
             dirToPlayer.Normalize();
-            float dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
             float moveSpeed = 1.4f;
             RaycastHit2D hit = currentLeg.GetHit(groundImpactMask);
 
+            float timer = 30;
+            float count = 0;
+
             while (currentLeg != null)
             {
-                hit = currentLeg.GetHit(groundImpactMask);
                 if (hit)
                 {
                     if (hit.collider.CompareTag("Snow"))
@@ -183,17 +201,17 @@ public class IceLegMove : Enemy
                         currentLeg.PlayAudio(); // this will have to be changed to the player hit sound
                     }
                 }
+                if (count > timer)
+                {
+                    break;
+                }
+
+                // Movement
                 currentLeg.transform.Translate(Vector2.down * moveSpeed);
 
-                if (!damagePlayer)
-                {
-                    break;
-                }
-                if (dstFromHead > legCallbackDst)
-                {
-                    break;
-                }
-                dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
+                // get values
+                hit = currentLeg.GetHit(groundImpactMask);
+                count++;
 
                 yield return new WaitForSeconds(.01f);
             }
@@ -210,12 +228,15 @@ public class IceLegMove : Enemy
     IEnumerator MoveDown(int currentLegIndex)
     {
         bool damagePlayer = true;
-        if (iceLegs[currentLegIndex] != null && player != null)
+
+        if (iceLegs[currentLegIndex] != null)
         {
             IceLeg currentLeg = iceLegs[currentLegIndex];
             float moveSpeed = 1.5f;
-            float dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
             RaycastHit2D hit = currentLeg.GetHit(groundImpactMask);
+
+            float timer = 50;
+            float count = 0;
 
             while (currentLeg != null)
             {
@@ -235,21 +256,18 @@ public class IceLegMove : Enemy
                         currentLeg.PlayAudio(); // this will have to be changed to the player hit sound
                     }
                 }
+                if (count > timer)
+                {
+                    break;
+                }
+
+                // Movement
                 currentLeg.transform.Translate(Vector2.down * moveSpeed);
 
-                // This makes sure that if he walks off a cliff he doesn't fall forever
-                dstFromHead = Mathf.Abs((head.transform.position - currentLeg.transform.position).magnitude);
-
-                if (!damagePlayer)
-                {
-                    break;
-                }
-                if (dstFromHead > legCallbackDst)
-                {
-                    break;
-                }
-
+                // getting values
                 hit = currentLeg.GetHit(groundImpactMask);
+                count++;
+
                 yield return new WaitForSeconds(.01f);
 
             }

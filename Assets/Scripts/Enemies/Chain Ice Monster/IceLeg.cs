@@ -45,7 +45,7 @@ public class IceLeg : Enemy
     public RaycastHit2D GetHit(LayerMask mask)
     {
         Vector3 direction = GetDownwardsDirection();
-        Debug.DrawRay(transform.position + direction * rayStartOffset, direction.normalized * rayLength, Color.red);
+        Debug.DrawRay(transform.position + direction * rayStartOffset, direction.normalized * rayLength, Color.blue);
         hit = Physics2D.Raycast(transform.position + direction * rayStartOffset, direction.normalized, rayLength, mask);
         return hit;
     }
