@@ -153,6 +153,7 @@
     <Compile Include="Assets\Scripts\PlatformController.cs" />
     <Compile Include="Assets\Scripts\Player\Attack.cs" />
     <Compile Include="Assets\Scripts\Player\Controller2D.cs" />
+    <Compile Include="Assets\Scripts\Player\FadeOut.cs" />
     <Compile Include="Assets\Scripts\Player\FireEyes.cs" />
     <Compile Include="Assets\Scripts\Player\MotionBlur.cs" />
     <Compile Include="Assets\Scripts\Player\ParentMotionBlur.cs" />

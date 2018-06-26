@@ -333,8 +333,9 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             if ((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
             {
-                camShake.Shake(.2f, .1f);
+                //camShake.Shake(.2f, .1f);
                 StartCoroutine("SprintTimer");
+                audioManager.PlaySound("Zoom");
                 Vector2 direction = new Vector2(directionalInput.x, directionalInput.y).normalized;
                 velocity.x = direction.x * moveSpeed * 3;
                 if (velocity.x == 0)
@@ -362,13 +363,14 @@ public class Player : MonoBehaviour, FallInWaterableObject
             yield return new WaitForSeconds(0.01f);
         }
         timeIsOut = true;
+        
         StopAllCoroutines();
         StartCoroutine("SprintRecharge");
     }
 
     IEnumerator SprintRecharge()
     {
-        int max = 50;
+        int max = 20;
         int initial = 0;
         while (initial < max)
         {

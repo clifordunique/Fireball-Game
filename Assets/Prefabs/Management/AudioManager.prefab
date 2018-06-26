@@ -327,14 +327,14 @@ MonoBehaviour:
     loop: 0
   - name: Zoom
     clip: {fileID: 8300000, guid: d99cda83be430994ca38f4e93abe4a68, type: 3}
-    volume: 0.15
+    volume: 0.3
     pitch: 1
     randomVolume: 0.113
     randomPitch: 0.189
     loop: 0
-  - name: Ice Crunch
-    clip: {fileID: 8300000, guid: 2dbfd40a8d155eb46bbf2bfe2f1543e8, type: 3}
-    volume: 0.4
+  - name: Ice Hit
+    clip: {fileID: 8300000, guid: 3e860c85e1690b94997be726737144cd, type: 3}
+    volume: 1
     pitch: 1
     randomVolume: 0.113
     randomPitch: 0.189

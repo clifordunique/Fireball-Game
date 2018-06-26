@@ -171,7 +171,7 @@ public class IceLegMove : Enemy
     /// <returns></returns>
     IEnumerator MoveToPlayer(int currentLegIndex)
     {
-        bool damagePlayer = true;
+        bool canDamagePlayer = true;
         if (iceLegs[currentLegIndex] != null && player != null)
         {
             IceLeg currentLeg = iceLegs[currentLegIndex];
@@ -183,22 +183,34 @@ public class IceLegMove : Enemy
             float timer = 30;
             float count = 0;
 
+            float volume = currentLeg.GetComponent<AudioSource>().volume;
+
             while (currentLeg != null)
             {
                 if (hit)
                 {
-                    if (hit.collider.CompareTag("Snow"))
-                    {
-                        camShake.Shake(0.05f, 0.05f);
-                        currentLeg.PlayAudio();
-                        break;
-                    }
-                    if (damagePlayer && hit.collider.CompareTag("Player"))
+                    if (canDamagePlayer && hit.collider.CompareTag("Player"))
                     {
                         player.DamagePlayer(damageToPlayerHealth);
                         camShake.Shake(0.08f, 0.08f);
-                        damagePlayer = false;
-                        currentLeg.PlayAudio(); // this will have to be changed to the player hit sound
+                        canDamagePlayer = false;
+                        audioManager.PlaySound("Ice Hit");
+                    }
+                    if (hit.collider.CompareTag("Snow"))
+                    {
+                        camShake.Shake(0.05f, 0.05f);
+                        //if (canDamagePlayer)
+                        //{
+                            currentLeg.GetComponent<AudioSource>().volume = volume;
+                            currentLeg.PlayAudio();
+                        //}
+                        //else
+                        //{
+                        //    currentLeg.GetComponent<AudioSource>().volume = volume * 0.1f;
+                        //    Debug.Log(currentLeg.GetComponent<AudioSource>().volume);
+                        //    currentLeg.PlayAudio();
+                        //}
+                        break;
                     }
                 }
                 if (count > timer)
@@ -215,9 +227,9 @@ public class IceLegMove : Enemy
 
                 yield return new WaitForSeconds(.01f);
             }
+            currentLeg.GetComponent<AudioSource>().volume = volume;
         }
-        damagePlayer = false;
-
+        canDamagePlayer = false;
     }
 
     /// <summary>
