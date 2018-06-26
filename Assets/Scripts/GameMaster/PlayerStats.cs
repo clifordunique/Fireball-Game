@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class PlayerStats : MonoBehaviour {
+public class PlayerStats : MonoBehaviour
+{
 
     public static PlayerStats instance;
 
@@ -54,11 +55,19 @@ public class PlayerStats : MonoBehaviour {
     }
 
     void Update()
-    {        
-        if(Time.time - time > intervalBetweenFireHealing && curFireHealth < maxFireHealth)
+    {
+        if (Time.time - time > intervalBetweenFireHealing)
         {
-            time = Time.time;
-            curFireHealth++;
+            if (curFireHealth < maxFireHealth)
+            {
+                time = Time.time;
+                curFireHealth++;
+            }
+            else
+            {
+                time = Time.time;
+                curHealth++;
+            }
         }
     }
 

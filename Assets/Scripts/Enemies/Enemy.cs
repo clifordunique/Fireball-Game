@@ -9,6 +9,7 @@ public class Enemy: MonoBehaviour {
     public int damageToPlayerFire = 10;
     public int damageToPlayerHealth = 10;
     public bool cameraFollow = false;
+    public DamagePlayerData DamagePlayerData;
 
     public virtual void Start()
     {

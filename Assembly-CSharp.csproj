@@ -129,6 +129,7 @@
     <Compile Include="Assets\Scripts\Enemies\Chain Ice Monster\IceLeg.cs" />
     <Compile Include="Assets\Scripts\Enemies\Chain Ice Monster\IceLegMove.cs" />
     <Compile Include="Assets\Scripts\Enemies\Chain Ice Monster\MaskFadeIn.cs" />
+    <Compile Include="Assets\Scripts\Enemies\DamagePlayerData.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Path Following Enemies\Ice Guy\IceGuy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Path Following Enemies\PathFollowingEnemies.cs" />

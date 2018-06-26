@@ -60,14 +60,14 @@ TagManager:
   - name: UnderBrush
     uniqueID: 871239437
     locked: 0
-  - name: Enemy
-    uniqueID: 2529663113
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Player
     uniqueID: 2351906617
+    locked: 0
+  - name: Enemy
+    uniqueID: 2529663113
     locked: 0
   - name: Foreground
     uniqueID: 1195426259

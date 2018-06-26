@@ -11,6 +11,7 @@ public class IceLegMove : Enemy
     public float crippleWaitTime = 0.4f;
 
     public Player player;
+    public GameObject playerScratch;
     public float seePlayerDst = 10;
 
     public float rayLength = 0.5f;
@@ -191,6 +192,8 @@ public class IceLegMove : Enemy
                 {
                     if (canDamagePlayer && hit.collider.CompareTag("Player"))
                     {
+                        
+                        Instantiate(playerScratch, hit.point, currentLeg.transform.rotation, player.head.transform);
                         player.DamagePlayer(damageToPlayerHealth);
                         camShake.Shake(0.08f, 0.08f);
                         canDamagePlayer = false;
@@ -199,17 +202,9 @@ public class IceLegMove : Enemy
                     if (hit.collider.CompareTag("Snow"))
                     {
                         camShake.Shake(0.05f, 0.05f);
-                        //if (canDamagePlayer)
-                        //{
-                            currentLeg.GetComponent<AudioSource>().volume = volume;
-                            currentLeg.PlayAudio();
-                        //}
-                        //else
-                        //{
-                        //    currentLeg.GetComponent<AudioSource>().volume = volume * 0.1f;
-                        //    Debug.Log(currentLeg.GetComponent<AudioSource>().volume);
-                        //    currentLeg.PlayAudio();
-                        //}
+
+                        currentLeg.GetComponent<AudioSource>().volume = volume;
+                        currentLeg.PlayAudio();
                         break;
                     }
                 }

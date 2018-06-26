@@ -18,16 +18,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public float timeToJumpApex = .4f;
     public LayerMask underBrushLayerMask;
 
-    float accelerationTimeAirborne = .3f;
-    float accelerationTimeGrounded = .07f;
-
     public float moveSpeed = 40;
-
-    GameMaster gm;
-    private PlayerStats stats;
-    FireEyes fireEyes;
-    [SerializeField]
-    private Healthbar statusIndicator;
+    public GameObject head;
 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
@@ -37,6 +29,13 @@ public class Player : MonoBehaviour, FallInWaterableObject
     bool isNearUnderbrush = false;
     bool wantsToBeInUnderBrush = false;
     float timeToWallUnstick;
+
+    float accelerationTimeAirborne = .3f;
+    float accelerationTimeGrounded = .07f;
+
+    private GameMaster gm;
+    private PlayerStats stats;
+    private FireEyes fireEyes;
 
     float gravity;       // -(2 * maxJumpHeight) / timeToJumpApex^2
     float gravityOriginal;
@@ -67,7 +66,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
     float velocityXOld;
 
     // Power ups
-    //public bool canDoubleJump;
     bool timeIsOut = false;
 
     //CameraShake variables
@@ -333,7 +331,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             if ((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
             {
-                //camShake.Shake(.2f, .1f);
                 StartCoroutine("SprintTimer");
                 audioManager.PlaySound("Zoom");
                 Vector2 direction = new Vector2(directionalInput.x, directionalInput.y).normalized;
@@ -487,9 +484,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (stats.CurFireHealth < stats.MaxFireHealth)
         {
             stats.CurFireHealth += _health;
-            //anim.SetFloat("Fire Health", stats.curFireHealth);
         }
-        //statusIndicator.SetFireHealth(stats.curFireHealth);
     }
 
     public void DamagePlayer(int _damage)
@@ -500,7 +495,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
             Effect();
             GameMaster.KillPlayer(this);
         }
-        //statusIndicator.SetHealth(stats.curHealth);
     }
 
     void Effect()

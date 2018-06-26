@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MotionBlur : MonoBehaviour {
+public class MotionBlur : MonoBehaviour
+{
 
     public float fadeOutSpeed = 0.08f;
     public float startAlpha = 1f;
 
-    SpriteRenderer sr;
+    public SpriteRenderer sr;
 
     private void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
+        if (sr == null)
+        {
+            sr = GetComponent<SpriteRenderer>();
+        }
     }
 
     /// <summary>
@@ -34,20 +38,7 @@ public class MotionBlur : MonoBehaviour {
         spriteRenderer.sprite = sr.sprite;
 
         spriteToFade.GetComponent<FadeOut>().StartFade(startAlpha, fadeOutSpeed);
-        //yield return StartCoroutine(FadeOut(spriteRenderer));
 
         Destroy(tempSprite);
     }
-
-    //IEnumerator FadeOut(SpriteRenderer spriteRenderer)
-    //{
-    //    spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, startAlpha);
-    //    Color color = spriteRenderer.color;
-    //    while (spriteRenderer.color.a > 0)
-    //    {
-    //        color = new Color(color.r, color.g, color.b, color.a - fadeOutSpeed);
-    //        spriteRenderer.color = color;
-    //        yield return new WaitForSeconds(0.01f);
-    //    }
-    //}
 }
