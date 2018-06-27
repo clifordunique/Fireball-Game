@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RhinoAttack : MonoBehaviour {
+public class RhinoAttack : Enemy {
 
     public float directionX = -1;
     public Transform rayOriginPos;
@@ -16,8 +16,9 @@ public class RhinoAttack : MonoBehaviour {
     Player player;
     CameraShake camShake;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
         //FindObjectOfType<Controller2D>().rhinoHitPlayerEvent += OnRhinoHitPlayer;
         player = FindObjectOfType<Player>();
         camShake = GameMaster.gm.GetComponent<CameraShake>();
@@ -34,9 +35,7 @@ public class RhinoAttack : MonoBehaviour {
 
     void OnRhinoHitPlayer()
     {
-        //camShake.Shake(player.camShakeAmt, player.camShakeLength);
-        player.DamagePlayer(1000);
-        //FindObjectOfType<Controller2D>().rhinoHitPlayerEvent -= OnRhinoHitPlayer;
+        player.DamagePlayer(damagePlayerData);
     }
 
     /*Detects Collisions with the player from the rhino's horn

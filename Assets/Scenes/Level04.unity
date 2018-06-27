@@ -1069,7 +1069,7 @@ MonoBehaviour:
   damageToPlayerFire: 10
   damageToPlayerHealth: 10
   cameraFollow: 0
-  DamagePlayerData: {fileID: 0}
+  damagePlayerData: {fileID: 0}
   metalBrace: {fileID: 152825240}
   tipOfIce: {fileID: 1469126212}
   spriteMask: {fileID: 331393242190331826, guid: c5041ac33dc28eb44aebc49e8273d3bf,
@@ -3313,7 +3313,7 @@ MonoBehaviour:
   damageToPlayerFire: 10
   damageToPlayerHealth: 10
   cameraFollow: 0
-  DamagePlayerData: {fileID: 0}
+  damagePlayerData: {fileID: 0}
   metalBrace: {fileID: 1331934531}
   tipOfIce: {fileID: 552053800}
   spriteMask: {fileID: 331276797507186958, guid: 28f7b50e6f14ad248a94b1413c9ec38d,
@@ -4947,6 +4947,48 @@ MonoBehaviour:
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 636581262}
   m_AttachedIK: {fileID: 716158057}
+--- !u!1001 &1075729763
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4857150596528512, guid: 884675a2070027a438965afd33203a2b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 21.839191
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857150596528512, guid: 884675a2070027a438965afd33203a2b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 9.285294
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857150596528512, guid: 884675a2070027a438965afd33203a2b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.24609375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857150596528512, guid: 884675a2070027a438965afd33203a2b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857150596528512, guid: 884675a2070027a438965afd33203a2b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857150596528512, guid: 884675a2070027a438965afd33203a2b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857150596528512, guid: 884675a2070027a438965afd33203a2b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857150596528512, guid: 884675a2070027a438965afd33203a2b, type: 2}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 884675a2070027a438965afd33203a2b, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1085864337
 GameObject:
   m_ObjectHideFlags: 0
@@ -5270,7 +5312,7 @@ MonoBehaviour:
   damageToPlayerFire: 10
   damageToPlayerHealth: 5
   cameraFollow: 1
-  DamagePlayerData: {fileID: 0}
+  damagePlayerData: {fileID: 0}
   speed: 2
   chaseSpeed: 16
   accelerationSpeed: 10
@@ -6339,6 +6381,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1397249886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1113637777129264, guid: 884675a2070027a438965afd33203a2b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1075729763}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1397249888}
+  - component: {fileID: 1397249887}
+  m_Layer: 0
+  m_Name: ChainEnemyData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1397249887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114829935028866166, guid: 884675a2070027a438965afd33203a2b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1075729763}
+  m_GameObject: {fileID: 1397249886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2192891743ddedf4bbf48dcc26e71969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePlayerEffect: {fileID: 0}
+  damageToPlayerHealth: 0
+  damageToPlayerFireHealth: 0
+  hitPos: {x: 0, y: 0}
+  transformInfo: {fileID: 0}
+--- !u!4 &1397249888
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4857150596528512, guid: 884675a2070027a438965afd33203a2b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1075729763}
+  m_GameObject: {fileID: 1397249886}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.839191, y: 9.285294, z: -0.24609375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1398087304
 GameObject:
@@ -8095,7 +8185,7 @@ MonoBehaviour:
   damageToPlayerFire: 10
   damageToPlayerHealth: 10
   cameraFollow: 0
-  DamagePlayerData: {fileID: 0}
+  damagePlayerData: {fileID: 0}
   metalBrace: {fileID: 971361836}
   tipOfIce: {fileID: 1873941188}
   spriteMask: {fileID: 331276797507186958, guid: 28f7b50e6f14ad248a94b1413c9ec38d,
@@ -8458,7 +8548,7 @@ MonoBehaviour:
   damageToPlayerFire: 0
   damageToPlayerHealth: 5
   cameraFollow: 1
-  DamagePlayerData: {fileID: 0}
+  damagePlayerData: {fileID: 0}
   iceLegs:
   - {fileID: 1918820958}
   - {fileID: 278713613}

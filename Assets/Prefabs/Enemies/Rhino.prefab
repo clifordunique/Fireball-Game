@@ -264,7 +264,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1364836495794328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.041, y: 0.498, z: 0}
+  m_LocalPosition: {x: 0.041, y: 0.663, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4769274790885290}
@@ -602,7 +602,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 530eadd82667e414ebca122229ae18d2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.164
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -715,6 +715,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf3df2f7700c584ea556cd6fe03cad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 10
+  health: 0
+  seePlayerDistanceX: 8
+  seePlayerDistanceY: 3
+  damageToPlayerFire: 10
+  damageToPlayerHealth: 10
+  cameraFollow: 0
+  damagePlayerData: {fileID: 0}
   directionX: -1
   rayOriginPos: {fileID: 4401538495356674}
   horizontalRayCount: 5
@@ -734,6 +742,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf3df2f7700c584ea556cd6fe03cad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 10
+  health: 0
+  seePlayerDistanceX: 8
+  seePlayerDistanceY: 3
+  damageToPlayerFire: 10
+  damageToPlayerHealth: 10
+  cameraFollow: 0
+  damagePlayerData: {fileID: 0}
   directionX: -1
   rayOriginPos: {fileID: 4860750557403606}
   horizontalRayCount: 4
@@ -753,13 +769,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e286cf37ac0304b826dc9ca0188b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 500
+  health: 0
+  seePlayerDistanceX: 8
+  seePlayerDistanceY: 3
+  damageToPlayerFire: 0
+  damageToPlayerHealth: 500
+  cameraFollow: 1
+  damagePlayerData: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 1280
   head: {fileID: 4440776764178978}
   eye: {fileID: 4578053959113380}
-  dstToPlayer: 10
   easeAmount: 1
   rotateUpTarget: -10
   rotateDownTarget: 4
@@ -824,7 +846,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1765304183
-  m_SortingLayer: -1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300006, guid: 28d5dcb1cf0601b4fb694e0fccb3ad5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -869,7 +891,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1765304183
-  m_SortingLayer: -1
+  m_SortingLayer: 2
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300008, guid: 28d5dcb1cf0601b4fb694e0fccb3ad5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -914,7 +936,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1765304183
-  m_SortingLayer: -1
+  m_SortingLayer: 2
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 28d5dcb1cf0601b4fb694e0fccb3ad5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -959,7 +981,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1765304183
-  m_SortingLayer: -1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300010, guid: 28d5dcb1cf0601b4fb694e0fccb3ad5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1004,7 +1026,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1765304183
-  m_SortingLayer: -1
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300012, guid: 28d5dcb1cf0601b4fb694e0fccb3ad5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1049,7 +1071,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1765304183
-  m_SortingLayer: -1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300004, guid: 28d5dcb1cf0601b4fb694e0fccb3ad5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1094,7 +1116,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1765304183
-  m_SortingLayer: -1
+  m_SortingLayer: 2
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300014, guid: 28d5dcb1cf0601b4fb694e0fccb3ad5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

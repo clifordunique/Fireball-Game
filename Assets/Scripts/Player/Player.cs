@@ -479,6 +479,23 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
     }
 
+    // change to take in damagePlayerData
+    public void DamagePlayer(DamagePlayerData data)
+    {
+        stats.CurHealth -= data.damageToPlayerHealth;
+        stats.CurFireHealth -= data.damageToPlayerFireHealth;
+        if(data.damagePlayerEffect != null)
+        {
+            Instantiate(data.damagePlayerEffect, data.hitPos, data.transformInfo.rotation, head.transform);
+        }
+
+        if (stats.CurHealth <= 0)
+        {
+            Effect();
+            GameMaster.KillPlayer(this);
+        }
+    }
+
     public void HealFire(int _health)
     {
         if (stats.CurFireHealth < stats.MaxFireHealth)
@@ -487,15 +504,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
     }
 
-    public void DamagePlayer(int _damage)
-    {
-        stats.CurHealth -= _damage;
-        if (stats.CurHealth <= 0)
-        {
-            Effect();
-            GameMaster.KillPlayer(this);
-        }
-    }
 
     void Effect()
     {

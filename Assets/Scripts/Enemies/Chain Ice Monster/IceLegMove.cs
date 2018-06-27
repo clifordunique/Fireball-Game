@@ -27,6 +27,7 @@ public class IceLegMove : Enemy
         camShake = GameMaster.gm.GetComponent<CameraShake>();
         StartCoroutine(Walk());
         audioManager = AudioManager.instance;
+        damagePlayerData.damagePlayerEffect = playerScratch;
     }
 
     IEnumerator Walk()
@@ -192,9 +193,12 @@ public class IceLegMove : Enemy
                 {
                     if (canDamagePlayer && hit.collider.CompareTag("Player"))
                     {
-                        
-                        Instantiate(playerScratch, hit.point, currentLeg.transform.rotation, player.head.transform);
-                        player.DamagePlayer(damageToPlayerHealth);
+                        damagePlayerData.transformInfo = currentLeg.transform;
+                        damagePlayerData.hitPos = hit.point;
+
+
+                        //Instantiate(playerScratch, hit.point, currentLeg.transform.rotation, player.head.transform);
+                        player.DamagePlayer(damagePlayerData);
                         camShake.Shake(0.08f, 0.08f);
                         canDamagePlayer = false;
                         audioManager.PlaySound("Ice Hit");
@@ -257,7 +261,10 @@ public class IceLegMove : Enemy
                     }
                     else if (damagePlayer && hit.collider.CompareTag("Player"))
                     {
-                        player.DamagePlayer(damageToPlayerHealth);
+                        damagePlayerData.transformInfo = currentLeg.transform;
+                        damagePlayerData.hitPos = hit.point;
+
+                        player.DamagePlayer(damagePlayerData);
                         camShake.Shake(0.08f, 0.08f);
                         damagePlayer = false;
                         currentLeg.PlayAudio(); // this will have to be changed to the player hit sound

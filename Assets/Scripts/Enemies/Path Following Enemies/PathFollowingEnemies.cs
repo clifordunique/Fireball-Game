@@ -120,8 +120,12 @@ public class PathFollowingEnemies : Enemy
             Player player = col.gameObject.GetComponent<Player>();
             if (stats.IsFire())
             {
-                player.DamageFire((int)(damageToPlayerFire * ((health + 6 / health) / maxHealth)));
-                player.DamagePlayer((int)(damageToPlayerHealth * (health + 6 / health) / maxHealth));
+                int healthDamage = (int)(damageToPlayerHealth * (health + 6 / health) / maxHealth);
+                int fireDamage = (int)(damageToPlayerFire * ((health + 6 / health) / maxHealth));
+                damagePlayerData.damageToPlayerHealth = healthDamage;
+                damagePlayerData.damageToPlayerFireHealth = fireDamage;
+
+                player.DamagePlayer(damagePlayerData);
                 DamageEnemy(1000, transform.position);
             }
         }
