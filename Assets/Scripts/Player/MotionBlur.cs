@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MotionBlur : MonoBehaviour
 {
-
+    const string playerLayerName = "Player";
     public float fadeOutSpeed = 0.08f;
     public float startAlpha = 1f;
 
@@ -36,6 +36,7 @@ public class MotionBlur : MonoBehaviour
 
         SpriteRenderer spriteRenderer = spriteToFade.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = sr.sprite;
+        spriteRenderer.sortingLayerName = playerLayerName;
 
         spriteToFade.GetComponent<FadeOut>().StartFade(startAlpha, fadeOutSpeed);
 

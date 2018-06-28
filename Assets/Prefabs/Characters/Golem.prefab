@@ -51,11 +51,11 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4456704741331316}
+  - component: {fileID: 4983008623414246}
   - component: {fileID: 212263764379267706}
   - component: {fileID: 114543176721197710}
   m_Layer: 10
-  m_Name: Golem_Complete_0
+  m_Name: TopHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,6 +120,22 @@ GameObject:
   - component: {fileID: 212647801024341886}
   m_Layer: 10
   m_Name: Golem_Complete_9
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1672958192950252
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4456704741331316}
+  - component: {fileID: 331800865830318874}
+  m_Layer: 10
+  m_Name: TopMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,7 +230,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1812255519232518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.58, y: -1.02, z: 0.7242643}
+  m_LocalPosition: {x: 26.01, y: -0.367, z: 0.7242643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4400936544659590}
@@ -235,7 +251,7 @@ Transform:
   m_LocalPosition: {x: -0.5209961, y: 0.22499943, z: -0.7242643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4456704741331316}
+  - {fileID: 4983008623414246}
   - {fileID: 4072088584872238}
   - {fileID: 4915910320004828}
   - {fileID: 4503787901096124}
@@ -247,12 +263,12 @@ Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1101706187127338}
+  m_GameObject: {fileID: 1672958192950252}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.483, y: 0.268, z: 0}
-  m_LocalScale: {x: 0.7332555, y: 0.7332555, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4400936544659590}
+  m_Father: {fileID: 4983008623414246}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4498542388881238
@@ -319,6 +335,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4400936544659590}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4983008623414246
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101706187127338}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.483, y: 0.268, z: 0}
+  m_LocalScale: {x: 0.7332555, y: 0.7332555, z: 1}
+  m_Children:
+  - {fileID: 4456704741331316}
+  m_Father: {fileID: 4400936544659590}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &61993334759003356
 BoxCollider2D:
@@ -394,6 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOutSpeed: 0.08
   startAlpha: 1
+  sr: {fileID: 0}
 --- !u!114 &114091872775271428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -418,6 +449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOutSpeed: 0.15
   startAlpha: 0.7
+  sr: {fileID: 212019964290060660, guid: 1593828083e5d6d40a1e34f4068e1e33, type: 2}
 --- !u!114 &114422170501650312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -471,6 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOutSpeed: 0.15
   startAlpha: 0.7
+  sr: {fileID: 0}
 --- !u!114 &114629726805755846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -488,7 +521,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16384
   moveSpeed: 8
-  statusIndicator: {fileID: 0}
+  head: {fileID: 1949705156578486}
   wallJumpClimb: {x: 3, y: 20}
   wallJumpOff: {x: 10, y: 10}
   wallLeap: {x: 18, y: 10}
@@ -564,7 +597,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1943060679
   m_SortingLayer: 1
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300004, guid: 9b4cda6dda3eb394091f7117616f5e66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -609,7 +642,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1943060679
   m_SortingLayer: 1
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300002, guid: 9b4cda6dda3eb394091f7117616f5e66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -834,7 +867,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1943060679
   m_SortingLayer: 1
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300006, guid: 9b4cda6dda3eb394091f7117616f5e66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -890,3 +923,47 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!331 &331800865830318874
+SpriteMask:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1672958192950252}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 9b4cda6dda3eb394091f7117616f5e66, type: 3}
+  m_MaskAlphaCutoff: 0.93
+  m_FrontSortingLayerID: -1943060679
+  m_BackSortingLayerID: -1943060679
+  m_FrontSortingLayer: 1
+  m_BackSortingLayer: 1
+  m_FrontSortingOrder: 2
+  m_BackSortingOrder: 1
+  m_IsCustomRangeActive: 1
