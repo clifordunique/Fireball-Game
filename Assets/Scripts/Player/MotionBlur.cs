@@ -7,14 +7,15 @@ public class MotionBlur : MonoBehaviour
     const string playerLayerName = "Player";
     public float fadeOutSpeed = 0.08f;
     public float startAlpha = 1f;
+    public int orderInLayer = -2;
 
-    public SpriteRenderer sr;
+    public SpriteRenderer spriteRenderer;
 
     private void Start()
     {
-        if (sr == null)
+        if (spriteRenderer == null)
         {
-            sr = GetComponent<SpriteRenderer>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
     }
 
@@ -35,8 +36,9 @@ public class MotionBlur : MonoBehaviour
         spriteToFade.GetComponent<Transform>().localScale = transform.localScale;
 
         SpriteRenderer spriteRenderer = spriteToFade.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sr.sprite;
+        spriteRenderer.sprite = this.spriteRenderer.sprite;
         spriteRenderer.sortingLayerName = playerLayerName;
+        spriteRenderer.sortingOrder = orderInLayer;
 
         spriteToFade.GetComponent<FadeOut>().StartFade(startAlpha, fadeOutSpeed);
 
