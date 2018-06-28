@@ -14,7 +14,7 @@ public class Enemy: MonoBehaviour {
     public virtual void Start()
     {
         health = maxHealth;
-        damagePlayerData = new DamagePlayerData();
+        damagePlayerData = gameObject.AddComponent<DamagePlayerData>();
         damagePlayerData.damageToPlayerFireHealth = damageToPlayerFire;
         damagePlayerData.damageToPlayerHealth = damageToPlayerHealth;
     }

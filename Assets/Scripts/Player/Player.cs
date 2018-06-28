@@ -114,7 +114,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         // First check and see if the state is paused. If it is, return.
         if (gm.CurState == Utilities.State.PAUSED) return;
-
+       
         CalculateVelocity();
         //HandleWallSliding();
         DetectUnderBrush();
@@ -122,6 +122,10 @@ public class Player : MonoBehaviour, FallInWaterableObject
         if (Input.GetKeyDown(KeyCode.Z))
         {
             ToggleIsInUnderbrush();
+        }
+        if (controller.collisions.below)
+        {
+            isDoubleJumping = false;
         }
         if (Input.GetButton("Shift"))
         {
@@ -327,6 +331,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             isDoubleJumping = false;
         }
+        //Debug.Log(!timeIsOut + " "  + stats.Zoom + " " +  Input.GetButton("Jump") + " "+ Input.GetButton("Horizontal") + " " + Input.GetButton("Vertical"));
         if (!timeIsOut && stats.Zoom && (Input.GetButton("Jump") || Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
         {
             if ((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
