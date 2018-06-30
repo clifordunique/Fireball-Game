@@ -230,7 +230,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1812255519232518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.01, y: -0.367, z: 0.7242643}
+  m_LocalPosition: {x: 2.3, y: -0.9, z: 0.7242643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4400936544659590}
@@ -362,7 +362,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.1040349}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -424,7 +424,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOutSpeed: 0.08
   startAlpha: 1
-  sr: {fileID: 0}
+  orderInLayer: 6
+  spriteRenderer: {fileID: 0}
 --- !u!114 &114091872775271428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -449,7 +450,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOutSpeed: 0.15
   startAlpha: 0.7
-  sr: {fileID: 212019964290060660, guid: 1593828083e5d6d40a1e34f4068e1e33, type: 2}
+  orderInLayer: -2
+  spriteRenderer: {fileID: 212019964290060660, guid: 1593828083e5d6d40a1e34f4068e1e33,
+    type: 2}
 --- !u!114 &114422170501650312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -503,7 +506,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOutSpeed: 0.15
   startAlpha: 0.7
-  sr: {fileID: 0}
+  orderInLayer: -2
+  spriteRenderer: {fileID: 0}
 --- !u!114 &114629726805755846
 MonoBehaviour:
   m_ObjectHideFlags: 1

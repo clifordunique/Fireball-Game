@@ -154,10 +154,10 @@
     <Compile Include="Assets\Scripts\PlatformController.cs" />
     <Compile Include="Assets\Scripts\Player\Attack.cs" />
     <Compile Include="Assets\Scripts\Player\Controller2D.cs" />
-    <Compile Include="Assets\Scripts\Player\FadeOut.cs" />
-    <Compile Include="Assets\Scripts\Player\FireEyes.cs" />
-    <Compile Include="Assets\Scripts\Player\MotionBlur.cs" />
-    <Compile Include="Assets\Scripts\Player\ParentMotionBlur.cs" />
+    <Compile Include="Assets\Scripts\Player\Extra\FadeOut.cs" />
+    <Compile Include="Assets\Scripts\Player\Extra\FireEyes.cs" />
+    <Compile Include="Assets\Scripts\Player\Extra\MotionBlur.cs" />
+    <Compile Include="Assets\Scripts\Player\Extra\ParentMotionBlur.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerDestroy.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />

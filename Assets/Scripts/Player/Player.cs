@@ -6,12 +6,15 @@
  * It also handles wall jumping and calculating the velocity.
  */
 
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ParentMotionBlur))]
 [RequireComponent(typeof(FireEyes))]
 [RequireComponent(typeof(Controller2D))]
+[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour, FallInWaterableObject
 {
     public float minJumpHeight = 1;
@@ -21,21 +24,21 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public float moveSpeed = 40;
     public GameObject head;
 
+    // WALL JUMP
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
     public float wallSlideSpeedMax = 3;
     public float wallStickTime = .25f;
+    int wallDirX;
+
+    // UNDERBRUSH
     bool isNearUnderbrush = false;
     bool wantsToBeInUnderBrush = false;
     float timeToWallUnstick;
 
     float accelerationTimeAirborne = .3f;
     float accelerationTimeGrounded = .07f;
-
-    private GameMaster gm;
-    private PlayerStats stats;
-    private FireEyes fireEyes;
 
     float gravity;       // -(2 * maxJumpHeight) / timeToJumpApex^2
     float gravityOriginal;
@@ -47,23 +50,26 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public bool isInWater = false;
     public bool isDoubleJumping;
     Utilities.PlatformType platformType;
-
     bool grounded;
 
+    // REFERENCES
+    private GameMaster gm;
+    private AudioManager audioManager;
+    private CameraShake camShake;
+    private PlayerStats stats;
+
+    // REFERENCES TO COMPONENTS ON THIS OBJECT
+    private FireEyes fireEyes;
+    private Controller2D controller;
+    private Animator anim;
     private ParentMotionBlur blur;
-    CameraShake camShake;
-    SpriteRenderer[] srs;
-    CollisionInfo colInfo;
-    Controller2D controller;
-    Animator anim;
-    AudioManager audioManager;
+
     public GameObject deathPrefab;
+    private SpriteRenderer[] spriteRenderersInChildren;
+    private Queue<GameObject> damageSpritesOnPlayer;
 
-    Vector2 directionalInput;
     //bool wallSliding;
-    int wallDirX;
-
-    float velocityXOld;
+    Vector2 directionalInput;
 
     // Power ups
     bool timeIsOut = false;
@@ -71,6 +77,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
     //CameraShake variables
     public float camShakeAmt = 0.1f;
     public float camShakeLength = 0.1f;
+
+    float velocityXOld;
 
     // DELEGATES
     public delegate void OnFireChange(bool currentFire);
@@ -81,58 +89,62 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     void Start()
     {
-        fireEyes = GetComponent<FireEyes>();
-        if (fireEyes == null)
+        // REFERENCES
+        gm = GameMaster.gm;
+        if (gm == null)
         {
-            Debug.Log("No FireEyes script attached to this GameObject");
+            Debug.Log("No GameMaster found in scene.");
         }
-        stats = PlayerStats.instance;
-        stats.CurFireHealth = stats.MaxFireHealth;
-        stats.CurHealth = stats.MaxHealth;
         audioManager = AudioManager.instance;
         if (audioManager == null)
         {
-            Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
+            Debug.Log("No AudioManager found in scene.");
         }
-        srs = GetComponentsInChildren<SpriteRenderer>();
-        anim = GetComponent<Animator>();
-        controller = GetComponent<Controller2D>();
-        gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
-        gravityOriginal = gravity;
-        gm = GameMaster.gm;
-        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         camShake = gm.GetComponent<CameraShake>();
         if (camShake == null)
         {
             Debug.LogError("No CameraShake found on the GameMaster.");
         }
+        stats = PlayerStats.instance;
+        if (stats == null)
+        {
+            Debug.LogError("No PlayerStats found in scene.");
+        }
+
+        // REFERENCES TO COMPONENTS ON THIS OBJECT
+        fireEyes = GetComponent<FireEyes>();
+        controller = GetComponent<Controller2D>();
+        anim = GetComponent<Animator>();
         blur = GetComponent<ParentMotionBlur>();
+
+        spriteRenderersInChildren = GetComponentsInChildren<SpriteRenderer>();
+        damageSpritesOnPlayer = new Queue<GameObject>();
+
+        stats.CurFireHealth = stats.MaxFireHealth;
+        stats.CurHealth = stats.MaxHealth;
+        stats.onHealEvent += OnPlayerHeal;
+        gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        gravityOriginal = gravity;
+        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
     }
 
     void Update()
     {
         // First check and see if the state is paused. If it is, return.
         if (gm.CurState == Utilities.State.PAUSED) return;
-       
+
         CalculateVelocity();
         //HandleWallSliding();
         DetectUnderBrush();
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            ToggleIsInUnderbrush();
-        }
         if (controller.collisions.below)
         {
             isDoubleJumping = false;
         }
-        if (Input.GetButton("Shift"))
-        {
-            OnShiftInput();
-        }
         controller.Move(velocity * Time.deltaTime, directionalInput, isDoubleJumping);
 
+        // Calculating gravity
         if (isInWater)
         {
             gravity = .5f * gravityOriginal;
@@ -156,6 +168,14 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
 
         DealWithFire();
+    }
+
+    private void OnPlayerHeal()
+    {
+        if (damageSpritesOnPlayer.Count > 0)
+        {
+            StartCoroutine(FadeOut(damageSpritesOnPlayer.Dequeue()));
+        }
     }
 
     void DetectUnderBrush()
@@ -189,16 +209,16 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     /* Toggles if the player is behind the underbrush
     */
-    void ToggleIsInUnderbrush()
+    public void ToggleIsInUnderbrush()
     {
         if (isNearUnderbrush)
         {
             audioManager.PlaySound("underbrush");
-            if (srs[0].sortingLayerName == "Player")
+            if (spriteRenderersInChildren[0].sortingLayerName == "Player")
             {
-                for (int i = 0; i < srs.Length; i++)
+                for (int i = 0; i < spriteRenderersInChildren.Length; i++)
                 {
-                    srs[i].sortingLayerName = "Behind Underbrush";
+                    spriteRenderersInChildren[i].sortingLayerName = "Behind Underbrush";
                 }
                 wantsToBeInUnderBrush = true;
                 if (onUnderbrushEvent != null)
@@ -208,9 +228,9 @@ public class Player : MonoBehaviour, FallInWaterableObject
             }
             else
             {
-                for (int i = 0; i < srs.Length; i++)
+                for (int i = 0; i < spriteRenderersInChildren.Length; i++)
                 {
-                    srs[i].sortingLayerName = "Player";
+                    spriteRenderersInChildren[i].sortingLayerName = "Player";
                 }
                 wantsToBeInUnderBrush = false;
                 if (onUnderbrushEvent != null)
@@ -365,7 +385,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             yield return new WaitForSeconds(0.01f);
         }
         timeIsOut = true;
-        
+
         StopAllCoroutines();
         StartCoroutine("SprintRecharge");
     }
@@ -484,14 +504,18 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
     }
 
-    // change to take in damagePlayerData
+    /// <summary>
+    /// Damages the player. If health equals 0, it kills the player.
+    /// </summary>
+    /// <param name="data"></param>
     public void DamagePlayer(DamagePlayerData data)
     {
         stats.CurHealth -= data.damageToPlayerHealth;
         stats.CurFireHealth -= data.damageToPlayerFireHealth;
-        if(data.damagePlayerEffect != null)
+        if (data.damagePlayerEffect != null)
         {
-            Instantiate(data.damagePlayerEffect, data.hitPos, data.transformInfo.rotation, head.transform);
+            GameObject tempDamagePlayerEffect = Instantiate(data.damagePlayerEffect, data.hitPos, data.transformInfo.rotation, head.transform);
+            damageSpritesOnPlayer.Enqueue(tempDamagePlayerEffect);
         }
 
         if (stats.CurHealth <= 0)
@@ -514,6 +538,19 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         audioManager.PlaySound("PlayerDie");
         Instantiate(deathPrefab, transform.position, Quaternion.Euler(0, 0, 0));
+    }
+
+    IEnumerator FadeOut(GameObject objectToFade)
+    {
+        SpriteRenderer sr = objectToFade.GetComponent<SpriteRenderer>();
+        Color tmp = sr.color;
+        while (sr.color.a >= 0)
+        {
+            tmp.a -= 0.02f;
+            sr.color = tmp;
+            yield return null;
+        }
+        Destroy(objectToFade);
     }
 
     void FallInWaterableObject.SetIsInWater(bool _isInWater)

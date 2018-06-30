@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DamagePlayerData : MonoBehaviour {
+public class DamagePlayerData {
 
     public GameObject damagePlayerEffect;
     public int damageToPlayerHealth;

@@ -45,6 +45,10 @@ public class PlayerStats : MonoBehaviour
 
     float time;
 
+    // DELEGATES
+    public delegate void OnHeal();
+    public event OnHeal onHealEvent;
+
     void Awake()
     {
         if (instance == null)
@@ -67,6 +71,10 @@ public class PlayerStats : MonoBehaviour
             {
                 time = Time.time;
                 curHealth++;
+                if(onHealEvent != null)
+                {
+                    onHealEvent();
+                }
             }
         }
     }

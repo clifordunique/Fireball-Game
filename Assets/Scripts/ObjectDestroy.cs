@@ -42,7 +42,6 @@ public class ObjectDestroy : MonoBehaviour
             sr.color = tmp;
             yield return null;
         }
-
     }
 
     /* If colliding with an enemy or plant, ignore the collision

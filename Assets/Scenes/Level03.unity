@@ -27786,57 +27786,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114765935818208596, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: flickerSpeedMaxMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114765935818208596, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: flickerAmountMaxMin.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114765935818208596, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: waitBtwFlickerMaxMin.y
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114765935818208596, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: flickerSpeedMaxMin.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114765935818208596, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: waitBtwFlickerMaxMin.x
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 114629726805755846, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: canDoubleJump
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 61993334759003356, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 61993334759003356, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114019846538707424, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: sr
-      value: 
-      objectReference: {fileID: 212829447537778780, guid: 9aaa25bca896d614c93393afcd6c35ff,
-        type: 2}
-    - target: {fileID: 114019846538707424, guid: e07aacbdf40c39642a5e4e9b979f21b6,
-        type: 2}
-      propertyPath: orderInLayer
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
   m_IsPrefabParent: 0
