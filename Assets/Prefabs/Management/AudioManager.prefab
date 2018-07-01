@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1991461213699472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.1, y: -0.5, z: 0}
+  m_LocalPosition: {x: 6.1579027, y: 6.4549556, z: 0}
   m_LocalScale: {x: 0.34605542, y: 0.35318342, z: 0.7367114}
   m_Children: []
   m_Father: {fileID: 0}
@@ -334,8 +334,134 @@ MonoBehaviour:
     loop: 0
   - name: Ice Hit
     clip: {fileID: 8300000, guid: 3e860c85e1690b94997be726737144cd, type: 3}
+    volume: 0.6
+    pitch: 1
+    randomVolume: 0.113
+    randomPitch: 0.189
+    loop: 0
+  - name: chainSmall01
+    clip: {fileID: 8300000, guid: 697bd08f823a7284d9423c0f245067d6, type: 3}
     volume: 1
     pitch: 1
     randomVolume: 0.113
     randomPitch: 0.189
+    loop: 0
+  - name: chainSmall02
+    clip: {fileID: 8300000, guid: 9258f78cd2fa3bd4c8e0025bddad8542, type: 3}
+    volume: 1
+    pitch: 1
+    randomVolume: 0.113
+    randomPitch: 0.189
+    loop: 0
+  - name: chainSmall03
+    clip: {fileID: 8300000, guid: 047edf53580ae7144985a88ed30e873b, type: 3}
+    volume: 1
+    pitch: 1
+    randomVolume: 0.113
+    randomPitch: 0.189
+    loop: 0
+  - name: chainSmall04
+    clip: {fileID: 8300000, guid: 00207615139b9da4088a9d1b50e2392d, type: 3}
+    volume: 1
+    pitch: 1
+    randomVolume: 0.113
+    randomPitch: 0.189
+    loop: 0
+  - name: chainSmall05
+    clip: {fileID: 8300000, guid: d016cac78b264ae4aa06c46509f30233, type: 3}
+    volume: 1
+    pitch: 1
+    randomVolume: 0.113
+    randomPitch: 0.189
+    loop: 0
+  - name: chainSmall06
+    clip: {fileID: 8300000, guid: 65dd087e78adcba4790d0e88ad2073dc, type: 3}
+    volume: 1
+    pitch: 1
+    randomVolume: 0.113
+    randomPitch: 0.189
+    loop: 0
+  - name: chainSmall07
+    clip: {fileID: 8300000, guid: 0afa305015ca9ad46a67da21743ccef0, type: 3}
+    volume: 1
+    pitch: 1
+    randomVolume: 0.113
+    randomPitch: 0.189
+    loop: 0
+  - name: chainMove01
+    clip: {fileID: 8300000, guid: 248263ebc3e69b14aa14bf719faf85cc, type: 3}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.113
+    randomPitch: 0.189
+    loop: 0
+  - name: chainMove02
+    clip: {fileID: 8300000, guid: a21677c36fe94f249af6aa8c49942955, type: 3}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.113
+    randomPitch: 0.189
+    loop: 0
+  - name: chainMove03
+    clip: {fileID: 8300000, guid: 59a3515f75b8e0a479b6e9bedfd66ef3, type: 3}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.113
+    randomPitch: 0.189
+    loop: 0
+  - name: chainPull01
+    clip: {fileID: 8300000, guid: 88ecdc68b0b06b74bb9ae0f4cac1de55, type: 3}
+    volume: 1
+    pitch: 0.813
+    randomVolume: 0.059
+    randomPitch: 0.1
+    loop: 0
+  - name: chainPull02
+    clip: {fileID: 8300000, guid: 6a17a865b37a0e148b0f7fdbdb157e0b, type: 3}
+    volume: 1
+    pitch: 0.888
+    randomVolume: 0.043
+    randomPitch: 0.093
+    loop: 0
+  - name: chainPull03
+    clip: {fileID: 8300000, guid: 17b870305f43d3e4b8f564b9e0a6d1c5, type: 3}
+    volume: 1
+    pitch: 0.804
+    randomVolume: 0.026
+    randomPitch: 0.061
+    loop: 0
+  - name: chainPull04
+    clip: {fileID: 8300000, guid: 12804948063415c47bbd5c7adefec466, type: 3}
+    volume: 1
+    pitch: 0.82
+    randomVolume: 0.018
+    randomPitch: 0.066
+    loop: 0
+  - name: chainPull05
+    clip: {fileID: 8300000, guid: b1340426d1840624a99f4a5e1c6b43dc, type: 3}
+    volume: 1
+    pitch: 0.814
+    randomVolume: 0.031
+    randomPitch: 0.072
+    loop: 0
+  - name: chainPull06
+    clip: {fileID: 8300000, guid: 2524031f45d163547b86f74bf1f950a5, type: 3}
+    volume: 1
+    pitch: 0.82
+    randomVolume: 0.037
+    randomPitch: 0.08
+    loop: 0
+  - name: chainPull07
+    clip: {fileID: 8300000, guid: d984f115ba4f9c44d90461e00356848a, type: 3}
+    volume: 1
+    pitch: 0.841
+    randomVolume: 0.007
+    randomPitch: 0.031
+    loop: 0
+  - name: chainPull08
+    clip: {fileID: 8300000, guid: 3e12fdf405068c44f86113952ccca1dd, type: 3}
+    volume: 1
+    pitch: 0.798
+    randomVolume: 0.015
+    randomPitch: 0.045
     loop: 0

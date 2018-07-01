@@ -21,13 +21,50 @@ public class IceLegMove : Enemy
     CameraShake camShake;
     AudioManager audioManager;
 
+    // sounds
+    string[] smallShakeSounds;
+    string[] moveFastSounds;
+    private string[] pullSounds;
+
     public override void Start()
     {
         base.Start();
         camShake = GameMaster.gm.GetComponent<CameraShake>();
-        StartCoroutine(Walk());
         audioManager = AudioManager.instance;
+
+        InitializeChainSounds();
+
+        StartCoroutine(Walk());
         damagePlayerData.damagePlayerEffect = playerScratch;
+    }
+
+    private void InitializeChainSounds()
+    {
+        smallShakeSounds = new string[7];
+        moveFastSounds = new string[3];
+        pullSounds = new string[8];
+        for (int i = 0; i < smallShakeSounds.Length; i++)
+        {
+            smallShakeSounds[i] = "chainSmall0" + (i + 1);
+        }
+        for (int i = 0; i < moveFastSounds.Length; i++)
+        {
+            moveFastSounds[i] = "chainMove0" + (i + 1);
+        }
+        for (int i = 0; i < pullSounds.Length; i++)
+        {
+            pullSounds[i] = "chainPull0" + (i + 1);
+        }
+    }
+    
+    /// <summary>
+    /// Gets a random index between 0 and max
+    /// </summary>
+    /// <param name="max">The maximum value for the random index</param>
+    /// <returns></returns>
+    private int GetRandomIndex(int max)
+    {
+        return Random.Range(0, max);
     }
 
     IEnumerator Walk()
@@ -72,6 +109,9 @@ public class IceLegMove : Enemy
     {
         if (iceLegs[currentLegIndex] != null)
         {
+            int index = GetRandomIndex(pullSounds.Length);
+            audioManager.PlaySound(pullSounds[index]);
+
             IceLeg currentLeg = iceLegs[currentLegIndex];
             float moveSpeed = 0.15f;
             float totalMoveDisplacement = 0;
@@ -92,6 +132,9 @@ public class IceLegMove : Enemy
     {
         if (iceLegs[currentLegIndex] != null)
         {
+            int index = GetRandomIndex(smallShakeSounds.Length);
+            audioManager.PlaySound(smallShakeSounds[index]);
+
             IceLeg currentLeg = iceLegs[currentLegIndex];
             float dirToPlayerX;
             if (player != null)
@@ -158,7 +201,7 @@ public class IceLegMove : Enemy
             float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
             Quaternion angleToPlayer = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
-            while (currentLeg != null && (currentLeg.transform.rotation.eulerAngles.z > angleToPlayer.eulerAngles.z + 0.1f || currentLeg.transform.rotation.eulerAngles.z < angleToPlayer.eulerAngles.z - 0.1f))
+            while (currentLeg != null && (currentLeg.transform.rotation.eulerAngles.z > angleToPlayer.eulerAngles.z + 2f || currentLeg.transform.rotation.eulerAngles.z < angleToPlayer.eulerAngles.z - 2f))
             {
                 currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angleToPlayer, Time.deltaTime * speed);
                 yield return new WaitForSeconds(0.01f);
@@ -176,6 +219,9 @@ public class IceLegMove : Enemy
         bool canDamagePlayer = true;
         if (iceLegs[currentLegIndex] != null && player != null)
         {
+            int index = GetRandomIndex(moveFastSounds.Length);
+            audioManager.PlaySound(moveFastSounds[index]);
+
             IceLeg currentLeg = iceLegs[currentLegIndex];
             Vector2 dirToPlayer = player.transform.position - currentLeg.transform.position;
             dirToPlayer.Normalize();
@@ -242,6 +288,9 @@ public class IceLegMove : Enemy
 
         if (iceLegs[currentLegIndex] != null)
         {
+            int index = GetRandomIndex(smallShakeSounds.Length);
+            audioManager.PlaySound(smallShakeSounds[index]);
+
             IceLeg currentLeg = iceLegs[currentLegIndex];
             float moveSpeed = 1.5f;
             RaycastHit2D hit = currentLeg.GetHit(groundImpactMask);

@@ -1665,7 +1665,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 61c23200a5b86144488e3bedf6428057, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3720,8 +3720,43 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114648225553489990, guid: 5c2e43948bc20024b84e95554c8ceaf4,
         type: 2}
-      propertyPath: sounds.Array.data[40].loop
-      value: 0
+      propertyPath: sounds.Array.data[51].volume
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648225553489990, guid: 5c2e43948bc20024b84e95554c8ceaf4,
+        type: 2}
+      propertyPath: sounds.Array.data[52].volume
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648225553489990, guid: 5c2e43948bc20024b84e95554c8ceaf4,
+        type: 2}
+      propertyPath: sounds.Array.data[53].volume
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648225553489990, guid: 5c2e43948bc20024b84e95554c8ceaf4,
+        type: 2}
+      propertyPath: sounds.Array.data[54].volume
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648225553489990, guid: 5c2e43948bc20024b84e95554c8ceaf4,
+        type: 2}
+      propertyPath: sounds.Array.data[55].volume
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648225553489990, guid: 5c2e43948bc20024b84e95554c8ceaf4,
+        type: 2}
+      propertyPath: sounds.Array.data[56].volume
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648225553489990, guid: 5c2e43948bc20024b84e95554c8ceaf4,
+        type: 2}
+      propertyPath: sounds.Array.data[57].volume
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648225553489990, guid: 5c2e43948bc20024b84e95554c8ceaf4,
+        type: 2}
+      propertyPath: sounds.Array.data[58].volume
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c2e43948bc20024b84e95554c8ceaf4, type: 2}
@@ -4903,7 +4938,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 61c23200a5b86144488e3bedf6428057, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8612,11 +8647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2192891743ddedf4bbf48dcc26e71969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePlayerEffect: {fileID: 0}
-  damageToPlayerHealth: 0
-  damageToPlayerFireHealth: 0
-  hitPos: {x: 0, y: 0}
-  transformInfo: {fileID: 0}
 --- !u!4 &1397249888
 Transform:
   m_ObjectHideFlags: 0
@@ -11657,7 +11687,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 61c23200a5b86144488e3bedf6428057, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
