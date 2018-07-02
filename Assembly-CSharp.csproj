@@ -132,6 +132,7 @@
     <Compile Include="Assets\Scripts\Enemies\DamagePlayerData.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Path Following Enemies\Ice Guy\IceGuy.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Path Following Enemies\Ice Guy\StupidMimic.cs" />
     <Compile Include="Assets\Scripts\Enemies\Path Following Enemies\PathFollowingEnemies.cs" />
     <Compile Include="Assets\Scripts\Enemies\Path Following Enemies\Water Droplet Enemy\WaterDropletEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Path Following Enemies\Water Droplet Enemy\WaterSplat.cs" />

@@ -45,7 +45,7 @@ public class PathFollowingEnemies : Enemy
         SetWaypoints();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if(isPlayerFire != stats.IsFire())
         {
