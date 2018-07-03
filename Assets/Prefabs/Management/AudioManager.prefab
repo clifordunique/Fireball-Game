@@ -411,56 +411,56 @@ MonoBehaviour:
     loop: 0
   - name: chainPull01
     clip: {fileID: 8300000, guid: 88ecdc68b0b06b74bb9ae0f4cac1de55, type: 3}
-    volume: 1
+    volume: 0.75
     pitch: 0.813
     randomVolume: 0.059
     randomPitch: 0.1
     loop: 0
   - name: chainPull02
     clip: {fileID: 8300000, guid: 6a17a865b37a0e148b0f7fdbdb157e0b, type: 3}
-    volume: 1
+    volume: 0.75
     pitch: 0.888
     randomVolume: 0.043
     randomPitch: 0.093
     loop: 0
   - name: chainPull03
     clip: {fileID: 8300000, guid: 17b870305f43d3e4b8f564b9e0a6d1c5, type: 3}
-    volume: 1
+    volume: 0.75
     pitch: 0.804
     randomVolume: 0.026
     randomPitch: 0.061
     loop: 0
   - name: chainPull04
     clip: {fileID: 8300000, guid: 12804948063415c47bbd5c7adefec466, type: 3}
-    volume: 1
+    volume: 0.75
     pitch: 0.82
     randomVolume: 0.018
     randomPitch: 0.066
     loop: 0
   - name: chainPull05
     clip: {fileID: 8300000, guid: b1340426d1840624a99f4a5e1c6b43dc, type: 3}
-    volume: 1
+    volume: 0.75
     pitch: 0.814
     randomVolume: 0.031
     randomPitch: 0.072
     loop: 0
   - name: chainPull06
     clip: {fileID: 8300000, guid: 2524031f45d163547b86f74bf1f950a5, type: 3}
-    volume: 1
+    volume: 0.75
     pitch: 0.82
     randomVolume: 0.037
     randomPitch: 0.08
     loop: 0
   - name: chainPull07
     clip: {fileID: 8300000, guid: d984f115ba4f9c44d90461e00356848a, type: 3}
-    volume: 1
+    volume: 0.75
     pitch: 0.841
     randomVolume: 0.007
     randomPitch: 0.031
     loop: 0
   - name: chainPull08
     clip: {fileID: 8300000, guid: 3e12fdf405068c44f86113952ccca1dd, type: 3}
-    volume: 1
+    volume: 0.75
     pitch: 0.798
     randomVolume: 0.015
     randomPitch: 0.045

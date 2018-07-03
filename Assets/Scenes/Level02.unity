@@ -3238,16 +3238,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114743769972837944, guid: 02cad2b9220bd5b4ebabccc05668737e,
-        type: 2}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 679646660}
-    - target: {fileID: 114743769972837944, guid: 02cad2b9220bd5b4ebabccc05668737e,
-        type: 2}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 679646662}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02cad2b9220bd5b4ebabccc05668737e, type: 2}
   m_IsPrefabParent: 0
