@@ -56,7 +56,7 @@ public class IceLegMove : Enemy
             pullSounds[i] = "chainPull0" + (i + 1);
         }
     }
-    
+
     /// <summary>
     /// Gets a random index between 0 and max
     /// </summary>
@@ -272,7 +272,10 @@ public class IceLegMove : Enemy
 
                 yield return new WaitForSeconds(.01f);
             }
-            currentLeg.GetComponent<AudioSource>().volume = volume;
+            if (currentLeg != null)
+            {
+                currentLeg.GetComponent<AudioSource>().volume = volume;
+            }
         }
         canDamagePlayer = false;
     }
@@ -335,21 +338,6 @@ public class IceLegMove : Enemy
 
             }
             damagePlayer = false;
-        }
-    }
-
-    IEnumerator RotateDownwards(int currentLegIndex)
-    {
-        if (iceLegs[currentLegIndex] != null && player != null)
-        {
-            Transform currentLeg = iceLegs[currentLegIndex].transform;
-            Quaternion downwardAngle = Quaternion.AngleAxis(0, Vector3.forward);
-
-            while (currentLeg != null && currentLeg.transform.rotation != downwardAngle)
-            {
-                currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, downwardAngle, Time.deltaTime * 5);
-                yield return new WaitForSeconds(0.01f);
-            }
         }
     }
 }

@@ -542,15 +542,21 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     IEnumerator FadeOut(GameObject objectToFade)
     {
-        SpriteRenderer sr = objectToFade.GetComponent<SpriteRenderer>();
-        Color tmp = sr.color;
-        while (sr.color.a >= 0)
+        if (objectToFade != null)
         {
-            tmp.a -= 0.02f;
-            sr.color = tmp;
-            yield return null;
+            SpriteRenderer sr = objectToFade.GetComponent<SpriteRenderer>();
+            Color tmp = sr.color;
+            while (sr.color.a >= 0 && sr != null)
+            {
+                tmp.a -= 0.02f;
+                sr.color = tmp;
+                yield return null;
+            }
+            if (objectToFade != null)
+            {
+                Destroy(objectToFade);
+            }
         }
-        Destroy(objectToFade);
     }
 
     void FallInWaterableObject.SetIsInWater(bool _isInWater)
