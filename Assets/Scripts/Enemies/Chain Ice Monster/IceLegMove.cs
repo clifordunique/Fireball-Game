@@ -67,6 +67,18 @@ public class IceLegMove : Enemy
         return Random.Range(0, max);
     }
 
+    bool CanSeePlayer()
+    {
+        if (player != null)
+        {
+            return Mathf.Abs(head.transform.position.x - player.transform.position.x) < seePlayerDst;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     IEnumerator Walk()
     {
         while (true)
@@ -87,7 +99,7 @@ public class IceLegMove : Enemy
                     yield return MoveUp(i);
                     if (seePlayer)
                     {
-                        yield return PointAtPlayer(i);
+                        //yield return PointAtPlayer(i);
                         yield return MoveToPlayer(i);
                     }
                     else
@@ -121,6 +133,11 @@ public class IceLegMove : Enemy
             while (currentLeg != null && totalMoveDisplacement < moveUpAmount)
             {
                 totalMoveDisplacement += moveSpeed;
+
+                if (CanSeePlayer())
+                {
+                    Point(currentLegIndex);
+                }
 
                 currentLeg.transform.Translate(hit.normal * moveSpeed, Space.World);
                 yield return new WaitForSeconds(0.01f);
@@ -209,6 +226,23 @@ public class IceLegMove : Enemy
         }
     }
 
+    void Point(int currentLegIndex)
+    {
+        if (iceLegs[currentLegIndex] != null && player != null)
+        {
+            Transform currentLeg = iceLegs[currentLegIndex].transform;
+            float speed = 20f;
+            Vector3 vectorToTarget = currentLeg.position - player.transform.position;
+            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+            Quaternion angleToPlayer = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+
+            //while (currentLeg != null && (currentLeg.transform.rotation.eulerAngles.z > angleToPlayer.eulerAngles.z + 2f || currentLeg.transform.rotation.eulerAngles.z < angleToPlayer.eulerAngles.z - 2f))
+            //{
+            currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angleToPlayer, Time.deltaTime * speed);
+            //}
+        }
+    }
+
     /// <summary>
     /// Moves the ice leg directly towards the player
     /// </summary>
@@ -232,6 +266,8 @@ public class IceLegMove : Enemy
             float count = 0;
 
             float volume = currentLeg.GetComponent<AudioSource>().volume;
+
+            StopCoroutine("MoveUp");
 
             while (currentLeg != null)
             {
