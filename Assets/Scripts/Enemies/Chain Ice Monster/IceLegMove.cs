@@ -125,10 +125,21 @@ public class IceLegMove : Enemy
             audioManager.PlaySound(pullSounds[index]);
 
             IceLeg currentLeg = iceLegs[currentLegIndex];
-            float moveSpeed = 0.15f;
+            float moveSpeed = 0.1f;
             float totalMoveDisplacement = 0;
 
             RaycastHit2D hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
+
+            float dirToPlayerX = 1;
+
+            if (player != null)
+            {
+                dirToPlayerX = Mathf.Sign(player.transform.position.x - currentLeg.transform.position.x);
+            }
+            else
+            {
+                dirToPlayerX = -1;
+            }
 
             while (currentLeg != null && totalMoveDisplacement < moveUpAmount)
             {
@@ -136,7 +147,8 @@ public class IceLegMove : Enemy
 
                 if (CanSeePlayer())
                 {
-                    Point(currentLegIndex);
+                    currentLeg.transform.Translate(Vector2.right * dirToPlayerX * .25f,Space.World);
+                    PointAtPlayer(currentLegIndex);
                 }
 
                 currentLeg.transform.Translate(hit.normal * moveSpeed, Space.World);
@@ -208,25 +220,25 @@ public class IceLegMove : Enemy
     /// </summary>
     /// <param name="currentLegIndex">The index of the leg to rotate</param>
     /// <returns></returns>
-    IEnumerator PointAtPlayer(int currentLegIndex)
-    {
-        if (iceLegs[currentLegIndex] != null && player != null)
-        {
-            Transform currentLeg = iceLegs[currentLegIndex].transform;
-            float speed = 20f;
-            Vector3 vectorToTarget = currentLeg.position - player.transform.position;
-            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
-            Quaternion angleToPlayer = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+    //IEnumerator PointAtPlayer(int currentLegIndex)
+    //{
+    //    if (iceLegs[currentLegIndex] != null && player != null)
+    //    {
+    //        Transform currentLeg = iceLegs[currentLegIndex].transform;
+    //        float speed = 20f;
+    //        Vector3 vectorToTarget = currentLeg.position - player.transform.position;
+    //        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+    //        Quaternion angleToPlayer = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
-            while (currentLeg != null && (currentLeg.transform.rotation.eulerAngles.z > angleToPlayer.eulerAngles.z + 2f || currentLeg.transform.rotation.eulerAngles.z < angleToPlayer.eulerAngles.z - 2f))
-            {
-                currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angleToPlayer, Time.deltaTime * speed);
-                yield return new WaitForSeconds(0.01f);
-            }
-        }
-    }
+    //        while (currentLeg != null && (currentLeg.transform.rotation.eulerAngles.z > angleToPlayer.eulerAngles.z + 2f || currentLeg.transform.rotation.eulerAngles.z < angleToPlayer.eulerAngles.z - 2f))
+    //        {
+    //            currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angleToPlayer, Time.deltaTime * speed);
+    //            yield return new WaitForSeconds(0.01f);
+    //        }
+    //    }
+    //}
 
-    void Point(int currentLegIndex)
+    void PointAtPlayer(int currentLegIndex)
     {
         if (iceLegs[currentLegIndex] != null && player != null)
         {

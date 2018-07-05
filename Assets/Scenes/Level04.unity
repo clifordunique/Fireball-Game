@@ -6171,7 +6171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47cb003267370742ac53761d4fed0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mimicObject: {fileID: 1428138018}
 --- !u!1 &911643567
 GameObject:
   m_ObjectHideFlags: 0
@@ -13057,7 +13056,7 @@ GameObject:
   - component: {fileID: 1951957343}
   - component: {fileID: 1951957346}
   - component: {fileID: 1951957347}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Chain Ice Creature
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -13183,7 +13182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3208f3c48d58924fb8536aa8bda276f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
   health: 0
   seePlayerDistanceX: 8
   seePlayerDistanceY: 3
@@ -13195,7 +13194,7 @@ MonoBehaviour:
   - {fileID: 278713613}
   - {fileID: 770525132}
   head: {fileID: 1951957345}
-  moveUpAmount: 4
+  moveUpAmount: 3
   stepDst: 5
   legCallbackDst: 20
   crippleWaitTime: 0.4
@@ -13638,7 +13637,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47cb003267370742ac53761d4fed0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mimicObject: {fileID: 1428138018}
 --- !u!114 &2037358568
 MonoBehaviour:
   m_ObjectHideFlags: 0
