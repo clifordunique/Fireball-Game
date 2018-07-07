@@ -188,7 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioListenerPos: {fileID: 1471825340999662}
   target: {fileID: 0}
-  verticalOffset: 0.5
+  verticalOffset: 0
   lookAheadDstX: 6
   lookAheadDstY: 3
   lookSmoothTimeX: 0.5

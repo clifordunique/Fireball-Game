@@ -99,8 +99,7 @@ public class IceLegMove : Enemy
                     yield return MoveUp(i);
                     if (seePlayer)
                     {
-                        //yield return PointAtPlayer(i);
-                        yield return MoveToPlayer(i);
+                        StartCoroutine(MoveToPlayer(i));
                     }
                     else
                     {
