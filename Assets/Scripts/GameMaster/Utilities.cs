@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Utilities : MonoBehaviour {
+public class Utilities : MonoBehaviour
+{
 
     public static Utilities instance;
 
@@ -51,6 +53,72 @@ public class Utilities : MonoBehaviour {
         Time.timeScale = 1f;
         AudioListener.pause = false;
         gm.CurState = State.RUNNING;
+    }
+
+    /// <summary>
+    /// Fades and object out
+    /// </summary>
+    /// <param name="objectToFade">The object to fade out</param>
+    /// <param name="destroy">Whether or not to destory the object once it has faded out</param>c
+    /// <param name="speed">The fade speed - the amount that the alpha decreases every frame.</param>
+    public void FadeObjectOut(GameObject objectToFade, float speed, bool destroy, bool disable)
+    {
+        StartCoroutine(FadeOut(objectToFade, speed, destroy, disable));
+    }
+
+    IEnumerator FadeOut(GameObject objectToFade, float speed, bool destroy, bool disable)
+    {
+        if (objectToFade != null)
+        {
+            SpriteRenderer sr = objectToFade.GetComponent<SpriteRenderer>();
+            Color tmp = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a);
+
+            while (sr.color.a >= 0 && sr != null)
+            {
+                Debug.Log("fading");
+                tmp.a -= speed;
+                sr.color = tmp;
+                yield return null;
+            }
+            if (objectToFade != null)
+            {
+                if (destroy)
+                {
+                    Destroy(objectToFade);
+                }
+                if (disable)
+                {
+                    objectToFade.SetActive(false);
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Fades an object in
+    /// </summary>
+    /// <param name="objectToFade">The object to fade in</param>
+    /// <param name="speed">The fade speed - the amount that the alpha increases every frame.</param>
+    public void FadeObjectIn(GameObject objectToFade, float speed)
+    {
+        StartCoroutine(FadeIn(objectToFade, speed));
+    }
+
+    IEnumerator FadeIn(GameObject objectToFade, float speed)
+    {
+        if (objectToFade != null)
+        {
+            SpriteRenderer sr = objectToFade.GetComponent<SpriteRenderer>();
+            Color tmp = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a);
+
+            while (sr.color.a <= 1 && sr != null)
+            {
+                Debug.Log("fading in");
+                tmp.a += speed;
+                sr.color = tmp;
+                yield return null;
+            }
+        }
     }
 
     public enum Ambiance { FOREST, DARKFOREST, MOUNTAIN };

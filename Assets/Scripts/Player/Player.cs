@@ -174,7 +174,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         if (damageSpritesOnPlayer.Count > 0)
         {
-            StartCoroutine(FadeOut(damageSpritesOnPlayer.Dequeue()));
+            Utilities.instance.FadeObjectOut(damageSpritesOnPlayer.Dequeue(), 0.02f, true, false);
         }
     }
 
@@ -538,25 +538,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         audioManager.PlaySound("PlayerDie");
         Instantiate(deathPrefab, transform.position, Quaternion.Euler(0, 0, 0));
-    }
-
-    IEnumerator FadeOut(GameObject objectToFade)
-    {
-        if (objectToFade != null)
-        {
-            SpriteRenderer sr = objectToFade.GetComponent<SpriteRenderer>();
-            Color tmp = sr.color;
-            while (sr.color.a >= 0 && sr != null)
-            {
-                tmp.a -= 0.02f;
-                sr.color = tmp;
-                yield return null;
-            }
-            if (objectToFade != null)
-            {
-                Destroy(objectToFade);
-            }
-        }
     }
 
     void FallInWaterableObject.SetIsInWater(bool _isInWater)
