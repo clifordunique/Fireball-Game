@@ -171,6 +171,7 @@
     <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\TreeBranch.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TriggerSensor.cs" />
+    <Compile Include="Assets\Scripts\TriggerSensor\TSDisableObject.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSEDFade.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSEnableDisableObject.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSEnableObject.cs" />

@@ -5,6 +5,7 @@ using UnityEngine;
 public class TriggerSensor : MonoBehaviour {
 
     public Transform actionObject;
+    public bool fade;
 
     private void Start()
     {
