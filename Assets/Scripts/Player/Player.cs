@@ -246,10 +246,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
         // value between 0 and 1 to correctly set variables in the blend tree
         // In other words, the player walks faster or slower depending on speed.
         // However, it doesn't matter if the player is going up or down hill... dang it
+        // ^ I think I fixed that now actually
         float speedValue = velocity.sqrMagnitude / (moveSpeed * moveSpeed + 5);
         anim.SetFloat("Speed", Mathf.Abs(speedValue));
         anim.SetBool("Grounded", controller.collisions.below);
-        fireEyes.SetFireBase(stats.CurFireHealth, stats.MaxFireHealth);
+        fireEyes.SetFireBase(stats.CurFireHealth, stats.MaxFireHealth); // maybe this should happen in stats
 
         if (stats.CurFireHealth <= 0)
         {
