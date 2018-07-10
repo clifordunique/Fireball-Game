@@ -2267,6 +2267,11 @@ Prefab:
       propertyPath: CurBackgroundAmbiance
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114376351025066836, guid: 02cad2b9220bd5b4ebabccc05668737e,
+        type: 2}
+      propertyPath: CurBackgroundAmbiance
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02cad2b9220bd5b4ebabccc05668737e, type: 2}
   m_IsPrefabParent: 0

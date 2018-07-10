@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114344848191458024}
   - component: {fileID: 114921689595484170}
   - component: {fileID: 114095405598262990}
+  - component: {fileID: 114376351025066836}
   m_Layer: 0
   m_Name: _GM
   m_TagString: GM
@@ -74,12 +75,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4351d54eab553408ed01e846a2bba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurBackgroundAmbiance: 0
   endLevelUI: {fileID: 0}
   mountainAmbiance: MountainWind01
   forestAmbiance: Woodland02
   stoneWoodSound: StoneWood03
-  timeBetweenFootsteps: 0.3
 --- !u!114 &114206759410512024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,6 +101,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303a4667eea33f646970a7e580cb0e91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114376351025066836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503490623343074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1975ce5def3904d8ee16dbc73de8e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurBackgroundAmbiance: 1
 --- !u!114 &114743769972837944
 MonoBehaviour:
   m_ObjectHideFlags: 1

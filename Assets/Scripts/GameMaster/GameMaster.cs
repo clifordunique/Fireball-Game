@@ -2,14 +2,17 @@
 using System.Diagnostics;
 using UnityEngine;
 
+[RequireComponent(requiredComponent: typeof(SceneStarter))]
 public class GameMaster : MonoBehaviour
 {
-    public Utilities.Ambiance CurBackgroundAmbiance;
-    public Utilities.State CurState { get; set; }
     public static GameMaster gm;
+
+    public Utilities.State CurState { get; set; }
+    private Utilities.Ambiance CurBackgroundAmbiance;
 
     public GameObject endLevelUI;
 
+    SceneStarter sceneStarter;
     AudioManager audioManager;
     Stopwatch sw;
 
@@ -26,7 +29,6 @@ public class GameMaster : MonoBehaviour
     string audioClip;
     int backgroundSoundIndex;
 
-    public float timeBetweenFootsteps;
     float timer;
 
     void Awake()
@@ -49,8 +51,11 @@ public class GameMaster : MonoBehaviour
         {
             UnityEngine.Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
         }
+        sceneStarter = GetComponent<SceneStarter>();
+
         SaveLoad.Load();
         LoadPlatformSounds();
+
         PlayBackgroundAmbiance();
         sw = new Stopwatch();
     }
@@ -129,6 +134,7 @@ public class GameMaster : MonoBehaviour
      */
     void PlayBackgroundAmbiance()
     {
+        CurBackgroundAmbiance = sceneStarter.CurBackgroundAmbiance;
         SetAmbianceName();
 
         audioManager.PlaySound(curAmbianceName);

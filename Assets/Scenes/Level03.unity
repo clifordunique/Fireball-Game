@@ -2005,6 +2005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionObject: {fileID: 1486041972}
+  fade: 0
 --- !u!50 &234390395
 Rigidbody2D:
   serializedVersion: 4
@@ -2037,7 +2038,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionObject: {fileID: 0}
-  backgroundAmbiance: 2
+  fade: 0
+  backgroundAmbiance: 3
 --- !u!1 &235057913
 GameObject:
   m_ObjectHideFlags: 0
@@ -2780,6 +2782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionObject: {fileID: 662858966}
+  fade: 0
   powerups: 0
   spriteOffset: {x: -0.7, y: 0.4}
 --- !u!61 &309505366
@@ -8637,6 +8640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionObject: {fileID: 1510394863}
+  fade: 0
   min: 0.1
   max: 1
   soundToFade: Woodland02
@@ -27761,11 +27765,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.3
+      value: 145.3
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.9
+      value: 37.9
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.z

@@ -142,8 +142,10 @@
     <Compile Include="Assets\Scripts\FloatOnWater.cs" />
     <Compile Include="Assets\Scripts\FollowCamera.cs" />
     <Compile Include="Assets\Scripts\GameMaster\CameraShake.cs" />
+    <Compile Include="Assets\Scripts\GameMaster\CustomEnums.cs" />
     <Compile Include="Assets\Scripts\GameMaster\GameMaster.cs" />
     <Compile Include="Assets\Scripts\GameMaster\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\GameMaster\SceneStarter.cs" />
     <Compile Include="Assets\Scripts\GameMaster\Utilities.cs" />
     <Compile Include="Assets\Scripts\GroundChildrenFade.cs" />
     <Compile Include="Assets\Scripts\GroundFade.cs" />
@@ -176,6 +178,7 @@
     <Compile Include="Assets\Scripts\TriggerSensor\TSEnableDisableObject.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSEnableObject.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSEnablePowerups.cs" />
+    <Compile Include="Assets\Scripts\TriggerSensor\TSFadeInObject.cs" />
     <Compile Include="Assets\Scripts\TriggerSensor\TSSwitchBackground.cs" />
     <Compile Include="Assets\Scripts\UI\Healthbar.cs" />
     <Compile Include="Assets\Scripts\UI\PauseButton.cs" />
