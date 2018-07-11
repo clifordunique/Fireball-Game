@@ -157,6 +157,7 @@
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSEnableObject.cs" />
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSEnablePowerups.cs" />
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSFadeInObject.cs" />
+    <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSFadeInOut.cs" />
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSSwitchBackground.cs" />
     <Compile Include="Assets\Scripts\ISmashable.cs" />
     <Compile Include="Assets\Scripts\ObjectDestroy.cs" />
