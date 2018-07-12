@@ -6,7 +6,7 @@ public class TSFadeInOut : TriggerSensor {
     {
         if (col.CompareTag("Player"))
         {
-            Utilities.instance.FadeObjectIn(actionObject.gameObject, 0.05f);
+            Utilities.instance.FadeObjectIn(actionObject.gameObject, 0.08f);
         }
     }
 
@@ -14,7 +14,7 @@ public class TSFadeInOut : TriggerSensor {
     {
         if (col.CompareTag("Player"))
         {
-            Utilities.instance.FadeObjectOut(actionObject.gameObject, 0.05f, false, false);
+            Utilities.instance.FadeObjectOut(actionObject.gameObject, 0.08f, false, false);
         }
     }
 }

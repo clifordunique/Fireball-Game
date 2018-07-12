@@ -72,10 +72,11 @@ public class Utilities : MonoBehaviour
         {
             SpriteRenderer sr = objectToFade.GetComponent<SpriteRenderer>();
             Color tmp = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a);
+            float timer = 0;
 
-            while (sr.color.a >= 0 && sr != null)
+            while (sr != null && sr.color.a >= 0 && timer < 50)
             {
-                Debug.Log("fading");
+                timer++;
                 tmp.a -= speed;
                 sr.color = tmp;
                 yield return null;
@@ -110,10 +111,11 @@ public class Utilities : MonoBehaviour
         {
             SpriteRenderer sr = objectToFade.GetComponent<SpriteRenderer>();
             Color tmp = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a);
+            float timer = 0;
 
-            while (sr.color.a <= 1 && sr != null)
+            while (sr != null && sr.color.a <= 1 && timer < 50)
             {
-                Debug.Log("fading in");
+                timer++;
                 tmp.a += speed;
                 sr.color = tmp;
                 yield return null;

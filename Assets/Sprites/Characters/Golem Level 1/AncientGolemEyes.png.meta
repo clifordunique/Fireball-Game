@@ -8,6 +8,10 @@ TextureImporter:
     21300006: AncientGolemEyes_3
     21300008: AncientGolemEyes_4
     21300010: AncientGolemEyes_5
+    21300012: AncientGolemEyes_8
+    21300014: AncientGolemEyes_6
+    21300016: AncientGolemEyes_8
+    21300018: AncientGolemEyes_7
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -91,18 +95,18 @@ TextureImporter:
       name: AncientGolemEyes_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 108
-        width: 85
-        height: 86
+        x: 3
+        y: 192
+        width: 80
+        height: 87
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7e404be3d4529040952a96258ea4c11
+      spriteID: 9f19a3737e65316458d91928e1c43a0f
       vertices: []
       indices: 
       edges: []
@@ -111,18 +115,18 @@ TextureImporter:
       name: AncientGolemEyes_1
       rect:
         serializedVersion: 2
-        x: 95
-        y: 105
-        width: 87
-        height: 84
+        x: 98
+        y: 189
+        width: 80
+        height: 87
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: adac2366ccff0a94fad94391d0830084
+      spriteID: 75127fb41bd5616459624b489feae2c7
       vertices: []
       indices: 
       edges: []
@@ -131,18 +135,18 @@ TextureImporter:
       name: AncientGolemEyes_2
       rect:
         serializedVersion: 2
-        x: 184
-        y: 106
-        width: 87
-        height: 86
+        x: 187
+        y: 190
+        width: 80
+        height: 87
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6deb4093e021ae548b6484d60738cf75
+      spriteID: 1f1c07009235cc84f9d79d51f1ec38be
       vertices: []
       indices: 
       edges: []
@@ -151,18 +155,18 @@ TextureImporter:
       name: AncientGolemEyes_3
       rect:
         serializedVersion: 2
-        x: 1
-        y: 3
-        width: 83
-        height: 90
+        x: 4
+        y: 88
+        width: 80
+        height: 87
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6767d65484964142ac9ded575722e3a
+      spriteID: 6379610edbccbc9449e0949ba39b9de9
       vertices: []
       indices: 
       edges: []
@@ -171,18 +175,18 @@ TextureImporter:
       name: AncientGolemEyes_4
       rect:
         serializedVersion: 2
-        x: 98
-        y: 4
-        width: 83
-        height: 89
+        x: 100
+        y: 88
+        width: 80
+        height: 87
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7c80a65af461e1419ed171a89607432
+      spriteID: 7d0f0e6c77166144ba36c25a0184c519
       vertices: []
       indices: 
       edges: []
@@ -191,18 +195,78 @@ TextureImporter:
       name: AncientGolemEyes_5
       rect:
         serializedVersion: 2
-        x: 188
-        y: 8
-        width: 81
-        height: 86
+        x: 187
+        y: 88
+        width: 80
+        height: 87
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37aabcd6c98a348439eda2fc3baac282
+      spriteID: abe8fa8c6d832ca499046758b567f079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientGolemEyes_8
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 0
+        width: 80
+        height: 87
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02c121119acf8984b9b2236606bbb467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientGolemEyes_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 80
+        height: 87
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 491b1609b0f8e424a839e2cc448f3e05
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientGolemEyes_7
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 80
+        height: 87
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6f4d405cc7a59d44b5ca2bec6f4dcd5
       vertices: []
       indices: 
       edges: []

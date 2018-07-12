@@ -36,6 +36,11 @@ public class PlayerWeapon : MonoBehaviour
             {
                 HitEnemy(hit);
             }
+            else if (hit.collider.gameObject.GetComponent<LightOnFire>())
+            {
+                LightOnFire lightOnFire = hit.collider.gameObject.GetComponent<LightOnFire>();
+                lightOnFire.FireAction();
+            }
             else
             {
                 Effect(hit);
