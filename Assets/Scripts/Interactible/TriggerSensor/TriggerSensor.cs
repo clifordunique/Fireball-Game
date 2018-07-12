@@ -1,6 +1,7 @@
 ﻿/* This script detects the player and then enables some object
  */
 using UnityEngine;
+[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 public class TriggerSensor : MonoBehaviour {
 

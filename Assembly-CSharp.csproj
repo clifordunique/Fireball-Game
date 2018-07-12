@@ -125,7 +125,6 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\BigBranch.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
-    <Compile Include="Assets\Scripts\CampFire.cs" />
     <Compile Include="Assets\Scripts\Enemies\Chain Ice Monster\IceLeg.cs" />
     <Compile Include="Assets\Scripts\Enemies\Chain Ice Monster\IceLegMove.cs" />
     <Compile Include="Assets\Scripts\Enemies\Chain Ice Monster\MaskFadeIn.cs" />
@@ -149,7 +148,8 @@
     <Compile Include="Assets\Scripts\GameMaster\Utilities.cs" />
     <Compile Include="Assets\Scripts\GroundChildrenFade.cs" />
     <Compile Include="Assets\Scripts\GroundFade.cs" />
-    <Compile Include="Assets\Scripts\Interactible\LightOnFire.cs" />
+    <Compile Include="Assets\Scripts\Interactible\Fire\CampFire.cs" />
+    <Compile Include="Assets\Scripts\Interactible\Fire\LightOnFire.cs" />
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TriggerSensor.cs" />
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSDisableObject.cs" />
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSEDFade.cs" />

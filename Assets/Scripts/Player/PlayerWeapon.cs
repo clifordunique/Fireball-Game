@@ -36,7 +36,7 @@ public class PlayerWeapon : MonoBehaviour
             {
                 HitEnemy(hit);
             }
-            else if (hit.collider.gameObject.GetComponent<LightOnFire>())
+            else if (hit.collider.gameObject.GetComponent<LightOnFire>() != null)
             {
                 LightOnFire lightOnFire = hit.collider.gameObject.GetComponent<LightOnFire>();
                 lightOnFire.FireAction();

@@ -63,33 +63,72 @@ public class Utilities : MonoBehaviour
     /// <param name="speed">The fade speed - the amount that the alpha decreases every frame.</param>
     public void FadeObjectOut(GameObject objectToFade, float speed, bool destroy, bool disable)
     {
-        StartCoroutine(FadeOut(objectToFade, speed, destroy, disable));
+        if (objectToFade.GetComponent<TextMesh>())
+        {
+            StartCoroutine(FadeOut(objectToFade.GetComponent<TextMesh>(), speed, destroy, disable));
+        }
+        else if (objectToFade.GetComponent<SpriteRenderer>())
+        {
+            StartCoroutine(FadeOut(objectToFade.GetComponent<SpriteRenderer>(), speed, destroy, disable));
+        }
+        else
+        {
+            Debug.Log("The object fading out doesn't have the correct objects attached.");
+        }
     }
 
-    IEnumerator FadeOut(GameObject objectToFade, float speed, bool destroy, bool disable)
+    IEnumerator FadeOut(TextMesh objectToFade, float speed, bool destroy, bool disable)
     {
         if (objectToFade != null)
         {
-            SpriteRenderer sr = objectToFade.GetComponent<SpriteRenderer>();
-            Color tmp = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a);
+            Color tmp = new Color(objectToFade.color.r, objectToFade.color.g, objectToFade.color.b, objectToFade.color.a);
             float timer = 0;
 
-            while (sr != null && sr.color.a >= 0 && timer < 50)
+            while (objectToFade != null && objectToFade.color.a >= 0 && timer < 50)
             {
                 timer++;
                 tmp.a -= speed;
-                sr.color = tmp;
+                objectToFade.color = tmp;
                 yield return null;
             }
             if (objectToFade != null)
             {
                 if (destroy)
                 {
-                    Destroy(objectToFade);
+                    Destroy(objectToFade.gameObject);
                 }
                 if (disable)
                 {
-                    objectToFade.SetActive(false);
+                    objectToFade.gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
+    IEnumerator FadeOut(SpriteRenderer objectToFade, float speed, bool destroy, bool disable)
+    {
+        if (objectToFade != null)
+        {
+            SpriteRenderer sr = objectToFade.GetComponent<SpriteRenderer>();
+            Color tmp = new Color(objectToFade.color.r, objectToFade.color.g, objectToFade.color.b, objectToFade.color.a);
+            float timer = 0;
+
+            while (objectToFade != null && objectToFade.color.a >= 0 && timer < 50)
+            {
+                timer++;
+                tmp.a -= speed;
+                objectToFade.color = tmp;
+                yield return null;
+            }
+            if (objectToFade != null)
+            {
+                if (destroy)
+                {
+                    Destroy(objectToFade.gameObject);
+                }
+                if (disable)
+                {
+                    objectToFade.gameObject.SetActive(false);
                 }
             }
         }
@@ -102,22 +141,49 @@ public class Utilities : MonoBehaviour
     /// <param name="speed">The fade speed - the amount that the alpha increases every frame.</param>
     public void FadeObjectIn(GameObject objectToFade, float speed)
     {
-        StartCoroutine(FadeIn(objectToFade, speed));
+        if (objectToFade.GetComponent<TextMesh>())
+        {
+            StartCoroutine(FadeIn(objectToFade.GetComponent<TextMesh>(), speed));
+        }
+        else if (objectToFade.GetComponent<SpriteRenderer>())
+        {
+            StartCoroutine(FadeIn(objectToFade.GetComponent<SpriteRenderer>(), speed));
+        }
+        else
+        {
+            Debug.Log("The object fading in doesn't have the correct objects attached.");
+        }
     }
 
-    IEnumerator FadeIn(GameObject objectToFade, float speed)
+    IEnumerator FadeIn(TextMesh objectToFade, float speed)
     {
         if (objectToFade != null)
         {
-            SpriteRenderer sr = objectToFade.GetComponent<SpriteRenderer>();
-            Color tmp = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a);
+            Color tmp = new Color(objectToFade.color.r, objectToFade.color.g, objectToFade.color.b, objectToFade.color.a);
             float timer = 0;
 
-            while (sr != null && sr.color.a <= 1 && timer < 50)
+            while (objectToFade != null && objectToFade.color.a <= 1 && timer < 50)
             {
                 timer++;
                 tmp.a += speed;
-                sr.color = tmp;
+                objectToFade.color = tmp;
+                yield return null;
+            }
+        }
+    }
+
+    IEnumerator FadeIn(SpriteRenderer objectToFade, float speed)
+    {
+        if (objectToFade != null)
+        {
+            Color tmp = new Color(objectToFade.color.r, objectToFade.color.g, objectToFade.color.b, objectToFade.color.a);
+            float timer = 0;
+
+            while (objectToFade != null && objectToFade.color.a <= 1 && timer < 50)
+            {
+                timer++;
+                tmp.a += speed;
+                objectToFade.color = tmp;
                 yield return null;
             }
         }

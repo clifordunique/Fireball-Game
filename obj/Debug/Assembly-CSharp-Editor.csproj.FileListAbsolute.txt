@@ -311,7 +311,6 @@ C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\Boo.Lang.PatternMatchi
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\Boo.Lang.Useful.dll
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\Unity.CecilTools.dll
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\Unity.Cecil.Pdb.dll
-C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\Assembly-CSharp.pdb
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEngine.xml
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEditor.xml
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEngine.AIModule.xml
