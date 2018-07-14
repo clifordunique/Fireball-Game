@@ -166,7 +166,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 velocity.y = 0;
             }
         }
-
+        fireEyes.SetFireBase(stats.CurFireHealth, stats.MaxFireHealth);
         DealWithFire();
     }
 
@@ -250,7 +250,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         float speedValue = velocity.sqrMagnitude / (moveSpeed * moveSpeed + 5);
         anim.SetFloat("Speed", Mathf.Abs(speedValue));
         anim.SetBool("Grounded", controller.collisions.below);
-        fireEyes.SetFireBase(stats.CurFireHealth, stats.MaxFireHealth); // maybe this should happen in stats
+        //fireEyes.SetFireBase(stats.CurFireHealth, stats.MaxFireHealth); // maybe this should happen in stats
 
         if (stats.CurFireHealth <= 0)
         {
@@ -353,10 +353,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
             isDoubleJumping = false;
         }
         //Debug.Log(!timeIsOut + " "  + stats.Zoom + " " +  Input.GetButton("Jump") + " "+ Input.GetButton("Horizontal") + " " + Input.GetButton("Vertical"));
-        if (!timeIsOut && stats.Zoom && (Input.GetButton("Jump") || Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
+        if (!timeIsOut && stats.Zoom && stats.IsFire() && (Input.GetButton("Jump") || Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
         {
             if ((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
             {
+                // needs to be a check to see if the coroutine is running around these next two lines
                 StartCoroutine("SprintTimer");
                 audioManager.PlaySound("Zoom");
                 Vector2 direction = new Vector2(directionalInput.x, directionalInput.y).normalized;

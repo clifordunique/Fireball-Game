@@ -36,9 +36,10 @@ public class FireEyes : MonoBehaviour
     /// <returns>null</returns>
     IEnumerator Flicker(SpriteRenderer fireEyes)
     {
+        //StartCoroutine(FlickerIndividual(fireEyes));
         while (true)
         {
-            float waitBtwFlicker = Random.Range(waitBtwFlickerMaxMin.x, waitBtwFlickerMaxMin.y);
+
             float flickerSpeed = Random.Range(flickerSpeedMaxMin.x, flickerSpeedMaxMin.y);
             float flickerAmount = Random.Range(flickerAmountMaxMin.x, flickerAmountMaxMin.y);
 
@@ -53,8 +54,19 @@ public class FireEyes : MonoBehaviour
                 fireEyes.color = new Color(fireEyes.color.r, fireEyes.color.g, fireEyes.color.b, Mathf.Lerp(fireEyes.color.a, fireBase, flickerSpeed));
                 yield return null;
             }
+
+            yield return FlickerIndividual(fireEyes);
+        }
+    }
+
+    IEnumerator FlickerIndividual(SpriteRenderer fireEyes)
+    {
+        float waitBtwFlicker = Random.Range(waitBtwFlickerMaxMin.x, waitBtwFlickerMaxMin.y);
+        float targetTime = Time.time + waitBtwFlicker;
+        while (Time.time < targetTime)
+        {
             fireEyes.color = new Color(fireEyes.color.r, fireEyes.color.g, fireEyes.color.b, fireBase);
-            yield return new WaitForSeconds(waitBtwFlicker);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 }

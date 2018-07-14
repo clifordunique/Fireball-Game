@@ -1,18 +1,43 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class TSFadeInObject : TriggerSensor {
-
+public class TSFadeInObject : TriggerSensor
+{
     public override void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
-            SpriteRenderer[] spriteRenderers = actionObject.GetComponentsInChildren<SpriteRenderer>();
-            Debug.Log(spriteRenderers.Length);
-            for (int i = 0; i < spriteRenderers.Length; i++)
+            if (actionObject.GetComponentsInChildren<SpriteRenderer>().Length > 0)
             {
-                if (fade)
+                SpriteRenderer[] objects = actionObject.GetComponentsInChildren<SpriteRenderer>();
+                for (int i = 0; i < objects.Length; i++)
                 {
-                    Utilities.instance.FadeObjectIn(spriteRenderers[i].gameObject, 0.05f);
+                    if (fade)
+                    {
+                        Utilities.instance.FadeObjectIn(objects[i].gameObject, 0.05f);
+                    }
+                }
+            }
+            else if (actionObject.GetComponentsInChildren<Text>().Length > 0)
+            {
+                Text[] objects = actionObject.GetComponentsInChildren<Text>();
+                for (int i = 0; i < objects.Length; i++)
+                {
+                    if (fade)
+                    {
+                        Utilities.instance.FadeObjectIn(objects[i].gameObject, 0.05f);
+                    }
+                }
+            }
+            else if (actionObject.GetComponentsInChildren<TextMesh>().Length > 0)
+            {
+                TextMesh[] objects = actionObject.GetComponentsInChildren<TextMesh>();
+                for (int i = 0; i < objects.Length; i++)
+                {
+                    if (fade)
+                    {
+                        Utilities.instance.FadeObjectIn(objects[i].gameObject, 0.05f);
+                    }
                 }
             }
         }

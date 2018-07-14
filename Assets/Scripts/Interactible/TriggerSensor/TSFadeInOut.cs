@@ -6,6 +6,7 @@ public class TSFadeInOut : TriggerSensor {
     {
         if (col.CompareTag("Player"))
         {
+            actionObject.gameObject.SetActive(true);
             Utilities.instance.FadeObjectIn(actionObject.gameObject, 0.08f);
         }
     }

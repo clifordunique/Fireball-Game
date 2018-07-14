@@ -62,18 +62,21 @@ public class PlayerStats : MonoBehaviour
     {
         if (Time.time - time > intervalBetweenFireHealing)
         {
-            if (curFireHealth < maxFireHealth)
+            if (IsFire())
             {
-                time = Time.time;
-                curFireHealth++;
-            }
-            else
-            {
-                time = Time.time;
-                curHealth++;
-                if(onHealEvent != null)
+                if (curFireHealth < maxFireHealth)
                 {
-                    onHealEvent();
+                    time = Time.time;
+                    curFireHealth++;
+                }
+                else
+                {
+                    time = Time.time;
+                    curHealth++;
+                    if (onHealEvent != null)
+                    {
+                        onHealEvent();
+                    }
                 }
             }
         }

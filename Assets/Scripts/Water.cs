@@ -13,21 +13,22 @@ public class Water : MonoBehaviour {
     AudioManager audioManager;
     PlayerStats stats;
 
+    bool wasFire = false;
 
     void Start () {
         audioManager = AudioManager.instance;
         stats = PlayerStats.instance;
 
-        Vector2[] waypoints = null;
-        for (int j = 0; j < pathHolder.Length; j++)
-        {
-            waypoints = new Vector2[pathHolder[j].childCount];
-            for (int i = 0; i < waypoints.Length; i++)
-            {
-                waypoints[i] = pathHolder[j].GetChild(i).position;
-            }
-            StartCoroutine(FollowPath(waypoints, water[j]));
-        }
+        //Vector2[] waypoints = null;
+        //for (int j = 0; j < pathHolder.Length; j++)
+        //{
+        //    waypoints = new Vector2[pathHolder[j].childCount];
+        //    for (int i = 0; i < waypoints.Length; i++)
+        //    {
+        //        waypoints[i] = pathHolder[j].GetChild(i).position;
+        //    }
+        //    StartCoroutine(FollowPath(waypoints, water[j]));
+        //}
 
     }
 
@@ -40,6 +41,12 @@ public class Water : MonoBehaviour {
         {
             Player player = col.gameObject.GetComponent<Player>();
             player.DamageFire(damage);
+            if (!stats.IsFire() && wasFire)
+            {
+                audioManager.StopSound("Water Hiss Long");
+                audioManager.PlaySound("Water Hiss End");
+                wasFire = false;
+            }
         }
     }
 
@@ -47,9 +54,9 @@ public class Water : MonoBehaviour {
     {
         if (col.gameObject.GetComponent<Player>() != null)
         {
-            //Player player = col.gameObject.GetComponent<Player>();
             if (stats.IsFire())
             {
+                wasFire = true;
                 audioManager.PlaySound("Water Hiss Long");
             }
         }
@@ -64,11 +71,11 @@ public class Water : MonoBehaviour {
     {
         if (col.gameObject.GetComponent<Player>() != null)
         {
-            //Player player = col.gameObject.GetComponent<Player>();
-            if (stats.IsFire())
+            if (stats.IsFire() || wasFire)
             {
                 audioManager.StopSound("Water Hiss Long");
                 audioManager.PlaySound("Water Hiss End");
+                wasFire = false;
             }
         }
         if (col.gameObject.GetComponent<FallInWaterableObject>() != null)

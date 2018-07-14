@@ -149,6 +149,7 @@
     <Compile Include="Assets\Scripts\GroundChildrenFade.cs" />
     <Compile Include="Assets\Scripts\GroundFade.cs" />
     <Compile Include="Assets\Scripts\Interactible\Fire\CampFire.cs" />
+    <Compile Include="Assets\Scripts\Interactible\Fire\GolemEyes.cs" />
     <Compile Include="Assets\Scripts\Interactible\Fire\LightOnFire.cs" />
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TriggerSensor.cs" />
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSDisableObject.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSEnablePowerups.cs" />
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSFadeInObject.cs" />
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSFadeInOut.cs" />
+    <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSFadeOutObject.cs" />
     <Compile Include="Assets\Scripts\Interactible\TriggerSensor\TSSwitchBackground.cs" />
     <Compile Include="Assets\Scripts\ISmashable.cs" />
     <Compile Include="Assets\Scripts\ObjectDestroy.cs" />
