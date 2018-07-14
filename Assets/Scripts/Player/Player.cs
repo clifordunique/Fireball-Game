@@ -73,6 +73,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     // Power ups
     bool timeIsOut = false;
+    bool isDashing;
 
     //CameraShake variables
     public float camShakeAmt = 0.1f;
@@ -358,8 +359,12 @@ public class Player : MonoBehaviour, FallInWaterableObject
             if ((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
             {
                 // needs to be a check to see if the coroutine is running around these next two lines
-                StartCoroutine("SprintTimer");
-                audioManager.PlaySound("Zoom");
+                if (!isDashing)
+                {
+                    audioManager.PlaySound("Zoom");
+                    StartCoroutine("SprintTimer");
+                }
+                //audioManager.PlaySound("Zoom");
                 Vector2 direction = new Vector2(directionalInput.x, directionalInput.y).normalized;
                 velocity.x = direction.x * moveSpeed * 3;
                 if (velocity.x == 0)
@@ -377,15 +382,17 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     IEnumerator SprintTimer()
     {
-        audioManager.PlaySound("Zoom");
+        isDashing = true;
         int max = 5;
         int initial = 0;
+        Debug.Log("in sprint timeer");
         while (initial < max)
         {
             blur.Blur();
             initial++;
             yield return new WaitForSeconds(0.01f);
         }
+        isDashing = false;
         timeIsOut = true;
 
         StopAllCoroutines();
