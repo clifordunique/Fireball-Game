@@ -194,6 +194,7 @@ MonoBehaviour:
     m_Bits: 491776
   rayLength: 0.5
   raycastPoint: {fileID: 4553340334546108}
+  destroyTime: 10
 --- !u!114 &114713775315656536
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -11,7 +11,7 @@ public static class SaveLoad {
         FileStream file = File.Create(Application.persistentDataPath + "/savedGames.gd");
 
         PlayerData data = new PlayerData();
-        data.zoom = PlayerStats.instance.Zoom;
+        data.zoom = PlayerStats.instance.Dash;
 
         bf.Serialize(file, data);
         file.Close();
@@ -27,7 +27,7 @@ public static class SaveLoad {
 
             file.Close();
 
-            PlayerStats.instance.Zoom = data.zoom;
+            PlayerStats.instance.Dash = data.zoom;
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Collections;
 public class Attack : MonoBehaviour
 {
     public PlayerWeapon fireball;
+    public PlayerWeapon fireBurst;
     public Transform firePoint;
     public float speed = 10f;
     public Animator headAnim;
@@ -51,11 +52,24 @@ public class Attack : MonoBehaviour
                     sw1.Reset();
                     if (!EventSystem.current.IsPointerOverGameObject())
                     {
-                        Shoot();
+                        if (stats.Shoot)
+                        {
+                            Shoot();
+                        }
+                        else
+                        {
+                            Burst();
+                        }
                     }
                 }
             }
         }
+    }
+
+    void Burst()
+    {
+        Instantiate(fireBurst, firePoint.position - 0.4f * Vector3.up, transform.rotation, this.transform);
+        Effect();
     }
 
     void Shoot()

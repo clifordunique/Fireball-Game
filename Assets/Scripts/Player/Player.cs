@@ -354,7 +354,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
             isDoubleJumping = false;
         }
         //Debug.Log(!timeIsOut + " "  + stats.Zoom + " " +  Input.GetButton("Jump") + " "+ Input.GetButton("Horizontal") + " " + Input.GetButton("Vertical"));
-        if (!timeIsOut && stats.Zoom && stats.IsFire() && (Input.GetButton("Jump") || Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
+        if (!timeIsOut && stats.Dash && stats.IsFire() && (Input.GetButton("Jump") || Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
         {
             if ((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
             {

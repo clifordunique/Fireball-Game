@@ -13,22 +13,30 @@ public class PlayerWeapon : MonoBehaviour
     public LayerMask layerMask;
     public float rayLength = 0.5f;
     public Transform raycastPoint;
+    public float destroyTime = 1f;
 
     Vector2 rotation;
     float rotation2;
     Quaternion startRot;
+    float destroyAt = 0;
 
     Enemy enemy;
 
     void Start()
     {
         rotation = FindObjectOfType<Attack>().GetDirection();
+        destroyAt = Time.time + destroyTime;
     }
 
     void Update()
     {
         RaycastHit2D hit = Physics2D.Raycast(raycastPoint.position, rotation, rayLength, layerMask);
         Debug.DrawRay(raycastPoint.position, rotation * rayLength, Color.red);
+
+        if(Time.time > destroyAt)
+        {
+            Destroy(this.gameObject);
+        }
 
         if (hit)
         {
@@ -52,7 +60,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         enemy = hit.collider.gameObject.GetComponent<Enemy>();
         enemy.DamageEnemy(damage, transform.position);
-        if(hit.collider.GetComponent<WaterDropletEnemy>() == null)
+        if (hit.collider.GetComponent<WaterDropletEnemy>() == null)
         {
             Effect(hit);
         }
@@ -62,7 +70,10 @@ public class PlayerWeapon : MonoBehaviour
     void Effect(RaycastHit2D hit)
     {
         Vector2 offset = hit.normal * 0.2f;
-        Instantiate(explodeParticles, hit.point + offset, Quaternion.FromToRotation(Vector3.left, hit.normal));
+        if (explodeParticles != null)
+        {
+            Instantiate(explodeParticles, hit.point + offset, Quaternion.FromToRotation(Vector3.left, hit.normal));
+        }
         Destroy(this.gameObject);
     }
 }

@@ -254,5 +254,5 @@ public class Utilities : MonoBehaviour
 
     public enum State { PAUSED, RUNNING }
 
-    public enum PowerUps { ZOOM }
+    public enum PowerUps { ZOOM, SHOOT }
 }

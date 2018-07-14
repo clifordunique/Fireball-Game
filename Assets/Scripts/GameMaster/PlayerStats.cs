@@ -4,14 +4,8 @@ public class PlayerStats : MonoBehaviour
 {
 
     public static PlayerStats instance;
-
-    // Powerups
-    private bool zoom;
-    public bool Zoom
-    {
-        get { return zoom; }
-        set { zoom = value; }
-    }
+    public bool Dash { get; set; }
+    public bool Shoot { get; set; }
 
     private int maxHealth = 30;
     private int curHealth;
@@ -87,7 +81,10 @@ public class PlayerStats : MonoBehaviour
         switch (powerup)
         {
             case Utilities.PowerUps.ZOOM:
-                zoom = true;
+                Dash = true;
+                break;
+            case Utilities.PowerUps.SHOOT:
+                Shoot = true;
                 break;
             default:
                 Debug.Log("Powerup is not in PlayerStats.");
