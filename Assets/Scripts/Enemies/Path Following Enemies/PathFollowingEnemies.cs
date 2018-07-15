@@ -184,7 +184,7 @@ public class PathFollowingEnemies : Enemy
         //Wait for the enemy to finish jumping, then chase the player
         if (shouldJump)
         {
-            yield return StartCoroutine(Jump());
+            yield return Jump();
         }
         StartCoroutine(GetDirectionToPlayer());
         while (player != null)
@@ -231,7 +231,12 @@ public class PathFollowingEnemies : Enemy
         while (Time.time < jumpSeconds)
         {
             transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x, transform.position.y + jumpHeight), .09f);
-            yield return null;
+            yield return new WaitForSeconds(0.01f);
+        }
+        jumpSeconds = Time.time + 0.2f;
+        while(Time.time < jumpSeconds)
+        {
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
