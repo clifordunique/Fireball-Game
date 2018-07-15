@@ -58,18 +58,12 @@ public class Attack : MonoBehaviour
                         }
                         else
                         {
-                            Burst();
+                            Effect();
                         }
                     }
                 }
             }
         }
-    }
-
-    void Burst()
-    {
-        Instantiate(fireBurst, firePoint.position - 0.4f * Vector3.up, transform.rotation, this.transform);
-        Effect();
     }
 
     void Shoot()
@@ -78,7 +72,6 @@ public class Attack : MonoBehaviour
         Vector2 heading = targetPoint - (Vector2)firePoint.transform.position;
         direction = heading.normalized;
         Effect();
-
         Instantiate(fireball, firePoint.position, Quaternion.FromToRotation(Vector3.up, direction));
     }
 
@@ -90,6 +83,7 @@ public class Attack : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(OpenMouth());
         audioManager.PlaySound("Fireball");
+        Instantiate(fireBurst, firePoint.position - 0.4f * Vector3.up, transform.rotation, this.transform);
     }
 
     /// <summary>
