@@ -465,3 +465,17 @@ MonoBehaviour:
     randomVolume: 0.015
     randomPitch: 0.045
     loop: 0
+  - name: song
+    clip: {fileID: 8300000, guid: 666810b586e11ac4faec3eb0f0e4cb93, type: 3}
+    volume: 0.75
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 0
+  - name: rockSmash
+    clip: {fileID: 8300000, guid: eb42841ce1d1dc243a358744d010a68b, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomVolume: 0.2
+    randomPitch: 0.2
+    loop: 0

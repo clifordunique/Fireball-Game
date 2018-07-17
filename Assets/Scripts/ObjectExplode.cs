@@ -41,6 +41,6 @@ public class ObjectExplode : MonoBehaviour
         {
             yield return null;
         }
-        Utilities.instance.FadeObjectOut(children[index].gameObject, speed, false, false);
+        Utilities.instance.FadeObjectOut(children[index].gameObject, speed, true, false);
     }
 }

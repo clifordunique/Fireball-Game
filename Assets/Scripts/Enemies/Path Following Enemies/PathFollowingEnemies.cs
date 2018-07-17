@@ -78,7 +78,7 @@ public class PathFollowingEnemies : Enemy
         if (health <= 5)
         {
             //FindObjectOfType<Player>().onFireChangeEvent -= OnFireChange;
-            Destroy(this.gameObject);
+            Destroy(this.transform.parent.gameObject);
         }
     }
 
