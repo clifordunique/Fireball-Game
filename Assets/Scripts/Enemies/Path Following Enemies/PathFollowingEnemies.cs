@@ -126,7 +126,7 @@ public class PathFollowingEnemies : Enemy
                 damagePlayerData.damageToPlayerFireHealth = fireDamage;
 
                 player.DamagePlayer(damagePlayerData);
-                DamageEnemy(1000, transform.position);
+                DamageEnemy(1000, player.transform.position);
             }
         }
         else if (col.gameObject.CompareTag("Enemy"))
@@ -176,7 +176,6 @@ public class PathFollowingEnemies : Enemy
      */
     public IEnumerator ChasePlayer(bool shouldJump)
     {
-        anim.SetFloat("Speed", chaseSpeed);
         float dirToPlayerX = Mathf.Sign(player.position.x - transform.position.x);
         transform.localScale = new Vector2(-dirToPlayerX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
         float velocityX = 0;
@@ -187,6 +186,7 @@ public class PathFollowingEnemies : Enemy
             yield return Jump();
         }
         StartCoroutine(GetDirectionToPlayer());
+        anim.SetFloat("Speed", chaseSpeed);
         while (player != null)
         {
             if (!stats.IsFire())
@@ -227,13 +227,13 @@ public class PathFollowingEnemies : Enemy
     {
         float jumpHeight = 2;
         float jumpSeconds = Time.time + 0.3f;
-
+        anim.SetFloat("Speed", chaseSpeed);
         while (Time.time < jumpSeconds)
         {
             transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x, transform.position.y + jumpHeight), .09f);
             yield return new WaitForSeconds(0.01f);
         }
-        jumpSeconds = Time.time + 0.2f;
+        jumpSeconds = Time.time + 0.4f;
         while(Time.time < jumpSeconds)
         {
             yield return new WaitForSeconds(0.01f);
