@@ -10,10 +10,14 @@ public class Utilities : MonoBehaviour
 
     GameMaster gm;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Use this for initialization
     void Start()
     {
-        instance = this;
         gm = GameMaster.gm;
     }
 
