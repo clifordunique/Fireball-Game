@@ -103,7 +103,7 @@ public class PathFollowingEnemies : Enemy
             {
                 RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + offset), Vector2.right * dirX, seePlayerDistanceX, playerMask);
                 Debug.DrawRay(transform.position + new Vector3(0, offset, 0), new Vector3(dirX * seePlayerDistanceX, 0, 0));
-                if (hit && stats.IsFire())
+                if (hit && hit.collider.CompareTag("Player") && stats.IsFire())
                 {
                     return true;
                 }

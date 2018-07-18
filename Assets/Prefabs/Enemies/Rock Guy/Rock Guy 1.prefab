@@ -352,7 +352,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1841215025914838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 85.42, y: -3.12, z: 10.046157}
+  m_LocalPosition: {x: 112.95, y: -4.04, z: 10.046157}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4901617143509164}
@@ -396,7 +396,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1553482355671880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.63, y: -5.53, z: 0}
+  m_LocalPosition: {x: -11.47, y: 0.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4901617143509164}
@@ -478,7 +478,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1926866093784996}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.37, y: -4.89, z: 0}
+  m_LocalPosition: {x: 0.01, y: 0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4901617143509164}
@@ -766,7 +766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.3614912
+  m_Length: 0.36149096
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4238554783601114}
   m_AttachedIK: {fileID: 0}
@@ -889,12 +889,12 @@ MonoBehaviour:
   damageToPlayerHealth: 5
   cameraFollow: 1
   speed: 2
-  chaseSpeed: 30
-  accelerationSpeed: 40
+  chaseSpeed: 20
+  accelerationSpeed: 20
   waitTime: 0.2
   playerMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 33792
   pathHolder: {fileID: 4901617143509164}
   player: {fileID: 0}
   rockExplosion: {fileID: 114932239897089730, guid: 7505e2737a87b044193c3918279d0186,
@@ -911,7 +911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.40518394
+  m_Length: 0.40518418
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4606999700798384}
   m_AttachedIK: {fileID: 0}
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.35236937
+  m_Length: 0.3523696
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4511449412930502}
   m_AttachedIK: {fileID: 0}

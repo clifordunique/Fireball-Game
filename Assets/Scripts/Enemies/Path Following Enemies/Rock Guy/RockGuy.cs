@@ -18,4 +18,12 @@ public class RockGuy : PathFollowingEnemies {
 
         audioManager.PlaySound("rockSmash");
     }
+    protected override void OnCollisionEnter2D(Collision2D col)
+    {
+        base.OnCollisionEnter2D(col);
+        if(col.gameObject.CompareTag("Rock"))
+        {
+            DamageEnemy(1000, col.transform.position);
+        }
+    }
 }
