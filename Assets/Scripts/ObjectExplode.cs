@@ -23,7 +23,6 @@ public class ObjectExplode : MonoBehaviour
 
         children = GetComponentsInChildren<Rigidbody2D>();
 
-        Debug.Log(children.Length);
         for (int i = 0; i < children.Length; i++)
         {
             float xForce = Random.Range(xMaxMin.x, xMaxMin.y);

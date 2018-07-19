@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(AudioSource))]
 public class PathFollowingEnemies : Enemy
 {
     public float speed = 8;
@@ -15,12 +16,16 @@ public class PathFollowingEnemies : Enemy
     public LayerMask playerMask;
     public Transform pathHolder;
 
+    public Utilities.PlatformType platformType;
+    private string platformSoundName;
+
     protected float delayedDirToPlayer;
     private bool isPlayerFire;
 
     protected AudioManager audioManager;
     protected PlayerStats stats;
     protected Animator anim;
+    protected AudioSource audioSource;
 
     public Transform player;
 
@@ -34,9 +39,19 @@ public class PathFollowingEnemies : Enemy
         stats = PlayerStats.instance;
         anim = GetComponent<Animator>();
         audioManager = AudioManager.instance;
+        audioSource = GetComponent<AudioSource>();
 
         playerCollider = player.GetComponent<Collider2D>();
         enemyCollider = GetComponent<Collider2D>();
+
+        switch (platformType)
+        {
+            case Utilities.PlatformType.GRASS:
+                platformSoundName = "Grass02";
+                break;
+            default:
+                break;
+        }
 
         //player.GetComponent<Player>().onFireChangeEvent += OnFireChange;
         //playerCollider = FindObjectOfType<Player>().GetComponent<Collider2D>();
@@ -143,9 +158,16 @@ public class PathFollowingEnemies : Enemy
         int targetWaypointIndex = 1;
         Vector2 targetWaypoint = waypoints[targetWaypointIndex];
         float dirX;
+        float waitTime = 0.4f;
+        float targetTime = Time.time + waitTime;
 
         while (!CanSeePlayer())
         {
+            if(Time.time > targetTime)
+            {
+                audioSource.Play();
+                targetTime = Time.time + waitTime;
+            }
             dirX = Mathf.Sign(targetWaypoint.x - transform.position.x);
             transform.localScale = new Vector2(-dirX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
             anim.SetFloat("Speed", speed);
@@ -179,6 +201,8 @@ public class PathFollowingEnemies : Enemy
         float dirToPlayerX = Mathf.Sign(player.position.x - transform.position.x);
         transform.localScale = new Vector2(-dirToPlayerX * Mathf.Abs(transform.localScale.x), transform.localScale.y);
         float velocityX = 0;
+        float waitTime = 0.25f;
+        float targetTime = Time.time + waitTime;
 
         //Wait for the enemy to finish jumping, then chase the player
         if (shouldJump)
@@ -189,6 +213,11 @@ public class PathFollowingEnemies : Enemy
         anim.SetFloat("Speed", chaseSpeed);
         while (player != null)
         {
+            if (Time.time > targetTime)
+            {
+                audioSource.Play();
+                targetTime = Time.time + waitTime;
+            }
             if (!stats.IsFire())
             {
                 ToggleIgnorePlayer();

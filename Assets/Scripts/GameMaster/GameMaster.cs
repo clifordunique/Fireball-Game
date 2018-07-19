@@ -62,7 +62,7 @@ public class GameMaster : MonoBehaviour
 
     private void Update()
     {
-        if(sw.ElapsedMilliseconds > 600)
+        if (sw.ElapsedMilliseconds > 600)
         {
             sw.Start();
             sw.Reset();
@@ -81,13 +81,10 @@ public class GameMaster : MonoBehaviour
      */
     void LoadPlatformSounds()
     {
-        grassPlatformAudioClips = new string[14];
-        for (int i = 0; i < grassPlatformAudioClips.Length; i++)
+        grassPlatformAudioClips = new string[5];
+        for (int i = 1; i <= grassPlatformAudioClips.Length; i++)
         {
-            if (i < 9)
-                grassPlatformAudioClips[i] = "grass" + "0" + (i + 1);
-            if (i >= 9)
-                grassPlatformAudioClips[i] = "grass" + (i + 1);
+            grassPlatformAudioClips[i - 1] = "Grass0" + i;
         }
     }
 
