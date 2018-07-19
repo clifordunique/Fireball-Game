@@ -254,7 +254,7 @@ public class Utilities : MonoBehaviour
 
     public enum Ambiance { CAVE, FOREST, DARKFOREST, MOUNTAIN };
 
-    public enum PlatformType { GRASS, SNOW, ROCK, WOOD }
+    public enum PlatformType { GRASS, SNOW, ROCK, WOOD, MUD }
 
     public enum State { PAUSED, RUNNING }
 

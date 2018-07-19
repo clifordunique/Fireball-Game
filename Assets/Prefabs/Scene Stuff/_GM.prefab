@@ -78,7 +78,9 @@ MonoBehaviour:
   endLevelUI: {fileID: 0}
   mountainAmbiance: MountainWind01
   forestAmbiance: Woodland02
-  stoneWoodSound: StoneWood03
+  woodPlatformAudioClip: StoneWood01
+  mudPlatformAudioClip: Mud
+  snowPlatformAudioClip: Snow Step
 --- !u!114 &114206759410512024
 MonoBehaviour:
   m_ObjectHideFlags: 1

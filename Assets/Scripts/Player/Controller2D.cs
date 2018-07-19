@@ -347,6 +347,9 @@ public class Controller2D : RaycastController
                             }
                         }
                         break;
+                    case "Mud":
+                        platformType = Utilities.PlatformType.MUD;
+                        break;
                     default:
                         break;
                 }

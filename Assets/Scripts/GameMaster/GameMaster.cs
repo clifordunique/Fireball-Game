@@ -22,7 +22,9 @@ public class GameMaster : MonoBehaviour
     public string forestAmbiance;
 
     // Footstep sounds
-    public string stoneWoodSound;
+    public string woodPlatformAudioClip;
+    public string mudPlatformAudioClip;
+    public string snowPlatformAudioClip;
 
     string[] woodCrackClips;
     string[] grassPlatformAudioClips;
@@ -109,10 +111,13 @@ public class GameMaster : MonoBehaviour
                     audioClip = "";
                     break;
                 case Utilities.PlatformType.SNOW:
-                    audioClip = "";
+                    audioClip = snowPlatformAudioClip;
                     break;
                 case Utilities.PlatformType.WOOD:
-                    audioClip = stoneWoodSound;
+                    audioClip = woodPlatformAudioClip;
+                    break;
+                case Utilities.PlatformType.MUD:
+                    audioClip = mudPlatformAudioClip;
                     break;
                 default:
                     audioClip = "";

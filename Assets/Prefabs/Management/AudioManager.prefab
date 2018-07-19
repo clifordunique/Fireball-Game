@@ -481,35 +481,49 @@ MonoBehaviour:
     loop: 0
   - name: Grass01
     clip: {fileID: 8300000, guid: c480b12fe0216134ea2ded34437756c8, type: 3}
-    volume: 0.5
+    volume: 0.75
     pitch: 1
     randomVolume: 0.1
     randomPitch: 0.4
     loop: 0
   - name: Grass02
     clip: {fileID: 8300000, guid: 5991a21011ab23948a1bef33f64bb6e2, type: 3}
-    volume: 0.5
+    volume: 0.75
     pitch: 1
     randomVolume: 0.1
     randomPitch: 0.4
     loop: 0
   - name: Grass03
     clip: {fileID: 8300000, guid: a502e6d952d48da4aae80fd058118d6c, type: 3}
-    volume: 0.5
+    volume: 0.75
     pitch: 1
     randomVolume: 0.1
     randomPitch: 0.4
     loop: 0
   - name: Grass04
     clip: {fileID: 8300000, guid: 715d249a4fe53894980426db95287d47, type: 3}
-    volume: 0.5
+    volume: 0.75
     pitch: 1
     randomVolume: 0.1
     randomPitch: 0.4
     loop: 0
   - name: Grass05
     clip: {fileID: 8300000, guid: 0c25659405a79a14b843b44f15f09732, type: 3}
-    volume: 0.5
+    volume: 0.75
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.4
+    loop: 0
+  - name: Mud
+    clip: {fileID: 8300000, guid: 3df2ca7d3ac09554982bde58802f7b39, type: 3}
+    volume: 0.4
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.4
+    loop: 0
+  - name: Snow Step
+    clip: {fileID: 8300000, guid: de2e3dc10e67a0e479f3d68e8d0343cb, type: 3}
+    volume: 0.25
     pitch: 1
     randomVolume: 0.1
     randomPitch: 0.4

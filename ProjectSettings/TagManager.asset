@@ -17,6 +17,7 @@ TagManager:
   - Snow
   - Water Splat
   - Wood
+  - Mud
   layers:
   - Default
   - TransparentFX

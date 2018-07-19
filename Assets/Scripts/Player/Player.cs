@@ -385,7 +385,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
         isDashing = true;
         int max = 5;
         int initial = 0;
-        Debug.Log("in sprint timeer");
         while (initial < max)
         {
             blur.Blur();
@@ -483,7 +482,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
 
         // Sound plays when the player starts, but not necessarily when he is slowing down
-        if (Mathf.Abs(velocity.x) > 0.5f && Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) && controller.collisions.below)
+        if (Mathf.Abs(velocity.x) > 0.5f && /*Mathf.Abs(velocityXOld) <= Mathf.Abs(velocity.x) &&*/ controller.collisions.below)
         {
             platformType = controller.GetPlatformType();
             gm.PlayPlatformAudio(platformType, velocity.magnitude, moveSpeed);
