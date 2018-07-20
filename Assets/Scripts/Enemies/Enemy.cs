@@ -11,6 +11,9 @@ public class Enemy: MonoBehaviour {
     public bool cameraFollow = false;
     protected DamagePlayerData damagePlayerData;
 
+    public delegate void OnEnemyDestroy();
+    public static event OnEnemyDestroy onEnemyDestroy;
+
     public virtual void Start()
     {
         health = maxHealth;
@@ -24,6 +27,10 @@ public class Enemy: MonoBehaviour {
         health -= _damage;
         if (health <= 0)
         {
+            if(onEnemyDestroy != null)
+            {
+                onEnemyDestroy();
+            }
             Destroy(this.gameObject);
         }
     }

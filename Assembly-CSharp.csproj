@@ -150,6 +150,7 @@
     <Compile Include="Assets\Scripts\GameMaster\Utilities.cs" />
     <Compile Include="Assets\Scripts\GroundChildrenFade.cs" />
     <Compile Include="Assets\Scripts\GroundFade.cs" />
+    <Compile Include="Assets\Scripts\Interactible\EventDetectors\FadeObjectInOnEvent.cs" />
     <Compile Include="Assets\Scripts\Interactible\Fire\CampFire.cs" />
     <Compile Include="Assets\Scripts\Interactible\Fire\GolemEyes.cs" />
     <Compile Include="Assets\Scripts\Interactible\Fire\LightOnFire.cs" />

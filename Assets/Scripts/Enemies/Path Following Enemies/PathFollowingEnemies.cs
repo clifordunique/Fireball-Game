@@ -62,7 +62,7 @@ public class PathFollowingEnemies : Enemy
 
     protected virtual void Update()
     {
-        if(isPlayerFire != stats.IsFire())
+        if (isPlayerFire != stats.IsFire())
         {
             ToggleIgnorePlayer();
         }
@@ -163,7 +163,7 @@ public class PathFollowingEnemies : Enemy
 
         while (!CanSeePlayer())
         {
-            if(Time.time > targetTime)
+            if (Time.time > targetTime)
             {
                 audioSource.Play();
                 targetTime = Time.time + waitTime;
@@ -263,7 +263,7 @@ public class PathFollowingEnemies : Enemy
             yield return new WaitForSeconds(0.01f);
         }
         jumpSeconds = Time.time + 0.4f;
-        while(Time.time < jumpSeconds)
+        while (Time.time < jumpSeconds)
         {
             yield return new WaitForSeconds(0.01f);
         }

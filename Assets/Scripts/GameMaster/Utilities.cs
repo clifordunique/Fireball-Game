@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Utilities : MonoBehaviour
 {
-
     public static Utilities instance;
 
     GameMaster gm;

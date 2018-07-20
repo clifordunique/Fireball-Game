@@ -366,14 +366,14 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 }
                 //audioManager.PlaySound("Zoom");
                 Vector2 direction = new Vector2(directionalInput.x, directionalInput.y).normalized;
-                velocity.x = direction.x * moveSpeed * 3;
+                velocity.x = direction.x * moveSpeed * 8;
                 if (velocity.x == 0)
                 {
-                    velocity.y = direction.y * moveSpeed * 2f;
+                    velocity.y = direction.y * moveSpeed * 4f;
                 }
                 else
                 {
-                    velocity.y = direction.y * moveSpeed * 2.5f;
+                    velocity.y = direction.y * moveSpeed * 5f;
                 }
                 isDoubleJumping = true;
             }
@@ -383,7 +383,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     IEnumerator SprintTimer()
     {
         isDashing = true;
-        int max = 5;
+        int max = 1;
         int initial = 0;
         while (initial < max)
         {
@@ -467,7 +467,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
         float targetVelocityX = directionalInput.x * moveSpeed;
 
-        // This doesn't take account for actual speed
         if (controller.collisions.climingSlope)
         {
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX * climbMultiplier, ref velocityXSmoothing, accelerationTimeGrounded * climbMultiplier);
@@ -478,7 +477,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
         else
         {
-            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below ? accelerationTimeGrounded : accelerationTimeAirborne));
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below || isDashing ? accelerationTimeGrounded : accelerationTimeAirborne));
         }
 
         // Sound plays when the player starts, but not necessarily when he is slowing down
