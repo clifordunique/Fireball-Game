@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class FadeObjectInOnEvent : MonoBehaviour
 {
-    public Enemy enemy;
     public float waitTime = 2f;
     public GameObject[] textObjects;
 

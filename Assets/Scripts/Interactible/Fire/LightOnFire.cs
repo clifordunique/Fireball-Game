@@ -6,8 +6,15 @@ public class LightOnFire : MonoBehaviour
     public GameObject glow;
     public float speed = 0.08f;
 
+    public delegate void OnFire();
+    public static event OnFire onFire;
+
     public virtual void FireAction()
     {
+        if(onFire != null)
+        {
+            onFire();
+        }
         SpriteRenderer[] actionObjects = actionObject.GetComponentsInChildren<SpriteRenderer>();
         for (int i = 0; i < actionObjects.Length; i++)
         {
