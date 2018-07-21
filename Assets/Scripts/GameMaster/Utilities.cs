@@ -155,7 +155,7 @@ public class Utilities : MonoBehaviour
             Color tmp = new Color(objectToFade.color.r, objectToFade.color.g, objectToFade.color.b, objectToFade.color.a);
             float timer = 0;
 
-            while (objectToFade != null && objectToFade.color.a >= 0 && timer < 50)
+            while (objectToFade != null && objectToFade.color.a >= 0 && timer < 100)
             {
                 timer++;
                 tmp.a -= speed;
@@ -183,7 +183,7 @@ public class Utilities : MonoBehaviour
             Color tmp = new Color(objectToFade.color.r, objectToFade.color.g, objectToFade.color.b, objectToFade.color.a);
             float timer = 0;
 
-            while (objectToFade != null && objectToFade.color.a >= 0 && timer < 50)
+            while (objectToFade != null && objectToFade.color.a >= 0 && timer < 100)
             {
                 timer++;
                 tmp.a -= speed;
@@ -231,7 +231,7 @@ public class Utilities : MonoBehaviour
             }
             else
             {
-                Debug.Log("The object fading in doesn't have the correct objects attached.");
+                Debug.Log("The object " + objectToFade.name + " doesn't have the correct components attached.");
             }
         }
     }

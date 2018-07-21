@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class TSFadeInOut : TriggerSensor {
+public class TSFadeInOut : TriggerSensor
+{
 
     public override void OnTriggerEnter2D(Collider2D col)
     {
@@ -8,6 +9,12 @@ public class TSFadeInOut : TriggerSensor {
         {
             actionObject.gameObject.SetActive(true);
             Utilities.instance.FadeObjectIn(actionObject.gameObject, 0.08f);
+
+            for (int i = 0; i < actionObject.childCount; i++)
+            {
+                Transform child = actionObject.GetChild(i);
+                Utilities.instance.FadeObjectIn(child.gameObject, 0.08f);
+            }
         }
     }
 
@@ -16,6 +23,12 @@ public class TSFadeInOut : TriggerSensor {
         if (col.CompareTag("Player"))
         {
             Utilities.instance.FadeObjectOut(actionObject.gameObject, 0.08f, false, false);
+
+            for (int i = 0; i < actionObject.childCount; i++)
+            {
+                Transform child = actionObject.GetChild(i);
+                Utilities.instance.FadeObjectOut(child.gameObject, 0.08f, false, false);
+            }
         }
     }
 }

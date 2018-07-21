@@ -12,30 +12,11 @@ public class TSFadeOutObject : TriggerSensor
     {
         if (col.CompareTag("Player"))
         {
-            if (actionObject.GetComponentsInChildren<SpriteRenderer>().Length > 0)
+            for(int i = 0; i < actionObject.childCount; i++)
             {
-                SpriteRenderer[] objects = actionObject.GetComponentsInChildren<SpriteRenderer>();
-                for (int i = 0; i < objects.Length; i++)
-                {
-                    Utilities.instance.FadeObjectOut(objects[i].gameObject, 0.05f, destroy, disable);
-                }
+                Utilities.instance.FadeObjectOut(actionObject.GetChild(i).gameObject, 0.05f, destroy, disable);
             }
-            else if (actionObject.GetComponentsInChildren<Text>().Length > 0)
-            {
-                Text[] objects = actionObject.GetComponentsInChildren<Text>();
-                for (int i = 0; i < objects.Length; i++)
-                {
-                    Utilities.instance.FadeObjectOut(objects[i].gameObject, 0.05f, destroy, disable);
-                }
-            }
-            else if (actionObject.GetComponentsInChildren<TextMesh>().Length > 0)
-            {
-                TextMesh[] objects = actionObject.GetComponentsInChildren<TextMesh>();
-                for (int i = 0; i < objects.Length; i++)
-                {
-                    Utilities.instance.FadeObjectOut(objects[i].gameObject, 0.05f, destroy, disable);
-                }
-            }
+            Utilities.instance.FadeObjectOut(actionObject.gameObject, 0.05f, destroy, disable);
         }
     }
 }

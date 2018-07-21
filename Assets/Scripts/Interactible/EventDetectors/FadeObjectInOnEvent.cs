@@ -24,9 +24,16 @@ public class FadeObjectInOnEvent : MonoBehaviour
         for (int i = 0; i < textObjects.Length; i++)
         {
             textObjects[i].gameObject.SetActive(true);
+            Color color1 = textObjects[i].gameObject.GetComponent<Image>().color;
+            textObjects[i].gameObject.GetComponent<Image>().color = new Color(color1.r, color1.g, color1.b, 0);
             Utilities.instance.FadeObjectIn(textObjects[i], 0.08f);
+
+            Color color2 = textObjects[i].gameObject.GetComponentInChildren<Text>().color;
+            textObjects[i].gameObject.GetComponent<Image>().color = new Color(color2.r, color2.g, color2.b, 0);
             Utilities.instance.FadeObjectIn(textObjects[i].GetComponentInChildren<Text>().gameObject, 0.08f);
+
             yield return new WaitForSeconds(waitTime);
+
             Utilities.instance.FadeObjectOut(textObjects[i], 0.08f, false, true);
             Utilities.instance.FadeObjectOut(textObjects[i].GetComponentInChildren<Text>().gameObject, 0.08f, false, true);
         }
