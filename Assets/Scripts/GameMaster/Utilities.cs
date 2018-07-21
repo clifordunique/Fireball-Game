@@ -81,6 +81,10 @@ public class Utilities : MonoBehaviour
             {
                 StartCoroutine(FadeOut(objectToFade.GetComponent<Text>(), speed, destroy, disable));
             }
+            else if (objectToFade.GetComponent<Image>())
+            {
+                StartCoroutine(FadeOut(objectToFade.GetComponent<Image>(), speed, destroy, disable));
+            }
             else
             {
                 Debug.Log("The object fading out doesn't have the correct objects attached.");
@@ -172,6 +176,34 @@ public class Utilities : MonoBehaviour
         }
     }
 
+    IEnumerator FadeOut(Image objectToFade, float speed, bool destroy, bool disable)
+    {
+        if (objectToFade != null)
+        {
+            Color tmp = new Color(objectToFade.color.r, objectToFade.color.g, objectToFade.color.b, objectToFade.color.a);
+            float timer = 0;
+
+            while (objectToFade != null && objectToFade.color.a >= 0 && timer < 50)
+            {
+                timer++;
+                tmp.a -= speed;
+                objectToFade.color = tmp;
+                yield return null;
+            }
+            if (objectToFade != null)
+            {
+                if (destroy)
+                {
+                    Destroy(objectToFade);
+                }
+                if (disable)
+                {
+                    objectToFade.enabled = false;
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// Fades an object in
     /// </summary>
@@ -192,6 +224,10 @@ public class Utilities : MonoBehaviour
             else if (objectToFade.GetComponent<Text>())
             {
                 StartCoroutine(FadeIn(objectToFade.GetComponent<Text>(), speed));
+            }
+            else if (objectToFade.GetComponent<Image>())
+            {
+                StartCoroutine(FadeIn(objectToFade.GetComponent<Image>(), speed));
             }
             else
             {
@@ -235,6 +271,23 @@ public class Utilities : MonoBehaviour
     }
 
     IEnumerator FadeIn(Text objectToFade, float speed)
+    {
+        if (objectToFade != null)
+        {
+            Color tmp = new Color(objectToFade.color.r, objectToFade.color.g, objectToFade.color.b, objectToFade.color.a);
+            float timer = 0;
+
+            while (objectToFade != null && objectToFade.color.a <= 1 && timer < 50)
+            {
+                timer++;
+                tmp.a += speed;
+                objectToFade.color = tmp;
+                yield return null;
+            }
+        }
+    }
+
+    IEnumerator FadeIn(Image objectToFade, float speed)
     {
         if (objectToFade != null)
         {
