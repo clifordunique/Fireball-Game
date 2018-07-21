@@ -17,7 +17,11 @@ public class TSPlaySound : TriggerSensor
         if (col.CompareTag("Player"))
         {
             audioManager.PlaySound(song);
-            this.enabled = false;
+            enabled = false;
+            if (destroySelf)
+            {
+                Destroy(this);
+            }
         }
     }
 }

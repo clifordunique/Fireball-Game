@@ -528,3 +528,10 @@ MonoBehaviour:
     randomVolume: 0.1
     randomPitch: 0.4
     loop: 0
+  - name: Cave
+    clip: {fileID: 8300000, guid: fd0ab2095cf47454da2d92c345b69056, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.4
+    loop: 0

@@ -369,11 +369,11 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 velocity.x = direction.x * moveSpeed * 8;
                 if (velocity.x == 0)
                 {
-                    velocity.y = direction.y * moveSpeed * 4f;
+                    velocity.y = direction.y * moveSpeed * 2f;
                 }
                 else
                 {
-                    velocity.y = direction.y * moveSpeed * 5f;
+                    velocity.y = direction.y * moveSpeed * 3f;
                 }
                 isDoubleJumping = true;
             }

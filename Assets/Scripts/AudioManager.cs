@@ -183,19 +183,35 @@ public class AudioManager : MonoBehaviour
     IEnumerator FadeVolume(Sound tempSound1, Sound tempSound2)
     {
         // getting original volume levels
-        float tempVolume1 = tempSound1.volume;
-        float tempVolume2 = tempSound2.volume;
-        
+        // Values tend to get set to something like 1.2E-508239238470293841230489, so we had to check for small values instead of zero
+        float tempVolume1 = tempSound1.volume < 0.01f ? 1 : tempSound1.volume;
+        float tempVolume2 = tempSound2.volume < 0.01f ? 1 : tempSound2.volume;
+
+        float iOld = -1;
+
         // playing tempsound1 at 0 volume
         tempSound1.Play(0);
-        for (float i = 0; i < tempVolume1; i += 0.001f)
+        for (float i = 0; i < tempVolume1; i += 0.005f)
         {
+            if (iOld == i)
+            {
+                tempSound1.SetVolume(1);
+                tempSound1.volume = 1;
+
+                tempSound2.SetVolume(0);
+                tempSound2.volume = 0;
+
+                break;
+            }
             // Yes, apparantly it is necessary to change both the source volume and the actual volume...
             tempSound1.SetVolume(i);
             tempSound1.volume = i;
             // calculation to decrease the volume of tempSound2 proportionally to tempSound1 since they might be at different volumes
             tempSound2.SetVolume(tempVolume2 - i * tempVolume2 / tempVolume1);
             tempSound2.volume = tempVolume2 - i * tempVolume2 / tempVolume1;
+
+            Debug.Log(tempSound1.name + " " + tempSound1.volume);
+            iOld = i;
             yield return null;
         }
         tempSound2.Stop();

@@ -7,6 +7,9 @@ public class TriggerSensor : MonoBehaviour {
 
     public Transform actionObject;
     public bool fade;
+    public bool disable;
+    public bool destroy;
+    public bool destroySelf;
 
     private void Start()
     {

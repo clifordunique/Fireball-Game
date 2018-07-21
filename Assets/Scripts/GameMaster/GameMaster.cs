@@ -8,7 +8,7 @@ public class GameMaster : MonoBehaviour
     public static GameMaster gm;
 
     public Utilities.State CurState { get; set; }
-    private Utilities.Ambiance CurBackgroundAmbiance;
+    public Utilities.Ambiance CurBackgroundAmbiance;
 
     public GameObject endLevelUI;
 
@@ -20,6 +20,7 @@ public class GameMaster : MonoBehaviour
     string curAmbianceName; // keeps track of the current ambiance name for convenience
     public string mountainAmbiance;
     public string forestAmbiance;
+    public string caveAmbiance;
 
     // Footstep sounds
     public string woodPlatformAudioClip;
@@ -136,7 +137,6 @@ public class GameMaster : MonoBehaviour
      */
     void PlayBackgroundAmbiance()
     {
-        CurBackgroundAmbiance = sceneStarter.CurBackgroundAmbiance;
         SetAmbianceName();
 
         audioManager.PlaySound(curAmbianceName);
@@ -174,11 +174,14 @@ public class GameMaster : MonoBehaviour
     /// <param name="backgroundAmbiance">The background ambiance to be set in GameMaster</param>
     public void SetAmbianceEnum(Utilities.Ambiance backgroundAmbiance)
     {
-        string oldAmbianceName = curAmbianceName;
-        CurBackgroundAmbiance = backgroundAmbiance;
-        SetAmbianceName();
+        if (CurBackgroundAmbiance != backgroundAmbiance)
+        {
+            string oldAmbianceName = curAmbianceName;
+            CurBackgroundAmbiance = backgroundAmbiance;
+            SetAmbianceName();
 
-        FadeBetweenBackgroundAmbiance(oldAmbianceName);
+            FadeBetweenBackgroundAmbiance(oldAmbianceName);
+        }
     }
 
     /// <summary>
@@ -205,6 +208,9 @@ public class GameMaster : MonoBehaviour
                 break;
             case Utilities.Ambiance.MOUNTAIN:
                 curAmbianceName = mountainAmbiance;
+                break;
+            case Utilities.Ambiance.CAVE:
+                curAmbianceName = caveAmbiance;
                 break;
             default:
                 UnityEngine.Debug.Log("A non-existent ambiance enum was selected in GM.");

@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class TSFadeOutObject : TriggerSensor
 {
-    public bool disable;
-    public bool destroy;
-
     public override void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
@@ -17,6 +14,10 @@ public class TSFadeOutObject : TriggerSensor
                 Utilities.instance.FadeObjectOut(actionObject.GetChild(i).gameObject, 0.05f, destroy, disable);
             }
             Utilities.instance.FadeObjectOut(actionObject.gameObject, 0.05f, destroy, disable);
+            if (destroySelf)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }

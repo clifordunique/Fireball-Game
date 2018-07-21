@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class TSSwitchBackground : TriggerSensor {
+public class TSSwitchBackground : TriggerSensor
+{
 
     public Utilities.Ambiance backgroundAmbiance;
 
@@ -16,7 +17,10 @@ public class TSSwitchBackground : TriggerSensor {
     {
         if (col.CompareTag("Player"))
         {
-            Destroy(this);
+            if (destroySelf)
+            {
+                Destroy(this);
+            }
         }
     }
 }
