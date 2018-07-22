@@ -391,3 +391,4 @@ C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEngine.SpatialTra
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEditor.VR.xml
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\obj\Debug\Assembly-CSharp-Editor.csproj.CopyComplete
+C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\Assembly-CSharp.pdb

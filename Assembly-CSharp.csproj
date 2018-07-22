@@ -123,6 +123,7 @@
     <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
     <Compile Include="Assets\Scripts\Ancient Golem Stuff\PlayerTransporter.cs" />
+    <Compile Include="Assets\Scripts\Ancient Golem Stuff\TansitionHandler.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Branches\BigBranch.cs" />
     <Compile Include="Assets\Scripts\Branches\TreeBranch.cs" />

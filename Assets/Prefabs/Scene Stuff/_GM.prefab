@@ -75,9 +75,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4351d54eab553408ed01e846a2bba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurBackgroundAmbiance: 0
   endLevelUI: {fileID: 0}
   mountainAmbiance: MountainWind01
   forestAmbiance: Woodland02
+  caveAmbiance: Cave
   woodPlatformAudioClip: StoneWood01
   mudPlatformAudioClip: Mud
   snowPlatformAudioClip: Snow Step
@@ -114,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1975ce5def3904d8ee16dbc73de8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurBackgroundAmbiance: 1
+  CurBackgroundAmbiance: 2
 --- !u!114 &114743769972837944
 MonoBehaviour:
   m_ObjectHideFlags: 1

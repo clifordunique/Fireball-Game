@@ -8,10 +8,12 @@ public class PlayerTransporter : MonoBehaviour {
     public Transform transformToPos;
 
     Vector2 savedPlayerPos;
+    Animator anim;
 
 	// Use this for initialization
 	void Start () {
         LightOnFire.onFire += TransportPlayer;
+        anim = GetComponent<Animator>();
 	}
 
     private void Update()
@@ -32,10 +34,20 @@ public class PlayerTransporter : MonoBehaviour {
 
     IEnumerator Wait()
     {
-        float waitTime = 1f;
+        float waitTime = 2f;
         float targetTime = Time.time + waitTime;
 
         while (Time.time < targetTime)
+        {
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        AudioManager.instance.PlaySound("Shockwave");
+        anim.enabled = true;
+
+        targetTime = Time.time + 1f;
+
+        while(Time.time < targetTime)
         {
             yield return new WaitForSeconds(0.05f);
         }

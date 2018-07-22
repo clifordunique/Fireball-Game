@@ -5,13 +5,14 @@ public class LightOnFire : MonoBehaviour
     public GameObject actionObject;
     public GameObject glow;
     public float speed = 0.08f;
+    public bool emitEvent;
 
     public delegate void OnFire();
     public static event OnFire onFire;
 
     public virtual void FireAction()
     {
-        if(onFire != null)
+        if(emitEvent && onFire != null)
         {
             onFire();
         }
