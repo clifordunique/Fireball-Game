@@ -42,6 +42,7 @@ public class PlayerTransporter : MonoBehaviour {
             yield return new WaitForSeconds(0.05f);
         }
 
+        GameMaster.gm.GetComponent<CameraShake>().Shake(0.3f, 2f);
         AudioManager.instance.PlaySound("Shockwave");
         anim.enabled = true;
 
