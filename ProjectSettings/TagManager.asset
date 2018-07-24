@@ -18,6 +18,7 @@ TagManager:
   - Water Splat
   - Wood
   - Mud
+  - Mysterious
   layers:
   - Default
   - TransparentFX

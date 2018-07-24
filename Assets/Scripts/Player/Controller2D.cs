@@ -326,6 +326,7 @@ public class Controller2D : RaycastController
             */
             if (hit)
             {
+                player.isInMysterious = false;
                 switch (hit.collider.tag)
                 {
                     case "Grass":
@@ -349,6 +350,10 @@ public class Controller2D : RaycastController
                         break;
                     case "Mud":
                         platformType = Utilities.PlatformType.MUD;
+                        break;
+                    case "Mysterious":
+                        platformType = Utilities.PlatformType.MYSTERIOUS;
+                        player.isInMysterious = true;
                         break;
                     default:
                         break;

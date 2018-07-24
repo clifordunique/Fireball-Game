@@ -16,7 +16,7 @@ public class TSPlaySound : TriggerSensor
     {
         if (col.CompareTag("Player"))
         {
-            audioManager.PlaySound(song);
+            GameMaster.gm.PlayBackgroundSong();
             enabled = false;
             if (destroySelf)
             {

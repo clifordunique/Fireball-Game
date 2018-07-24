@@ -192,6 +192,7 @@
     <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\UI\Healthbar.cs" />
     <Compile Include="Assets\Scripts\UI\PauseButton.cs" />
+    <Compile Include="Assets\Scripts\UI\TextMeshToFront.cs" />
     <Compile Include="Assets\Scripts\Underbrush.cs" />
     <Compile Include="Assets\Scripts\Water.cs" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />

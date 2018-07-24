@@ -9,6 +9,7 @@ public class GameMaster : MonoBehaviour
 
     public Utilities.State CurState { get; set; }
     public Utilities.Ambiance CurBackgroundAmbiance;
+    public Utilities.Song CurSong;
 
     public GameObject endLevelUI;
 
@@ -21,11 +22,17 @@ public class GameMaster : MonoBehaviour
     public string mountainAmbiance;
     public string forestAmbiance;
     public string caveAmbiance;
+    public string mysteriousAmbiance;
+
+    // Background songs
+    string curSongName;
+    public string level01Song;
 
     // Footstep sounds
     public string woodPlatformAudioClip;
     public string mudPlatformAudioClip;
     public string snowPlatformAudioClip;
+    public string mysteriousPlatformAudioClip;
 
     string[] woodCrackClips;
     string[] grassPlatformAudioClips;
@@ -120,6 +127,9 @@ public class GameMaster : MonoBehaviour
                 case Utilities.PlatformType.MUD:
                     audioClip = mudPlatformAudioClip;
                     break;
+                case Utilities.PlatformType.MYSTERIOUS:
+                    audioClip = mysteriousPlatformAudioClip;
+                    break;
                 default:
                     audioClip = "";
                     break;
@@ -180,7 +190,53 @@ public class GameMaster : MonoBehaviour
             CurBackgroundAmbiance = backgroundAmbiance;
             SetAmbianceName();
 
-            FadeBetweenBackgroundAmbiance(oldAmbianceName);
+            FadeBetweenBackgrounds(oldAmbianceName, curAmbianceName);
+        }
+    }
+
+    public void PlayBackgroundSong()
+    {
+        if (CurSong != Utilities.Song.NONE)
+        {
+            SetSongName();
+
+            audioManager.PlaySound(curSongName);
+        }
+    }
+
+    public void SetBackgroundSong(Utilities.Song song)
+    {
+        if (CurSong != song)
+        {
+            string oldSongName = curSongName;
+            CurSong = song;
+            SetSongName();
+
+            if (curSongName == "")
+            {
+                audioManager.FadeSound(oldSongName, 0, 0.07f);
+            }
+            else if(oldSongName == "")
+            {
+                audioManager.PlaySound(curSongName);
+            }
+            else
+            {
+                FadeBetweenBackgrounds(oldSongName, curSongName);
+            }
+        }
+    }
+
+    void SetSongName()
+    {
+        switch (CurSong)
+        {
+            case Utilities.Song.LEVEL01:
+                curSongName = level01Song;
+                break;
+            default:
+                curSongName = "";
+                break;
         }
     }
 
@@ -188,9 +244,9 @@ public class GameMaster : MonoBehaviour
     /// Fades between oldAmbianceName out and curAmbianceName in
     /// </summary>
     /// <param name="oldAmbianceName">The ambiance to be faded out</param>
-    void FadeBetweenBackgroundAmbiance(string oldAmbianceName)
+    void FadeBetweenBackgrounds(string oldSoundName, string newSoundName)
     {
-        audioManager.FadeBetweenTwoSounds(curAmbianceName, oldAmbianceName);
+        audioManager.FadeBetweenTwoSounds(newSoundName, oldSoundName);
     }
 
     /// <summary>
@@ -211,6 +267,9 @@ public class GameMaster : MonoBehaviour
                 break;
             case Utilities.Ambiance.CAVE:
                 curAmbianceName = caveAmbiance;
+                break;
+            case Utilities.Ambiance.MYSTERIOUS:
+                curAmbianceName = mysteriousAmbiance;
                 break;
             default:
                 UnityEngine.Debug.Log("A non-existent ambiance enum was selected in GM.");

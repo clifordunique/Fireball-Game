@@ -465,7 +465,7 @@ MonoBehaviour:
     randomVolume: 0.015
     randomPitch: 0.045
     loop: 0
-  - name: song
+  - name: songLevel01
     clip: {fileID: 8300000, guid: 666810b586e11ac4faec3eb0f0e4cb93, type: 3}
     volume: 0.75
     pitch: 1
@@ -516,7 +516,7 @@ MonoBehaviour:
     loop: 0
   - name: Mud
     clip: {fileID: 8300000, guid: 3df2ca7d3ac09554982bde58802f7b39, type: 3}
-    volume: 0.4
+    volume: 0.3
     pitch: 1
     randomVolume: 0.1
     randomPitch: 0.4
@@ -530,8 +530,29 @@ MonoBehaviour:
     loop: 0
   - name: Cave
     clip: {fileID: 8300000, guid: fd0ab2095cf47454da2d92c345b69056, type: 3}
-    volume: 0.5
+    volume: 1
     pitch: 1
     randomVolume: 0.1
     randomPitch: 0.4
+    loop: 1
+  - name: Shockwave
+    clip: {fileID: 8300000, guid: 3c7fc17520434d4429c3def3545164ff, type: 3}
+    volume: 1
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 0
+  - name: Mysterious
+    clip: {fileID: 8300000, guid: 2fb68e17bd59f15459166d544b092352, type: 3}
+    volume: 1
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 1
+  - name: Mysterious Step
+    clip: {fileID: 8300000, guid: ee56f18524f11094bb1a7246d6397569, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
     loop: 0

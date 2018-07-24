@@ -76,13 +76,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurBackgroundAmbiance: 0
+  CurSong: 0
   endLevelUI: {fileID: 0}
   mountainAmbiance: MountainWind01
   forestAmbiance: Woodland02
   caveAmbiance: Cave
+  mysteriousAmbiance: Mysterious
+  level01Song: songLevel01
   woodPlatformAudioClip: StoneWood01
   mudPlatformAudioClip: Mud
   snowPlatformAudioClip: Snow Step
+  mysteriousPlatformAudioClip: Mysterious Step
 --- !u!114 &114206759410512024
 MonoBehaviour:
   m_ObjectHideFlags: 1

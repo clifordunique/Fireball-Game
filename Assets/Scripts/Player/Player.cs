@@ -48,6 +48,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public Vector3 velocity;
     float velocityXSmoothing;
     public bool isInWater = false;
+    public bool isInMysterious = false;
     public bool isDoubleJumping;
     Utilities.PlatformType platformType;
     bool grounded;
@@ -465,7 +466,16 @@ public class Player : MonoBehaviour, FallInWaterableObject
         float climbMultiplier = 1 - diffValue;
         float descendMultiplier = 1 + diffValue;
 
-        float targetVelocityX = directionalInput.x * moveSpeed;
+        float targetVelocityX = 0;
+
+        if (isInMysterious)
+        {
+            targetVelocityX = directionalInput.x * 3f;
+        }
+        else
+        {
+            targetVelocityX = directionalInput.x * moveSpeed;
+        }
 
         if (controller.collisions.climingSlope)
         {

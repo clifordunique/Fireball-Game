@@ -8,13 +8,13 @@ public class TSFadeInOut : TriggerSensor
         if (col.CompareTag("Player"))
         {
             actionObject.gameObject.SetActive(true);
-            Utilities.instance.FadeObjectIn(actionObject.gameObject, 0.08f);
 
             for (int i = 0; i < actionObject.childCount; i++)
             {
                 Transform child = actionObject.GetChild(i);
                 Utilities.instance.FadeObjectIn(child.gameObject, 0.08f);
             }
+            Utilities.instance.FadeObjectIn(actionObject.gameObject, 0.08f);
         }
     }
 
@@ -22,13 +22,13 @@ public class TSFadeInOut : TriggerSensor
     {
         if (col.CompareTag("Player"))
         {
-            Utilities.instance.FadeObjectOut(actionObject.gameObject, 0.08f, false, false);
 
             for (int i = 0; i < actionObject.childCount; i++)
             {
                 Transform child = actionObject.GetChild(i);
                 Utilities.instance.FadeObjectOut(child.gameObject, 0.08f, false, false);
             }
+            Utilities.instance.FadeObjectOut(actionObject.gameObject, 0.08f, false, false);
         }
     }
 }

@@ -101,6 +101,7 @@ public class Utilities : MonoBehaviour
 
             while (objectToFade != null && objectToFade.color.a >= 0 && timer < 50)
             {
+                Debug.Log("fading out");
                 timer++;
                 tmp.a -= speed;
                 objectToFade.color = tmp;
@@ -245,6 +246,7 @@ public class Utilities : MonoBehaviour
 
             while (objectToFade != null && objectToFade.color.a <= 1 && timer < 50)
             {
+                Debug.Log("fading in");
                 timer++;
                 tmp.a += speed;
                 objectToFade.color = tmp;
@@ -304,9 +306,11 @@ public class Utilities : MonoBehaviour
         }
     }
 
-    public enum Ambiance { CAVE, FOREST, DARKFOREST, MOUNTAIN };
+    public enum Ambiance { CAVE, FOREST, DARKFOREST, MOUNTAIN, MYSTERIOUS };
 
-    public enum PlatformType { GRASS, SNOW, ROCK, WOOD, MUD }
+    public enum Song { LEVEL01, NONE };
+
+    public enum PlatformType { GRASS, SNOW, ROCK, WOOD, MUD, MYSTERIOUS }
 
     public enum State { PAUSED, RUNNING }
 

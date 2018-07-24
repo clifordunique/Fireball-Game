@@ -203,6 +203,7 @@ public class AudioManager : MonoBehaviour
                 break;
             }
             // Yes, apparantly it is necessary to change both the source volume and the actual volume...
+
             tempSound1.SetVolume(i);
             tempSound1.volume = i;
             // calculation to decrease the volume of tempSound2 proportionally to tempSound1 since they might be at different volumes
