@@ -2,6 +2,7 @@
 
 public class TSFadeInOut : TriggerSensor
 {
+    public float speed = 0.08f;
 
     public override void OnTriggerEnter2D(Collider2D col)
     {
@@ -12,9 +13,9 @@ public class TSFadeInOut : TriggerSensor
             for (int i = 0; i < actionObject.childCount; i++)
             {
                 Transform child = actionObject.GetChild(i);
-                Utilities.instance.FadeObjectIn(child.gameObject, 0.08f);
+                Utilities.instance.FadeObjectIn(child.gameObject, speed);
             }
-            Utilities.instance.FadeObjectIn(actionObject.gameObject, 0.08f);
+            Utilities.instance.FadeObjectIn(actionObject.gameObject, speed);
         }
     }
 
@@ -26,9 +27,9 @@ public class TSFadeInOut : TriggerSensor
             for (int i = 0; i < actionObject.childCount; i++)
             {
                 Transform child = actionObject.GetChild(i);
-                Utilities.instance.FadeObjectOut(child.gameObject, 0.08f, false, false);
+                Utilities.instance.FadeObjectOut(child.gameObject, speed, false, false);
             }
-            Utilities.instance.FadeObjectOut(actionObject.gameObject, 0.08f, false, false);
+            Utilities.instance.FadeObjectOut(actionObject.gameObject, speed, false, false);
         }
     }
 }
