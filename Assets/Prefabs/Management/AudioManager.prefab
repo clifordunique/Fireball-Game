@@ -471,7 +471,7 @@ MonoBehaviour:
     pitch: 1
     randomVolume: 0
     randomPitch: 0
-    loop: 0
+    loop: 1
   - name: rockSmash
     clip: {fileID: 8300000, guid: eb42841ce1d1dc243a358744d010a68b, type: 3}
     volume: 0.5
@@ -551,8 +551,8 @@ MonoBehaviour:
     loop: 1
   - name: Mysterious Step
     clip: {fileID: 8300000, guid: ee56f18524f11094bb1a7246d6397569, type: 3}
-    volume: 0.5
+    volume: 0.15
     pitch: 1
-    randomVolume: 0.1
-    randomPitch: 0.1
+    randomVolume: 0.2
+    randomPitch: 0.2
     loop: 0

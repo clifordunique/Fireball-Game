@@ -20,5 +20,6 @@ public class TansitionHandler : MonoBehaviour {
         gameMaster.SetAmbianceEnum(Utilities.Ambiance.MYSTERIOUS);
         gameMaster.SetBackgroundSong(Utilities.Song.NONE);
         animator.enabled = true;
+        LightOnFire.onFire -= EnableTansition;
     }
 }

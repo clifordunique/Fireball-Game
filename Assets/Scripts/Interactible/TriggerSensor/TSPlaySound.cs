@@ -5,7 +5,7 @@ using UnityEngine;
 public class TSPlaySound : TriggerSensor
 {
     AudioManager audioManager;
-    public string song = "song";
+    public Utilities.Song Song;
 
     private void Start()
     {
@@ -16,7 +16,7 @@ public class TSPlaySound : TriggerSensor
     {
         if (col.CompareTag("Player"))
         {
-            GameMaster.gm.PlayBackgroundSong();
+            GameMaster.gm.SetBackgroundSong(Song);
             enabled = false;
             if (destroySelf)
             {

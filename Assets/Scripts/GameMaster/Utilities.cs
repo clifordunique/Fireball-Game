@@ -101,7 +101,6 @@ public class Utilities : MonoBehaviour
 
             while (objectToFade != null && objectToFade.color.a >= 0 && timer < 50)
             {
-                Debug.Log("fading out");
                 timer++;
                 tmp.a -= speed;
                 objectToFade.color = tmp;
@@ -246,7 +245,6 @@ public class Utilities : MonoBehaviour
 
             while (objectToFade != null && objectToFade.color.a <= 1 && timer < 50)
             {
-                Debug.Log("fading in");
                 timer++;
                 tmp.a += speed;
                 objectToFade.color = tmp;

@@ -66,6 +66,7 @@ public class GameMaster : MonoBehaviour
         SaveLoad.Load();
         LoadPlatformSounds();
 
+        PlayBackgroundSong();
         PlayBackgroundAmbiance();
         sw = new Stopwatch();
     }
@@ -196,10 +197,10 @@ public class GameMaster : MonoBehaviour
 
     public void PlayBackgroundSong()
     {
-        if (CurSong != Utilities.Song.NONE)
-        {
-            SetSongName();
+        SetSongName();
 
+        if (curSongName != "")
+        {
             audioManager.PlaySound(curSongName);
         }
     }
@@ -216,7 +217,7 @@ public class GameMaster : MonoBehaviour
             {
                 audioManager.FadeSound(oldSongName, 0, 0.07f);
             }
-            else if(oldSongName == "")
+            else if (oldSongName == "")
             {
                 audioManager.PlaySound(curSongName);
             }

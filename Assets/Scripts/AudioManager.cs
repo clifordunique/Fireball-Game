@@ -240,6 +240,12 @@ public class AudioManager : MonoBehaviour
             {
                 sound.SetVolume(i);
                 sound.volume = i;
+                if(sound.volume - fadeSpeed < 0)
+                {
+                    sound.SetVolume(0);
+                    sound.volume = 0;
+                }
+                Debug.Log(sound.clip.name + " " + sound.volume + " done:  " + (i > volumePercentage));
                 yield return null;
             }
         }
