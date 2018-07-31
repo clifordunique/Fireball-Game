@@ -12,7 +12,8 @@ public class PlayerTransporter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        LightOnFire.onFire += TransportPlayer;
+        LightOnFire.onFire += TransportPlayerThere;
+        EndMysterious.onEndTransition += TransportPlayerBack;
         anim = GetComponent<Animator>();
 	}
 
@@ -24,15 +25,20 @@ public class PlayerTransporter : MonoBehaviour {
         }
     }
 
-    void TransportPlayer()
+    void TransportPlayerThere()
     {
         savedPlayerPos = player.transform.position;
-        StartCoroutine(Wait());
+        StartCoroutine(TransportThereAction());
 
-        LightOnFire.onFire -= TransportPlayer;
+        LightOnFire.onFire -= TransportPlayerThere;
     }
 
-    IEnumerator Wait()
+    void TransportPlayerBack()
+    {
+        StartCoroutine(TransportBackAction());
+    }
+
+    IEnumerator TransportThereAction()
     {
         float waitTime = 2f;
         float targetTime = Time.time + waitTime;
@@ -54,6 +60,21 @@ public class PlayerTransporter : MonoBehaviour {
         }
 
         player.transform.position = transformToPos.position;
+    }
+
+    IEnumerator TransportBackAction()
+    {
+        GameMaster.gm.GetComponent<CameraShake>().Shake(0.3f, 2f);
+        AudioManager.instance.PlaySound("Shockwave");
+
+        float targetTime = Time.time + 1f;
+
+        while (Time.time < targetTime)
+        {
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        player.transform.position = savedPlayerPos;
     }
 
     void GoBack()

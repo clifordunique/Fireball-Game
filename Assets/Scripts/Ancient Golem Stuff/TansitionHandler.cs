@@ -2,24 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public class TansitionHandler : MonoBehaviour {
+
+    public Utilities.Song SongToTransitionTo;
+    public GameObject enterShineAnimation;
+    public GameObject exitShineAnimation;
 
     GameMaster gameMaster;
     Animator animator;
 
 	// Use this for initialization
 	void Start () {
-        LightOnFire.onFire += EnableTansition;
+        LightOnFire.onFire += TransitionToMysterious;
+        EndMysterious.onEndTransition += TransitionBack;
         gameMaster = GameMaster.gm;
-        animator = GetComponent<Animator>();
 	}
 	
-    void EnableTansition()
+    void TransitionToMysterious()
     {
         gameMaster.SetAmbianceEnum(Utilities.Ambiance.MYSTERIOUS);
         gameMaster.SetBackgroundSong(Utilities.Song.NONE);
-        animator.enabled = true;
-        LightOnFire.onFire -= EnableTansition;
+        enterShineAnimation.GetComponent<Animator>().enabled = true;
+        enterShineAnimation.GetComponent<Animator>().Play("ShineThingEnter");
+        LightOnFire.onFire -= TransitionToMysterious;
+    }
+
+    void TransitionBack()
+    {
+        gameMaster.SetAmbianceEnum(gameMaster.LevelAmbiance);
+        gameMaster.SetBackgroundSong(SongToTransitionTo);
+        exitShineAnimation.GetComponent<Animator>().enabled = true;
+        exitShineAnimation.GetComponent<Animator>().Play("ShineThingExit");
     }
 }

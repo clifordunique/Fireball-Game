@@ -7,8 +7,10 @@ public class GameMaster : MonoBehaviour
 {
     public static GameMaster gm;
 
+    public Utilities.Ambiance LevelAmbiance;
+
     public Utilities.State CurState { get; set; }
-    public Utilities.Ambiance CurBackgroundAmbiance;
+    private Utilities.Ambiance CurBackgroundAmbiance;
     public Utilities.Song CurSong;
 
     public GameObject endLevelUI;
@@ -62,6 +64,8 @@ public class GameMaster : MonoBehaviour
             UnityEngine.Debug.Log("fREAK OUT, NO AUDIOMANAGER IN SCENE!!!");
         }
         sceneStarter = GetComponent<SceneStarter>();
+
+        CurBackgroundAmbiance = LevelAmbiance;
 
         SaveLoad.Load();
         LoadPlatformSounds();
