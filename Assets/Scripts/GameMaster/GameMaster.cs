@@ -223,7 +223,7 @@ public class GameMaster : MonoBehaviour
             }
             else if (oldSongName == "")
             {
-                audioManager.PlaySound(curSongName);
+                audioManager.PlaySound(curSongName, 0.75f);
             }
             else
             {

@@ -136,6 +136,7 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(string _name, float _volumePercent)
     {
         Sound tempSound = FindSound(_name);
+        tempSound.volume = _volumePercent;
         tempSound.Play(_volumePercent);
     }
 
@@ -245,7 +246,6 @@ public class AudioManager : MonoBehaviour
                     sound.SetVolume(0);
                     sound.volume = 0;
                 }
-                Debug.Log(sound.clip.name + " " + sound.volume + " done:  " + (i > volumePercentage));
                 yield return null;
             }
         }
