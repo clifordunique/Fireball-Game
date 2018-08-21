@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class TansitionHandler : MonoBehaviour
 {
-
     public Utilities.Song TransitionToSong;
     public Utilities.Song TransitionBackSong;
     public Utilities.Ambiance TransitionToAmbiance;
@@ -87,7 +86,7 @@ public class TansitionHandler : MonoBehaviour
         {
             yield return new WaitForSeconds(0.05f);
         }
-
+        animator.Play("ShineThingExit2");
         player.transform.position = savedPlayerPos;
     }
 
