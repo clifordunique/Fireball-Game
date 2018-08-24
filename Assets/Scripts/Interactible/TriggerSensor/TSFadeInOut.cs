@@ -30,6 +30,10 @@ public class TSFadeInOut : TriggerSensor
                 Utilities.instance.FadeObjectOut(child.gameObject, speed, destroy, disable);
             }
             Utilities.instance.FadeObjectOut(actionObject.gameObject, speed, destroy, disable);
+            if (destroySelf)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }
