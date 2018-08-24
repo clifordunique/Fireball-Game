@@ -4,7 +4,7 @@ using System.Collections;
 public class Parallaxing : MonoBehaviour
 {
 
-    public Transform[] backgrounds;             // Array (list) of all the back adn foregrounds to be parallaxed.
+    public Transform[] backgrounds;             // Array (list) of all the back and foregrounds to be parallaxed.
     private float[] parallaxScales;             // The proportion of the camera's movement to move the backgrounds by.
     public float smoothing = 1;                 // How smooth the parallax is going to be. Make sure to set this above 0.
 
@@ -33,7 +33,7 @@ public class Parallaxing : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         // For each background
         for (int i = 0; i < backgrounds.Length; i++)

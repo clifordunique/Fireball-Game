@@ -86,6 +86,7 @@ public class TansitionHandler : MonoBehaviour
         {
             yield return new WaitForSeconds(0.05f);
         }
+        animator.enabled = true;
         animator.Play("ShineThingExit2");
         player.transform.position = savedPlayerPos;
     }

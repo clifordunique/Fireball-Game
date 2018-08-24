@@ -27,9 +27,9 @@ public class TSFadeInOut : TriggerSensor
             for (int i = 0; i < actionObject.childCount; i++)
             {
                 Transform child = actionObject.GetChild(i);
-                Utilities.instance.FadeObjectOut(child.gameObject, speed, false, false);
+                Utilities.instance.FadeObjectOut(child.gameObject, speed, destroy, disable);
             }
-            Utilities.instance.FadeObjectOut(actionObject.gameObject, speed, false, false);
+            Utilities.instance.FadeObjectOut(actionObject.gameObject, speed, destroy, disable);
         }
     }
 }

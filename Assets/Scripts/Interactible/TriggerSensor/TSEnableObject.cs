@@ -8,7 +8,10 @@ public class TSEnableObject : TriggerSensor
         if (col.CompareTag("Player"))
         {
             actionObject.gameObject.SetActive(true);
-            Destroy(this.gameObject);
+            if (destroySelf)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }

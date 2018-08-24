@@ -5,7 +5,7 @@ public class PlayerStats : MonoBehaviour
 
     public static PlayerStats instance;
     public bool Dash { get; set; }
-    public bool Shoot { get; set; }
+    public bool Shoot;
 
     private int maxHealth = 30;
     private int curHealth;
