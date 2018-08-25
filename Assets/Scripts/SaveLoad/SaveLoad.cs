@@ -11,7 +11,8 @@ public static class SaveLoad {
         FileStream file = File.Create(Application.persistentDataPath + "/savedGames.gd");
 
         PlayerData data = new PlayerData();
-        data.zoom = PlayerStats.instance.Dash;
+        data.dash = PlayerStats.instance.Dash;
+        data.shoot = PlayerStats.instance.Shoot;
 
         bf.Serialize(file, data);
         file.Close();
@@ -21,13 +22,15 @@ public static class SaveLoad {
     {
         if (File.Exists(Application.persistentDataPath + "/savedGames.gd"))
         {
+            Debug.Log("Loading from in " + Application.persistentDataPath + "/savedGames.gd");
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
             PlayerData data = (PlayerData)bf.Deserialize(file);
 
             file.Close();
 
-            PlayerStats.instance.Dash = data.zoom;
+            PlayerStats.instance.Dash = data.dash;
+            PlayerStats.instance.Shoot = data.shoot;
         }
     }
 }
@@ -35,5 +38,6 @@ public static class SaveLoad {
 [System.Serializable]
 class PlayerData
 {
-    public bool zoom;
+    public bool dash;
+    public bool shoot;
 }

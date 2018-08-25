@@ -354,7 +354,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
         {
             isDoubleJumping = false;
         }
-        //Debug.Log(!timeIsOut + " "  + stats.Zoom + " " +  Input.GetButton("Jump") + " "+ Input.GetButton("Horizontal") + " " + Input.GetButton("Vertical"));
         if (!timeIsOut && stats.Dash && stats.IsFire() && (Input.GetButton("Jump") || Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
         {
             if ((!controller.collisions.below && !isDoubleJumping) || controller.collisions.below)
@@ -365,7 +364,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
                     audioManager.PlaySound("Zoom");
                     StartCoroutine("SprintTimer");
                 }
-                //audioManager.PlaySound("Zoom");
                 Vector2 direction = new Vector2(directionalInput.x, directionalInput.y).normalized;
                 velocity.x = direction.x * moveSpeed * 8;
                 if (velocity.x == 0)

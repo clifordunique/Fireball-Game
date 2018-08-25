@@ -83,7 +83,6 @@ public class PathFollowingEnemies : Enemy
     public override void DamageEnemy(int _damage, Vector2 pos)
     {
         base.DamageEnemy(_damage, pos);
-        transform.localScale *= (health + 6 / (health + .1f)) / maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
 
         Effect(pos);
 

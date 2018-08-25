@@ -15,6 +15,12 @@ public class WaterDropletEnemy : PathFollowingEnemies
         base.Start();
     }
 
+    public override void DamageEnemy(int _damage, Vector2 pos)
+    {
+        base.DamageEnemy(_damage, pos);
+        transform.localScale *= (health + 6 / (health + .1f)) / maxHealth;  // Weird equation for scaling the enemy on hits - maybe make it better
+    }
+
     protected override void Effect(Vector2 hitPosition)
     {
         //TODO: make it so the splash has a forward velocity if the enemy has a forward velocity so that the splash is visible
