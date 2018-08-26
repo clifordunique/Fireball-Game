@@ -23,7 +23,6 @@ public class TSFadeInOut : TriggerSensor
     {
         if (col.CompareTag("Player"))
         {
-
             for (int i = 0; i < actionObject.childCount; i++)
             {
                 Transform child = actionObject.GetChild(i);

@@ -10,8 +10,8 @@ public class RockGuy : PathFollowingEnemies {
 
         Vector2 xMaxMin = dirToDamage > 0 ? new Vector2(1, 0) : new Vector2(0, -1);
         rockExplosion = Instantiate(rockExplosion,transform.position,transform.rotation);
-        rockExplosion.maxThrust = 1000;
-        rockExplosion.minThrust = 300;
+        //rockExplosion.maxThrust = 1000;
+        //rockExplosion.minThrust = 300;
         rockExplosion.xMaxMin = xMaxMin;
 
         audioManager.PlaySound("rockSmash");
