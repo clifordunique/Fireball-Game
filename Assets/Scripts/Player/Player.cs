@@ -64,10 +64,12 @@ public class Player : MonoBehaviour, FallInWaterableObject
     private Controller2D controller;
     private Animator anim;
     private ParentMotionBlur blur;
+    public GameObject[] cracks;
 
     public GameObject deathPrefab;
     private SpriteRenderer[] spriteRenderersInChildren;
     private Queue<GameObject> damageSpritesOnPlayer;
+    private int indexOfCracksOnPlayer = -1;
 
     //bool wallSliding;
     Vector2 directionalInput;
@@ -81,11 +83,12 @@ public class Player : MonoBehaviour, FallInWaterableObject
     public float camShakeLength = 0.1f;
 
     float velocityXOld;
+    private float fireHealInterval = 3f;
+    private float healthHealInterval = 3f;
+    private float noFireDamageInterval = 3f;
+    private float curTime;
 
     // DELEGATES
-    public delegate void OnFireChange(bool currentFire);
-    public event OnFireChange onFireChangeEvent;
-
     public delegate void OnUnderbrush();
     public event OnUnderbrush onUnderbrushEvent;
 
@@ -124,11 +127,12 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
         stats.CurFireHealth = stats.MaxFireHealth;
         stats.CurHealth = stats.MaxHealth;
-        stats.onHealEvent += OnPlayerHeal;
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         gravityOriginal = gravity;
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+
+        curTime = Time.time;
     }
 
     void Update()
@@ -176,7 +180,15 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         if (damageSpritesOnPlayer.Count > 0)
         {
-            Utilities.instance.FadeObjectOut(damageSpritesOnPlayer.Dequeue(), 0.02f, true, false);
+            if (indexOfCracksOnPlayer > -1)
+            {
+                indexOfCracksOnPlayer = -1;
+                Utilities.instance.FadeObjectOut(damageSpritesOnPlayer.Dequeue(), 0.02f, false, true);
+            }
+            else
+            {
+                Utilities.instance.FadeObjectOut(damageSpritesOnPlayer.Dequeue(), 0.02f, true, false);
+            }
         }
     }
 
@@ -252,20 +264,33 @@ public class Player : MonoBehaviour, FallInWaterableObject
         float speedValue = velocity.sqrMagnitude / (moveSpeed * moveSpeed + 5);
         anim.SetFloat("Speed", Mathf.Abs(speedValue));
         anim.SetBool("Grounded", controller.collisions.below);
-        //fireEyes.SetFireBase(stats.CurFireHealth, stats.MaxFireHealth); // maybe this should happen in stats
 
-        if (stats.CurFireHealth <= 0)
+        if (Time.time - curTime > fireHealInterval)
         {
-            if (onFireChangeEvent != null)
+            if (stats.IsFire())
             {
-                onFireChangeEvent(true);
+                if (stats.CurFireHealth < stats.MaxFireHealth)
+                {
+                    stats.CurFireHealth++;
+                    curTime = Time.time;
+                }
+                else
+                {
+                    stats.CurHealth++;
+                    OnPlayerHeal();
+                    curTime = Time.time;
+                }
             }
-        }
-        else
-        {
-            if (onFireChangeEvent != null)
+            else
             {
-                onFireChangeEvent(false);
+                curTime = Time.time;
+                DamagePlayerData damagePlayerData = new DamagePlayerData
+                {
+                    damageToPlayerFireHealth = 0,
+                    damageToPlayerHealth = 1,
+                    customDamageSprite = true
+                };
+                DamagePlayer(damagePlayerData);
             }
         }
     }
@@ -527,10 +552,40 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         stats.CurHealth -= data.damageToPlayerHealth;
         stats.CurFireHealth -= data.damageToPlayerFireHealth;
-        if (data.damagePlayerEffect != null)
+
+        if (!data.customDamageSprite)
         {
-            GameObject tempDamagePlayerEffect = Instantiate(data.damagePlayerEffect, data.hitPos, data.transformInfo.rotation, head.transform);
-            damageSpritesOnPlayer.Enqueue(tempDamagePlayerEffect);
+            if (data.damagePlayerEffect != null)
+            {
+                GameObject tempDamagePlayerEffect = Instantiate(data.damagePlayerEffect, data.hitPos, data.transformInfo.rotation, head.transform);
+                damageSpritesOnPlayer.Enqueue(tempDamagePlayerEffect);
+            }
+        }
+        else
+        {
+            if (indexOfCracksOnPlayer + 1 < cracks.Length)
+            {
+                if (indexOfCracksOnPlayer == -1)
+                {
+                    Color color = cracks[0].GetComponent<SpriteRenderer>().color;
+
+                    cracks[0].gameObject.SetActive(true);
+                    cracks[0].GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
+                    damageSpritesOnPlayer.Enqueue(cracks[0]);
+                }
+                else
+                {
+                    Color color = cracks[indexOfCracksOnPlayer].GetComponent<SpriteRenderer>().color;
+
+                    cracks[indexOfCracksOnPlayer].gameObject.SetActive(false);
+                    damageSpritesOnPlayer.Dequeue();
+
+                    cracks[indexOfCracksOnPlayer + 1].gameObject.SetActive(true);
+                    damageSpritesOnPlayer.Enqueue(cracks[indexOfCracksOnPlayer + 1]);
+                    cracks[indexOfCracksOnPlayer + 1].GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
+                }
+                indexOfCracksOnPlayer++;
+            }
         }
 
         if (stats.CurHealth <= 0)

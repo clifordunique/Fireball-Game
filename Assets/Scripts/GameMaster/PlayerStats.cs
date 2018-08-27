@@ -54,26 +54,31 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-        if (Time.time - time > intervalBetweenFireHealing)
-        {
-            if (IsFire())
-            {
-                if (curFireHealth < maxFireHealth)
-                {
-                    time = Time.time;
-                    curFireHealth++;
-                }
-                else
-                {
-                    time = Time.time;
-                    curHealth++;
-                    if (onHealEvent != null)
-                    {
-                        onHealEvent();
-                    }
-                }
-            }
-        }
+        //if (Time.time - time > intervalBetweenFireHealing)
+        //{
+        //    if (IsFire())
+        //    {
+        //        if (curFireHealth < maxFireHealth)
+        //        {
+        //            time = Time.time;
+        //            curFireHealth++;
+        //        }
+        //        else
+        //        {
+        //            time = Time.time;
+        //            curHealth++;
+        //            if (onHealEvent != null)
+        //            {
+        //                onHealEvent();
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        time = Time.time;
+        //        curHealth -= 2;
+        //    }
+        //}
     }
 
     public void EnablePowerup(Utilities.PowerUps powerup)

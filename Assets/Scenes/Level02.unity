@@ -2765,6 +2765,11 @@ Prefab:
       propertyPath: endLevelUI
       value: 
       objectReference: {fileID: 1756336285}
+    - target: {fileID: 114206759410512024, guid: 02cad2b9220bd5b4ebabccc05668737e,
+        type: 2}
+      propertyPath: Dash
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02cad2b9220bd5b4ebabccc05668737e, type: 2}
   m_IsPrefabAsset: 0
