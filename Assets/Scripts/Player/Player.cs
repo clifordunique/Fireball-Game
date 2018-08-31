@@ -65,11 +65,12 @@ public class Player : MonoBehaviour, FallInWaterableObject
     private Animator anim;
     private ParentMotionBlur blur;
     public GameObject[] cracks;
+    public GameObject currentCrack;
 
     public GameObject deathPrefab;
     private SpriteRenderer[] spriteRenderersInChildren;
     private Queue<GameObject> damageSpritesOnPlayer;
-    private int indexOfCracksOnPlayer = -1;
+    private int indexOfCracksOnPlayer = 0;
 
     //bool wallSliding;
     Vector2 directionalInput;
@@ -178,17 +179,14 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
     private void OnPlayerHeal()
     {
+        if (currentCrack != null)
+        {
+            Utilities.instance.FadeObjectOut(currentCrack, 0.02f, false, true);
+            currentCrack = null;
+        }
         if (damageSpritesOnPlayer.Count > 0)
         {
-            if (indexOfCracksOnPlayer > -1)
-            {
-                indexOfCracksOnPlayer = -1;
-                Utilities.instance.FadeObjectOut(damageSpritesOnPlayer.Dequeue(), 0.02f, false, true);
-            }
-            else
-            {
-                Utilities.instance.FadeObjectOut(damageSpritesOnPlayer.Dequeue(), 0.02f, true, false);
-            }
+            Utilities.instance.FadeObjectOut(damageSpritesOnPlayer.Dequeue(), 0.02f, true, false);
         }
     }
 
@@ -288,7 +286,8 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 {
                     damageToPlayerFireHealth = 0,
                     damageToPlayerHealth = 1,
-                    customDamageSprite = true
+                    customDamageSprite = true,
+                    soundFX = "woodcrack04"
                 };
                 DamagePlayer(damagePlayerData);
             }
@@ -555,37 +554,61 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
         if (!data.customDamageSprite)
         {
+            if (data.soundFX != "")
+            {
+                audioManager.PlaySound(data.soundFX);
+            }
             if (data.damagePlayerEffect != null)
             {
                 GameObject tempDamagePlayerEffect = Instantiate(data.damagePlayerEffect, data.hitPos, data.transformInfo.rotation, head.transform);
                 damageSpritesOnPlayer.Enqueue(tempDamagePlayerEffect);
             }
         }
-        else
+        else // this is the logic for cracks that appear when the player has lost all fire health
         {
-            if (indexOfCracksOnPlayer + 1 < cracks.Length)
+            indexOfCracksOnPlayer = Mathf.Clamp(cracks.Length - Mathf.CeilToInt(stats.CurHealth * cracks.Length / (float)stats.MaxHealth), 0, cracks.Length - 1);
+
+            if (currentCrack == null && indexOfCracksOnPlayer != 0)
             {
-                if (indexOfCracksOnPlayer == -1)
-                {
-                    Color color = cracks[0].GetComponent<SpriteRenderer>().color;
-
-                    cracks[0].gameObject.SetActive(true);
-                    cracks[0].GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
-                    damageSpritesOnPlayer.Enqueue(cracks[0]);
-                }
-                else
-                {
-                    Color color = cracks[indexOfCracksOnPlayer].GetComponent<SpriteRenderer>().color;
-
-                    cracks[indexOfCracksOnPlayer].gameObject.SetActive(false);
-                    damageSpritesOnPlayer.Dequeue();
-
-                    cracks[indexOfCracksOnPlayer + 1].gameObject.SetActive(true);
-                    damageSpritesOnPlayer.Enqueue(cracks[indexOfCracksOnPlayer + 1]);
-                    cracks[indexOfCracksOnPlayer + 1].GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
-                }
-                indexOfCracksOnPlayer++;
+                StartCoroutine(AddCracks(indexOfCracksOnPlayer));
+                currentCrack = cracks[indexOfCracksOnPlayer-1];
+                audioManager.PlaySound(data.soundFX, 0.25f);
             }
+            else if (currentCrack != cracks[indexOfCracksOnPlayer] || indexOfCracksOnPlayer != 0)
+            {
+                if (indexOfCracksOnPlayer - 1 >= 0)
+                {
+                    cracks[indexOfCracksOnPlayer - 1].SetActive(false);
+                }
+                cracks[indexOfCracksOnPlayer].SetActive(true);
+                currentCrack = cracks[indexOfCracksOnPlayer];
+
+                Color color = cracks[indexOfCracksOnPlayer].GetComponent<SpriteRenderer>().color;
+                cracks[indexOfCracksOnPlayer].GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
+
+                audioManager.PlaySound(data.soundFX, 0.25f);
+            }
+
+            //if (indexOfCracksOnPlayer == -1)
+            //{
+            //    Color color = cracks[0].GetComponent<SpriteRenderer>().color;
+
+            //    cracks[0].gameObject.SetActive(true);
+            //    cracks[0].GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
+            //    audioManager.PlaySound(data.soundFX, 0.25f);
+            //    indexOfCracksOnPlayer++;
+            //}
+            //else if (stats.CurHealth % 2 != 0)
+            //{
+            //    Color color = cracks[indexOfCracksOnPlayer].GetComponent<SpriteRenderer>().color;
+
+            //    cracks[indexOfCracksOnPlayer].gameObject.SetActive(false);
+            //    cracks[indexOfCracksOnPlayer + 1].gameObject.SetActive(true);
+            //    cracks[indexOfCracksOnPlayer + 1].GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
+
+            //    audioManager.PlaySound(data.soundFX, 0.25f);
+            //    indexOfCracksOnPlayer++;
+            //}
         }
 
         if (stats.CurHealth <= 0)
@@ -595,6 +618,22 @@ public class Player : MonoBehaviour, FallInWaterableObject
         }
     }
 
+    IEnumerator AddCracks(int index)
+    {
+        int count = 0;
+        while (count < index)
+        {
+            cracks[count].SetActive(true);
+            if(count - 1 >= 0)
+            {
+                cracks[count - 1].SetActive(false);
+            }
+            count++;
+            yield return null;
+        }
+        audioManager.PlaySound("woodcrack07", 0.25f);
+    }
+
     public void HealFire(int _health)
     {
         if (stats.CurFireHealth < stats.MaxFireHealth)
@@ -602,7 +641,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
             stats.CurFireHealth += _health;
         }
     }
-
 
     void Effect()
     {

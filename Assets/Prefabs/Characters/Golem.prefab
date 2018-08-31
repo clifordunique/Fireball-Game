@@ -569,6 +569,7 @@ MonoBehaviour:
   isInMysterious: 0
   isDoubleJumping: 0
   cracks: []
+  currentCrack: {fileID: 0}
   deathPrefab: {fileID: 1730261801472782, guid: b1555f563add0f64dbdbc00a3a5435f8,
     type: 2}
   camShakeAmt: 0.3

@@ -6,6 +6,7 @@ public class DamagePlayerData {
     public bool customDamageSprite; // The damagePlayerEffect will not be used
     public int damageToPlayerHealth;
     public int damageToPlayerFireHealth;
+    public string soundFX;
 
     public Vector2 hitPos;
     public Transform transformInfo;
