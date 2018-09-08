@@ -181,7 +181,14 @@ public class Player : MonoBehaviour, FallInWaterableObject
     {
         if (currentCrack != null)
         {
-            Utilities.instance.FadeObjectOut(currentCrack, 0.02f, false, true);
+            for (int i = 0; i < cracks.Length; i++)
+            {
+                if (cracks[i].activeSelf == true)
+                {
+                    Utilities.instance.FadeObjectOut(cracks[i], 0.02f, false, true);
+                }
+            }
+            //Utilities.instance.FadeObjectOut(currentCrack, 0.02f, false, true);
             currentCrack = null;
         }
         if (damageSpritesOnPlayer.Count > 0)
@@ -572,10 +579,14 @@ public class Player : MonoBehaviour, FallInWaterableObject
             {
                 StartCoroutine(AddCracks(indexOfCracksOnPlayer));
                 currentCrack = cracks[indexOfCracksOnPlayer-1];
-                audioManager.PlaySound(data.soundFX, 0.25f);
+                audioManager.PlaySound(data.soundFX, 0.5f);
             }
             else if (currentCrack != cracks[indexOfCracksOnPlayer] || indexOfCracksOnPlayer != 0)
             {
+                if (currentCrack != cracks[indexOfCracksOnPlayer])
+                {
+                    audioManager.PlaySound(data.soundFX, 0.5f);
+                }
                 if (indexOfCracksOnPlayer - 1 >= 0)
                 {
                     cracks[indexOfCracksOnPlayer - 1].SetActive(false);
@@ -585,8 +596,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
                 Color color = cracks[indexOfCracksOnPlayer].GetComponent<SpriteRenderer>().color;
                 cracks[indexOfCracksOnPlayer].GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
-
-                audioManager.PlaySound(data.soundFX, 0.25f);
             }
 
             //if (indexOfCracksOnPlayer == -1)
@@ -624,14 +633,14 @@ public class Player : MonoBehaviour, FallInWaterableObject
         while (count < index)
         {
             cracks[count].SetActive(true);
-            if(count - 1 >= 0)
+            if (count - 1 >= 0)
             {
                 cracks[count - 1].SetActive(false);
             }
             count++;
             yield return null;
         }
-        audioManager.PlaySound("woodcrack07", 0.25f);
+        audioManager.PlaySound("woodcrack07", 0.5f);
     }
 
     public void HealFire(int _health)
