@@ -597,27 +597,6 @@ public class Player : MonoBehaviour, FallInWaterableObject
                 Color color = cracks[indexOfCracksOnPlayer].GetComponent<SpriteRenderer>().color;
                 cracks[indexOfCracksOnPlayer].GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
             }
-
-            //if (indexOfCracksOnPlayer == -1)
-            //{
-            //    Color color = cracks[0].GetComponent<SpriteRenderer>().color;
-
-            //    cracks[0].gameObject.SetActive(true);
-            //    cracks[0].GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
-            //    audioManager.PlaySound(data.soundFX, 0.25f);
-            //    indexOfCracksOnPlayer++;
-            //}
-            //else if (stats.CurHealth % 2 != 0)
-            //{
-            //    Color color = cracks[indexOfCracksOnPlayer].GetComponent<SpriteRenderer>().color;
-
-            //    cracks[indexOfCracksOnPlayer].gameObject.SetActive(false);
-            //    cracks[indexOfCracksOnPlayer + 1].gameObject.SetActive(true);
-            //    cracks[indexOfCracksOnPlayer + 1].GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
-
-            //    audioManager.PlaySound(data.soundFX, 0.25f);
-            //    indexOfCracksOnPlayer++;
-            //}
         }
 
         if (stats.CurHealth <= 0)
@@ -630,13 +609,17 @@ public class Player : MonoBehaviour, FallInWaterableObject
     IEnumerator AddCracks(int index)
     {
         int count = 0;
-        while (count < index)
+        Debug.Log("Index: " + index + " Cracks length: " + cracks.Length);
+        Color color = cracks[count].GetComponent<SpriteRenderer>().color;
+        while (count <= index)
         {
+            cracks[count].GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
             cracks[count].SetActive(true);
             if (count - 1 >= 0)
             {
                 cracks[count - 1].SetActive(false);
             }
+            Debug.Log(count);
             count++;
             yield return null;
         }
