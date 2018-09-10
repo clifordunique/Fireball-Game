@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class BigBranch : TreeBranch {
+public class BigBranch : MonoBehaviour {
 
     AudioManager audioManager;
 
