@@ -27,7 +27,7 @@ public class PathFollowingEnemies : Enemy
     protected Animator anim;
     protected AudioSource audioSource;
 
-    public Transform player;
+    Transform player;
 
     Collider2D playerCollider;
     Collider2D enemyCollider;
@@ -40,6 +40,7 @@ public class PathFollowingEnemies : Enemy
         anim = GetComponent<Animator>();
         audioManager = AudioManager.instance;
         audioSource = GetComponent<AudioSource>();
+        player = FindObjectOfType<Player>().transform;
 
         playerCollider = player.GetComponent<Collider2D>();
         enemyCollider = GetComponent<Collider2D>();
