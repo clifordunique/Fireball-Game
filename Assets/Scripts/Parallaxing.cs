@@ -38,7 +38,7 @@ public class Parallaxing : MonoBehaviour
         // For each background
         for (int i = 0; i < backgrounds.Length; i++)
         {
-            if (backgrounds[i].gameObject.activeSelf == true)
+            if (backgrounds[i].gameObject.activeInHierarchy == true)
             {
                 // The parallax is the opposite of the camera movement because the previous frame multiplied by the scale
                 float parallaxX = (previousCamPos.x - cam.position.x) * parallaxScales[i];
