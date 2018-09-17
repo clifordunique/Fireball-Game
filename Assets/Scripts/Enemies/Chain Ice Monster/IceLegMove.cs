@@ -17,6 +17,7 @@ public class IceLegMove : Enemy
     public float rayLength = 0.5f;
     public LayerMask groundImpactMask;
     public LayerMask groundDetectorMask;
+    public LayerMask playerMask;
 
     CameraShake camShake;
     AudioManager audioManager;
@@ -71,7 +72,17 @@ public class IceLegMove : Enemy
     {
         if (player != null)
         {
-            return Mathf.Abs(head.transform.position.x - player.transform.position.x) < seePlayerDst;
+            Vector2 dirToPlayer = (player.transform.position - transform.position).normalized;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dirToPlayer, seePlayerDst, playerMask);
+            //Debug.DrawRay(transform.position, dirToPlayer * seePlayerDst, Color.red);
+            if (hit)
+            {
+                return hit.transform.tag == "Player";
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
@@ -90,7 +101,8 @@ public class IceLegMove : Enemy
                     bool seePlayer;
                     if (player != null)
                     {
-                        seePlayer = Mathf.Abs(head.transform.position.x - player.transform.position.x) < seePlayerDst;
+                        seePlayer = CanSeePlayer();
+                        //seePlayer = Mathf.Abs(head.transform.position.x - player.transform.position.x) < seePlayerDst;
                     }
                     else
                     {
@@ -146,7 +158,7 @@ public class IceLegMove : Enemy
 
                 if (CanSeePlayer())
                 {
-                    currentLeg.transform.Translate(Vector2.right * dirToPlayerX * .25f,Space.World);
+                    currentLeg.transform.Translate(Vector2.right * dirToPlayerX * .25f, Space.World);
                     PointAtPlayer(currentLegIndex);
                 }
 

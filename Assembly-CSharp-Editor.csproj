@@ -235,6 +235,7 @@
     <Compile Include="Assets\PostProcessing\Editor\Utils\EditorResources.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Utils\FxStyles.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Utils\ReflectionUtils.cs" />
+    <Compile Include="Assets\ScriptCalculator\Editor\ScriptCalculator.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/jpdep/Desktop/Unity/Fireball-Game/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

@@ -1,4 +1,3 @@
-C:\Users\jpdep\Desktop\Unity\Fireball-Game\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\Assembly-CSharp.dll
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\Assembly-CSharp.pdb
@@ -327,3 +326,6 @@ C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEngine.FileSystem
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEngine.LocalizationModule.xml
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEngine.ProfilerModule.xml
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEngine.StreamingModule.xml
+C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\Assembly-CSharp.dll.CodeAnalysisLog.xml
+C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\Assembly-CSharp.dll.lastcodeanalysissucceeded
+C:\Users\jpdep\Desktop\Unity\Fireball-Game\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
