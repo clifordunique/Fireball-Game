@@ -6,9 +6,11 @@ public class IceLegMove : Enemy
     public IceLeg[] iceLegs;
     public Transform head;
     public float moveUpAmount = 5f;
+    public float moveSideAmount = 30f;
     public float stepDst = 5f;
     public float legCallbackDst = 20f;
     public float crippleWaitTime = 0.4f;
+    public float tooFarApartDst = 20f;
 
     public Player player;
     public GameObject playerScratch;
@@ -98,24 +100,33 @@ public class IceLegMove : Enemy
             {
                 if (iceLegs[i].health > 0)
                 {
+                    Vector2 dstFromHead = iceLegs[i].transform.position - transform.position;
+                    float dstToMove = moveSideAmount;
+                    bool tooFarFromHead = false;
+
+                    if (dstFromHead.magnitude > tooFarApartDst)
+                    {
+                        dstToMove = dstFromHead.x;
+                        tooFarFromHead = true;
+                    }
                     bool seePlayer;
+
                     if (player != null)
                     {
                         seePlayer = CanSeePlayer();
-                        //seePlayer = Mathf.Abs(head.transform.position.x - player.transform.position.x) < seePlayerDst;
                     }
                     else
                     {
                         seePlayer = false;
                     }
                     yield return MoveUp(i);
-                    if (seePlayer)
+                    if (seePlayer && !tooFarFromHead)
                     {
                         StartCoroutine(MoveToPlayer(i));
                     }
                     else
                     {
-                        yield return MoveToPos(i);
+                        yield return MoveToPos(i, tooFarFromHead);
                         yield return MoveDown(i);
                     }
                 }
@@ -168,7 +179,7 @@ public class IceLegMove : Enemy
         }
     }
 
-    IEnumerator MoveToPos(int currentLegIndex)
+    IEnumerator MoveToPos(int currentLegIndex, bool tooFarFromHead)
     {
         if (iceLegs[currentLegIndex] != null)
         {
@@ -176,37 +187,44 @@ public class IceLegMove : Enemy
             audioManager.PlaySound(smallShakeSounds[index]);
 
             IceLeg currentLeg = iceLegs[currentLegIndex];
-            float dirToPlayerX;
+            float dirToMove;
             if (player != null)
             {
-                dirToPlayerX = Mathf.Sign(player.transform.position.x - currentLeg.transform.position.x);
+                if (!tooFarFromHead)
+                {
+                    dirToMove = Mathf.Sign(player.transform.position.x - currentLeg.transform.position.x);
+                }
+                else // If the legs are too far from the head, they will move back towards the head.
+                {
+                    dirToMove = Mathf.Sign(transform.position.x - currentLeg.transform.position.x);
+                }
             }
             else
             {
-                dirToPlayerX = -1;
+                dirToMove = -1;
             }
             //float dirToPlayerY = Mathf.Sign(player.transform.position.y - currentLeg.transform.position.y);
 
             float moveSpeed = .3f;
             RaycastHit2D hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
 
-            float moveAmount = 30f;
+
             float counter = 0;
 
             // move a little in the player's direction
             if (hit)
             {
-                while (currentLeg != null && counter < moveAmount && !currentLeg.GetHit(groundImpactMask))
+                while (currentLeg != null && counter < moveSideAmount && !currentLeg.GetHit(groundImpactMask))
                 {
 
                     // Get values
                     hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
                     Quaternion angle = Quaternion.FromToRotation(Vector2.up, hit.normal);
-                    counter++;
+                    counter += moveSpeed;
 
                     // Movement
+                    currentLeg.transform.Translate(Vector2.right * dirToMove * moveSpeed);
                     currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angle, 0.2f);
-                    currentLeg.transform.Translate(Vector2.right * dirToPlayerX * moveSpeed);
 
                     yield return new WaitForSeconds(0.01f);
                 }
@@ -215,10 +233,11 @@ public class IceLegMove : Enemy
             {
                 Quaternion downwardAngle = Quaternion.AngleAxis(0, Vector3.forward);
 
-                while (currentLeg != null && currentLeg.transform.rotation != downwardAngle)
+                while (currentLeg != null && (currentLeg.transform.rotation != downwardAngle || counter < moveSideAmount))
                 {
+                    counter += moveSpeed;
                     currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, downwardAngle, Time.deltaTime * 20);
-                    currentLeg.transform.Translate(Vector2.right * dirToPlayerX * moveSpeed);
+                    currentLeg.transform.Translate(Vector2.right * dirToMove * moveSpeed);
 
                     yield return new WaitForSeconds(0.01f);
                 }
