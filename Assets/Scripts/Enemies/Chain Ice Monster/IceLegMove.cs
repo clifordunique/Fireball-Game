@@ -208,7 +208,6 @@ public class IceLegMove : Enemy
             float moveSpeed = .3f;
             RaycastHit2D hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
 
-
             float counter = 0;
 
             // move a little in the player's direction
@@ -216,9 +215,19 @@ public class IceLegMove : Enemy
             {
                 while (currentLeg != null && counter < moveSideAmount && !currentLeg.GetHit(groundImpactMask))
                 {
-
                     // Get values
-                    hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
+                    // if sideHit
+                    // hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
+                    // else
+                    RaycastHit2D sideHit = currentLeg.GetSideHit(groundDetectorMask, dirToMove);
+                    if (!sideHit)
+                    {
+                        hit = currentLeg.GetGroundDetectorHit(groundDetectorMask); 
+                    }
+                    else
+                    {
+                        hit = currentLeg.GetSideHit(groundDetectorMask, dirToMove);
+                    }
                     Quaternion angle = Quaternion.FromToRotation(Vector2.up, hit.normal);
                     counter += moveSpeed;
 

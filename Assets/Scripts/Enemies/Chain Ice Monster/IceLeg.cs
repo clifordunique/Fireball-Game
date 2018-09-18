@@ -5,10 +5,13 @@ public class IceLeg : Enemy
 {
     public Transform metalBrace;
     public Transform tipOfIce;
+    public Transform leftSide;
+    public Transform rightSide;
     public SpriteMask spriteMask;
 
     public float rayStartOffset;
     public float rayLength = 0.5f;
+    public float sideRayLength = 1f;
     private RaycastHit2D hit;
     private RaycastHit2D groundDetector;
 
@@ -27,7 +30,7 @@ public class IceLeg : Enemy
         {
             UpdateRigidbody();
 
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         Effect(position);
     }
@@ -61,6 +64,16 @@ public class IceLeg : Enemy
         Debug.DrawRay(transform.position, direction.normalized * 30, Color.red);
         groundDetector = Physics2D.Raycast(transform.position + direction, direction.normalized, 30, mask);
         return groundDetector;
+    }
+
+    public RaycastHit2D GetSideHit(LayerMask mask, float direction)
+    {
+        Vector2 directionBtwSides = (rightSide.position - leftSide.position).normalized;
+        Debug.DrawRay(rightSide.position, directionBtwSides * direction * sideRayLength, Color.red);
+        Debug.Log(direction + " " + directionBtwSides + " " + sideRayLength);
+
+        RaycastHit2D sideHit = Physics2D.Raycast(rightSide.position, direction * directionBtwSides, sideRayLength, mask);
+        return sideHit;
     }
 
     /// <summary>
