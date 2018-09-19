@@ -2027,7 +2027,6 @@ MonoBehaviour:
     type: 2}
   rayStartOffset: 1
   rayLength: 2
-  sideRayLength: 5
 --- !u!60 &278713614
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -5451,11 +5450,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 107.1
+      value: 88.3
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5.8
+      value: 13.75
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.z
@@ -5738,7 +5737,6 @@ MonoBehaviour:
     type: 2}
   rayStartOffset: 1
   rayLength: 1.9
-  sideRayLength: 5
 --- !u!60 &770525133
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -13632,7 +13630,6 @@ MonoBehaviour:
     type: 2}
   rayStartOffset: 1
   rayLength: 1.9
-  sideRayLength: 5
 --- !u!233 &1918820959
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -14119,7 +14116,7 @@ GameObject:
   - component: {fileID: 1951957343}
   - component: {fileID: 1951957346}
   - component: {fileID: 1951957347}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: Chain Ice Creature
   m_TagString: Movable
   m_Icon: {fileID: 0}
@@ -14262,6 +14259,7 @@ MonoBehaviour:
   moveUpSpeed: 0.2
   moveSideAmount: 12
   moveSideSpeed: 0.5
+  moveDownSpeed: 1.4
   legCallbackDst: 20
   crippleWaitTime: 0.4
   tooFarApartDst: 15

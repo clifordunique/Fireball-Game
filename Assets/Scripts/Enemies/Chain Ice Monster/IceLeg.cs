@@ -11,7 +11,7 @@ public class IceLeg : Enemy
 
     public float rayStartOffset;
     public float rayLength = 0.5f;
-    public float sideRayLength = 1f;
+    public const float sideRayLength = 5f;
     private RaycastHit2D hit;
     private RaycastHit2D groundDetector;
 
@@ -65,12 +65,24 @@ public class IceLeg : Enemy
         return groundDetector;
     }
 
-    public RaycastHit2D GetSideHit(LayerMask mask, float direction)
+    /// <summary>
+    /// This casts a ray to the side of the leg, either projecting it out, or just the width of the leg
+    /// </summary>
+    /// <param name="mask"></param>
+    /// <param name="direction">The direction to cast the ray</param>
+    /// <param name="longRayLength">Whether or not to cast a long ray to the side or just one that spans the width of the leg</param>
+    /// <returns></returns>
+    public RaycastHit2D GetSideHit(LayerMask mask, float direction, bool longRayLength)
     {
-        Vector2 directionBtwSides = (rightSide.position - leftSide.position).normalized;
-        RaycastHit2D sideHit = Physics2D.Raycast(rightSide.position, direction * directionBtwSides, sideRayLength, mask);
+        Vector2 directionBtwSides = rightSide.position - leftSide.position;
+        float dstBetweenSides = directionBtwSides.magnitude;
+        directionBtwSides.Normalize();
+        float actualRayLength = longRayLength ? sideRayLength : dstBetweenSides;
+        direction = longRayLength ? direction : -1;
 
-        Debug.DrawRay(rightSide.position, directionBtwSides * direction * sideRayLength, Color.red);
+        RaycastHit2D sideHit = Physics2D.Raycast(rightSide.position, direction * directionBtwSides, actualRayLength, mask);
+
+        Debug.DrawRay(rightSide.position, directionBtwSides * direction * actualRayLength, Color.red);
 
         return sideHit;
     }
