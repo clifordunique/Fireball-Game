@@ -6,7 +6,6 @@
  * It also handles wall jumping and calculating the velocity.
  */
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

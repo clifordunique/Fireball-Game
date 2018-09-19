@@ -29,8 +29,7 @@ public class IceLeg : Enemy
         if (health <= 0)
         {
             UpdateRigidbody();
-
-            Destroy(gameObject);
+            base.DamageEnemy(_damage, position);
         }
         Effect(position);
     }
@@ -69,10 +68,10 @@ public class IceLeg : Enemy
     public RaycastHit2D GetSideHit(LayerMask mask, float direction)
     {
         Vector2 directionBtwSides = (rightSide.position - leftSide.position).normalized;
-        Debug.DrawRay(rightSide.position, directionBtwSides * direction * sideRayLength, Color.red);
-        Debug.Log(direction + " " + directionBtwSides + " " + sideRayLength);
-
         RaycastHit2D sideHit = Physics2D.Raycast(rightSide.position, direction * directionBtwSides, sideRayLength, mask);
+
+        Debug.DrawRay(rightSide.position, directionBtwSides * direction * sideRayLength, Color.red);
+
         return sideHit;
     }
 
@@ -104,4 +103,6 @@ public class IceLeg : Enemy
     {
         audioSource.Play();
     }
+
+
 }

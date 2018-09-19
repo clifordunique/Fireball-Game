@@ -6,8 +6,9 @@ public class IceLegMove : Enemy
     public IceLeg[] iceLegs;
     public Transform head;
     public float moveUpAmount = 5f;
+    public float moveUpSpeed = 0.2f;
     public float moveSideAmount = 30f;
-    public float stepDst = 5f;
+    public float moveSideSpeed = 0.5f;
     public float legCallbackDst = 20f;
     public float crippleWaitTime = 0.4f;
     public float tooFarApartDst = 20f;
@@ -29,11 +30,15 @@ public class IceLegMove : Enemy
     string[] moveFastSounds;
     private string[] pullSounds;
 
+    private static float deadLegs = 0;
+
     public override void Start()
     {
         base.Start();
         camShake = GameMaster.gm.GetComponent<CameraShake>();
         audioManager = AudioManager.instance;
+
+        onEnemyDestroy += EnemyIsDestroyed;
 
         InitializeChainSounds();
 
@@ -147,11 +152,11 @@ public class IceLegMove : Enemy
             audioManager.PlaySound(pullSounds[index]);
 
             IceLeg currentLeg = iceLegs[currentLegIndex];
-            float moveSpeed = 0.1f;
+
             float totalMoveDisplacement = 0;
 
             RaycastHit2D hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
-
+            float moveUpSpeedSlower = moveUpSpeed * 0.5f;
             float dirToPlayerX = 1;
 
             if (player != null)
@@ -165,15 +170,19 @@ public class IceLegMove : Enemy
 
             while (currentLeg != null && totalMoveDisplacement < moveUpAmount)
             {
-                totalMoveDisplacement += moveSpeed;
-
                 if (CanSeePlayer())
                 {
                     currentLeg.transform.Translate(Vector2.right * dirToPlayerX * .25f, Space.World);
                     PointAtPlayer(currentLegIndex);
+                    totalMoveDisplacement += moveUpSpeedSlower;
+                    currentLeg.transform.Translate(hit.normal * moveUpSpeedSlower, Space.World);
+                }
+                else
+                {
+                    totalMoveDisplacement += moveUpSpeed;
+                    currentLeg.transform.Translate(hit.normal * moveUpSpeed, Space.World);
                 }
 
-                currentLeg.transform.Translate(hit.normal * moveSpeed, Space.World);
                 yield return new WaitForSeconds(0.01f);
             }
         }
@@ -205,7 +214,7 @@ public class IceLegMove : Enemy
             }
             //float dirToPlayerY = Mathf.Sign(player.transform.position.y - currentLeg.transform.position.y);
 
-            float moveSpeed = .3f;
+            //float moveSpeed = .3f;
             RaycastHit2D hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
 
             float counter = 0;
@@ -215,24 +224,20 @@ public class IceLegMove : Enemy
             {
                 while (currentLeg != null && counter < moveSideAmount && !currentLeg.GetHit(groundImpactMask))
                 {
-                    // Get values
-                    // if sideHit
-                    // hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
-                    // else
                     RaycastHit2D sideHit = currentLeg.GetSideHit(groundDetectorMask, dirToMove);
                     if (!sideHit)
                     {
-                        hit = currentLeg.GetGroundDetectorHit(groundDetectorMask); 
+                        hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
                     }
                     else
                     {
                         hit = currentLeg.GetSideHit(groundDetectorMask, dirToMove);
                     }
                     Quaternion angle = Quaternion.FromToRotation(Vector2.up, hit.normal);
-                    counter += moveSpeed;
+                    counter += moveSideSpeed;
 
                     // Movement
-                    currentLeg.transform.Translate(Vector2.right * dirToMove * moveSpeed);
+                    currentLeg.transform.Translate(Vector2.right * dirToMove * moveSideSpeed);
                     currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angle, 0.2f);
 
                     yield return new WaitForSeconds(0.01f);
@@ -244,9 +249,9 @@ public class IceLegMove : Enemy
 
                 while (currentLeg != null && (currentLeg.transform.rotation != downwardAngle || counter < moveSideAmount))
                 {
-                    counter += moveSpeed;
+                    counter += moveSideSpeed;
                     currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, downwardAngle, Time.deltaTime * 20);
-                    currentLeg.transform.Translate(Vector2.right * dirToMove * moveSpeed);
+                    currentLeg.transform.Translate(Vector2.right * dirToMove * moveSideSpeed);
 
                     yield return new WaitForSeconds(0.01f);
                 }
@@ -425,6 +430,24 @@ public class IceLegMove : Enemy
 
             }
             damagePlayer = false;
+        }
+    }
+
+    /// <summary>
+    /// This handles the event when a leg is destroyed.
+    /// It increments deadLegs so that this script can keep track of
+    /// how many legs have been destroyed.
+    /// </summary>
+    /// <param name="gameObject">The enemy that was destroyed</param>
+    private void EnemyIsDestroyed(GameObject gameObject)
+    {
+        if (gameObject.GetComponent<IceLeg>() != null)
+        {
+            deadLegs++;
+            if (deadLegs > iceLegs.Length)
+            {
+                // emit event to get player out of pit thingy
+            }
         }
     }
 }

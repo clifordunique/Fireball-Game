@@ -2012,7 +2012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b2f2724d580c94094de9d3021a7cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 40
   health: 0
   seePlayerDistanceX: 8
   seePlayerDistanceY: 3
@@ -5437,7 +5437,8 @@ Transform:
   - {fileID: 1249126991}
   - {fileID: 2090943681}
   - {fileID: 1741179633}
-  - {fileID: 1811707567}
+  - {fileID: 1487647389}
+  - {fileID: 1906796088}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5450,11 +5451,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 114.72
+      value: 107.1
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.18
+      value: 5.8
       objectReference: {fileID: 0}
     - target: {fileID: 4395252159646168, guid: e07aacbdf40c39642a5e4e9b979f21b6, type: 2}
       propertyPath: m_LocalPosition.z
@@ -5722,7 +5723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b2f2724d580c94094de9d3021a7cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 40
   health: 0
   seePlayerDistanceX: 8
   seePlayerDistanceY: 3
@@ -10634,6 +10635,119 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c50233cfd87cf4d4483e89bcca65a549, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1487647388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1487647389}
+  - component: {fileID: 1487647391}
+  - component: {fileID: 1487647390}
+  m_Layer: 8
+  m_Name: Snowy_cliffside (1)
+  m_TagString: Snow
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1487647389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1487647388}
+  m_LocalRotation: {x: -0, y: -0, z: -0.012776911, w: 0.99991846}
+  m_LocalPosition: {x: 126.73, y: 5.03, z: 0}
+  m_LocalScale: {x: -2.929138, y: 2.9716496, z: 2.38483}
+  m_Children: []
+  m_Father: {fileID: 740138191}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1487647390
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1487647388}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 8}
+    newSize: {x: 4, y: 8}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.1114252, y: 3.0472238}
+      - {x: 0.71923333, y: 3.349024}
+      - {x: -0.09953157, y: 3.5709367}
+      - {x: -1.7596313, y: 3.434313}
+      - {x: -0.776805, y: -2.3368673}
+      - {x: 0.57440513, y: -1.594994}
+      - {x: 1.5145136, y: -1.4835732}
+      - {x: 1.1696094, y: -1.2548078}
+      - {x: 0.5054916, y: -1.0324808}
+      - {x: 0.49768317, y: -0.31723666}
+      - {x: 0.43040904, y: 0.25745937}
+      - {x: 0.43516874, y: 1.7240732}
+      - {x: 1.4650035, y: 2.3719614}
+--- !u!212 &1487647391
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1487647388}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1195426259
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: be1d63ba15d495045a32960eab8a3267, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 4, y: 8}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1490016227
 GameObject:
   m_ObjectHideFlags: 0
@@ -12262,119 +12376,6 @@ Transform:
   m_Father: {fileID: 323582871}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1811707566
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1811707567}
-  - component: {fileID: 1811707569}
-  - component: {fileID: 1811707568}
-  m_Layer: 8
-  m_Name: Snowy_cliffside (1)
-  m_TagString: Snow
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1811707567
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1811707566}
-  m_LocalRotation: {x: -0, y: -0, z: -0.012776911, w: 0.99991846}
-  m_LocalPosition: {x: 78.98, y: -0.65, z: 0}
-  m_LocalScale: {x: 2.929138, y: 2.9716496, z: 2.38483}
-  m_Children: []
-  m_Father: {fileID: 740138191}
-  m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &1811707568
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1811707566}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 8}
-    newSize: {x: 4, y: 8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 1.1114252, y: 3.0472238}
-      - {x: 0.71923333, y: 3.349024}
-      - {x: -0.09953157, y: 3.5709367}
-      - {x: -3.0344713, y: 1.2060364}
-      - {x: -0.776805, y: -2.3368673}
-      - {x: 0.57440513, y: -1.594994}
-      - {x: 1.5145136, y: -1.4835732}
-      - {x: 1.1696094, y: -1.2548078}
-      - {x: 0.5054916, y: -1.0324808}
-      - {x: 0.49768317, y: -0.31723666}
-      - {x: 0.43040904, y: 0.25745937}
-      - {x: 0.43516874, y: 1.7240732}
-      - {x: 1.4650035, y: 2.3719614}
---- !u!212 &1811707569
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1811707566}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1195426259
-  m_SortingLayer: 3
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: be1d63ba15d495045a32960eab8a3267, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 4, y: 8}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &1817783645
 GameObject:
   m_ObjectHideFlags: 0
@@ -13373,6 +13374,97 @@ MonoBehaviour:
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 1666839578}
   m_AttachedIK: {fileID: 278880548}
+--- !u!1 &1906796087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1906796088}
+  - component: {fileID: 1906796090}
+  - component: {fileID: 1906796089}
+  m_Layer: 8
+  m_Name: Snowy_ground04 (11)
+  m_TagString: Snow
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1906796088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1906796087}
+  m_LocalRotation: {x: -0, y: -0, z: -0.015848937, w: 0.9998744}
+  m_LocalPosition: {x: 140.58, y: 11.19, z: 0}
+  m_LocalScale: {x: 1.6507478, y: 1.2460698, z: 1}
+  m_Children: []
+  m_Father: {fileID: 740138191}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.8160001}
+--- !u!70 &1906796089
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1906796087}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.00000034547182, y: 1.15}
+  m_Size: {x: 15.88, y: 3.9583948}
+  m_Direction: 1
+--- !u!212 &1906796090
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1906796087}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1195426259
+  m_SortingLayer: 3
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 6b6f506a4ee0a4b45999dc4a15cb4679, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 15, y: 7.3}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1916176252
 GameObject:
   m_ObjectHideFlags: 0
@@ -13525,7 +13617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b2f2724d580c94094de9d3021a7cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 40
   health: 0
   seePlayerDistanceX: 8
   seePlayerDistanceY: 3
@@ -14029,7 +14121,7 @@ GameObject:
   - component: {fileID: 1951957347}
   m_Layer: 15
   m_Name: Chain Ice Creature
-  m_TagString: Through
+  m_TagString: Movable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14167,8 +14259,9 @@ MonoBehaviour:
   - {fileID: 770525132}
   head: {fileID: 1951957345}
   moveUpAmount: 3
+  moveUpSpeed: 0.2
   moveSideAmount: 12
-  stepDst: 5
+  moveSideSpeed: 0.5
   legCallbackDst: 20
   crippleWaitTime: 0.4
   tooFarApartDst: 15
@@ -14927,8 +15020,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2090943680}
   m_LocalRotation: {x: -0, y: -0, z: -0.015848937, w: 0.9998744}
-  m_LocalPosition: {x: 112.13, y: -1.65, z: 0}
-  m_LocalScale: {x: 1.2282318, y: 1.2460698, z: 1}
+  m_LocalPosition: {x: 115.311, y: -1.732, z: 0}
+  m_LocalScale: {x: 1.6507435, y: 1.2460698, z: 1}
   m_Children: []
   m_Father: {fileID: 740138191}
   m_RootOrder: 15

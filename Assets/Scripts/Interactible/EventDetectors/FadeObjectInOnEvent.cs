@@ -12,7 +12,7 @@ public class FadeObjectInOnEvent : MonoBehaviour
         Enemy.onEnemyDestroy += EnemyIsDestroyed;
     }
 
-    private void EnemyIsDestroyed()
+    private void EnemyIsDestroyed(GameObject gameObject)
     {
         StartCoroutine(TextHandler());
         Enemy.onEnemyDestroy -= EnemyIsDestroyed;

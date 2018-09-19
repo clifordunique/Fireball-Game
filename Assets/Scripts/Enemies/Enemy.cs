@@ -11,7 +11,7 @@ public class Enemy: MonoBehaviour {
     public bool cameraFollow = false;
     protected DamagePlayerData damagePlayerData;
 
-    public delegate void OnEnemyDestroy();
+    public delegate void OnEnemyDestroy(GameObject gameObject);
     public static event OnEnemyDestroy onEnemyDestroy;
 
     public virtual void Start()
@@ -29,9 +29,9 @@ public class Enemy: MonoBehaviour {
         {
             if(onEnemyDestroy != null)
             {
-                onEnemyDestroy();
+                onEnemyDestroy(gameObject);
             }
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

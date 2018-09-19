@@ -10,7 +10,6 @@ public class Controller2D : RaycastController
     float speedBySlopeAngleClimb;
     float speedBySlopeAngleDescend;
     bool grounded;
-    Stopwatch sw;
     public Vector2 playerVelocity;
 
     public delegate void OnHitBranch();
@@ -30,7 +29,6 @@ public class Controller2D : RaycastController
     public override void Start()
     {
         base.Start();
-        sw = new Stopwatch();
         collisions.faceDir = 1;
         treeBranch = FindObjectOfType<TreeBranch>();
         player = GetComponent<Player>();
@@ -446,11 +444,6 @@ public class Controller2D : RaycastController
     void ResetFallingThroughPlatform()
     {
         collisions.fallingThroughPlatform = false;
-    }
-
-    void ResetSw()
-    {
-        sw.Reset();
     }
 
     public Utilities.PlatformType GetPlatformType()
