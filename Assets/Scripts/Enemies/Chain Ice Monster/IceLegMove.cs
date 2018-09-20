@@ -32,6 +32,8 @@ public class IceLegMove : Enemy
     private string[] pullSounds;
 
     private static float deadLegs = 0;
+    public delegate void OnAllLegsDead();
+    public static event OnAllLegsDead onAllLegsDead;
 
     public override void Start()
     {
@@ -350,7 +352,7 @@ public class IceLegMove : Enemy
                     break;
                 }
 
-                Debug.Log(Mathf.Round(dirToPlayer.x * 10 / 10) != Mathf.Round(dirToGround.x * 10 / 10) && Mathf.Round(dirToPlayer.y * 10 / 10) != Mathf.Round(dirToGround.y * 10 / 10));
+                //Debug.Log(Mathf.Round(dirToPlayer.x * 10 / 10) != Mathf.Round(dirToGround.x * 10 / 10) && Mathf.Round(dirToPlayer.y * 10 / 10) != Mathf.Round(dirToGround.y * 10 / 10));
                 // Movement
                 // It is pointing upwards or something and so it shouldn't just be rushed down
                 if (Mathf.Round(dirToPlayer.x * 10 / 10) != Mathf.Round(dirToGround.x * 10 / 10) && Mathf.Round(dirToPlayer.y * 10 / 10) != Mathf.Round(dirToGround.y * 10 / 10))
@@ -464,7 +466,11 @@ public class IceLegMove : Enemy
             deadLegs++;
             if (deadLegs > iceLegs.Length)
             {
-                // emit event to get player out of pit thingy
+                Debug.Log("Emitting event, all legs are dead.");
+                if(onAllLegsDead != null)
+                {
+                    onAllLegsDead();
+                }
             }
         }
     }
