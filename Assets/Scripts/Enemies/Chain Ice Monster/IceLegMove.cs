@@ -242,14 +242,14 @@ public class IceLegMove : Enemy
             {
                 while (currentLeg != null && counter < moveSideAmount && !currentLeg.GetHit(groundImpactMask))
                 {
-                    RaycastHit2D sideHit = currentLeg.GetSideHit(groundDetectorMask, dirToMove,true);
+                    RaycastHit2D sideHit = currentLeg.GetSideHit(groundDetectorMask, dirToMove, true);
                     if (!sideHit)
                     {
                         hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
                     }
                     else
                     {
-                        hit = currentLeg.GetSideHit(groundDetectorMask, dirToMove,true);
+                        hit = currentLeg.GetSideHit(groundDetectorMask, dirToMove, true);
                     }
                     Quaternion angle = Quaternion.FromToRotation(Vector2.up, hit.normal);
                     counter += moveSideSpeed;
@@ -366,7 +366,7 @@ public class IceLegMove : Enemy
                     }
                     else
                     {
-                        StartCoroutine("MoveUp",currentLegIndex);
+                        StartCoroutine("MoveUp", currentLegIndex);
                         break;
                         //shouldPointAtPlayer = false;
                         //Quaternion angle = Quaternion.FromToRotation(Vector2.up, sideHit.normal);
@@ -464,10 +464,9 @@ public class IceLegMove : Enemy
         if (gameObject.GetComponent<IceLeg>() != null)
         {
             deadLegs++;
-            if (deadLegs > iceLegs.Length)
+            if (deadLegs >= iceLegs.Length)
             {
-                Debug.Log("Emitting event, all legs are dead.");
-                if(onAllLegsDead != null)
+                if (onAllLegsDead != null)
                 {
                     onAllLegsDead();
                 }
