@@ -46,7 +46,9 @@ public class IceLegMove : Enemy
         InitializeChainSounds();
 
         StartCoroutine(Walk());
+        
         damagePlayerData.damagePlayerEffect = playerScratch;
+        damagePlayerData.soundFX = "Ice Hit";
     }
 
     private void InitializeChainSounds()
@@ -100,7 +102,7 @@ public class IceLegMove : Enemy
         }
     }
 
-    IEnumerator Walk()
+    IEnumerator Walk() // TODO: add an awesome jump attack. All legs go into the air, then they all attack the player one after another
     {
         while (true)
         {
@@ -159,7 +161,6 @@ public class IceLegMove : Enemy
 
             IceLeg currentLeg = iceLegs[currentLegIndex];
             RaycastHit2D hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
-
             audioManager.PlaySound(pullSounds[index]);
 
 
@@ -212,7 +213,6 @@ public class IceLegMove : Enemy
         {
             int index = GetRandomIndex(smallShakeSounds.Length);
             audioManager.PlaySound(smallShakeSounds[index]);
-
             IceLeg currentLeg = iceLegs[currentLegIndex];
             float dirToMove;
             if (player != null)
@@ -331,12 +331,9 @@ public class IceLegMove : Enemy
                         damagePlayerData.transformInfo = currentLeg.transform;
                         damagePlayerData.hitPos = hit.point;
 
-
-                        //Instantiate(playerScratch, hit.point, currentLeg.transform.rotation, player.head.transform);
                         player.DamagePlayer(damagePlayerData);
-                        camShake.Shake(0.08f, 0.08f);
+                        camShake.Shake(.3f, .2f);
                         canDamagePlayer = false;
-                        audioManager.PlaySound("Ice Hit");
                     }
                     if (hit.collider.CompareTag("Snow"))
                     {
@@ -405,7 +402,6 @@ public class IceLegMove : Enemy
         {
             int index = GetRandomIndex(smallShakeSounds.Length);
             audioManager.PlaySound(smallShakeSounds[index]);
-
             IceLeg currentLeg = iceLegs[currentLegIndex];
             float moveSpeed = 1.5f;
             RaycastHit2D hit = currentLeg.GetHit(groundImpactMask);
@@ -428,10 +424,10 @@ public class IceLegMove : Enemy
                         damagePlayerData.transformInfo = currentLeg.transform;
                         damagePlayerData.hitPos = hit.point;
 
-                        player.DamagePlayer(damagePlayerData);
-                        camShake.Shake(0.08f, 0.08f);
+                        camShake.Shake(.1f, .1f);
                         damagePlayer = false;
                         currentLeg.PlayAudio(); // this will have to be changed to the player hit sound
+                        player.DamagePlayer(damagePlayerData);
                     }
                 }
                 if (count > timer)

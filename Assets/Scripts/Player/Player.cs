@@ -560,7 +560,7 @@ public class Player : MonoBehaviour, FallInWaterableObject
 
         if (!data.customDamageSprite)
         {
-            if (data.soundFX != "")
+            if (data.soundFX != "" && data.soundFX != null)
             {
                 audioManager.PlaySound(data.soundFX);
             }

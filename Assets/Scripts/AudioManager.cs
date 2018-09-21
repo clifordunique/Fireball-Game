@@ -125,7 +125,7 @@ public class AudioManager : MonoBehaviour
         if (tempSound != null)
             tempSound.Play();
         else
-            Debug.LogWarning("Trying to play a nonexistent sound");
+            Debug.LogWarning("Trying to play a nonexistent sound: " + _name);
     }
 
     /// <summary>

@@ -3,19 +3,36 @@
 public class TSFadeInOut : TriggerSensor
 {
     public float speed = 0.08f;
+    public bool fadeOutOnEnterTrigger;
 
     public override void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
-            actionObject.gameObject.SetActive(true);
-
-            for (int i = 0; i < actionObject.childCount; i++)
+            if (fadeOutOnEnterTrigger)
             {
-                Transform child = actionObject.GetChild(i);
-                Utilities.instance.FadeObjectIn(child.gameObject, speed);
+                for (int i = 0; i < actionObject.childCount; i++)
+                {
+                    Transform child = actionObject.GetChild(i);
+                    Utilities.instance.FadeObjectOut(child.gameObject, speed, destroy, disable);
+                }
+                Utilities.instance.FadeObjectOut(actionObject.gameObject, speed, destroy, disable);
+                if (destroySelf)
+                {
+                    Destroy(this.gameObject);
+                }
             }
-            Utilities.instance.FadeObjectIn(actionObject.gameObject, speed);
+            else
+            {
+                actionObject.gameObject.SetActive(true);
+
+                for (int i = 0; i < actionObject.childCount; i++)
+                {
+                    Transform child = actionObject.GetChild(i);
+                    Utilities.instance.FadeObjectIn(child.gameObject, speed);
+                }
+                Utilities.instance.FadeObjectIn(actionObject.gameObject, speed);
+            }
         }
     }
 
@@ -23,15 +40,29 @@ public class TSFadeInOut : TriggerSensor
     {
         if (col.CompareTag("Player"))
         {
-            for (int i = 0; i < actionObject.childCount; i++)
+            if (fadeOutOnEnterTrigger)
             {
-                Transform child = actionObject.GetChild(i);
-                Utilities.instance.FadeObjectOut(child.gameObject, speed, destroy, disable);
+                actionObject.gameObject.SetActive(true);
+
+                for (int i = 0; i < actionObject.childCount; i++)
+                {
+                    Transform child = actionObject.GetChild(i);
+                    Utilities.instance.FadeObjectIn(child.gameObject, speed);
+                }
+                Utilities.instance.FadeObjectIn(actionObject.gameObject, speed);
             }
-            Utilities.instance.FadeObjectOut(actionObject.gameObject, speed, destroy, disable);
-            if (destroySelf)
+            else
             {
-                Destroy(this.gameObject);
+                for (int i = 0; i < actionObject.childCount; i++)
+                {
+                    Transform child = actionObject.GetChild(i);
+                    Utilities.instance.FadeObjectOut(child.gameObject, speed, destroy, disable);
+                }
+                Utilities.instance.FadeObjectOut(actionObject.gameObject, speed, destroy, disable);
+                if (destroySelf)
+                {
+                    Destroy(this.gameObject);
+                }
             }
         }
     }
