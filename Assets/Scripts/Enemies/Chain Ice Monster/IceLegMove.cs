@@ -5,6 +5,9 @@ public class IceLegMove : Enemy
 {
     public IceLeg[] iceLegs;
     public Transform head;
+    public Player player;
+    public GameObject playerScratch;
+
     public float moveUpAmount = 5f;
     public float moveUpSpeed = 0.2f;
     public float moveSideAmount = 30f;
@@ -13,12 +16,8 @@ public class IceLegMove : Enemy
     public float legCallbackDst = 20f;
     public float crippleWaitTime = 0.4f;
     public float tooFarApartDst = 20f;
+    public float soundRadius = 30f;
 
-    public Player player;
-    public GameObject playerScratch;
-    public float seePlayerDst = 10;
-
-    public float rayLength = 0.5f;
     public LayerMask groundImpactMask;
     public LayerMask groundDetectorMask;
     public LayerMask playerMask;
@@ -46,7 +45,7 @@ public class IceLegMove : Enemy
         InitializeChainSounds();
 
         StartCoroutine(Walk());
-        
+
         damagePlayerData.damagePlayerEffect = playerScratch;
         damagePlayerData.soundFX = "Ice Hit";
     }
@@ -85,8 +84,8 @@ public class IceLegMove : Enemy
         if (player != null)
         {
             Vector2 dirToPlayer = (player.transform.position - transform.position).normalized;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, dirToPlayer, seePlayerDst, playerMask);
-            //Debug.DrawRay(transform.position, dirToPlayer * seePlayerDst, Color.red);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dirToPlayer, seePlayerDistanceX, playerMask);
+            //Debug.DrawRay(transform.position, dirToPlayer * seePlayerDistanceX, Color.red);
             if (hit)
             {
                 return hit.transform.tag == "Player";
@@ -130,6 +129,7 @@ public class IceLegMove : Enemy
                         seePlayer = false;
                     }
                     yield return MoveUp(i);
+                    //RaycastHit2D hitPlayer = iceLegs[i].GetLongHit(playerMask);
                     if (seePlayer && !tooFarFromHead)
                     {
                         StartCoroutine(MoveToPlayer(i));
@@ -154,56 +154,61 @@ public class IceLegMove : Enemy
         if (iceLegs[currentLegIndex] != null)
         {
             int index = GetRandomIndex(pullSounds.Length);
+            IceLeg currentLeg = iceLegs[currentLegIndex];
+            RaycastHit2D hit = currentLeg.GetLongHit(groundDetectorMask);
             float totalMoveDisplacement = 0;
             float moveUpSpeedSlower = moveUpSpeed * 0.5f;
-            float dirToPlayerX = 1;
-            bool shouldPointAtPlayer = true;
-
-            IceLeg currentLeg = iceLegs[currentLegIndex];
-            RaycastHit2D hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
-            audioManager.PlaySound(pullSounds[index]);
-
-
+             
+            float dirToMoveX = -1;
             if (player != null)
             {
-                dirToPlayerX = Mathf.Sign(player.transform.position.x - currentLeg.transform.position.x);
-            }
-            else
-            {
-                dirToPlayerX = -1;
+                Mathf.Sign(player.transform.position.x - currentLeg.transform.position.x);
             }
 
+            audioManager.PlaySound(pullSounds[index]);
 
             while (currentLeg != null && totalMoveDisplacement < moveUpAmount)
             {
+                RaycastHit2D sideHit = currentLeg.GetSideHit(groundDetectorMask,1,false);
+
                 if (CanSeePlayer())
                 {
-                    currentLeg.transform.Translate(Vector2.right * dirToPlayerX * .25f, Space.World);
-                    currentLeg.transform.Translate(hit.normal * moveUpSpeedSlower, Space.World);
-
-                    RaycastHit2D sideHit = currentLeg.GetSideHit(groundDetectorMask, 1, false);
-                    if ((!sideHit || (sideHit && sideHit.distance != 0)) && shouldPointAtPlayer)
+                    PointAtPlayer(currentLegIndex);
+                    RaycastHit2D upHit = currentLeg.GetUpHit(groundDetectorMask, moveUpSpeedSlower);
+                    if (upHit)
                     {
-                        PointAtPlayer(currentLegIndex);
+                        Debug.Log("uphit");
+                        currentLeg.transform.Translate(-currentLeg.GetDownwardsDirection() * upHit.distance);
+                        break;
                     }
                     else
                     {
-                        shouldPointAtPlayer = false;
-                        //Quaternion angle = Quaternion.FromToRotation(Vector2.up, sideHit.normal);
-                        //currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angle, 0.2f);
-                        totalMoveDisplacement += moveUpSpeed;
-                        currentLeg.transform.Translate(hit.normal * moveUpSpeed, Space.World);
+                        currentLeg.transform.Translate(hit.normal * moveUpSpeedSlower, Space.World);
+                        currentLeg.transform.Translate(Vector2.right * dirToMoveX * .25f, Space.World);
                     }
+
                     totalMoveDisplacement += moveUpSpeedSlower;
                 }
                 else
                 {
+                    RaycastHit2D upHit = currentLeg.GetUpHit(groundDetectorMask, moveUpSpeed);
+                    if (upHit)
+                    {
+                        Debug.Log("uphit");
+                        currentLeg.transform.Translate(-currentLeg.GetDownwardsDirection() * upHit.distance);
+                        break;
+                    }
+                    else
+                    {
+                        currentLeg.transform.Translate(hit.normal * moveUpSpeed, Space.World);
+                    }
                     totalMoveDisplacement += moveUpSpeed;
-                    currentLeg.transform.Translate(hit.normal * moveUpSpeed, Space.World);
+
                 }
 
                 yield return new WaitForSeconds(0.01f);
             }
+            //currentLeg.lastPosition = currentLeg.transform.position;
         }
     }
 
@@ -215,6 +220,8 @@ public class IceLegMove : Enemy
             audioManager.PlaySound(smallShakeSounds[index]);
             IceLeg currentLeg = iceLegs[currentLegIndex];
             float dirToMove;
+            RaycastHit2D hit = currentLeg.GetLongHit(groundDetectorMask);
+
             if (player != null)
             {
                 if (!tooFarFromHead)
@@ -233,28 +240,33 @@ public class IceLegMove : Enemy
             //float dirToPlayerY = Mathf.Sign(player.transform.position.y - currentLeg.transform.position.y);
 
             //float moveSpeed = .3f;
-            RaycastHit2D hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
 
             float counter = 0;
 
             // move a little in the player's direction
             if (hit)
             {
-                while (currentLeg != null && counter < moveSideAmount && !currentLeg.GetHit(groundImpactMask))
+                while (currentLeg != null && counter < moveSideAmount && !currentLeg.GetHit(groundDetectorMask, 0.3f))
                 {
-                    RaycastHit2D sideHit = currentLeg.GetSideHit(groundDetectorMask, dirToMove, true);
-                    if (!sideHit)
+                    RaycastHit2D longSideHit = currentLeg.GetSideHit(groundDetectorMask, dirToMove, true);
+                    //RaycastHit2D shortSideHit = currentLeg.GetSideHit(groundDetectorMask, 1, false); // modify this so there are two side hit positions
+                    //if (shortSideHit)
+                    //{
+                    //    dirToMove = Mathf.Sign(currentLeg.transform.position.x - shortSideHit.point.x);
+                    //}
+                    if (!longSideHit)
                     {
-                        hit = currentLeg.GetGroundDetectorHit(groundDetectorMask);
+                        hit = currentLeg.GetLongHit(groundDetectorMask);
                     }
                     else
                     {
-                        hit = currentLeg.GetSideHit(groundDetectorMask, dirToMove, true);
+                        hit = longSideHit;
                     }
                     Quaternion angle = Quaternion.FromToRotation(Vector2.up, hit.normal);
                     counter += moveSideSpeed;
 
                     // Movement
+                    //RaycastHit2D groundHit = currentLeg.GetHit(groundImpactMask, );
                     currentLeg.transform.Translate(Vector2.right * dirToMove * moveSideSpeed);
                     currentLeg.transform.rotation = Quaternion.Slerp(currentLeg.transform.rotation, angle, 0.2f);
 
@@ -274,6 +286,7 @@ public class IceLegMove : Enemy
                     yield return new WaitForSeconds(0.01f);
                 }
             }
+            currentLeg.lastPosition = currentLeg.transform.position;
         }
     }
 
@@ -287,7 +300,7 @@ public class IceLegMove : Enemy
         if (iceLegs[currentLegIndex] != null && player != null)
         {
             Transform currentLeg = iceLegs[currentLegIndex].transform;
-            float speed = 20f;
+            float speed = 50f;
             Vector3 vectorToTarget = currentLeg.position - player.transform.position;
             float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
             Quaternion angleToPlayer = Quaternion.AngleAxis(angle - 90, Vector3.forward);
@@ -311,10 +324,10 @@ public class IceLegMove : Enemy
             IceLeg currentLeg = iceLegs[currentLegIndex];
             Vector2 dirToPlayer = (player.transform.position - currentLeg.transform.position).normalized;
             Vector2 dirToGround = currentLeg.GetDownwardsDirection();
-            RaycastHit2D hit = currentLeg.GetHit(groundImpactMask);
+            RaycastHit2D hit = currentLeg.GetHit(groundImpactMask, moveDownSpeed);
             float moveSlowerSpeed = moveDownSpeed * 0.3f;
             bool shouldPointAtPlayer = true;
-            float timer = 30;
+            float time = 30;
             float count = 0;
 
             float volume = currentLeg.GetComponent<AudioSource>().volume;
@@ -322,7 +335,7 @@ public class IceLegMove : Enemy
             audioManager.PlaySound(moveFastSounds[index]);
             StopCoroutine("MoveUp");
 
-            while (currentLeg != null)
+            while (currentLeg != null && count < time)
             {
                 if (hit)
                 {
@@ -332,21 +345,18 @@ public class IceLegMove : Enemy
                         damagePlayerData.hitPos = hit.point;
 
                         player.DamagePlayer(damagePlayerData);
-                        camShake.Shake(.3f, .2f);
+                        camShake.Shake(0.7f, 0.5f);
                         canDamagePlayer = false;
                     }
                     if (hit.collider.CompareTag("Snow"))
                     {
                         camShake.Shake(0.05f, 0.05f);
+                        currentLeg.transform.Translate(Vector2.down * hit.distance);
 
                         currentLeg.GetComponent<AudioSource>().volume = volume;
                         currentLeg.PlayAudio();
                         break;
                     }
-                }
-                if (count > timer)
-                {
-                    break;
                 }
 
                 //Debug.Log(Mathf.Round(dirToPlayer.x * 10 / 10) != Mathf.Round(dirToGround.x * 10 / 10) && Mathf.Round(dirToPlayer.y * 10 / 10) != Mathf.Round(dirToGround.y * 10 / 10));
@@ -357,13 +367,13 @@ public class IceLegMove : Enemy
                     currentLeg.transform.Translate(Vector2.down * moveSlowerSpeed);
 
                     RaycastHit2D sideHit = currentLeg.GetSideHit(groundDetectorMask, 1, false);
-                    if ((!sideHit || (sideHit && sideHit.distance != 0)) && shouldPointAtPlayer)
+                    if (!sideHit /*|| (sideHit && sideHit.distance != 0)) && shouldPointAtPlayer*/)
                     {
                         PointAtPlayer(currentLegIndex);
                     }
                     else
                     {
-                        StartCoroutine("MoveUp", currentLegIndex);
+                        //StartCoroutine("MoveUp", currentLegIndex);
                         break;
                         //shouldPointAtPlayer = false;
                         //Quaternion angle = Quaternion.FromToRotation(Vector2.up, sideHit.normal);
@@ -376,7 +386,7 @@ public class IceLegMove : Enemy
                 }
 
                 // get values
-                hit = currentLeg.GetHit(groundImpactMask);
+                hit = currentLeg.GetHit(groundImpactMask, moveDownSpeed);
                 count++;
 
                 yield return new WaitForSeconds(.01f);
@@ -385,6 +395,7 @@ public class IceLegMove : Enemy
             {
                 currentLeg.GetComponent<AudioSource>().volume = volume;
             }
+            currentLeg.lastPosition = currentLeg.transform.position;
         }
         canDamagePlayer = false;
     }
@@ -404,7 +415,7 @@ public class IceLegMove : Enemy
             audioManager.PlaySound(smallShakeSounds[index]);
             IceLeg currentLeg = iceLegs[currentLegIndex];
             float moveSpeed = 1.5f;
-            RaycastHit2D hit = currentLeg.GetHit(groundImpactMask);
+            RaycastHit2D hit = currentLeg.GetHit(groundImpactMask, moveSpeed);
 
             float timer = 50;
             float count = 0;
@@ -413,10 +424,14 @@ public class IceLegMove : Enemy
             {
                 if (hit)
                 {
-                    if (hit.collider.CompareTag("Snow"))
+                    if (hit.collider.CompareTag("Snow") || hit.collider.CompareTag("Mud"))
                     {
-                        camShake.Shake(0.05f, 0.05f);
+                        if (player != null && Mathf.Abs((player.transform.position - transform.position).magnitude) < soundRadius)
+                        {
+                            camShake.Shake(0.05f, 0.05f);
+                        }
                         currentLeg.PlayAudio();
+                        currentLeg.transform.Translate(Vector2.down * hit.distance);
                         break;
                     }
                     else if (damagePlayer && hit.collider.CompareTag("Player"))
@@ -439,13 +454,14 @@ public class IceLegMove : Enemy
                 currentLeg.transform.Translate(Vector2.down * moveSpeed);
 
                 // getting values
-                hit = currentLeg.GetHit(groundImpactMask);
+                hit = currentLeg.GetHit(groundImpactMask, moveSpeed);
                 count++;
 
                 yield return new WaitForSeconds(.01f);
 
             }
             damagePlayer = false;
+            //currentLeg.lastPosition = currentLeg.transform.position;
         }
     }
 

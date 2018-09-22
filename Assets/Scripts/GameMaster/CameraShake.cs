@@ -5,6 +5,11 @@ public class CameraShake : MonoBehaviour
     CameraFollow cam;
 
     float shakeAmount = 0;
+    float offsetX = 0;
+    float offsetY = 0;
+    float newOffsetY = 0;
+    float newOffsetX = 0;
+    float timer = 11;
 
     void Awake()
     {
@@ -30,11 +35,19 @@ public class CameraShake : MonoBehaviour
     {
         if (shakeAmount > 0)
         {
-            Vector3 camPos = cam.transform.position;
+            if (timer > 10)
+            {
+                timer = 0;
+                newOffsetX = Random.value * shakeAmount * 2 - shakeAmount;
+                newOffsetY = Random.value * shakeAmount * 2 - shakeAmount;
+            }
 
-            float offsetX = Random.value * shakeAmount * 2 - shakeAmount;
-            float offsetY = Random.value * shakeAmount * 2 - shakeAmount;
+            offsetX = Mathf.Lerp(offsetX, newOffsetX, 0.2f);
+            offsetY = Mathf.Lerp(offsetY, newOffsetY, 0.2f);
+
+            Vector3 camPos = cam.transform.position;
             cam.UpdateShake(offsetX, offsetY);
+            timer++;
         }
     }
 
@@ -42,5 +55,6 @@ public class CameraShake : MonoBehaviour
     {
         CancelInvoke("DoShake");
         cam.UpdateShake(0, 0);
+        timer = 11;
     }
 }

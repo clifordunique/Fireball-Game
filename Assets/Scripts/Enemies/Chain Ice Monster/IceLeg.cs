@@ -7,11 +7,13 @@ public class IceLeg : Enemy
     public Transform tipOfIce;
     public Transform leftSide;
     public Transform rightSide;
+    public Transform top;
     public SpriteMask spriteMask;
 
     public float rayStartOffset;
     public float rayLength = 0.5f;
     public const float sideRayLength = 5f;
+    public Vector2 lastPosition { get; set; }
     private RaycastHit2D hit;
     private RaycastHit2D groundDetector;
 
@@ -44,11 +46,11 @@ public class IceLeg : Enemy
     /// </summary>
     /// <param name="mask">The layermask for the ray to pay attention to</param>
     /// <returns>The hit info</returns>
-    public RaycastHit2D GetHit(LayerMask mask)
+    public RaycastHit2D GetHit(LayerMask mask, float _rayLength)
     {
         Vector3 direction = GetDownwardsDirection();
-        Debug.DrawRay(transform.position + direction * rayStartOffset, direction.normalized * rayLength, Color.blue);
-        hit = Physics2D.Raycast(transform.position + direction * rayStartOffset, direction.normalized, rayLength, mask);
+        Debug.DrawRay(tipOfIce.position, direction.normalized * _rayLength, Color.blue);
+        hit = Physics2D.Raycast(tipOfIce.position, direction.normalized, _rayLength, mask);
         return hit;
     }
 
@@ -57,7 +59,7 @@ public class IceLeg : Enemy
     /// </summary>
     /// <param name="mask">The layermask for the ray to pay attention to</param>
     /// <returns>The hit info</returns>
-    public RaycastHit2D GetGroundDetectorHit(LayerMask mask)
+    public RaycastHit2D GetLongHit(LayerMask mask)
     {
         Vector3 direction = GetDownwardsDirection();
         Debug.DrawRay(transform.position, direction.normalized * 30, Color.red);
@@ -83,6 +85,15 @@ public class IceLeg : Enemy
         RaycastHit2D sideHit = Physics2D.Raycast(rightSide.position, direction * directionBtwSides, actualRayLength, mask);
 
         Debug.DrawRay(rightSide.position, directionBtwSides * direction * actualRayLength, Color.red);
+
+        return sideHit;
+    }
+
+    public RaycastHit2D GetUpHit(LayerMask mask, float length)
+    {
+        RaycastHit2D sideHit = Physics2D.Raycast(transform.position, transform.up, length, mask);
+
+        Debug.DrawRay(top.position, transform.up * length, Color.black);
 
         return sideHit;
     }

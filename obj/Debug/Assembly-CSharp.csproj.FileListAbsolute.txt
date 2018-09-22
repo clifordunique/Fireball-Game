@@ -327,3 +327,5 @@ C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEngine.Localizati
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEngine.ProfilerModule.xml
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\UnityEngine.StreamingModule.xml
 C:\Users\jpdep\Desktop\Unity\Fireball-Game\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\Cinemachine.dll
+C:\Users\jpdep\Desktop\Unity\Fireball-Game\Temp\bin\Debug\com.unity.cinemachine.editor.dll
